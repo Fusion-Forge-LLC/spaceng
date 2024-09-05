@@ -20,6 +20,15 @@
   .text-balance {
     text-wrap: balance;
   }
+  .about-count-wrapper {
+    @apply h-24 w-24 rounded-full bg-grey flex flex-col justify-center p-4;
+  }
+  .features-text {
+    @apply bg-grey rounded w-fit shadow-[2px_0px_15px_rgba(0,0,0,0.25)];
+  }
+  .testimonial-label {
+    @apply rounded-lg border border-blue px-3 py-1 block w-full;
+  }
 }
 
 @layer base {
@@ -83,6 +92,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-grey;
   }
 }
