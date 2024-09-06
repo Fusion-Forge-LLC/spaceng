@@ -37,6 +37,12 @@
   }
 }
 
+@layer components {
+  .pageination-btn {
+    @apply h-10 w-10 rounded-full bg-[#FBFBFB] grid place-content-center hover:bg-blue/20;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
