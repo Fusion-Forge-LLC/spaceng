@@ -1,8 +1,9 @@
 import {Heart, MapPin} from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
-import {Rating} from "@/components/Icons/icons";
+import RatingStars from "./rating-star";
 
 function Card({
   image,
@@ -31,7 +32,9 @@ function Card({
       <div className="flex-1">
         <div className="flex gap-2 mb-1">
           <h4 className="flex-1 text-ellipsis overflow-hidden whitespace-nowrap font-medium text-lg">
-            {title}
+            <Link className="hover:underline" href={"/shortlet/myshortlets"}>
+              {title}
+            </Link>
           </h4>
           <span className="ml-auto block w-fit p-2 rounded-md text-xs font-medium bg-[#A0B3E5]">
             New Building
@@ -58,17 +61,7 @@ function Card({
         <div className="flex items-center gap-2">
           <span className="font-semibold">{rating}</span>
 
-          <div className="flex gap-0.5">
-            {Array.from({length: 5}).map((_, index) => {
-              return (
-                <Rating
-                  key={index}
-                  fill={index + 1 <= rating ? "#FABB05" : "#888888"}
-                  opacity={index + 1 <= rating ? 1 : 0.16}
-                />
-              );
-            })}
-          </div>
+          <RatingStars rating={rating} />
 
           <span className="text-grey-200 text-xs">({reviewNum} Reviews)</span>
 

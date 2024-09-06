@@ -41,6 +41,9 @@
   .pageination-btn {
     @apply h-10 w-10 rounded-full bg-[#FBFBFB] grid place-content-center hover:bg-blue/20;
   }
+  .property-book {
+    @apply p-8 bg-white rounded-2xl shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)];
+  }
 }
 
 @layer base {

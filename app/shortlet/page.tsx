@@ -1,13 +1,12 @@
-import {Search} from "lucide-react";
 import React from "react";
 import Image from "next/image";
 
-import {Input} from "@/components/ui/input";
 import Wrapper from "@/components/wrapper/wrapper";
 
 import dummyMap from "../../public/dummymap.png";
 
 import Card from "./components/property/card";
+import SearchProperties from "./components/search/search";
 
 const shortlets = [
   {
@@ -68,15 +67,7 @@ function Page() {
               <span>250 results</span>
             </div>
 
-            <div className="bg-[#FDFDFD] relative rounded-md w-full max-w-80">
-              <Input
-                className="border-none shadow-none rounded-md py-4 focus-visible:ring-blue w-full h-12"
-                defaultValue={"Lagos, Nigeria"}
-              />
-              <span className="grid place-content-center h-7 w-7 rounded-full bg-blue absolute top-1/2 right-2 -translate-y-1/2">
-                <Search color="#FFF" size={14} />
-              </span>
-            </div>
+            <SearchProperties />
           </div>
 
           <div className="grid grid-cols-2 gap-12 py-12">
