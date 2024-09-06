@@ -101,3 +101,7 @@
     @apply bg-background text-grey;
   }
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -65,6 +65,9 @@ const config: Config = {
         yellow: "#FABB05",
         dark: "#1E1E1E",
       },
+      fontFamily: {
+        montserrat: "var('--montesserat-variable')",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
