@@ -59,6 +59,7 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        "grey-100": "#C5C5C5",
         grey: "#434343",
         blue: "#205BF3",
         yellow: "#FABB05",
