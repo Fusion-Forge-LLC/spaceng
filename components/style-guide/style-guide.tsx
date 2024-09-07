@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactNode} from "react";
 
 import {
   Select,
@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {cn} from "@/lib/utils";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 
 interface Props {
   placeholder: string;
@@ -31,5 +32,14 @@ export function DropdDown({placeholder, options, className}: Props) {
         })}
       </SelectContent>
     </Select>
+  );
+}
+
+export function PopoverElement({trigger, children}: {trigger: ReactNode; children: ReactNode}) {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>{trigger}</PopoverTrigger>
+      <PopoverContent>{children}</PopoverContent>
+    </Popover>
   );
 }
