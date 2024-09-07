@@ -165,7 +165,7 @@ function Page() {
                 </p>
 
                 <div>
-                  <BookShortlet />
+                  <BookShortlet showBtn />
                 </div>
               </div>
             </div>

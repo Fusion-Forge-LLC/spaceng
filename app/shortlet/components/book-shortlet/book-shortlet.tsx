@@ -8,7 +8,7 @@ import {CaretDown} from "@/components/Icons/icons";
 import {PopoverElement} from "@/components/style-guide/style-guide";
 import {Calendar} from "@/components/ui/calendar";
 
-function BookShortlet() {
+function BookShortlet({showBtn}: {showBtn?: boolean}) {
   const pathName = usePathname();
   const [date, setDate] = React.useState<{checkin: Date | undefined; checkout: Date | undefined}>({
     checkin: new Date(),
@@ -107,12 +107,11 @@ function BookShortlet() {
         </ul>
       </PopoverElement>
 
-      <Link
-        className="text-lg font-medium text-white rounded-xl py-3 px-4 block text-center bg-blue mt-4 hover:opacity-75 transition-all"
-        href={`${pathName}/booking?guest=${guestsCount}`}
-      >
-        Book
-      </Link>
+      {showBtn && (
+        <Link className="booking-btn" href={`${pathName}/checkout?guest=${guestsCount}`}>
+          Book
+        </Link>
+      )}
     </div>
   );
 }
