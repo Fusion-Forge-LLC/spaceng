@@ -62,7 +62,7 @@ const reviews = [
   },
 ];
 
-function Page() {
+function Page({params}: {params: {[key: string]: string}}) {
   return (
     <main>
       <Wrapper className="py-10">
@@ -149,7 +149,10 @@ function Page() {
             </article>
 
             <div className="w-[435px] shrink-0 space-y-5">
-              <Link className="flex items-center group property-book gap-4" href={"/"}>
+              <Link
+                className="flex items-center group property-book gap-4"
+                href={`${params.id}/booking`}
+              >
                 <CalendarDaysIcon />
                 <span>Arrange a visit</span>
 
