@@ -1,6 +1,6 @@
 import {Heart, MapPin} from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, {useId} from "react";
 import Link from "next/link";
 
 import RatingStars from "./rating-star";
@@ -13,6 +13,7 @@ function Card({
   rating,
   reviewNum,
   price,
+  path,
 }: {
   image: string;
   title: string;
@@ -21,7 +22,10 @@ function Card({
   rating: number;
   reviewNum: number;
   price: number;
+  path: string;
 }) {
+  const id = useId();
+
   return (
     <div className="rounded-2xl bg-white p-5 shadow-[0px_3.23px_24.23px_rgba(0,0,0,0.08)] flex items-stretch gap-5">
       <div className="h-[163px] aspect-[168/163] shrink-0 relative rounded-lg overflow-hidden">
@@ -32,7 +36,7 @@ function Card({
       <div className="flex-1">
         <div className="flex gap-2 mb-1">
           <h4 className="flex-1 text-ellipsis overflow-hidden whitespace-nowrap font-medium text-lg">
-            <Link className="hover:underline" href={"/shortlet/myshortlets"}>
+            <Link className="hover:underline" href={`${path}/${id}`}>
               {title}
             </Link>
           </h4>

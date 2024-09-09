@@ -3,22 +3,19 @@
 import {ArrowLeft} from "lucide-react";
 import {useRouter} from "next/navigation";
 import React, {FormEvent, useState} from "react";
-
-// import { Calendar } from './_components/calendar/calender'
 import Calendar from "react-calendar";
 
 import Wrapper from "@/components/wrapper/wrapper";
 
-import BookingSuccess from "../../components/modal/booking-success";
+import BookingSuccess from "../modal/booking-success";
 
 import FormControl, {PhoneNumber, TextArea} from "./_components/form-control/form-control";
-// import 'react-calendar/dist/Calendar.css';
 
 type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-function Page() {
+function BookingPage() {
   const router = useRouter();
   const [date, setDate] = React.useState<Value>(new Date());
   const [isBookingSuccess, setIsBookingSuccess] = useState(false);
@@ -56,17 +53,6 @@ function Page() {
           </div>
 
           <div className="w-full max-w-sm">
-            {/* <div className='flex justify-between'>
-                            <h3 className='text-lg font-medium mb-8'>{date.toLocaleDateString("en-Us", {month: "long", year: "numeric" })}</h3>
-                            <div className='flex gap-4 items-start'>
-                                <button>
-                                    <ChevronLeft />
-                                </button>
-                                <button>
-                                    <ChevronRight />
-                                </button>
-                            </div> */}
-            {/* </div> */}
             <Calendar
               calendarType={"gregory"}
               className={""}
@@ -83,4 +69,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default BookingPage;

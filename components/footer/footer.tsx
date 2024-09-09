@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 import Wrapper from "../wrapper/wrapper";
 
@@ -18,8 +19,12 @@ function Footer() {
             <div>
               <h4 className="font-medium text-[17px] mb-6">Services</h4>
               <ul className="space-y-5">
-                <li>Shortlets</li>
-                <li>Workspaces</li>
+                <li className="hover:underline">
+                  <Link href={"/shortlet"}>Shortlets</Link>
+                </li>
+                <li className="hover:underline">
+                  <Link href={"/workspace"}>Workspaces</Link>
+                </li>
                 <li>Pricing</li>
                 <li>Blog</li>
               </ul>

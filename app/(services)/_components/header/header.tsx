@@ -7,7 +7,9 @@ function Header() {
   return (
     <header className="py-6 shadow-[0px_1px_4px_1px_#F9F9F9]">
       <Wrapper className="flex items-center justify-between">
-        <span className="text-lg font-medium">SpacesNG</span>
+        <Link className="text-lg font-medium hover:text-blue" href={"/"}>
+          SpacesNG
+        </Link>
 
         <nav className="text-[#707070] flex gap-8">
           <Link href={"/"}>Home</Link>

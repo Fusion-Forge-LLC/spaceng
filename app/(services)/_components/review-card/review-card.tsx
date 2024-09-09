@@ -20,7 +20,7 @@ function ReviewCard({
         <div className="h-16 w-16 rounded-full relative overflow-hidden">
           <Image fill alt="Reviewer image" className="object-cover object-center" src={image} />
         </div>
-        <h4 className="text-grey font-medium ml-auto">{name}</h4>
+        <h4 className="text-grey font-medium mr-auto">{name}</h4>
         <div className="flex gap-1 items-center">
           <RatingStars rating={rating} />
           <span className="font-medium">{rating}/5</span>

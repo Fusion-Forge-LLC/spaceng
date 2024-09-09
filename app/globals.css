@@ -38,6 +38,9 @@
   .payment-input {
     @apply shadow-[0px_3px_6px_rgba(0,0,0,0.02),0px_1px_1px_rgba(0,0,0,0.03)] p-4 h-11 rounded-md;
   }
+  .active-payment-method {
+    @apply border-2 border-blue text-blue;
+  }
 }
 
 @layer components {
@@ -48,7 +51,10 @@
     @apply p-8 bg-white rounded-2xl shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)];
   }
   .payment-method {
-    @apply p-4 space-y-2 border border-[#E6E6E6] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.02),0px_1px_1px_rgba(0,0,0,0.03)];
+    @apply p-4 space-y-2 border cursor-pointer;
+  }
+  .non-active-payment-method {
+    @apply border-[#E6E6E6] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.02),0px_1px_1px_rgba(0,0,0,0.03)];
   }
   .booking-btn {
     @apply text-lg font-medium text-white rounded-xl py-3 px-4 block text-center bg-blue mt-4 hover:opacity-75 transition-all;
