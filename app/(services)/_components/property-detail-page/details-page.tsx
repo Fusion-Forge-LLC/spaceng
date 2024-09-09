@@ -1,21 +1,17 @@
+"use client";
+
 import React from "react";
 import {ArrowRight, CalendarDaysIcon, ImageIcon, MapPin} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import {usePathname} from "next/navigation";
 
 import Wrapper from "@/components/wrapper/wrapper";
 
-import ReviewCard from "../components/review-card/review-card";
-import SearchProperties from "../components/search/search";
-import BookShortlet from "../components/book-shortlet/book-shortlet";
+import ReviewCard from "../../_components/review-card/review-card";
+import SearchProperties from "../../_components/search/search";
+import BookShortlet from "../booking-page/booking";
 
-const images = [
-  "/shortlets/image6.png",
-  "/shortlets/image5.png",
-  "/shortlets/image2.png",
-  "/shortlets/image4.png",
-  "/shortlets/image3.png",
-];
 const amenities = [
   "Elevator",
   "24 Hour CCTV Mointoring",
@@ -62,15 +58,33 @@ const reviews = [
   },
 ];
 
-function Page({params}: {params: {[key: string]: string}}) {
+function DetailsPage({
+  images,
+  title,
+  location,
+  descriptionTitle,
+  description,
+  cost,
+  label,
+}: {
+  images: string[];
+  title: string;
+  location: string;
+  descriptionTitle: string;
+  description: string;
+  cost: number;
+  label: "Guest" | "Team";
+}) {
+  const pathname = usePathname();
+
   return (
     <main>
       <Wrapper className="py-10">
         <div className="flex items-center justify-between">
           <div>
-            <h5 className="text-lg font-medium">Haven Homes</h5>
+            <h5 className="text-lg font-medium">{title}</h5>
             <p className="flex gap-1">
-              <MapPin /> 1001, Estate, Lekki, Lagos{" "}
+              <MapPin /> {location}{" "}
             </p>
           </div>
 
@@ -104,17 +118,9 @@ function Page({params}: {params: {[key: string]: string}}) {
               <div>
                 <h4 className="mb-6">About Us</h4>
 
-                <h5 className="text-lg mb-6 font-medium text-grey">
-                  Discover your Lagos haven with Haven Homes.
-                </h5>
+                <h5 className="text-lg mb-6 font-medium text-grey">{descriptionTitle}</h5>
 
-                <p className="leading-loose mb-8">
-                  Our carefully curated collection of stylish shortlets offers the perfect blend of
-                  comfort and convenience. Whether you&rsquo;re visiting for business or leisure,
-                  our properties provide a home away from home in the heart of Lagos. Enjoy
-                  world-class amenities, prime locations, and exceptional service. Book your stay
-                  today and experience the best of Lagos living.
-                </p>
+                <p className="leading-loose mb-8">{description}</p>
 
                 <h5 className="text-lg mb-6 font-medium text-grey">Amenities</h5>
 
@@ -151,7 +157,7 @@ function Page({params}: {params: {[key: string]: string}}) {
             <div className="w-[435px] shrink-0 space-y-5">
               <Link
                 className="flex items-center group property-book gap-4"
-                href={`${params.id}/booking`}
+                href={`${pathname}/booking`}
               >
                 <CalendarDaysIcon />
                 <span>Arrange a visit</span>
@@ -164,11 +170,12 @@ function Page({params}: {params: {[key: string]: string}}) {
 
               <div className="property-book ">
                 <p className="text-2xl font-bold text-[#443344] flex items-center gap-2">
-                  ₦ 25,0000 <span className="text-[#333] text-xs font-normal">/night</span>
+                  ₦ {cost.toLocaleString("en-Us")}{" "}
+                  <span className="text-[#333] text-xs font-normal">/night</span>
                 </p>
 
                 <div>
-                  <BookShortlet showBtn />
+                  <BookShortlet showBtn label={label} />
                 </div>
               </div>
             </div>
@@ -179,4 +186,4 @@ function Page({params}: {params: {[key: string]: string}}) {
   );
 }
 
-export default Page;
+export default DetailsPage;

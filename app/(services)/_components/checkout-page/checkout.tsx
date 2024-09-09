@@ -12,10 +12,10 @@ import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
 
 import countries from "../../../../countries/countries";
-import BookShortlet from "../../components/book-shortlet/book-shortlet";
-import PaymentSuccess from "../../components/modal/payment-success";
+import PaymentSuccess from "../modal/payment-success";
+import Booking from "../booking-page/booking";
 
-function Page() {
+function Checkout({label}: {label: "Guest" | "Team"}) {
   const router = useRouter();
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
   const [cardDetails, setCardDetails] = useState({
@@ -179,7 +179,7 @@ function Page() {
           <div className="col-span-5 property-book">
             <div className="p-6">
               <h4 className=" text-grey font-medium text-lg">Booking details</h4>
-              <BookShortlet />
+              <Booking label={label} />
             </div>
           </div>
         </div>
@@ -188,4 +188,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default Checkout;
