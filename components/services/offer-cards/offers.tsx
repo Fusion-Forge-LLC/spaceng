@@ -32,7 +32,7 @@ function Offers({
           <span className="text-blue text-xl font-bold">₦{amount.toLocaleString()}</span>
           <span className="text-sm text-blue">/year</span>
 
-          <Link className="flex items-center gap-1 ml-auto" href={""}>
+          <Link className="flex items-center gap-1 ml-auto" href={`/${title.toLocaleLowerCase()}`}>
             <span className="font-bold text-lg">Book Now</span>
             <span className="grid h-5 w-5 place-content-center rounded-full bg-blue">
               <ArrowRight color="#fff" size={10} />
