@@ -46,7 +46,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
           <ul>
             <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard" />
             <NavItems Icon={ManagementIcon} name="Management" path="/management" />
-            <NavItems Icon={FinanceIcon} name="Finance" path="/finance" />
+            <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
             <NavItems Icon={CommunicationIcon} name="Communication" path="/communication" />
             <NavItems Icon={SettingsIcon} name="Settings" path="/settings" />
             <NavItems Icon={HelpIcon} name="Help" path="/help" />
