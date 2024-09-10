@@ -7,3 +7,7 @@ export interface PropertyType {
   reviewNum: number;
   price: number;
 }
+
+export interface DashboardIconsProps {
+  fill: "#205BF3" | "#9D9D9D";
+}
