@@ -68,6 +68,7 @@ const config: Config = {
       },
       fontFamily: {
         montserrat: "var('--montesserat-variable')",
+        poppin: "var('--poppin-variable')",
       },
     },
   },

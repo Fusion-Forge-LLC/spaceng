@@ -46,14 +46,18 @@ function Header() {
               </li>
               <li className="hover:text-blue cursor-pointer">Contact Us</li>
               <li>
-                <Button className="bg-white text-grey shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-w-32">
-                  Client
-                </Button>
+                <Link href={"/auth/client/signin"}>
+                  <Button className="bg-white text-grey shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-w-32">
+                    Client
+                  </Button>
+                </Link>
               </li>
               <li>
-                <Button className="bg-blue shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-w-32">
-                  Business
-                </Button>
+                <Link href={"/auth/business"}>
+                  <Button className="bg-blue shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-w-32">
+                    Business
+                  </Button>
+                </Link>
               </li>
             </ul>
           </nav>
