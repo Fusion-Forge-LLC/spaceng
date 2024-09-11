@@ -47,7 +47,11 @@ function DashboardLyout({children}: {children: ReactNode}) {
             <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard" />
             <NavItems Icon={ManagementIcon} name="Management" path="/management" />
             <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
-            <NavItems Icon={CommunicationIcon} name="Communication" path="/communication" />
+            <NavItems
+              Icon={CommunicationIcon}
+              name="Communication"
+              path="/dashboard/communication"
+            />
             <NavItems Icon={SettingsIcon} name="Settings" path="/settings" />
             <NavItems Icon={HelpIcon} name="Help" path="/help" />
             <li className="">
@@ -74,7 +78,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
             </button>
           </div>
         </aside>
-        <main className="flex-1 h-full overflow-y-scroll">{children}</main>
+        <main className="flex-1 h-full overflow-y-scroll no-scrollbar">{children}</main>
       </div>
     </div>
   );
