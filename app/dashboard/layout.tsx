@@ -7,6 +7,7 @@ import {EmailIcon} from "@/components/Icons/icons";
 
 import NavItems from "./_components/nav-items/nav-items";
 import {
+  AnalyticIcon,
   CommunicationIcon,
   DashboardIcon,
   FinanceIcon,
@@ -46,8 +47,13 @@ function DashboardLyout({children}: {children: ReactNode}) {
           <ul>
             <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard" />
             <NavItems Icon={ManagementIcon} name="Management" path="/management" />
-            <NavItems Icon={FinanceIcon} name="Finance" path="/finance" />
-            <NavItems Icon={CommunicationIcon} name="Communication" path="/communication" />
+            <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
+            <NavItems
+              Icon={CommunicationIcon}
+              name="Communication"
+              path="/dashboard/communication"
+            />
+            <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
             <NavItems Icon={SettingsIcon} name="Settings" path="/settings" />
             <NavItems Icon={HelpIcon} name="Help" path="/help" />
             <li className="">
@@ -74,7 +80,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
             </button>
           </div>
         </aside>
-        <main className="flex-1 h-full overflow-y-scroll">{children}</main>
+        <main className="flex-1 h-full overflow-y-scroll no-scrollbar">{children}</main>
       </div>
     </div>
   );
