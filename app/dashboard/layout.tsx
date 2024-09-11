@@ -7,6 +7,7 @@ import {EmailIcon} from "@/components/Icons/icons";
 
 import NavItems from "./_components/nav-items/nav-items";
 import {
+  AnalyticIcon,
   CommunicationIcon,
   DashboardIcon,
   FinanceIcon,
@@ -52,6 +53,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
               name="Communication"
               path="/dashboard/communication"
             />
+            <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
             <NavItems Icon={SettingsIcon} name="Settings" path="/settings" />
             <NavItems Icon={HelpIcon} name="Help" path="/help" />
             <li className="">
