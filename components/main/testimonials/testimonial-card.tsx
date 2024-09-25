@@ -20,15 +20,13 @@ function TestimonialCard({
         <div className="h-20 w-20 rounded-full overflow-hidden">
           <Image alt="user image" height={80} src={image} width={80} />
         </div>
-        <div className="space-y-1 flex-1">
-          <h4 className="bg-blue testimonial-label text-white font-semibold">{name}</h4>
-          <p className="testimonial-label">{occupation}</p>
-          <span className="testimonial-label font-medium">{reviewType}</span>
+        <div className="space-y-3 pt-2 flex-1">
+          <h4 className=" font-medium">{name}</h4>
+          <p className="">{occupation}</p>
         </div>
       </header>
-      <p className="rounded-lg border border-white shadow-[0px_0px_5px_rgba(0,0,0,0.25)] p-2 pb-4 flex-1 text-lg leading-loose">
-        {testimony}
-      </p>
+      <p className="pb-10 flex- leading-loose">{testimony}</p>
+      <p className="pb-2">{reviewType}</p>
     </li>
   );
 }

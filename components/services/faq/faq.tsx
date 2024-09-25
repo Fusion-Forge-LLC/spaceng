@@ -66,7 +66,7 @@ function Faq() {
 function Card({question, answer}: {question: string; answer: string}) {
   return (
     <li>
-      <h4 className="flex items-center justify-between bg-blue text-white rounded-lg px-3 py-3.5">
+      <h4 className="flex items-center justify-between bg-grey text-white rounded-lg px-3 py-3.5">
         <span className="font-medium text-xl">{question}</span>
         <Plus size={34} />
       </h4>

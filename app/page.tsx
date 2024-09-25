@@ -5,7 +5,7 @@ import {Search} from "lucide-react";
 import Wrapper from "@/components/wrapper/wrapper";
 import {DropdDown} from "@/components/style-guide/style-guide";
 import {Button} from "@/components/ui/button";
-import OverviewWithLabel, {Overview} from "@/components/main/overview/overview";
+import OverviewWithLabel from "@/components/main/overview/overview";
 import Title from "@/components/main/title/title";
 import Features from "@/components/main/features/features";
 import TestimonialCard from "@/components/main/testimonials/testimonial-card";
@@ -89,19 +89,18 @@ export default function Home() {
       <Header />
       <main>
         <Wrapper>
-          <h1 className="text-blue text-[2.5rem]">
-            <span className={playfair.className}>THE FUTURE OF FLEXIBLE</span>
-            <div className="flex items-end gap-2">
-              <span className={playfair.className}>LIVING </span>
-              <p className="text-2xl text-grey">
-                <span className="font-medium">SpaceNG</span> revolutionizes by blending short-term
-                rentals with dynamic workspaces.
-              </p>
-            </div>
-          </h1>
+          <div className="py-10 space-y-5">
+            <h1 className="text-blue text-5xl text-center">
+              <span className={playfair.className}>THE FUTURE OF FLEXIBLE LIVING </span>
+            </h1>
+
+            <p className="text-grey text-center">
+              SpaceNG revolutionizes by blending short-termrentals with dynamic workspaces.
+            </p>
+          </div>
 
           <div className="relative mt-8">
-            <div className="bg-blue p-4 w-80 absolute top-1/2 -translate-y-1/2 left-0">
+            <div className="bg-grey p-4 w-80 absolute top-1/2 -translate-y-1/2 left-0">
               <h4 className="flex items-center justify-between text-white">
                 Find Your SpaceNG
                 <Search />
@@ -124,7 +123,7 @@ export default function Home() {
                   placeholder="Type"
                 />
                 <DropdDown options={[]} placeholder="Date" />
-                <Button className="bg-grey text-white rounded-none w-full">Find my SpaceNG</Button>
+                <Button className="bg-blue text-white rounded-none w-full">Find my SpaceNG</Button>
               </div>
             </div>
             <Image alt="A room with desk and chairs" className="ml-auto w-[75%]" src={hero} />
@@ -140,25 +139,25 @@ export default function Home() {
                 width="160"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <rect fill="#205BF3" height="160" rx="80" width="160" />
-                <circle cx="80" cy="80" fill="white" r="59" />
+                <rect fill="white" height="160" rx="80" width="160" />
+                <circle cx="80" cy="80" fill="#434343" r="59" />
                 <path
-                  d="M80 117.146C72.8799 117.146 65.9197 114.979 59.9995 110.919C54.0793 106.858 49.4651 101.087 46.7404 94.3341C44.0156 87.5817 43.3027 80.1514 44.6917 72.9831C46.0808 65.8147 49.5095 59.2301 54.5442 54.062C59.5789 48.8939 65.9935 45.3744 72.9768 43.9485C79.9601 42.5226 87.1985 43.2544 93.7766 46.0514C100.355 48.8484 105.977 53.5849 109.933 59.6619C113.889 65.739 116 72.8836 116 80.1924C116 89.9932 112.207 99.3926 105.456 106.323C98.7046 113.253 89.5478 117.146 80 117.146ZM80 49.3974C74.0666 49.3974 68.2664 51.2035 63.3329 54.5873C58.3994 57.9711 54.5543 62.7807 52.2836 68.4077C50.013 74.0348 49.4189 80.2266 50.5765 86.2002C51.734 92.1739 54.5912 97.661 58.7868 101.968C62.9824 106.275 68.3279 109.207 74.1473 110.396C79.9667 111.584 85.9987 110.974 91.4805 108.643C96.9623 106.312 101.648 102.365 104.944 97.3012C108.241 92.237 110 86.2831 110 80.1924C110 72.0251 106.839 64.1923 101.213 58.4171C95.5871 52.6419 87.9565 49.3974 80 49.3974Z"
-                  fill="#205BF3"
+                  d="M80 117.146C72.8799 117.146 65.9197 114.979 59.9995 110.919C54.0793 106.858 49.4651 101.087 46.7404 94.3341C44.0156 87.5817 43.3027 80.1515 44.6917 72.9831C46.0808 65.8147 49.5095 59.2302 54.5442 54.0621C59.5789 48.8939 65.9935 45.3744 72.9768 43.9485C79.9601 42.5227 87.1985 43.2545 93.7766 46.0514C100.355 48.8484 105.977 53.5849 109.933 59.6619C113.889 65.739 116 72.8837 116 80.1925C116 89.9933 112.207 99.3927 105.456 106.323C98.7046 113.253 89.5478 117.146 80 117.146ZM80 49.3975C74.0666 49.3975 68.2664 51.2036 63.3329 54.5874C58.3994 57.9712 54.5543 62.7807 52.2836 68.4077C50.013 74.0348 49.4189 80.2266 50.5765 86.2003C51.734 92.1739 54.5912 97.6611 58.7868 101.968C62.9824 106.275 68.3279 109.208 74.1473 110.396C79.9667 111.584 85.9987 110.974 91.4805 108.643C96.9623 106.313 101.648 102.365 104.944 97.3012C108.241 92.237 110 86.2831 110 80.1925C110 72.0251 106.839 64.1923 101.213 58.4171C95.5871 52.6419 87.9565 49.3975 80 49.3975Z"
+                  fill="white"
                 />
-                <path d="M83 104.828H77V126.385H83V104.828Z" fill="#205BF3" />
-                <path d="M83 34H77V55.5565H83V34Z" fill="#205BF3" />
-                <path d="M125 77.1129H104V83.2719H125V77.1129Z" fill="#205BF3" />
-                <path d="M56 77.1129H35V83.2719H56V77.1129Z" fill="#205BF3" />
+                <path d="M83 104.828H77V126.385H83V104.828Z" fill="white" />
+                <path d="M83 34H77V55.5565H83V34Z" fill="white" />
+                <path d="M125 77.113H104V83.272H125V77.113Z" fill="white" />
+                <path d="M56 77.113H35V83.272H56V77.113Z" fill="white" />
                 <path
                   d="M80 92.5104C77.6266 92.5104 75.3066 91.788 73.3332 90.4345C71.3598 89.081 69.8217 87.1572 68.9135 84.9063C68.0052 82.6555 67.7676 80.1788 68.2306 77.7893C68.6936 75.3999 69.8365 73.205 71.5147 71.4823C73.193 69.7596 75.3312 68.5864 77.6589 68.1111C79.9867 67.6359 82.3995 67.8798 84.5922 68.8121C86.7849 69.7444 88.6591 71.3233 89.9776 73.3489C91.2962 75.3746 92 77.7562 92 80.1925C92 83.4594 90.7357 86.5925 88.4853 88.9026C86.2348 91.2127 83.1826 92.5104 80 92.5104ZM80 74.0335C78.8133 74.0335 77.6533 74.3947 76.6666 75.0714C75.6799 75.7482 74.9109 76.7101 74.4567 77.8355C74.0026 78.9609 73.8838 80.1993 74.1153 81.394C74.3468 82.5887 74.9183 83.6862 75.7574 84.5475C76.5965 85.4089 77.6656 85.9955 78.8295 86.2331C79.9934 86.4708 81.1998 86.3488 82.2961 85.8826C83.3925 85.4165 84.3295 84.6271 84.9888 83.6142C85.6481 82.6014 86 81.4106 86 80.1925C86 78.559 85.3679 76.9924 84.2426 75.8374C83.1174 74.6823 81.5913 74.0335 80 74.0335Z"
-                  fill="#205BF3"
+                  fill="white"
                 />
               </svg>
 
-              <h3 className="text-4xl font-semibold">Our Mission</h3>
+              <h3 className="text-xl font-semibold">Our Mission</h3>
 
-              <p className="text-xl font-medium">
+              <p className=" font-medium">
                 Enable individuals, teams, and organizations to thrive by creating innovative
                 solutions, spaces, and experiences for their evolving needs.
               </p>
@@ -166,7 +165,7 @@ export default function Home() {
             <div className="relative 1/2">
               <Image alt="Office settings image" src={about} />
 
-              <ul className="bg-blue flex px-6 py-3 gap-8 absolute -bottom-5 -right-8">
+              <ul className="bg-white text-center flex px-6 py-3 gap-8 absolute -bottom-5 -right-8">
                 <li className="about-count-wrapper">
                   <span className="text=lg font-semibold">10000+</span>
                   <span className="font-medium text-xs">request completed</span>
@@ -211,7 +210,7 @@ export default function Home() {
                 ]}
               />
 
-              <Overview
+              {/* <Overview
                 lists={[
                   {
                     note: "Flexible rental periods (hours, days, weeks, or months)",
@@ -226,7 +225,7 @@ export default function Home() {
                     image: "/overview/image6.png",
                   },
                 ]}
-              />
+              /> */}
             </div>
 
             <div className="space-y-10">
@@ -248,7 +247,7 @@ export default function Home() {
                 ]}
               />
 
-              <Overview
+              {/* <Overview
                 lists={[
                   {
                     note: "Access to workshops, webinars, and community events",
@@ -263,7 +262,7 @@ export default function Home() {
                     image: "/overview/image12.png",
                   },
                 ]}
-              />
+              /> */}
             </div>
           </Wrapper>
         </section>
@@ -297,7 +296,14 @@ export default function Home() {
             <Title title="The Partners" />
             <div className="flex items-center justify-between">
               {partners.map((item, index) => {
-                return <Image key={index} alt="Partner logo" src={item} />;
+                return (
+                  <Image
+                    key={index}
+                    alt="Partner logo"
+                    className="h-12 object-contain aspect-auto "
+                    src={item}
+                  />
+                );
               })}
             </div>
           </Wrapper>

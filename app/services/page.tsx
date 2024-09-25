@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {Phone} from "lucide-react";
 
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
@@ -18,20 +19,104 @@ import {
   Power,
 } from "@/components/Icons/icons";
 import Servicecards from "@/components/services/card/service-cards";
-import Faq from "@/components/services/faq/faq";
-
-import blogImage from "../../public/blog-image.png";
-import aboutImage from "../../public/about2.png";
-import aboutImage3 from "../../public/about3.png";
-import aboutImage4 from "../../public/about4.png";
-import aboutImage5 from "../../public/about5.png";
+import {Input} from "@/components/ui/input";
+import {DropdDown} from "@/components/style-guide/style-guide";
 
 function Page() {
   return (
     <div>
       <Header />
-      <main>
+      <main className="pb-16">
         <section>
+          <Wrapper className="py-10 pb-20">
+            <Title title="Get Started With SpaceNG" />
+            <form action="">
+              <div className="grid grid-cols-2 gap-24">
+                <div>
+                  <h4 className="font-medium mb-3">Specialist teams to help you get started</h4>
+                  <p className="mb-10 text-sm max-w-sm">
+                    Connect with our professional advisors to explore options and book an optional,
+                    hassle-free tour.
+                  </p>
+
+                  <div className="space-y-6">
+                    <Input className="border-grey-100 py-3 h-12" placeholder="Full Name" />
+                    <Input className="border-grey-100 py-3 h-12" placeholder="Email" />
+                    <Input
+                      className="border-grey-100 py-3 h-12 block"
+                      placeholder="(+234) 00000000"
+                    />
+                    <DropdDown
+                      className="border-grey-100 py-3 h-12"
+                      options={[
+                        {
+                          value: "coworking",
+                          note: "CoWorking",
+                        },
+                        {
+                          value: "shortlet",
+                          note: "Shortlet",
+                        },
+                        {
+                          value: "workspace",
+                          note: "Workspace",
+                        },
+                        {
+                          value: "virtual-office",
+                          note: "Virtual Office",
+                        },
+                      ]}
+                      placeholder="What are you interested in"
+                    />
+                  </div>
+                </div>
+                <div className='pl-5 relative after:content-[""] after:h-[95%] after:rounded-full after:w-[5px] after:bg-grey after:hidden after:absolute after:top-1/2 after:left-0 after:-translate-y-1/2'>
+                  <h4 className="font-medium mb-3">Existing customer and need support</h4>
+                  <p className="text-sm mb-5 max-w-sm">
+                    If you need to ask a question relating to your agreement, bookings, billing, or
+                    have any other queries, please reach out to our customer support team. They will
+                    be happy to help
+                  </p>
+
+                  <div className="about-label mb-5 max-w-sm">
+                    <span>Talk to our Customer Services</span>
+                    <Image alt="Icon" height={28} src={"/icons/customer-service.png"} width={28} />
+                  </div>
+
+                  <h4 className="font-medium mb-3">Call our sales team</h4>
+                  <p className="text-sm mb-5 max-w-sm">
+                    Speak to our team of professional advisors who are there to help with discussing
+                    options and booking an optional no-hassle tour.
+                  </p>
+
+                  <div className="flex items-center gap-3">
+                    <Phone color="#205BF3" />
+                    <span className="">(+234) 00000000</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 mt-10 pb-4">
+                <input className="h-8 w-8" id="receive-offers" type="checkbox" />
+                <label className="text-lg" htmlFor="receive-offers">
+                  I would like SpaceNG to send me offers and communications.
+                </label>
+              </div>
+              <p className="text-lg mb-10">
+                By submitting this form you agree to our{" "}
+                <Link className="text-blue font-semibold" href={""}>
+                  Privacy Policy
+                </Link>
+              </p>
+
+              <button className="w-9/12 mx-auto bg-blue py-4 px-4 mt-10 text-white text-xl font-semibold block hover:opacity-70">
+                ENQUIRE NOW
+              </button>
+            </form>
+          </Wrapper>
+        </section>
+
+        {/* <section>
           <Wrapper className="pt-10">
             <Title title="Articles & Blog Post" />
 
@@ -67,8 +152,8 @@ function Page() {
               </div>
             </div>
           </Wrapper>
-        </section>
-        <section>
+        </section> */}
+        {/* <section>
           <Wrapper className="py-20">
             <Title title="SaceNG" />
 
@@ -88,11 +173,11 @@ function Page() {
               <Image alt="Office settings image" className="w-full" src={aboutImage5} />
             </div>
           </Wrapper>
-        </section>
+        </section> */}
 
         <section>
           <Wrapper className="py-10">
-            <span className="bg-blue py-3 px-5 rounded-md text-white font-medium block w-fit mx-auto">
+            <span className="bg-blue py-3 px-5 invisible rounded-md text-white font-medium block w-fit mx-auto">
               SpaceNG Offer
             </span>
 
@@ -114,8 +199,8 @@ function Page() {
                 title="Shortlet"
               />
             </div>
-
-            <ul className="py-16 grid grid-cols-3 gap-x-8 gap-y-16">
+            <h3 className="py-4 pt-12 text-4xl font-medium text-grey-200">The Benefits</h3>
+            <ul className="pb-16 grid grid-cols-3 gap-x-8 gap-y-16">
               <Servicecards
                 Icon={AirCondition}
                 note="Achieve your goals effortlessly."
@@ -147,16 +232,6 @@ function Page() {
                 title="Distraction Free-Zone"
               />
             </ul>
-          </Wrapper>
-        </section>
-
-        <section>
-          <Wrapper className="py-10">
-            <h3 className="font-medium text-4xl mb-10 text-center">
-              Frequently Asked Questions (FAQs)
-            </h3>
-
-            <Faq />
           </Wrapper>
         </section>
       </main>
