@@ -77,6 +77,9 @@
   .dashboard-header-btn {
     @apply h-10 w-10 rounded-full border border-blue grid place-content-center;
   }
+  .service-link {
+    @apply absolute bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
+  }
 }
 
 @layer base {

@@ -54,7 +54,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
               path="/dashboard/communication"
             />
             <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
-            <NavItems Icon={SettingsIcon} name="Settings" path="/settings" />
+            <NavItems Icon={SettingsIcon} name="Settings" path="/dashboard/settings" />
             <NavItems Icon={HelpIcon} name="Help" path="/help" />
             <li className="">
               <button className="dashboard-nav text-red w-full">
