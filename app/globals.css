@@ -80,6 +80,15 @@
   .service-link {
     @apply absolute bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
   }
+  .property-tab-link {
+    @apply block w-fit p-2.5 hover:bg-blue/10;
+  }
+  .property-tab-link.active {
+    @apply border-b-2 border-b-blue text-grey;
+  }
+  .property-page-link {
+    @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all;
+  }
 }
 
 @layer base {
