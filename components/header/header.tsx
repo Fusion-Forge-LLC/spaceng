@@ -44,7 +44,14 @@ function Header() {
               >
                 <Link href={"/about-us"}>About Us</Link>
               </li>
-              <li className="hover:text-blue cursor-pointer">Contact Us</li>
+              <li
+                className={cn(
+                  "hover:text-blue",
+                  pathName === "/contact-us" && "border-b-2 border-b-blue",
+                )}
+              >
+                <Link href={"/contact-us"}>Contact Us</Link>
+              </li>
             </ul>
           </nav>
 

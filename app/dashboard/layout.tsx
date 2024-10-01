@@ -46,7 +46,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
         <aside className="w-56 h-full flex flex-col p-4 pt-0 gap-5 border-r border-grey-200">
           <ul>
             <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard" />
-            <NavItems Icon={ManagementIcon} name="Management" path="/management" />
+            <NavItems Icon={ManagementIcon} name="Management" path="/dashboard/management" />
             <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
             <NavItems
               Icon={CommunicationIcon}
@@ -54,7 +54,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
               path="/dashboard/communication"
             />
             <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
-            <NavItems Icon={SettingsIcon} name="Settings" path="/settings" />
+            <NavItems Icon={SettingsIcon} name="Settings" path="/dashboard/settings" />
             <NavItems Icon={HelpIcon} name="Help" path="/help" />
             <li className="">
               <button className="dashboard-nav text-red w-full">
