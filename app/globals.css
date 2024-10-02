@@ -30,7 +30,7 @@
     @apply rounded-lg border border-blue px-3 py-1 block w-full;
   }
   .about-label {
-    @apply rounded-[15px] bg-blue py-2 px-4 text-white text-lg font-semibold flex items-center gap-4  justify-between;
+    @apply rounded-[15px] bg-grey py-2 px-4 text-white font-semibold flex items-center gap-4  justify-between;
   }
   .values-list {
     @apply pl-8 relative py-0.5 after:content-[""] after:block after:h-4 after:w-4 after:border-4 after:border-white after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2;
@@ -76,6 +76,18 @@
   }
   .dashboard-header-btn {
     @apply h-10 w-10 rounded-full border border-blue grid place-content-center;
+  }
+  .service-link {
+    @apply absolute bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
+  }
+  .property-tab-link {
+    @apply block w-fit p-2.5 hover:bg-blue/10;
+  }
+  .property-tab-link.active {
+    @apply border-b-2 border-b-blue text-grey;
+  }
+  .property-page-link {
+    @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all;
   }
 }
 

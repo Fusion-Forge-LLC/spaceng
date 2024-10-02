@@ -23,7 +23,7 @@ function Header() {
       <Wrapper>
         <div className="flex items-center justify-between">
           <span className={cn(playfair.className, "text-4xl")}>SPACENG</span>
-          <nav className="border border-grey-100 px-4 py-2.5">
+          <nav className="px-4 py-2.5">
             <ul className="flex items-center justify-center gap-12">
               <li className={cn("hover:text-blue", pathName === "/" && "border-b-2 border-b-blue")}>
                 <Link href={"/"}>Home</Link>
@@ -44,23 +44,27 @@ function Header() {
               >
                 <Link href={"/about-us"}>About Us</Link>
               </li>
-              <li className="hover:text-blue cursor-pointer">Contact Us</li>
-              <li>
-                <Link href={"/auth/client/signin"}>
-                  <Button className="bg-white text-grey shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-w-32">
-                    Client
-                  </Button>
-                </Link>
-              </li>
-              <li>
-                <Link href={"/auth/business"}>
-                  <Button className="bg-blue shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-w-32">
-                    Business
-                  </Button>
-                </Link>
+              <li
+                className={cn(
+                  "hover:text-blue",
+                  pathName === "/contact-us" && "border-b-2 border-b-blue",
+                )}
+              >
+                <Link href={"/contact-us"}>Contact Us</Link>
               </li>
             </ul>
           </nav>
+
+          <div className="flex gap-4">
+            <Link href={"/auth/client/signin"}>
+              <Button className="bg-blue text-white min-w-32">Client</Button>
+            </Link>
+            <Link href={"/auth/business"}>
+              <Button className="border-grey-100 py-2 font-medium min-w-32" variant={"outline"}>
+                Business
+              </Button>
+            </Link>
+          </div>
         </div>
       </Wrapper>
     </header>
