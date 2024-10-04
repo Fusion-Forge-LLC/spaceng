@@ -21,7 +21,7 @@
     text-wrap: balance;
   }
   .about-count-wrapper {
-    @apply h-24 w-24 rounded-full bg-grey flex flex-col justify-center p-4;
+    @apply h-16 sm:h-24 w-16 sm:w-24 rounded-full bg-grey flex flex-col justify-center p-1 sm:p-4;
   }
   .features-text {
     @apply bg-grey rounded w-fit shadow-[2px_0px_15px_rgba(0,0,0,0.25)];
@@ -78,7 +78,7 @@
     @apply h-10 w-10 rounded-full border border-blue grid place-content-center;
   }
   .service-link {
-    @apply absolute bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
+    @apply absolute bottom-5 md:bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-10/12 md:w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
   }
   .property-tab-link {
     @apply block w-fit p-2.5 hover:bg-blue/10;
@@ -88,6 +88,9 @@
   }
   .property-page-link {
     @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all;
+  }
+  .mobile-nav-link {
+    @apply flex items-center gap-5 sm:hover:bg-blue/30 py-2.5 px-2 rounded-lg;
   }
 }
 

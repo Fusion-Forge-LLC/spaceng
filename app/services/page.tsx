@@ -24,7 +24,7 @@ function Page() {
                 Explore our suite of categories and experience the best of SpacesNG.
               </p>
             </article>
-            <div className="grid grid-cols-2 gap-20">
+            <div className="grid grid-cols1 sm:grid-cols-2 gap-14 sm:gap-10 md:gap-16 lg:gap-20">
               <div className="relative drop-shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)]">
                 <Image alt="A woman smiling" className="w-full" src={businessImage} />
                 <Link className="service-link" href="/auth/business">

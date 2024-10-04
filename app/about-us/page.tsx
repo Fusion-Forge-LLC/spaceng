@@ -48,155 +48,11 @@ function Page() {
     <div>
       <Header />
       <main>
-        {/* <section>
-          <Wrapper className="pt-10">
-            <Title title="Get Started With SpaceNG" />
-            <form action="">
-              <div className="grid grid-cols-2 gap-10">
-                <div>
-                  <h4 className="text-xl font-medium mb-3">
-                    Specialist teams to help you get started
-                  </h4>
-                  <p className="text-lg mb-10">
-                    Connect with our professional advisors to explore options and book an optional,
-                    hassle-free tour.
-                  </p>
-
-                  <div className="space-y-6">
-                    <Input className="border-blue py-3" placeholder="Full Name" />
-                    <Input className="border-blue py-3" placeholder="Email" />
-                    <Input className="border-blue py-3 block" placeholder="(+234) 00000000" />
-                    <DropdDown
-                      className="border-blue py-3"
-                      options={[
-                        {
-                          value: "coworking",
-                          note: "CoWorking",
-                        },
-                        {
-                          value: "shortlet",
-                          note: "Shortlet",
-                        },
-                        {
-                          value: "workspace",
-                          note: "Workspace",
-                        },
-                        {
-                          value: "virtual-office",
-                          note: "Virtual Office",
-                        },
-                      ]}
-                      placeholder="What are you interested in"
-                    />
-                  </div>
-                </div>
-                <div className='pl-5 relative after:content-[""] after:h-[95%] after:rounded-full after:w-[5px] after:bg-grey after:block after:absolute after:top-1/2 after:left-0 after:-translate-y-1/2'>
-                  <h4 className="text-xl font-medium mb-3">
-                    Book meeting rooms, Virtual offices and shortlet
-                  </h4>
-                  <p className="text-lg mb-5">
-                    Our workspaces and shortets are available to book all day.
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-6 mb-5">
-                    <div className="about-label">
-                      <span>Book Workspace</span>
-                      <Image alt="Icon" height={36} src={"/icons/workspace.png"} width={36} />
-                    </div>
-                    <div className="about-label">
-                      <span>Book Shortlets</span>
-                      <Image alt="Icon" height={36} src={"/icons/shortlet.png"} width={36} />
-                    </div>
-                  </div>
-
-                  <h4 className="text-xl font-medium mb-3">Existing customer and need support</h4>
-                  <p className="text-lg mb-5">
-                    If you need to ask a question relating to your agreement, bookings, billing, or
-                    have any other queries, please reach out to our customer support team. They will
-                    be happy to help
-                  </p>
-
-                  <div className="about-label w-fit mx-auto mb-5">
-                    <span>Talk to our Customer Services</span>
-                    <Image alt="Icon" height={36} src={"/icons/customer-service.png"} width={36} />
-                  </div>
-
-                  <h4 className="text-xl font-medium mb-3">Call our sales team</h4>
-                  <p className="text-lg mb-5">
-                    Speak to our team of professional advisors who are there to help with discussing
-                    options and booking an optional no-hassle tour.
-                  </p>
-
-                  <div className="flex items-center gap-3">
-                    <Phone color="#205BF3" />
-                    <span className="text-xl">(+234) 00000000</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 mt-10 pb-4">
-                <input className="h-8 w-8" id="receive-offers" type="checkbox" />
-                <label className="text-lg" htmlFor="receive-offers">
-                  I would like SpaceNG to send me offers and communications.
-                </label>
-              </div>
-              <p className="text-lg mb-10">
-                By submitting this form you agree to our{" "}
-                <Link className="text-blue font-semibold" href={""}>
-                  Privacy Policy
-                </Link>
-              </p>
-
-              <button className="w-9/12 mx-auto bg-blue py-4 px-4 text-white text-xl font-semibold block hover:opacity-70">
-                ENQUIRE NOW
-              </button>
-            </form>
-          </Wrapper>
-        </section> */}
-
-        {/* <section>
-          <Wrapper className="py-10">
-            <Image alt="Image of a sitting room" src={contactUs} />
-
-            <article className="pt-16">
-              <Title title="Our Community" />
-              <p className="py-2 px-3 text-white text-lg leading-loose bg-grey rounded my-12">
-                Welcome to SpaceNG Technology Community. A top platform for innovators,
-                entrepreneurs, and technologists. Converge, collaborate, and create groundbreaking
-                solutions. In today’s fast-paced world, we offer a dynamic, adaptive, and inclusive
-                ecosystem. Foster creativity, productivity, and growth with us. SpaceNG Technology
-                is built on modern tech principles, embracing these core tenets.
-              </p>
-            </article>
-
-            <ul className="space-y-16">
-              <CommunityCard
-                image="/community/agility.png"
-                label="agility"
-                note="Embracing flexibility and speed to stay ahead of the curve."
-              />
-              <CommunityCard
-                image="/community/innovation.png"
-                label="innovation"
-                note="Encouraging experimentation, learning, and continuous improvement."
-              />
-              <CommunityCard
-                image="/community/co-operation.png"
-                label="co-operation"
-                note="Fostering collaborative environments for collective success."
-              />
-              <CommunityCard
-                image="/community/data-driven.png"
-                label="data driven insight"
-                note="Leveraging analytics and intelligence to inform decisions."
-              />
-            </ul>
-          </Wrapper>
-        </section> */}
-
         <article>
-          <Wrapper className="pb-28 pt-20">
-            <h3 className="text-lg font-medium mb-14">About SpacesNG Technologies Limited</h3>
+          <Wrapper className="pb-28 pt-6 sm:pt-20">
+            <h3 className="text-lg font-medium mb-5 md:mb-14">
+              About SpacesNG Technologies Limited
+            </h3>
             <p className="leading-[2.3]">
               At SpacesNG, we are revolutionizing the way businesses and professionals discover and
               utilize workspaces and shortlets in Nigeria. Our innovative platform connects
@@ -220,7 +76,7 @@ function Page() {
 
         <section className="shadow-[0px_0px_25px_rgba(0,0,0,0.25)] py-16">
           <Wrapper className="py-10">
-            <ul className="grid grid-cols-3 gap-16">
+            <ul className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-4 lg:gap-16">
               <MissionCards title="Mission">
                 <p className="mt-auto text-sm leading-relaxed mb-auto">
                   Empower individuals, teams, and organizations to thrive in an ever-evolving world
@@ -249,8 +105,8 @@ function Page() {
 
         <section>
           <Wrapper className="py-24">
-            <Title title="Member Directory" />
-            <ul className="grid grid-cols-2 gap-20">
+            <Title title="The Inventors" />
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-20 sm:gap-10 md:gap-20">
               {members.map((item, index) => {
                 return <MembersCard key={index} name={item.name} role={item.role} />;
               })}
@@ -260,7 +116,7 @@ function Page() {
 
         <section>
           <Wrapper className="py-10">
-            <h3 className="font-medium text-4xl mb-10 text-center">
+            <h3 className="font-medium text-xl md:text-4xl sm:mb-10 text-center">
               Frequently Asked Questions (FAQs)
             </h3>
             <Faq />

@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {Phone} from "lucide-react";
 
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
@@ -28,10 +27,10 @@ function Page() {
       <Header />
       <main className="pb-16">
         <section>
-          <Wrapper className="py-10 pb-20">
-            <Title title="Get Started With SpaceNG" />
+          <Wrapper className="py-10 md:pb-20">
+            <Title title="Get Started With Spacefinda" />
             <form action="">
-              <div className="grid grid-cols-2 gap-24">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-24">
                 <div>
                   <h4 className="font-medium mb-3">Specialist teams to help you get started</h4>
                   <p className="mb-10 text-sm max-w-sm">
@@ -70,7 +69,7 @@ function Page() {
                     />
                   </div>
                 </div>
-                <div className='pl-5 relative after:content-[""] after:h-[95%] after:rounded-full after:w-[5px] after:bg-grey after:hidden after:absolute after:top-1/2 after:left-0 after:-translate-y-1/2'>
+                <div className='md:pl-5 relative after:content-[""] after:h-[95%] after:rounded-full after:w-[5px] after:bg-grey after:hidden after:absolute after:top-1/2 after:left-0 after:-translate-y-1/2'>
                   <h4 className="font-medium mb-3">Existing customer and need support</h4>
                   <p className="text-sm mb-5 max-w-sm">
                     If you need to ask a question relating to your agreement, bookings, billing, or
@@ -90,100 +89,60 @@ function Page() {
                   </p>
 
                   <div className="flex items-center gap-3">
-                    <Phone color="#205BF3" />
-                    <span className="">(+234) 00000000</span>
+                    <svg
+                      fill="none"
+                      height="15"
+                      viewBox="0 0 19 15"
+                      width="19"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M16.2885 0.5H2.32617V14.5H16.2885V0.5Z" fill="#F1F5F7" />
+                      <path
+                        d="M9.30859 8.97222L16.2896 14.5V3.58698L9.30859 8.97222Z"
+                        fill="#DCE6EA"
+                      />
+                      <path
+                        d="M16.871 0.5H16.2893L9.3083 6.02771L2.32695 0.5H1.74525C0.781943 0.5 0 1.28389 0 2.24997V12.75C0 13.7158 0.781943 14.5 1.74525 14.5H2.32695V3.58693L9.3083 8.97104L16.2893 3.58564V14.5H16.871C17.8345 14.5 18.6164 13.7158 18.6164 12.75V2.25001C18.6165 1.28393 17.8346 0.5 16.871 0.5Z"
+                        fill="#F84437"
+                      />
+                    </svg>
+                    <Link
+                      className="text-[#EB001B] hover:underline"
+                      href={"mailto:spacefindatechnologiesltd@gmail.com"}
+                    >
+                      spacefindatechnologiesltd@gmail.com
+                    </Link>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center gap-3 mt-10 pb-4">
-                <input className="h-8 w-8" id="receive-offers" type="checkbox" />
-                <label className="text-lg" htmlFor="receive-offers">
-                  I would like SpaceNG to send me offers and communications.
+                <input className="h-4 md:h-8 w-4 md:w-8" id="receive-offers" type="checkbox" />
+                <label className="text-xs sm:text-sm md:text-lg" htmlFor="receive-offers">
+                  I would like Spacefinda to send me offers and communications.
                 </label>
               </div>
-              <p className="text-lg mb-10">
+              <p className="text-xs sm:text-sm md:text-lg mb-10">
                 By submitting this form you agree to our{" "}
-                <Link className="text-blue font-semibold" href={""}>
+                <Link className="text-blue font-semibold" href={"/privacy-policy"}>
                   Privacy Policy
                 </Link>
               </p>
 
-              <button className="w-9/12 mx-auto bg-blue py-4 px-4 mt-10 text-white text-xl font-semibold block hover:opacity-70">
+              <button className="w-full sm:w-9/12 mx-auto bg-blue py-2 md:py-4 px-4 mt-10 text-white rounded-lg max-w-xs:text-sm md:text-xl font-semibold block hover:opacity-70">
                 ENQUIRE NOW
               </button>
             </form>
           </Wrapper>
         </section>
 
-        {/* <section>
-          <Wrapper className="pt-10">
-            <Title title="Articles & Blog Post" />
-
-            <article className="text-white font-montserrat relative mb-20">
-              <Image alt="Image of a bedroom" src={blogImage} />
-              <div className="space-y-8 absolute left-10 bottom-10 max-w-3xl">
-                <h4 className="font-bold text-3xl">Latest Post On SpaceNG :</h4>
-                <p className="font-thin text-xl">
-                  If you need to ask a question relating to your agreement, bookings, billing, or
-                  have any other queries, please reach out to our customer support team.......
-                </p>
-                <Link className="text-xl block" href={""}>
-                  ReadMore
-                </Link>
-              </div>
-            </article>
-
-            <div className="relative">
-              <Image alt="Conference room image" src={aboutImage} />
-              <div className="flex flex-nowrap overflow-x-scroll gap-6 absolute left-2 no-scrollbar bottom-2">
-                <div className="w-1/4 shrink-0">
-                  <Image alt="Image of bedroom" src={aboutImage3} />
-                </div>
-                <div className="w-1/4 shrink-0">
-                  <Image alt="image of lounge" src={aboutImage4} />
-                </div>
-                <div className="w-1/4 shrink-0">
-                  <Image alt="Image of bedroom" src={aboutImage3} />
-                </div>
-                <div className="w-1/4 shrink-0">
-                  <Image alt="image of lounge" src={aboutImage4} />
-                </div>
-              </div>
-            </div>
-          </Wrapper>
-        </section> */}
-        {/* <section>
-          <Wrapper className="py-20">
-            <Title title="SaceNG" />
-
-            <h3 className="text-3xl text-center max-w-3xl my-10 mx-auto">
-              A co-working space to make work seamless for{" "}
-              <span className="font-medium">Creatives.</span>
-            </h3>
-
-            <Link
-              className="bg-blue py-3 px-5 rounded-md text-white font-medium block w-fit mx-auto"
-              href={""}
-            >
-              Book Spaces
-            </Link>
-
-            <div className="pt-16">
-              <Image alt="Office settings image" className="w-full" src={aboutImage5} />
-            </div>
-          </Wrapper>
-        </section> */}
-
         <section>
           <Wrapper className="py-10">
-            <span className="bg-blue py-3 px-5 invisible rounded-md text-white font-medium block w-fit mx-auto">
-              SpaceNG Offer
-            </span>
+            <h3 className="text-center text-xl sm:text-4xl md:mt-16">
+              Choose a Spacefinda that suits your needs
+            </h3>
 
-            <h3 className="text-center text-4xl mt-16">Choose a SpaceNG that suits your needs</h3>
-
-            <div className="grid grid-cols-2 gap-10 pt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 sm:pt-12">
               <Offers
                 Icon={Menu}
                 amount={25000}
@@ -199,8 +158,10 @@ function Page() {
                 title="Shortlet"
               />
             </div>
-            <h3 className="py-4 pt-12 text-4xl font-medium text-grey-200">The Benefits</h3>
-            <ul className="pb-16 grid grid-cols-3 gap-x-8 gap-y-16">
+            <h3 className="py-4 pt-12 text-xl md:text-4xl font-medium text-grey-200">
+              The Benefits
+            </h3>
+            <ul className="pb-16 grid grid-cols-1 sm:grid-cols-3 gap-x-3 sm:gap-x-5 lg:gap-x-8 gap-y-10 sm:gap-y-16">
               <Servicecards
                 Icon={AirCondition}
                 note="Achieve your goals effortlessly."
