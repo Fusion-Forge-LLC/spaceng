@@ -21,7 +21,7 @@
     text-wrap: balance;
   }
   .about-count-wrapper {
-    @apply h-24 w-24 rounded-full bg-grey flex flex-col justify-center p-4;
+    @apply h-16 sm:h-24 w-16 sm:w-24 rounded-full bg-grey flex flex-col justify-center p-1 sm:p-4;
   }
   .features-text {
     @apply bg-grey rounded w-fit shadow-[2px_0px_15px_rgba(0,0,0,0.25)];

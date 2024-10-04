@@ -34,7 +34,7 @@ const testimonies = [
       reviewType: "Shortlet Reviews",
     },
     testimony:
-      "SpaceNG Shortlet was a lifesaver for my remote team,We needed a temporary space for a project, and their flexible rentals and amenities made it easy to get work done. 10/10 would recommend.",
+      "Spacefinda Shortlet was a lifesaver for my remote team,We needed a temporary space for a project, and their flexible rentals and amenities made it easy to get work done. 10/10 would recommend.",
   },
   {
     user: {
@@ -61,7 +61,7 @@ const testimonies = [
       reviewType: "Workspace Reivews",
     },
     testimony:
-      "SpaceNG's Workspace helped our startup scale quickly by providing a collaborative environment and access to resources we needed. We've seen significant growth since moving in",
+      "Spacefinda's Workspace helped our startup scale quickly by providing a collaborative environment and access to resources we needed. We've seen significant growth since moving in",
   },
   {
     user: {
@@ -79,7 +79,7 @@ const testimonies = [
       reviewType: "Workspace Reviews",
     },
     testimony:
-      "SpaceNG's Workspace has been instrumental in connecting us with other innovators and potential partners. The networking opportunities have been invaluable for our business",
+      "Spacefinda's Workspace has been instrumental in connecting us with other innovators and potential partners. The networking opportunities have been invaluable for our business",
   },
 ];
 
@@ -88,21 +88,21 @@ export default function Home() {
     <div>
       <Header />
       <main>
-        <Wrapper>
+        <Wrapper className="pb-20">
           <div className="py-10 space-y-5">
-            <h1 className="text-blue text-5xl text-center">
+            <h1 className="text-blue text-xl sm:text-3xl md:text-5xl text-center">
               <span className={playfair.className}>THE FUTURE OF FLEXIBLE LIVING </span>
             </h1>
 
             <p className="text-grey text-center">
-              SpaceNG revolutionizes by blending short-termrentals with dynamic workspaces.
+              Spacefinda revolutionizes by blending short-termrentals with dynamic workspaces.
             </p>
           </div>
 
-          <div className="relative mt-8">
-            <div className="bg-grey p-4 w-80 absolute top-1/2 -translate-y-1/2 left-0">
+          <div className="relative mt-8 flex flex-col-reverse gap-8 md:block">
+            <div className="bg-grey p-4 w-11/12 mx-auto md:mx-0 md:w-80 md:absolute md:top-1/2 md:-translate-y-1/2 md:left-0">
               <h4 className="flex items-center justify-between text-white">
-                Find Your SpaceNG
+                Find Your Spacefinda
                 <Search />
               </h4>
               <div className="space-y-3.5 mt-4">
@@ -123,15 +123,21 @@ export default function Home() {
                   placeholder="Type"
                 />
                 <DropdDown options={[]} placeholder="Date" />
-                <Button className="bg-blue text-white rounded-none w-full">Find my SpaceNG</Button>
+                <Button className="bg-blue text-white rounded-none w-full">
+                  Find my Spacefinda
+                </Button>
               </div>
             </div>
-            <Image alt="A room with desk and chairs" className="ml-auto w-[75%]" src={hero} />
+            <Image
+              alt="A room with desk and chairs"
+              className="md:ml-auto w-full md:w-11/12 lg:w-[75%]"
+              src={hero}
+            />
           </div>
         </Wrapper>
         <section className="bg-grey">
-          <Wrapper className="flex pt-20 pb-10 text-white">
-            <article className="flex flex-col justify-between w-1/2 pb-20 pr-10">
+          <Wrapper className="flex flex-col md:flex-row pt-20 pb-10 text-white">
+            <article className="flex flex-col max-sm:items-center max-sm:gap-12 justify-between md:w-1/2 pb-20 md:pr-10">
               <svg
                 fill="none"
                 height="160"
@@ -157,30 +163,30 @@ export default function Home() {
 
               <h3 className="text-xl font-semibold">Our Mission</h3>
 
-              <p className=" font-medium">
+              <p className="max-sm:text-center font-medium">
                 Enable individuals, teams, and organizations to thrive by creating innovative
                 solutions, spaces, and experiences for their evolving needs.
               </p>
             </article>
-            <div className="relative 1/2">
+            <div className="relative 1/2 max-sm:pr-6">
               <Image alt="Office settings image" src={about} />
 
-              <ul className="bg-white text-center flex px-6 py-3 gap-8 absolute -bottom-5 -right-8">
+              <ul className="bg-white text-center flex px-3 md:px-6 py-3 gap-2.5 md:gap-8 absolute -bottom-5 right-0 md:-right-8">
                 <li className="about-count-wrapper">
-                  <span className="text=lg font-semibold">10000+</span>
-                  <span className="font-medium text-xs">request completed</span>
+                  <span className="text-xs sm:text-lg font-semibold">10000+</span>
+                  <span className="font-medium text-[8px] sm:text-xs">request completed</span>
                 </li>
                 <li className="about-count-wrapper">
-                  <span className="text=lg font-semibold">5000+</span>
-                  <span className="font-medium text-xs">Uptime request</span>
+                  <span className="text-xs sm:text-lg font-semibold">5000+</span>
+                  <span className="font-medium text-[8px] sm:text-xs">Uptime request</span>
                 </li>
                 <li className="about-count-wrapper">
-                  <span className="text=lg font-semibold">98%</span>
-                  <span className="font-medium text-xs">satisfaction rate</span>
+                  <span className="text-xs sm:text-lg font-semibold">98%</span>
+                  <span className="font-medium text-[8px] sm:text-xs">satisfaction rate</span>
                 </li>
                 <li className="about-count-wrapper">
-                  <span className="text=lg font-semibold">2000+</span>
-                  <span className="font-medium text-xs">Business Supported</span>
+                  <span className="text-xs sm:text-lg font-semibold">2000+</span>
+                  <span className="font-medium text-[8px] sm:text-xs">Business Supported</span>
                 </li>
               </ul>
             </div>
@@ -189,7 +195,7 @@ export default function Home() {
 
         <section>
           <Wrapper className="py-20">
-            <Title title="The SpaceNG Overview" />
+            <Title title="The Spacefinda Overview" />
 
             <div className="space-y-10 mb-16">
               <OverviewWithLabel
@@ -204,7 +210,7 @@ export default function Home() {
                     image: "/overview/image2.png",
                   },
                   {
-                    note: "Access to amenities like high-speed internet, printing, and meeting rooms",
+                    note: "Access to amenities like high-speed internet and meeting rooms",
                     image: "/overview/image3.png",
                   },
                 ]}
@@ -294,7 +300,7 @@ export default function Home() {
         <section>
           <Wrapper className="py-20 space-y-10">
             <Title title="The Partners" />
-            <div className="flex items-center justify-between">
+            <div className="grid grid-cols-2 sm:flex items-center justify-between">
               {partners.map((item, index) => {
                 return (
                   <Image
@@ -336,7 +342,7 @@ export default function Home() {
               </button>
             </div>
 
-            <ul className="grid grid-cols-3 gap-8 py-10">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
               {testimonies.map((item, index) => {
                 return (
                   <TestimonialCard

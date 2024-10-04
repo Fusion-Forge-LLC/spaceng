@@ -29,7 +29,7 @@ function Header() {
     <header className="py-6">
       <Wrapper>
         <div className="flex items-center justify-between">
-          <span className={cn(playfair.className, "text-4xl")}>SPACENG</span>
+          <span className={cn(playfair.className, "text-2xl md:text-4xl")}>SPACEFINDA</span>
           <nav className="px-4 py-2.5 hidden lg:block">
             <ul className="flex items-center justify-center gap-12">
               <li className={cn("hover:text-blue", pathName === "/" && "border-b-2 border-b-blue")}>
