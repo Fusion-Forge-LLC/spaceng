@@ -5,7 +5,7 @@ import Wrapper from "../wrapper/wrapper";
 
 function Footer() {
   return (
-    <footer className="bg-[#1E1E1E] pt-28 pb-10 text-white">
+    <footer className="bg-[#1E1E1E] pt-16 md:pt-28 pb-10 text-white">
       <Wrapper>
         <div className=" md:flex gap-20">
           <article className="space-y-4 md:w-1/3 lg:w-2/5 mb-16 md:mb-0">
