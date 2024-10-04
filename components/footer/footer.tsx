@@ -32,8 +32,12 @@ function Footer() {
             <div>
               <h4 className="font-medium text-[17px] mb-6">Legal</h4>
               <ul className="space-y-5">
-                <li>Privacy Policy</li>
-                <li>Terms of Use</li>
+                <li>
+                  <Link href="/privacy-policy">Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link href="/privacy-policy#terms">Terms of Use</Link>
+                </li>
                 <li>Copyrights</li>
                 <li>Trademarks</li>
               </ul>

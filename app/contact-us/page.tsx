@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {Phone} from "lucide-react";
 
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
@@ -90,8 +89,29 @@ function Page() {
                   </p>
 
                   <div className="flex items-center gap-3">
-                    <Phone color="#205BF3" />
-                    <span className="">(+234) 00000000</span>
+                    <svg
+                      fill="none"
+                      height="15"
+                      viewBox="0 0 19 15"
+                      width="19"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M16.2885 0.5H2.32617V14.5H16.2885V0.5Z" fill="#F1F5F7" />
+                      <path
+                        d="M9.30859 8.97222L16.2896 14.5V3.58698L9.30859 8.97222Z"
+                        fill="#DCE6EA"
+                      />
+                      <path
+                        d="M16.871 0.5H16.2893L9.3083 6.02771L2.32695 0.5H1.74525C0.781943 0.5 0 1.28389 0 2.24997V12.75C0 13.7158 0.781943 14.5 1.74525 14.5H2.32695V3.58693L9.3083 8.97104L16.2893 3.58564V14.5H16.871C17.8345 14.5 18.6164 13.7158 18.6164 12.75V2.25001C18.6165 1.28393 17.8346 0.5 16.871 0.5Z"
+                        fill="#F84437"
+                      />
+                    </svg>
+                    <Link
+                      className="text-[#EB001B] hover:underline"
+                      href={"mailto:spacefindatechnologiesltd@gmail.com"}
+                    >
+                      spacefindatechnologiesltd@gmail.com
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -104,7 +124,7 @@ function Page() {
               </div>
               <p className="text-lg mb-10">
                 By submitting this form you agree to our{" "}
-                <Link className="text-blue font-semibold" href={""}>
+                <Link className="text-blue font-semibold" href={"/privacy-policy"}>
                   Privacy Policy
                 </Link>
               </p>
