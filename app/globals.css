@@ -81,13 +81,13 @@
     @apply absolute bottom-5 md:bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-10/12 md:w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
   }
   .property-tab-link {
-    @apply block w-fit p-2.5 hover:bg-blue/10;
+    @apply block w-fit p-1.5 lg:p-2.5 hover:bg-blue/10 text-sm lg:text-base;
   }
   .property-tab-link.active {
     @apply border-b-2 border-b-blue text-grey;
   }
   .property-page-link {
-    @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all;
+    @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all text-center;
   }
   .mobile-nav-link {
     @apply flex items-center gap-5 sm:hover:bg-blue/30 py-2.5 px-2 rounded-lg;
