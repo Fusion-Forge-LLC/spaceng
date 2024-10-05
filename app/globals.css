@@ -48,10 +48,10 @@
     @apply h-10 w-10 rounded-full bg-[#FBFBFB] grid place-content-center hover:bg-blue/20;
   }
   .property-book {
-    @apply p-8 bg-white rounded-2xl shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)];
+    @apply p-6 sm:p-8 md:p-4 lg:p-8 bg-white rounded-2xl shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)];
   }
   .payment-method {
-    @apply p-4 space-y-2 border cursor-pointer;
+    @apply p-2 lg:p-4 space-y-2 border cursor-pointer text-left flex flex-col;
   }
   .non-active-payment-method {
     @apply border-[#E6E6E6] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.02),0px_1px_1px_rgba(0,0,0,0.03)];

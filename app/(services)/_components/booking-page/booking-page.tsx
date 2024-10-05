@@ -35,7 +35,7 @@ function BookingPage() {
           </button>
         </div>
 
-        <section className="flex gap-40 py-5">
+        <section className="flex flex-col-reverse sm:flex-row gap-20 sm:gap-10 lg:gap-40 py-5">
           <div className="flex-1">
             <h3 className="text-lg font-medium mb-8">Arrange A Pre-Booking</h3>
 
@@ -46,13 +46,13 @@ function BookingPage() {
 
               <PhoneNumber />
               <TextArea />
-              <div className="pt-8">
+              <div className="pt-4 sm:pt-8">
                 <button className="booking-btn w-full ">Submit Request</button>
               </div>
             </form>
           </div>
 
-          <div className="w-full max-w-sm">
+          <div className="w-full sm:max-w-64 md:max-w-80 lg:max-w-sm">
             <Calendar
               calendarType={"gregory"}
               className={""}

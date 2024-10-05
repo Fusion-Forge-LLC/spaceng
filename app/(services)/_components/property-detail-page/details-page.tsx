@@ -7,6 +7,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 
 import Wrapper from "@/components/wrapper/wrapper";
+import {cn} from "@/lib/utils";
 
 import ReviewCard from "../../_components/review-card/review-card";
 import SearchProperties from "../../_components/search/search";
@@ -80,10 +81,10 @@ function DetailsPage({
   return (
     <main>
       <Wrapper className="py-10">
-        <div className="flex items-center justify-between">
-          <div>
-            <h5 className="text-lg font-medium">{title}</h5>
-            <p className="flex gap-1">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
+          <div className="max-sm:space-y-3">
+            <h5 className="md:text-lg font-medium">{title}</h5>
+            <p className="flex gap-1 ">
               <MapPin /> {location}{" "}
             </p>
           </div>
@@ -92,7 +93,7 @@ function DetailsPage({
         </div>
 
         <div className="py-10">
-          <div className="grid grid-cols-4 gap-3">
+          <div className="hidden sm:grid grid-cols-4 gap-3">
             {images.map((item, index) => {
               return (
                 <div
@@ -105,15 +106,26 @@ function DetailsPage({
                     className="object-cover object-center"
                     src={item}
                   />
-                  <button className="bg-[#F4F4F4]/80 hover:bg-[#F4F4F4] rounded-lg items-center px-5 py-3 gap-4 hidden group-last:flex absolute right-6 bottom-6">
+                  <button className="bg-[#F4F4F4]/80 hover:bg-[#F4F4F4] rounded-lg items-center px-3 lg:px-5 py-2 lg:py-3 gap-4 hidden group-last:flex absolute right-2 md:right-3 lg:right-6 bottom-2 md:bottom-3 lg:lbottom-6">
                     <ImageIcon /> Gallery
                   </button>
                 </div>
               );
             })}
           </div>
+          <div className="aspect-[331/321] relative rounded-md sm:hidden overflow-hidden">
+            <Image
+              fill
+              alt="Shortlet property image"
+              className="object-cover object-center"
+              src={images[0]}
+            />
+            <button className="bg-[#F4F4F4]/80 rounded-lg items-center px-5 py-3 gap-4 flex absolute right-4 bottom-4">
+              <ImageIcon /> Gallery
+            </button>
+          </div>
 
-          <div className="py-12 text-grey-200 flex gap-40">
+          <div className="py-12 text-grey-200 flex gap-10 lg:gap-40">
             <article className="text-grey-200 flex-1">
               <div>
                 <h4 className="mb-6">About Us</h4>
@@ -122,14 +134,20 @@ function DetailsPage({
 
                 <p className="leading-loose mb-8">{description}</p>
 
-                <h5 className="text-lg mb-6 font-medium text-grey">Amenities</h5>
+                <h5 className="text-lg  md:mb-6 font-medium text-grey">Amenities</h5>
 
-                <ul className="grid grid-rows-3 grid-flow-col gap-8 py-3">
+                <ul className="sm:grid grid-rows-3 grid-flow-col gap-8 py-3">
                   {amenities.map((item, index) => {
-                    return <li key={index}>{item}</li>;
+                    return (
+                      <li key={index} className="py-3 sm:py-0">
+                        {item}
+                      </li>
+                    );
                   })}
                 </ul>
               </div>
+
+              <BookingCard className="md:hidden my-16" cost={cost} label={label} />
 
               <div className="pt-12">
                 <h4 className="mb-6">Reviews & Ratings</h4>
@@ -154,35 +172,45 @@ function DetailsPage({
               </div>
             </article>
 
-            <div className="w-[435px] shrink-0 space-y-5">
-              <Link
-                className="flex items-center group property-book gap-4"
-                href={`${pathname}/booking`}
-              >
-                <CalendarDaysIcon />
-                <span>Arrange a visit</span>
-
-                <ArrowRight
-                  className="ml-auto group-hover:scale-150 transition-all"
-                  color="#205BF3"
-                />
-              </Link>
-
-              <div className="property-book ">
-                <p className="text-2xl font-bold text-[#443344] flex items-center gap-2">
-                  ₦ {cost.toLocaleString("en-Us")}{" "}
-                  <span className="text-[#333] text-xs font-normal">/night</span>
-                </p>
-
-                <div>
-                  <BookShortlet showBtn label={label} />
-                </div>
-              </div>
-            </div>
+            <BookingCard className="hidden md:block" cost={cost} label={label} />
           </div>
         </div>
       </Wrapper>
     </main>
+  );
+}
+
+function BookingCard({
+  className,
+  cost,
+  label,
+}: {
+  className: string;
+  cost: number;
+  label: "Guest" | "Team";
+}) {
+  const pathname = usePathname();
+
+  return (
+    <div className={cn("sm:w-[310px] lg:w-[435px] shrink-0 space-y-5", className)}>
+      <Link className="flex items-center group property-book gap-4" href={`${pathname}/booking`}>
+        <CalendarDaysIcon />
+        <span>Arrange a visit</span>
+
+        <ArrowRight className="ml-auto group-hover:scale-150 transition-all" color="#205BF3" />
+      </Link>
+
+      <div className="property-book ">
+        <p className="text-2xl font-bold text-[#443344] flex items-center gap-2">
+          ₦ {cost.toLocaleString("en-Us")}{" "}
+          <span className="text-[#333] text-xs font-normal">/night</span>
+        </p>
+
+        <div>
+          <BookShortlet showBtn label={label} />
+        </div>
+      </div>
+    </div>
   );
 }
 
