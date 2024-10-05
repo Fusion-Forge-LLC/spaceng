@@ -1,5 +1,8 @@
-import React from "react";
+"use client";
+
+import React, {FormEvent} from "react";
 import {Poppins} from "next/font/google";
+import {useRouter} from "next/navigation";
 
 import {cn} from "@/lib/utils";
 
@@ -9,10 +12,16 @@ import SocialBtn from "../_components/social-btn/social-btn";
 const poppin = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
 
 function Page() {
+  const router = useRouter();
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    router.push("/auth/business/signup/verify");
+  };
+
   return (
     <div className="business-auth-wrapper">
       <h3 className="auth-title mb-7">Create your Property Owner Account</h3>
-      <form action="" className="space-y-5 mb-8">
+      <form className="space-y-5 mb-8" onSubmit={handleSubmit}>
         <FormControl id="full_name" label="Full Name" />
         <FormControl id="email_address" label="Email Address" />
         <FormControl id="phone_number" label="Phone Number" />
@@ -37,7 +46,7 @@ function Page() {
           <div className="flex-1 h-px bg-grey" />
         </div>
 
-        <div className="flex justify-center gap-8 pt-4">
+        <div className="grid grid-cols-2 px-8 sm:px-0 sm:flex justify-center gap-2 sm:gap-8 pt-4">
           <SocialBtn image="/icons/facebook.svg" name="Facebook" />
           <SocialBtn image="/icons/google.svg" name="Google" />
         </div>

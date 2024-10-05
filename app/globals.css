@@ -48,10 +48,10 @@
     @apply h-10 w-10 rounded-full bg-[#FBFBFB] grid place-content-center hover:bg-blue/20;
   }
   .property-book {
-    @apply p-8 bg-white rounded-2xl shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)];
+    @apply p-6 sm:p-8 md:p-4 lg:p-8 bg-white rounded-2xl shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)];
   }
   .payment-method {
-    @apply p-4 space-y-2 border cursor-pointer;
+    @apply p-2 lg:p-4 space-y-2 border cursor-pointer text-left flex flex-col;
   }
   .non-active-payment-method {
     @apply border-[#E6E6E6] rounded-md shadow-[0px_3px_6px_rgba(0,0,0,0.02),0px_1px_1px_rgba(0,0,0,0.03)];
@@ -60,16 +60,16 @@
     @apply text-lg font-medium text-white rounded-xl py-3 px-4 block text-center bg-blue mt-4 hover:opacity-75 transition-all;
   }
   .business-auth-button {
-    @apply block rounded-2xl border-2 border-blue text-lg font-semibold px-8 py-2 w-44 text-center active:scale-95;
+    @apply block rounded-2xl border-2 border-blue w-full sm:text-lg font-medium sm:font-semibold px-8 py-2 sm:w-44 text-center active:scale-95;
   }
   .business-auth-wrapper {
-    @apply py-12 px-10 bg-white w-full max-w-xl mx-auto;
+    @apply py-12 px-4 sm:px-8 md:px-10 bg-white w-11/12 sm:w-full sm:max-w-xl mx-auto;
   }
   .auth-title {
-    @apply text-2xl text-center font-semibold;
+    @apply sm:text-2xl text-center font-semibold;
   }
   .verify-btn {
-    @apply text-black bg-[#D9D9D9] rounded-lg text-3xl font-medium p-2 w-full block hover:bg-grey-100;
+    @apply text-black bg-[#D9D9D9] rounded-lg text-xs sm:text-2xl lg:text-3xl font-medium p-2 w-full block hover:bg-grey-100;
   }
   .dashboard-nav {
     @apply flex items-center gap-2 px-2.5 py-2 hover:bg-grey-300/5 rounded-lg;
@@ -81,13 +81,13 @@
     @apply absolute bottom-5 md:bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-10/12 md:w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
   }
   .property-tab-link {
-    @apply block w-fit p-2.5 hover:bg-blue/10;
+    @apply block w-fit p-1.5 lg:p-2.5 hover:bg-blue/10 text-sm lg:text-base;
   }
   .property-tab-link.active {
     @apply border-b-2 border-b-blue text-grey;
   }
   .property-page-link {
-    @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all;
+    @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all text-center;
   }
   .mobile-nav-link {
     @apply flex items-center gap-5 sm:hover:bg-blue/30 py-2.5 px-2 rounded-lg;

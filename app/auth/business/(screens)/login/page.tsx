@@ -1,6 +1,9 @@
-import React from "react";
+"use client";
+
+import React, {FormEvent} from "react";
 import {Poppins} from "next/font/google";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 import {cn} from "@/lib/utils";
 
@@ -10,10 +13,17 @@ import SocialBtn from "../_components/social-btn/social-btn";
 const poppin = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
 
 function Page() {
+  const router = useRouter();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    router.push("/dashboard");
+  };
+
   return (
     <div className="business-auth-wrapper absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <h3 className="auth-title mb-6">Welcome Back!</h3>
-      <form action="" className="space-y-5 mb-6 text-right">
+      <form className="space-y-5 mb-6 text-right" onSubmit={handleSubmit}>
         <FormControl id="email_address" label="Email Address" />
         <FormControl isPassword id="password" label="Password" type="password" />
         <Link

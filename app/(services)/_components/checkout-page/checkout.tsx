@@ -33,16 +33,17 @@ function Checkout({label}: {label: "Guest" | "Team"}) {
   return (
     <main>
       <PaymentSuccess isShown={isPaymentSuccess} />
-      <Wrapper className="pt-10 pb-20">
+      <Wrapper className="pt-10">
         <div className="py-5">
           <button className="flex items-center gap-3" onClick={() => router.back()}>
             <ArrowLeft color="#205BF3" size={18} />
             Go Back
           </button>
         </div>
-
-        <div className="grid grid-cols-12 gap-12 items-start">
-          <div className="col-span-7 property-book">
+      </Wrapper>
+      <Wrapper className="pt-8 md:pt-0 pb-20 max-sm:px-0">
+        <div className="md:grid md:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="md:col-span-6 lg:col-span-7 property-book">
             <div className="text-[#6D6E78] text-sm flex gap-3">
               <button
                 className={cn(
@@ -104,7 +105,7 @@ function Checkout({label}: {label: "Guest" | "Team"}) {
               </div>
             </div>
           </div>
-          <div className="col-span-5 property-book">
+          <div className="hidden md:block col-span-6 lg:col-span-5 property-book">
             <div className="p-6">
               <h4 className=" text-grey font-medium text-lg">Booking details</h4>
               <Booking label={label} />

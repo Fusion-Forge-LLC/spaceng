@@ -12,7 +12,7 @@ function Page() {
         className="business-auth-button font-medium py-3 text-white bg-blue hover:bg-white hover:text-blue w-full"
         href={"/auth/business/login"}
       >
-        Confirm
+        Log in
       </Link>
     </div>
   );

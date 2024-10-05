@@ -44,7 +44,7 @@ function Card({image, title, location, price, status}: Props) {
         </button>
       </div>
 
-      <ul className="text-[#6D6E78] text-sm space-y-1">
+      <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">
         <li>Location: {location}</li>
         <li>Price: ₦{price.toLocaleString()} per night</li>
         <li className="flex items-center gap-1">Status: {status}</li>

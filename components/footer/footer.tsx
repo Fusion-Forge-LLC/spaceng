@@ -1,11 +1,18 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import {ArrowUp} from "lucide-react";
 
 import Wrapper from "../wrapper/wrapper";
 
 function Footer() {
+  const scrollTop = () => {
+    window.scrollTo({top: 0});
+  };
+
   return (
-    <footer className="bg-[#1E1E1E] pt-16 md:pt-28 pb-10 text-white">
+    <footer className="bg-[#1E1E1E] pt-16 md:pt-28 pb-10 text-white relative">
       <Wrapper>
         <div className=" md:flex gap-20">
           <article className="space-y-4 md:w-1/3 lg:w-2/5 mb-16 md:mb-0">
@@ -133,6 +140,10 @@ function Footer() {
         </div>
         <p className="mt-20 text-sm">&#169; Spacefinda2024, All Rights Reserved.</p>
       </Wrapper>
+
+      <button className="absolute bottom-8 right-4 md:right-10 animate-bounce" onClick={scrollTop}>
+        <ArrowUp />
+      </button>
     </footer>
   );
 }

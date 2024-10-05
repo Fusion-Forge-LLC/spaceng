@@ -16,18 +16,22 @@ function Lists({properties, type}: {properties: PropertyType[]; type: "shortlets
 
   return (
     <main>
-      <Wrapper className="py-10">
+      <Wrapper className="pt-10">
         <section>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
             <div>
-              <h5 className="text-lg font-medium capitalize">{type} in Lagos, Nigeria</h5>
-              <span>250 results</span>
+              <h5 className="md:text-lg font-medium capitalize">{type} in Lagos, Nigeria</h5>
+              <span className="text-sm md:text-base">250 results</span>
             </div>
 
             <SearchProperties />
           </div>
+        </section>
+      </Wrapper>
 
-          <div className="grid grid-cols-2 gap-12 py-12">
+      <Wrapper className="max-sm:px-0">
+        <section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
             <div className="space-y-10">
               {properties.map((item, index) => {
                 return (
@@ -45,12 +49,12 @@ function Lists({properties, type}: {properties: PropertyType[]; type: "shortlets
                 );
               })}
             </div>
-            <div>
+            <div className="px-4 sm:px-0 hidden lg:block">
               <Image alt="Map Image" placeholder="blur" src={dummyMap} />
             </div>
           </div>
 
-          <div className="pt-20 pb-10">
+          <div className="lg:pt-20 pb-10">
             <ul className="flex justify-center gap-4">
               <li>
                 <button className="pageination-btn bg-blue text-white">1</button>
@@ -68,6 +72,10 @@ function Lists({properties, type}: {properties: PropertyType[]; type: "shortlets
                 <button className="pageination-btn">5</button>
               </li>
             </ul>
+          </div>
+
+          <div className="px-4 sm:px-0 lg:hidden py-14">
+            <Image alt="Map Image" className="mx-auto" placeholder="blur" src={dummyMap} />
           </div>
         </section>
       </Wrapper>

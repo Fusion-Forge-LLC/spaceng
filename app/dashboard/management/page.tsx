@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
-
-import {cn} from "@/lib/utils";
+import {ChevronRight} from "lucide-react";
 
 import Card from "./_component/property-card";
 
@@ -42,56 +41,48 @@ const properties = [
 
 function Page() {
   return (
-    <div className="p-2">
-      <div className="flex gap-5 items-center text-grey-100">
-        <Link className={cn("property-tab-link", "active")} href={""}>
-          Property List
-        </Link>
-        <Link className={cn("property-tab-link")} href={""}>
-          Property Details
-        </Link>
-        <Link className={cn("property-tab-link")} href={""}>
-          Booking Calender
-        </Link>
-        <Link className={cn("property-tab-link")} href={""}>
-          Review & Ratings
-        </Link>
-      </div>
-      <div>
-        <article className="py-5">
-          <h4 className="text-2xl font-semibold">Your Properties</h4>
-          <p className="text-grey-200">
-            Manage your properties with effeciently, Quickly access key details, make updates, and
-            monitor status{" "}
-          </p>
-        </article>
-        <ul className="grid grid-cols-4 gap-5">
-          {properties.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                image={item.image}
-                location={item.location}
-                price={item.price}
-                status={item.status}
-                title={item.title}
-              />
-            );
-          })}
-          {properties.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                image={item.image}
-                location={item.location}
-                price={item.price}
-                status={item.status}
-                title={item.title}
-              />
-            );
-          })}
-        </ul>
-      </div>
+    <div>
+      <article className="py-5">
+        <h4 className="text-lg sm:text-2xl font-semibold">Your Properties</h4>
+        <p className="text-grey-200 max-sm:text-sm">
+          Manage your properties with effeciently, Quickly access key details, make updates, and
+          monitor status{" "}
+        </p>
+      </article>
+
+      <Link
+        className="flex sm:hidden items-center w-fit ml-auto pb-5 gap-0.5 text-xs sm:text-sm group"
+        href=""
+      >
+        See More <ChevronRight className="group-hover:translate-x-1 transition-all" size={16} />
+      </Link>
+
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {properties.map((item) => {
+          return (
+            <Card
+              key={item.id}
+              image={item.image}
+              location={item.location}
+              price={item.price}
+              status={item.status}
+              title={item.title}
+            />
+          );
+        })}
+        {properties.map((item) => {
+          return (
+            <Card
+              key={item.id}
+              image={item.image}
+              location={item.location}
+              price={item.price}
+              status={item.status}
+              title={item.title}
+            />
+          );
+        })}
+      </ul>
     </div>
   );
 }

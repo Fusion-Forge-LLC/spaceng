@@ -35,7 +35,7 @@ function Card({image, title, booking, views, rating}: Props) {
         </button>
       </div>
 
-      <ul className="text-[#6D6E78] text-sm space-y-1">
+      <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">
         <li>Bookings: {booking} upcoming</li>
         <li>Views: {views} in the last 30 days</li>
         <li className="flex items-center gap-1">

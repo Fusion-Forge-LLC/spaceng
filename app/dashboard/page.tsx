@@ -1,6 +1,7 @@
 import React from "react";
-import {Bell, Mail} from "lucide-react";
+import {Bell, ChevronRight, Mail, Plus} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import Card from "./_components/property-cards/card";
 import Chart from "./_components/charts/charts";
@@ -86,20 +87,28 @@ const payouts = [
 function Page() {
   return (
     <div className="text-grey-200">
-      <section className="flex items-center justify-between p-3 border-b border-b-grey-200">
+      <section className="flex items-center justify-between px-4 py-3 md:p-3 border-b border-b-grey-200">
         <div>
-          <h1 className="text-grey text-2xl font-semibold">Welcome Oluwatosin,</h1>
-          <p className="font-medium">Manage your properties with ease</p>
+          <h1 className="text-grey text-lg sm:text-2xl font-semibold">Welcome Oluwatosin,</h1>
+          <p className="font-medium max-sm:text-sm">Manage your properties with ease</p>
         </div>
 
-        <button className="bg-blue px-4 py-2 text-white font-medium rounded-md hover:opacity-75">
-          Add New property
+        <button className="bg-blue px-1 py-1 sm:px-4 sm:py-2 text-white font-medium rounded-md hover:opacity-75">
+          <span className="hidden sm:inline">Add New property</span> <Plus className="sm:hidden" />
         </button>
       </section>
 
-      <section className="p-3">
-        <h2 className="text-black font-medium text-lg mb-4">Your Properties at a glance</h2>
-        <ul className="grid grid-cols-4 gap-5">
+      <section className="px-4 py-3 md:p-3">
+        <h2 className="text-black font-medium text-sm sm:text-base md:text-lg mb-4 max-md:py-2 flex items-center justify-between">
+          Your Properties at a glance
+          <Link
+            className="flex items-center gap-0.5 text-xs sm:text-sm group"
+            href="/dashboard/management"
+          >
+            See More <ChevronRight className="group-hover:translate-x-1 transition-all" size={16} />
+          </Link>
+        </h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {properties.map((item) => {
             return (
               <Card
@@ -115,7 +124,7 @@ function Page() {
         </ul>
 
         <div className="grid grid-cols-12 gap-4 pt-10">
-          <div className="col-span-6 border border-[#77787D] rounded-xl py-2 px-3">
+          <div className="col-span-12 lg:col-span-6 border border-[#77787D] rounded-xl py-2 px-3">
             <h4 className="text-black font-medium mb-2">Your Earnings</h4>
 
             <div className="text-center flex gap-5 mb-4">
@@ -131,7 +140,7 @@ function Page() {
 
             <Chart />
           </div>
-          <div className="col-span-3 border border-[#77787D] rounded-xl py-2 px-3">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-3">
             <h4 className="text-black font-medium mb-5">Payouts</h4>
 
             <table className="w-full text-sm">
@@ -153,7 +162,7 @@ function Page() {
               </tbody>
             </table>
           </div>
-          <div className="col-span-3 border border-[#77787D] rounded-xl py-2 px-2">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-2">
             <h4 className="text-black font-medium mb-2">Notifications</h4>
             <ul className="space-y-2">
               <li className="flex items-center gap-2 rounded-lg border border-grey-100 p-1.5">

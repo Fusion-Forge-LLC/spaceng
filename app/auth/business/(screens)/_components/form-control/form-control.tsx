@@ -17,7 +17,7 @@ function FormControl(props: FormInput) {
       </label>
       <div className="relative">
         <Input
-          className="rounded-2xl border border-grey-200 h-14 focus-visible:ring-blue"
+          className="rounded-2xl border border-grey-200 h-12 sm:h-14 focus-visible:ring-blue"
           {...props}
         />
         {props.isPassword && (
