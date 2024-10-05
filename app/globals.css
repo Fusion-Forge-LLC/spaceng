@@ -60,16 +60,16 @@
     @apply text-lg font-medium text-white rounded-xl py-3 px-4 block text-center bg-blue mt-4 hover:opacity-75 transition-all;
   }
   .business-auth-button {
-    @apply block rounded-2xl border-2 border-blue text-lg font-semibold px-8 py-2 w-44 text-center active:scale-95;
+    @apply block rounded-2xl border-2 border-blue w-full sm:text-lg font-medium sm:font-semibold px-8 py-2 sm:w-44 text-center active:scale-95;
   }
   .business-auth-wrapper {
-    @apply py-12 px-10 bg-white w-full max-w-xl mx-auto;
+    @apply py-12 px-4 sm:px-8 md:px-10 bg-white w-11/12 sm:w-full sm:max-w-xl mx-auto;
   }
   .auth-title {
-    @apply text-2xl text-center font-semibold;
+    @apply sm:text-2xl text-center font-semibold;
   }
   .verify-btn {
-    @apply text-black bg-[#D9D9D9] rounded-lg text-3xl font-medium p-2 w-full block hover:bg-grey-100;
+    @apply text-black bg-[#D9D9D9] rounded-lg text-xs sm:text-2xl lg:text-3xl font-medium p-2 w-full block hover:bg-grey-100;
   }
   .dashboard-nav {
     @apply flex items-center gap-2 px-2.5 py-2 hover:bg-grey-300/5 rounded-lg;

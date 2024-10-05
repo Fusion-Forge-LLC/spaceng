@@ -51,7 +51,7 @@ function Page() {
     }
   };
 
-  return <EmailVerification />;
+  return <EmailVerification redirect="/auth/business/login" />;
 }
 
 export default Page;
