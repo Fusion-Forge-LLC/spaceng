@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react";
-import {Bell, Gem, LogOutIcon, Menu, Search} from "lucide-react";
+import {Bell, Gem, LogOutIcon, Search} from "lucide-react";
 import Image from "next/image";
 
 import {Input} from "@/components/ui/input";
@@ -16,16 +16,15 @@ import {
   ManagementIcon,
   SettingsIcon,
 } from "./_components/nav-items/icons/icons";
+import MobileNav from "./_components/dashboard/mobile-nav";
 
 function DashboardLyout({children}: {children: ReactNode}) {
   return (
     <div className="md:h-screen flex flex-col">
-      <header className="flex justify-between items-center py-3 gap-5 px-4 max-md:flex-wrap">
+      <header className="flex justify-between items-center py-5 md:py-3 gap-5 px-4 max-md:flex-wrap">
         <span className="text-2xl sm:text-3xl font-black text-blue">Spacefinda</span>
 
-        <button className="md:hidden">
-          <Menu />
-        </button>
+        <MobileNav />
         <div className="relative text-[#A7A7A7]/[95%] max-md:w-full max-sm:shrink-0 md:flex-1 md:max-w-96">
           <Input
             className="border border-grey rounded-xl h-10 sm:h-12 px-4 peer focus-visible:ring-blue"
@@ -47,7 +46,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
         </div>
       </header>
       <div className="flex-1 flex overflow-hidden">
-        <aside className="w-56 h-full hidden lg:flex flex-col p-4 pt-0 gap-5 border-r border-grey-200">
+        <aside className="w-56 h-full hidden md:flex flex-col p-4 pt-0 gap-5 border-r border-grey-200">
           <ul>
             <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard" />
             <NavItems Icon={ManagementIcon} name="Management" path="/dashboard/management" />
