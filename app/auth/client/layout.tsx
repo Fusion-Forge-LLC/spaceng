@@ -9,17 +9,20 @@ const inter = Inter({
 
 function ClientAuthLayout({children}: {children: React.ReactNode}) {
   return (
-    <div className={`py-[70px] px-5 lg:max-w-4xl xl:max-w-7xl container mx-auto`}>
-      <header className="text-blue font-bold text-4xl mb-[72.5px]">SpacesNG</header>
-      <main className="flex flex-col md:flex-row gap-10 xl:gap-20 justify-between items-center ">
+    <div className={`p-5 lg:py-[70px] px-5 lg:max-w-4xl xl:max-w-7xl container mx-auto`}>
+      <header className="text-blue font-bold text-2xl lg:text-4xl mb-5 lg:mb-[72.5px]">
+        SpaceFinda
+      </header>
+      <main className="flex flex-col lg:flex-row lg:gap-10 xl:gap-20 justify-between items-center ">
         <div className="w-full flex-1">
-          <p className="text-grey mb-7 font-medium lg:text-lg">
+          <p className="text-grey lg:mb-7 font-medium text-sm lg:text-lg">
             Welcome to a dynamic world of versatile workspaces and premium shortlets, designed to
             meet your every need.
           </p>
           <Image
             priority
             alt="Sign In Image"
+            className="hidden lg:block"
             height={620}
             layout="responsive"
             objectFit="cover"
@@ -27,7 +30,7 @@ function ClientAuthLayout({children}: {children: React.ReactNode}) {
             width={586}
           />
         </div>
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 w-full">{children}</div>
       </main>
     </div>
   );
