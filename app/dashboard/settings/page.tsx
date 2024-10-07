@@ -147,7 +147,7 @@ function CheckMark({id, label}: {id: string; label: string}) {
       <label htmlFor={id}>{label}</label>
       <input className="hidden peer" id={id} name={id} type="checkbox" />
       <label
-        className="ml-auto block w-12 h-6 rounded-full bg-grey-200 p-1 peer-checked:[&_span]:translate-x-6"
+        className="ml-auto cursor-pointer block w-12 h-6 rounded-full bg-grey-200 p-1 peer-checked:[&_span]:translate-x-6"
         htmlFor={id}
       >
         <span className="block h-4 w-4 rounded-full bg-white transition-all" />
