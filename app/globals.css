@@ -92,6 +92,9 @@
   .mobile-nav-link {
     @apply flex items-center gap-5 sm:hover:bg-blue/30 py-2.5 px-2 rounded-lg;
   }
+  .calender-item {
+    @apply h-12 w-12 grid place-content-center hover:bg-blue/40 cursor-pointer rounded;
+  }
 }
 
 @layer base {

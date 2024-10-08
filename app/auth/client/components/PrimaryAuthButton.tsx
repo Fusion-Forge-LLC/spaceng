@@ -3,7 +3,7 @@ import React from "react";
 interface PrimaryAuthButtonProps {
   buttonName: string;
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const PrimaryAuthButton: React.FC<PrimaryAuthButtonProps> = ({buttonName, className, onClick}) => {

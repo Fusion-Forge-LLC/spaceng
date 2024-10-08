@@ -68,7 +68,7 @@ function Page() {
           </Link>
           <Link
             className="property-page-link text-blue w-full hover:bg-blue hover:text-white"
-            href={"/dashboard/management/200"}
+            href={"/dashboard/management/200/booking"}
           >
             View Booking
           </Link>
