@@ -2,6 +2,7 @@
 
 import React, {useState} from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import EmailInput from "../components/EmailInput";
 import PrimaryAuthButton from "../components/PrimaryAuthButton";
@@ -17,7 +18,7 @@ function ClientSignIn() {
   };
 
   return (
-    <form className="py-10 px-6 md:text-base">
+    <form className="py-5 lg:py-10 px-2 lg:px-6 md:text-base w-full">
       <EmailInput className="mb-4" onChange={handleSubmit} />
       <div className="mb-6 flex flex-col gap-1.5 w-full">
         <label className="text-grey" htmlFor="clientPassword">
@@ -39,7 +40,9 @@ function ClientSignIn() {
             width={24}
           />
         </div>
-        <span className="text-[#707070] text-right font-medium">Forget Password?</span>
+        <Link href={"/auth/client/forgot-password"}>
+          <span className="text-[#707070] text-right font-medium">Forget Password?</span>
+        </Link>
       </div>
       <div>
         <PrimaryAuthButton buttonName="Sign In" className="mb-6" onClick={() => {}} />
