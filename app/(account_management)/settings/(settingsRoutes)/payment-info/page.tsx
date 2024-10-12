@@ -8,7 +8,7 @@ export default function PaymentInfo() {
   return (
     <div className="w-full">
       <div className="md:p-4 ">
-        <h1 className="text-lg lg:text-2xl font-semibold mb-2">Payment info</h1>
+        <h1 className="text-xl lg:text-2xl font-bold lg:font-semibold mb-2">Payment info</h1>
         <p className="text-grey-200 text-sm lg:text-base ">
           Securely add or remove payment methods to make it easier when you book.
         </p>
@@ -16,16 +16,22 @@ export default function PaymentInfo() {
       <div className="py-2 md:p-4 flex flex-col gap-4">
         <div className="">
           <div
-            className={` ${paymentBlock ? "hidden" : ""} py-4 flex justify-between items-start `}
+            className={` ${paymentBlock ? "hidden" : "lg:flex"} py-4 lg:justify-between items-start `}
           >
             <div className="flex flex-col gap-3">
-              <h2 className="font-medium">Payment cards</h2>
+              <h2 className="font-medium text-grey ">Payment cards</h2>
               <p className="text-grey-200">
                 Securely add or remove payment methods to make it easier when you book.
               </p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => setPaymentBlock(true)}
+            >
+              Add card
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto mt-3"
               onClick={() => setPaymentBlock(true)}
             >
               Add card
@@ -36,7 +42,7 @@ export default function PaymentInfo() {
             <div className="flex justify-between gap-2 mb-6">
               <h2 className="font-medium">Payment cards</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => setPaymentBlock(false)}
               >
                 Cancel
@@ -53,7 +59,7 @@ export default function PaymentInfo() {
               <Image alt="paypal" height={24} src="/account_management/paypal.svg" width={20} />
               <Image alt="opay" height={24} src="/account_management/opay.svg" width={24} />
             </div>
-            <div className="w-full max-w-[500px] mb-16">
+            <div className="w-full max-w-[500px] mb-5 lg:mb-16">
               <div className="flex flex-col gap-1 mb-4">
                 <label className="text-grey-200" htmlFor="cardHolderName">
                   Cardholder’s name
@@ -99,7 +105,17 @@ export default function PaymentInfo() {
                 />
               </div>
             </div>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => setPaymentBlock(false)}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>

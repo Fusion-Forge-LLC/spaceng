@@ -31,28 +31,28 @@ export default function Wishlist() {
       </div>
       {view === "emptylist" ? (
         <div className="px-5 lg:px-24 py-7">
-          <div className="max-w-[447px] mx-auto ">
-            <div className="w-fit mx-auto">
+          <div className="w-full max-w-[447px] mx-auto ">
+            <div className="w-fit sm:mx-auto">
               <Image
                 alt="office"
-                className="z-10 relative"
+                className="z-10 relative w-[260px] h-[150px] lg:w-[284px] lg:h-[173px] "
                 height={173}
                 src="/account_management/Office1.svg"
                 width={284}
               />
               <Image
                 alt="office"
-                className="relative bottom-[44px] left-[74px]"
+                className="relative w-[260px] h-[150px] lg:w-[284px] lg:h-[173px]  bottom-[44px] left-14 md:left-[74px]"
                 height={173}
                 src="/account_management/Office3.svg"
                 width={284}
               />
             </div>
-            <div className="text-center -mt-3 mb-11">
-              <h2 className="mb-2 text-lg font-medium text-grey">
+            <div className="text-center -mt-3 mb-8 lg:mb-11">
+              <h2 className="mb-2 text-base lg:text-lg font-medium text-grey">
                 Here are 3 simple steps to help you begin:
               </h2>
-              <ul className="">
+              <ul className="text-sm lg:text-base">
                 <li>1. Search for a place to rent</li>
                 <li>2. Tap the heart icon when you find a property you like</li>
                 <li>3. You&apos;ll find all you&apos;ve saved here</li>
@@ -70,14 +70,14 @@ export default function Wishlist() {
         <div className="px-5 lg:px-24 py-7">
           <div className="mb-2.5 flex gap-6 items-center">
             <button
-              className={`${display == "shortlets" ? "text-blue" : "text-grey"} flex items-center gap-2 font-medium text-2xl`}
+              className={`${display == "shortlets" ? "text-blue" : "text-grey"} flex items-center gap-2 font-medium text-base lg:text-2xl`}
               onClick={() => setDisplay("shortlets")}
             >
               Shortlets
               <ChevronDown size={24} />
             </button>
             <button
-              className={`${display == "workspaces" ? "text-blue" : "text-grey"} flex items-center gap-2 font-medium text-2xl`}
+              className={`${display == "workspaces" ? "text-blue" : "text-grey"} flex items-center gap-2 font-medium text-base lg:text-2xl`}
               onClick={() => setDisplay("workspaces")}
             >
               Workspaces
@@ -85,7 +85,7 @@ export default function Wishlist() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-12 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 py-3 lg:py-12">
             {display === "shortlets"
               ? shortlets.map((item, index) => {
                   return (

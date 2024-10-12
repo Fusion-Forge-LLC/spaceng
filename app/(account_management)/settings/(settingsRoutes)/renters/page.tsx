@@ -9,17 +9,19 @@ export default function Renters() {
   return (
     <div className="w-full text-grey-200">
       <div className="md:p-4 ">
-        <h1 className="text-lg lg:text-2xl font-semibold mb-2 text-grey ">Other renters</h1>
+        <h1 className="text-xl lg:text-2xl font-bold lg:font-semibold mb-2 text-grey ">
+          Other renters
+        </h1>
         <p className="text-grey-200 text-sm lg:text-base ">
           Add or edit information about the people you want to share space with
         </p>
       </div>
       <div className={` ${rentersBlock ? "hidden" : ""} py-2 md:p-4`}>
         <button
-          className="ml-auto py-3 px-4 flex items-center gap-2 bg-blue font-medium text-white rounded-lg"
+          className="ml-auto py-2 lg:py-3 px-4 text-sm lg:text-base flex items-center gap-2 bg-blue font-medium text-white rounded-lg"
           onClick={() => setRentersBlock(true)}
         >
-          <Plus size={24} />
+          <Plus className="w-4 h-4 lg:w-6 lg:h-6" />
           Add new renters
         </button>
       </div>
@@ -27,7 +29,7 @@ export default function Renters() {
       <div className="py-2 md:p-4 flex flex-col gap-4">
         <div className={`${rentersBlock ? "" : "hidden"} py-4`}>
           <button
-            className="text-blue font-medium cursor-pointer mb-6 block ml-auto"
+            className="text-blue font-medium cursor-pointer mb-6 ml-auto hidden lg:block"
             onClick={() => setRentersBlock(false)}
           >
             Remove
@@ -104,7 +106,17 @@ export default function Renters() {
               </p>
             </div>
           </div>
-          <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+          <div className="flex items-center justify-between">
+            <button
+              className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+              onClick={() => setRentersBlock(false)}
+            >
+              Remove
+            </button>
+            <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </div>
