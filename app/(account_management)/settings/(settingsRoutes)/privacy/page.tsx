@@ -7,17 +7,19 @@ export default function Privacy() {
   return (
     <div className="w-full text-grey-200">
       <div className={` ${privacyBlock ? "hidden" : ""} md:p-4`}>
-        <h1 className="text-lg lg:text-2xl font-semibold mb-2 text-grey">Privacy</h1>
+        <h1 className="text-xl lg:text-2xl font-bold lg:font-semibold mb-2 text-grey">Privacy</h1>
         <p className=" text-sm lg:text-base">
           Exercise your privacy rights and control how your data is used.
         </p>
       </div>
 
       <div className="py-2 md:p-4 flex flex-col gap-4">
-        <div className={` ${privacyBlock ? "hidden" : ""}  py-4 flex justify-between items-start `}>
+        <div
+          className={` ${privacyBlock ? "hidden" : "lg:flex"} py-4 lg:justify-between items-start `}
+        >
           <div className="flex flex-col gap-3">
             <h2 className="font-medium text-grey">Privacy settings</h2>
-            <div className="">
+            <div className="text-sm lg:text-base">
               <p className=" mb-1.5">akinpeters333@gmail.com</p>
               <p className="">
                 Select ‘Manage’ to change your privacy settings and exercise your rights using our
@@ -26,25 +28,31 @@ export default function Privacy() {
             </div>
           </div>
           <button
-            className="text-blue font-medium cursor-pointer"
+            className="text-blue font-medium cursor-pointer hidden lg:block"
+            onClick={() => setPrivacyBlock(true)}
+          >
+            Manage
+          </button>
+          <button
+            className="text-blue font-medium cursor-pointer block lg:hidden ml-auto mt-3"
             onClick={() => setPrivacyBlock(true)}
           >
             Manage
           </button>
         </div>
 
-        <div className={`${privacyBlock ? "" : "hidden"} py-4`}>
-          <h1 className="text-2xl font-semibold mb-4 text-grey">
+        <div className={`${privacyBlock ? "" : "hidden"} py-2`}>
+          <h1 className="text-lg lg:text-2xl font-semibold mb-4 text-grey">
             Exercise your rights regarding your personal data
           </h1>
-          <p className=" mb-10">
+          <p className="mb-5 lg:mb-10 text-sm lg:text-base">
             Exercise your privacy rights under local law. To make a request to SpacesNG.com and have
             it routed to the SpacesNG.com privacy team, use the ‘Data subject request form’.
             <br />
             For more information, or to exercise other rights, please take a look at our SpaceNG.com
             Privacy Statement
           </p>
-          <div className="mb-6 flex flex-col gap-4">
+          <div className="mb-5 lg:mb-6 flex flex-col gap-4">
             <div className="flex flex-col gap-1 w-full">
               <label className="text-sm" htmlFor="firstName">
                 First name
@@ -85,13 +93,13 @@ export default function Privacy() {
               />
             </div>
             <div
-              className="py-3.5 px-4 rounded-lg w-full border-grey-200 outline-none bg-[#D7D7D7]"
+              className="py-3.5 px-4 rounded-lg w-full border-grey-200 outline-none bg-[#D7D7D7] text-xs lg:text-base text-center lg:text-left"
               style={{borderWidth: "0.5px"}}
             >
               <p>We&apos;ll send an email to this address to verify your identity.</p>
             </div>
           </div>
-          <h3 className="font-semibold text-2xl text-grey mb-4">
+          <h3 className="font-semibold text-base lg:text-2xl text-grey mb-4">
             Which of the following rights would you like to exercise?
           </h3>
           <form className="p-2.5 flex flex-col gap-6 ">
@@ -142,7 +150,7 @@ const RightsRadioItem = ({
       <input className="relative top-[5px]" id={value} name="rights" type="radio" />
       <label htmlFor={value}>
         <h4 className="font-medium text-grey mb-1.5">{title}</h4>
-        <p>{description}</p>
+        <p className="text-sm lg:text-base">{description}</p>
       </label>
     </div>
   );

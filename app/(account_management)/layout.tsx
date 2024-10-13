@@ -14,8 +14,10 @@ function AccountManagementLayout({children}: {children: React.ReactNode}) {
   return (
     <>
       <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <AccountManagementNavigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <div className={`mx-auto `}>{children}</div>
+      <div className={`mx-auto relative `}>
+        <AccountManagementNavigation isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        {children}
+      </div>
       <Footer />
     </>
   );
@@ -34,7 +36,7 @@ function AccountManagementNavigation({
 
   return (
     <div
-      className={`bg-white hidden ${isMenuOpen ? "md:block" : "hidden"} w-[300px] absolute right-5 lg:right-24`}
+      className={`bg-white ${isMenuOpen ? "md:block" : "hidden"} w-[249px] md:w-[300px] absolute top-1 right-5 lg:right-24 rounded-lg z-50`}
       style={{
         boxShadow: "0px 4px 4px 0 rgba(0, 0, 0, 0.25)",
       }}
@@ -42,7 +44,7 @@ function AccountManagementNavigation({
       {acountManagementNavigation.map((item) => (
         <Link
           key={item.url}
-          className={` ${pathName === item.url ? "bg-[#E8E8E8]" : ""} flex gap-[14px] items-center p-6 w-[300px] hover:bg-[#E8E8E8] cursor-pointer`}
+          className={` ${pathName === item.url ? "bg-[#E8E8E8]" : ""} flex gap-[14px] items-center p-6 w-[249px] md:w-[300px] hover:bg-[#E8E8E8] cursor-pointer`}
           href={item.url}
           onClick={() => setIsMenuOpen(false)}
         >

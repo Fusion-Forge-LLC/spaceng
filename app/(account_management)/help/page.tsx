@@ -5,8 +5,11 @@ import {ChevronRight} from "lucide-react";
 export default function HelpCenter() {
   return (
     <div className="max-w-[983px] py-6 lg:py-20 px-5 lg:px-24 text-grey-200">
-      <h1 className="mb-6 text-3xl font-semibold text-grey ">Help center</h1>
-      <div className="mb-[58px] border-[#D7D7D7] p-4" style={{borderWidth: "0.5px"}}>
+      <h1 className="mb-4 lg:mb-6 text-3xl font-semibold text-grey ">Help center</h1>
+      <div
+        className="mb-8 lg:mb-[58px] border-[#D7D7D7] py-3.5 lg:py-4 p-4 rounded-lg"
+        style={{borderWidth: "0.5px"}}
+      >
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-2">
             <Image alt="alert" height={24} src="/account_management/alert.svg" width={24} />
@@ -14,22 +17,26 @@ export default function HelpCenter() {
           </div>
           <ChevronUp className="cursor-pointer text-grey" size={24} />
         </div>
-        <p className="mb-4">
+        <p className="mb-4 text-sm lg:text-base">
           Protect your security by never sharing your personal or credit card information over the
           phone, by email or chat.
         </p>
-        <p className="font-medium text-grey">Learn more</p>
+        <p className="font-medium text-blue">Learn more</p>
       </div>
-      <h2 className="mb-4 text-3xl font-semibold text-grey ">Welcome to the Help Centre</h2>
-      <p className="mb-4">We&apos;re available 24 hours a day</p>
+      <h2 className="mb-4 text-2xl lg:text-3xl font-semibold text-grey ">
+        Welcome to the Help Centre
+      </h2>
+      <p className="mb-4 text-sm lg:text-base">We&apos;re available 24 hours a day</p>
       <button className="py-3 px-4 bg-blue rounded-lg text-white mb-[34px]">
         Get help with a booking
       </button>
 
       <div className="">
-        <h3 className="text-2xl font-semibold text-grey mb-11">Frequently asked questions</h3>
+        <h3 className="text-2xl font-semibold text-grey mb-4 lg:mb-11">
+          Frequently asked questions
+        </h3>
         <div
-          className="border-[#D7D7D7] rounded-lg py-4 flex flex-col gap-6"
+          className="border-[#D7D7D7] rounded-lg py-4 flex flex-col gap-4 lg:gap-6"
           style={{borderWidth: "1px"}}
         >
           {faqs.map((faq) => (

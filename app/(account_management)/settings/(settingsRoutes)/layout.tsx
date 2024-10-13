@@ -9,7 +9,7 @@ function SettingsRoutesLayout({children}: {children: React.ReactNode}) {
 
   return (
     <>
-      <div className="flex justify-between gap-[100px] py-6 lg:py-20 px-5 lg:px-24">
+      <div className="flex justify-between gap-[100px] py-5 lg:py-20 px-5 lg:px-24">
         <div className="hidden md:flex flex-col gap-2">
           {sidebar.map((item) => (
             <SideBarItem
