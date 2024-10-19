@@ -41,7 +41,7 @@ const properties = [
 
 function Page() {
   return (
-    <div>
+    <div className="flex-1 overflow-scroll">
       <article className="py-5">
         <h4 className="text-lg sm:text-2xl font-semibold">Your Properties</h4>
         <p className="text-grey-200 max-sm:text-sm">
