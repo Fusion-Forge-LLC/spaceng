@@ -4,27 +4,25 @@ import SettingsCard from "../_components/settingsCard/settingsCard";
 
 function Settings() {
   return (
-    <div className="px-5 lg:px-24 py-10 lg:py-20 text-grey-200 ">
-      <div className="mb-11 lg:mb-14 flex flex-col gap-4">
+    <div className="px-5 lg:px-24 py-8 md:py-10 lg:py-20 text-grey-200 ">
+      <div className="mb-4 md:mb-11 lg:mb-14 flex flex-col gap-3 lg:gap-4">
         <h1 className="text-grey font-semibold text-xl lg:text-2xl">Account settings</h1>
-        <p className="lg:text-base">
+        <p className="text-sm lg:text-base">
           <span className="font-semibold">Akin Peters,</span> opapa34@gmail.com{" "}
           <span>Go to your profile</span>{" "}
         </p>
       </div>
-      <div className="flex">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 2xl:gap-10 w-full justify-stretch ">
-          {settingsList.map((setting, index) => (
-            <SettingsCard
-              key={index}
-              description={setting.description}
-              image={setting.image}
-              link={setting.link}
-              title={setting.title}
-              url={setting.url}
-            />
-          ))}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 2xl:gap-10 w-full justify-stretch ">
+        {settingsList.map((setting, index) => (
+          <SettingsCard
+            key={index}
+            description={setting.description}
+            image={setting.image}
+            link={setting.link}
+            title={setting.title}
+            url={setting.url}
+          />
+        ))}
       </div>
     </div>
   );

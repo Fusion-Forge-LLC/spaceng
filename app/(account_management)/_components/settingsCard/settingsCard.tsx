@@ -20,7 +20,7 @@ function SettingsCard({title, description, link, image, url}: SettingsCardProps)
 
   return (
     <div
-      className="w-full md:max-w-[397px] py-6 px-4 bg-white flex gap-2 items-start rounded-lg shadow-none md:shadow "
+      className="w-full md:max-w-[397px] py-6 px-4 bg-white flex gap-2 items-start rounded-lg shadow-none md:shadow border lg:border-none "
       style={{boxShadow: "0 2px 4px 0 rgb(0,0,0,0.25)"}}
     >
       <Image
@@ -33,7 +33,7 @@ function SettingsCard({title, description, link, image, url}: SettingsCardProps)
       <div className="flex flex-col gap-1">
         <h3 className="font-bold lg:font-semibold text-base lg:text-xl text-grey">{title}</h3>
         <p className="text-sm lg:text-base text-grey-200">{description}</p>
-        <Link className="text-blue font-medium lg:text-base" href={url}>
+        <Link className="text-blue font-medium text-base" href={url}>
           {link}
         </Link>
       </div>

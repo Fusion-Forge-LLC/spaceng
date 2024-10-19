@@ -30,7 +30,7 @@ export default function PersonalInfoPage() {
     <div className="w-full">
       <div className="md:p-4 flex items-center justify-between gap-5">
         <div className="">
-          <h1 className="text-lg lg:text-2xl font-semibold mb-2">Personal info</h1>
+          <h1 className="text-xl lg:text-2xl font-semibold mb-1 lg:mb-2">Personal info</h1>
           <p className="text-grey-200 text-sm lg:text-base ">
             Update your information and found out how it’s used
           </p>
@@ -46,7 +46,7 @@ export default function PersonalInfoPage() {
       <div className="py-2 md:p-4 flex flex-col gap-4">
         <div className="">
           <div
-            className={` ${personalInfoBlocks.name ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.name ? "hidden" : "lg:flex"} py-4  justify-between items-start box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -54,7 +54,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">Akin Peters</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("name")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto "
               onClick={() => handleEdit("name")}
             >
               Edit
@@ -67,16 +73,16 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-3">
               <h2 className="font-medium">Name</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("name")}
               >
                 Cancel
               </button>
             </div>
-            <p className="text-grey-200 mb-6">
+            <p className="text-grey-200 mb-6 hidden lg:block">
               Make sure the name match the name on your government ID
             </p>
-            <div className="flex flex-col md:flex-row gap-6 mb-4">
+            <div className="flex flex-col md:flex-row gap-5 lg:gap-6 mb-4">
               <div className="flex flex-col gap-1">
                 <label className="text-grey-200 text-sm" htmlFor="firstName">
                   First name on ID
@@ -104,13 +110,23 @@ export default function PersonalInfoPage() {
                 />
               </div>
             </div>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("name")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.displayName ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.displayName ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -118,7 +134,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">Choose a display name</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("displayName")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("displayName")}
             >
               Edit
@@ -131,7 +153,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-3">
               <h2 className="font-medium">Display name</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("displayName")}
               >
                 Cancel
@@ -153,13 +175,23 @@ export default function PersonalInfoPage() {
                 type="text"
               />
             </div>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("displayName")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.emailAddress ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.emailAddress ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -167,7 +199,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">aki***ers33@gmail.com</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("emailAddress")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("emailAddress")}
             >
               Edit
@@ -180,7 +218,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-3">
               <h2 className="font-medium">Email Address</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("emailAddress")}
               >
                 Cancel
@@ -200,13 +238,23 @@ export default function PersonalInfoPage() {
                 type="email"
               />
             </div>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("emailAddress")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.phoneNumber ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.phoneNumber ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -214,7 +262,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">+2348968***890</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("phoneNumber")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto "
               onClick={() => handleEdit("phoneNumber")}
             >
               Edit
@@ -227,7 +281,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-3">
               <h2 className="font-medium">Phone number</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("phoneNumber")}
               >
                 Cancel
@@ -249,18 +303,28 @@ export default function PersonalInfoPage() {
                 type="tel"
               />
             </div>
-            <div className="flex gap-4 items-center justify-end">
-              <button className="py-3 px-4 bg-blue rounded-lg text-white">Save</button>
-              <button className="py-3 px-4 border-blue border text-blue rounded-lg bg-white">
-                Delete
+            <div className="flex items-center justify-between lg:justify-end">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("phoneNumber")}
+              >
+                Cancel
               </button>
+              <div className="flex gap-4 items-center justify-end">
+                <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white">
+                  Save
+                </button>
+                <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base border-blue border text-blue rounded-lg bg-white">
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.dateOfBirth ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.dateOfBirth ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -268,7 +332,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">Enter your date of birth</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("dateOfBirth")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("dateOfBirth")}
             >
               Edit
@@ -281,7 +351,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-2">
               <h2 className="font-medium">Date of birth</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("dateOfBirth")}
               >
                 Cancel
@@ -299,13 +369,23 @@ export default function PersonalInfoPage() {
                 type="date"
               />
             </div>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("dateOfBirth")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.nationality ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.nationality ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -313,7 +393,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">Select the country/ region you’re from</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("nationality")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("nationality")}
             >
               Edit
@@ -326,7 +412,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-2">
               <h2 className="font-medium">Nationality</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("nationality")}
               >
                 Cancel
@@ -345,13 +431,23 @@ export default function PersonalInfoPage() {
                 type="text"
               />
             </div>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("nationality")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.gender ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.gender ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -361,7 +457,13 @@ export default function PersonalInfoPage() {
               </div>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("gender")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("gender")}
             >
               Edit
@@ -374,7 +476,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-2">
               <h2 className="font-medium">Gender</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("gender")}
               >
                 Cancel
@@ -393,13 +495,23 @@ export default function PersonalInfoPage() {
                 type="text"
               />
             </div>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("gender")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.address ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.address ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -407,7 +519,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">Enter your address</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("address")}
+            >
+              Edit
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("address")}
             >
               Edit
@@ -420,7 +538,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-2">
               <h2 className="font-medium">Address</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("address")}
               >
                 Cancel
@@ -431,7 +549,7 @@ export default function PersonalInfoPage() {
                 Select the region/ country you’re from
               </label>
               <input
-                className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[380px] "
+                className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[399px] "
                 id="address"
                 name="address"
                 placeholder="Nigeria"
@@ -444,7 +562,7 @@ export default function PersonalInfoPage() {
                 Address
               </label>
               <input
-                className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[380px] "
+                className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[399px] "
                 id="address"
                 name="address"
                 placeholder="No 6 park, Agbowo Ikeja"
@@ -458,7 +576,7 @@ export default function PersonalInfoPage() {
                   Town/city
                 </label>
                 <input
-                  className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[191px] "
+                  className="py-3.5 px-3 lg:px-4 outline-none border-grey-200 rounded-lg w-full max-w-[191px] "
                   id="address"
                   name="address"
                   placeholder="Lagos"
@@ -471,7 +589,7 @@ export default function PersonalInfoPage() {
                   Postcode
                 </label>
                 <input
-                  className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[191px] "
+                  className="py-3.5 px-3 lg:px-4 outline-none border-grey-200 rounded-lg w-full max-w-[191px] "
                   id="address"
                   name="address"
                   placeholder="567871"
@@ -481,13 +599,23 @@ export default function PersonalInfoPage() {
               </div>
             </div>
 
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Save</button>
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("address")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Save
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${personalInfoBlocks.governmentId ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${personalInfoBlocks.governmentId ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
@@ -495,7 +623,13 @@ export default function PersonalInfoPage() {
               <p className="text-grey-200">Not provided</p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("governmentId")}
+            >
+              Add
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("governmentId")}
             >
               Add
@@ -505,7 +639,7 @@ export default function PersonalInfoPage() {
             <div className="flex justify-between gap-2 mb-3">
               <h2 className="font-medium">Government ID</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("governmentId")}
               >
                 Cancel
@@ -515,10 +649,10 @@ export default function PersonalInfoPage() {
               We’ll need you to add an official Government ID. This step helps to make sure it’s
               really you
             </p>
-            <div className="flex flex-col md:flex-row gap-7 mb-4">
+            <div className="flex flex-col md:flex-row gap-10 lg:gap-7 mb-4">
               <div className="w-full flex-1">
                 <div
-                  className="border-grey-200 box-border flex justify-between py-4 mb-4 w-full text-grey font-semibold"
+                  className="lg:border-grey-200 lg:box-border flex justify-between py-1 lg:py-4 mb-4 w-full text-grey font-semibold"
                   style={{borderBottomWidth: "0.1px"}}
                 >
                   Take a photo with your webcam
@@ -533,9 +667,17 @@ export default function PersonalInfoPage() {
                     <circle cx="8" cy="8.78516" fill="#D9D9D9" r="4" />
                   </svg>
                 </div>
-                <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">
-                  Save
-                </button>
+                <div className="flex items-center justify-between">
+                  <button
+                    className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                    onClick={() => handleEdit("governmentId")}
+                  >
+                    Cancel
+                  </button>
+                  <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                    Save
+                  </button>
+                </div>
               </div>
               <div className="flex-1 border border-grey-200 p-5 rounded-lg">
                 <h3 className="text-grey font-semibold mb-3.5">Your Privacy</h3>

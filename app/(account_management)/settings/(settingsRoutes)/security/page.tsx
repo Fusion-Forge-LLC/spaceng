@@ -23,7 +23,7 @@ export default function Security() {
   return (
     <div className="w-full">
       <div className="md:p-4 ">
-        <h1 className="text-lg lg:text-2xl font-semibold mb-2">Security</h1>
+        <h1 className="text-xl lg:text-2xl font-bold lg:font-semibold mb-2">Security</h1>
         <p className="text-grey-200 text-sm lg:text-base ">
           Change your security settings, set up secure authentication or delete your account
         </p>
@@ -31,7 +31,7 @@ export default function Security() {
       <div className="py-2 md:p-4 flex flex-col gap-4">
         <div className="">
           <div
-            className={` ${securityBlocks.password ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${securityBlocks.password ? "hidden" : "lg:flex"} py-4 justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3 w-full">
@@ -41,7 +41,13 @@ export default function Security() {
               </p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer hidden lg:block"
+              onClick={() => handleEdit("password")}
+            >
+              Reset
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
               onClick={() => handleEdit("password")}
             >
               Reset
@@ -54,7 +60,7 @@ export default function Security() {
             <div className="flex justify-between gap-2 mb-3">
               <h2 className="font-medium">Password</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block"
                 onClick={() => handleEdit("password")}
               >
                 Cancel
@@ -63,31 +69,45 @@ export default function Security() {
             <p className="text-grey-200 mb-3">
               To change your password, we need to send a reset link to your email address
             </p>
-            <button
+            {/* <button
               className="text-blue font-medium cursor-pointer ml-auto block mb-8"
               onClick={() => handleEdit("password")}
             >
               Edit
-            </button>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">
-              Send email
-            </button>
+            </button> */}
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("password")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Send email
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="">
           <div
-            className={` ${securityBlocks.twoFactor ? "hidden" : ""} py-4 flex justify-between items-start border-grey-200 box-border `}
+            className={` ${securityBlocks.twoFactor ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
           >
             <div className="flex flex-col gap-3">
               <h2 className="font-medium">Two-factor authentication</h2>
               <p className="text-grey-200">
-                Increase the security of your account by setting tow-factor authentication
+                Increase the security of your account by setting two-factor authentication
               </p>
             </div>
             <button
-              className="text-blue font-medium cursor-pointer"
+              className="text-blue font-medium cursor-pointer min-w-fit hidden lg:block"
+              onClick={() => handleEdit("twoFactor")}
+            >
+              Set up
+            </button>
+            <button
+              className="text-blue font-medium cursor-pointer min-w-fit block lg:hidden ml-auto"
               onClick={() => handleEdit("twoFactor")}
             >
               Set up
@@ -100,7 +120,7 @@ export default function Security() {
             <div className="flex justify-between gap-2 mb-3">
               <h2 className="font-medium">Two-factor authentication</h2>
               <button
-                className="text-blue font-medium cursor-pointer"
+                className="text-blue font-medium cursor-pointer hidden lg:block "
                 onClick={() => handleEdit("twoFactor")}
               >
                 Cancel
@@ -113,18 +133,28 @@ export default function Security() {
                 using Google Authenticator or Microsoft Authenticator
               </span>
             </p>
-            <button
+            {/* <button
               className="text-blue font-medium cursor-pointer ml-auto block mb-8"
               onClick={() => handleEdit("twoFactor")}
             >
               Edit
-            </button>
-            <button className="py-3 px-4 bg-blue rounded-lg text-white block ml-auto">Next</button>
+            </button> */}
+            <div className="flex items-center justify-between">
+              <button
+                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
+                onClick={() => handleEdit("twoFactor")}
+              >
+                Cancel
+              </button>
+              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
+                Next
+              </button>
+            </div>
           </div>
         </div>
 
         <div
-          className="py-4 flex justify-between items-start border-grey-200 box-border "
+          className="py-4 lg:flex justify-between items-start border-grey-200 box-border "
           style={{borderBottomWidth: "0.1px"}}
         >
           <div className="flex flex-col gap-3">
@@ -134,18 +164,28 @@ export default function Security() {
               can take up to 10 minutes.
             </p>
           </div>
-          <span className="text-blue font-medium cursor-pointer">Sign out</span>
+          <span className="text-blue font-medium cursor-pointer w-fit hidden lg:block">
+            Sign out
+          </span>
+          <span className="text-blue font-medium cursor-pointer w-fit block lg:hidden ml-auto mt-3 ">
+            Sign out
+          </span>
         </div>
 
         <div
-          className="py-4 flex justify-between items-start border-grey-200 box-border "
+          className="py-4 lg:flex justify-between items-start border-grey-200 box-border "
           style={{borderBottomWidth: "0.1px"}}
         >
           <div className="flex flex-col gap-3">
             <h2 className="font-medium">Delete account</h2>
             <p className="text-grey-200">Permanently delete your SpacesNG.com account</p>
           </div>
-          <span className="text-blue font-medium cursor-pointer">Delete account</span>
+          <span className="text-blue font-medium cursor-pointer w-fit hidden lg:block ">
+            Delete account
+          </span>
+          <span className="text-blue font-medium cursor-pointer w-fit block lg:hidden ml-auto mt-3 ">
+            Delete account
+          </span>
         </div>
       </div>
     </div>

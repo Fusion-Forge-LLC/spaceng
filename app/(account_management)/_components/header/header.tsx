@@ -10,10 +10,10 @@ export default function Header({
 }) {
   return (
     <header
-      className="pt-[40px] pb-[30px] px-5 lg:px-24 flex justify-between items-center sticky"
+      className="lg:pt-[40px] lg:pb-[30px] py-5 px-5 lg:px-24 flex justify-between items-center sticky"
       style={{boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)"}}
     >
-      <h1 className="text-blue font-bold lg:text-lg">SpacesNG</h1>
+      <h1 className="text-blue font-bold text-lg">SpaceFinda</h1>
       <div className="flex gap-2 items-center">
         <Image
           alt="avatar"
