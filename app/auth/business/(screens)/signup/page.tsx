@@ -6,13 +6,12 @@ import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 
-import {cn} from "@/lib/utils";
 import {useSignUp} from "@/api/auth/signup";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
-import Loader from "@/components/loader/loader";
 
 import FormInput from "../_components/form-control/form-control";
 import SocialBtn from "../_components/social-btn/social-btn";
+import AuthBtn from "../_components/auth-btn/auth-btn";
 
 const poppin = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
 
@@ -120,15 +119,7 @@ function Page() {
               )}
             />
           </div>
-          <button
-            className={cn(
-              poppin.className,
-              "business-auth-button text-white bg-blue h-12 hover:bg-white disabled:hover:bg-blue hover:text-blue disabled:hover:text-white disabled:cursor-not-allowed w-full",
-            )}
-            disabled={isPending}
-          >
-            {isPending ? <Loader /> : "Sign Up and Start Listing"}
-          </button>
+          <AuthBtn showLoader={isPending} text="Sign Up and Start Listing" />
         </form>
       </Form>
       <div className={poppin.className}>

@@ -3,8 +3,8 @@ import {Bell, ChevronRight, Mail, Plus} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import Card from "./_components/property-cards/card";
-import Chart from "./_components/charts/charts";
+import Card from "../_components/property-cards/card";
+import Chart from "../_components/charts/charts";
 
 const properties = [
   {

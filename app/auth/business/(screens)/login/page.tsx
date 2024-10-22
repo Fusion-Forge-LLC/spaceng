@@ -1,46 +1,77 @@
 "use client";
 
-import React, {FormEvent} from "react";
+import React from "react";
 import {Poppins} from "next/font/google";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
+import * as yup from "yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 
-import {cn} from "@/lib/utils";
+import {useLogIn} from "@/api/auth/login";
+import {Form, FormField, FormItem, FormMessage, FormControl} from "@/components/ui/form";
 
-import FormControl from "../_components/form-control/form-control";
 import SocialBtn from "../_components/social-btn/social-btn";
+import FormInput from "../_components/form-control/form-control";
+import AuthBtn from "../_components/auth-btn/auth-btn";
 
 const poppin = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
 
-function Page() {
-  const router = useRouter();
+const loginSchema = yup.object({
+  email: yup.string().email().required("Please enter email address"),
+  password: yup.string().required("Please enter password"),
+});
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    router.push("/dashboard");
-  };
+type LoginType = yup.InferType<typeof loginSchema>;
+
+function Page() {
+  const form = useForm<LoginType>({
+    resolver: yupResolver(loginSchema),
+    defaultValues: {email: "", password: ""},
+  });
+  const {isPending, mutate: loginUser} = useLogIn();
+
+  function onSubmit(data: LoginType) {
+    loginUser(data);
+  }
 
   return (
     <div className="business-auth-wrapper absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <h3 className="auth-title mb-6">Welcome Back!</h3>
-      <form className="space-y-5 mb-6 text-right" onSubmit={handleSubmit}>
-        <FormControl id="email_address" label="Email Address" />
-        <FormControl isPassword id="password" label="Password" type="password" />
-        <Link
-          className="text-right text-sm text-[#F90000] w-fit ml-auto hover:underline -mt-5"
-          href="/auth/business/login/forgot-password"
-        >
-          Forget Password?
-        </Link>
-        <button
-          className={cn(
-            poppin.className,
-            "business-auth-button text-white bg-blue hover:bg-white hover:text-blue w-full",
-          )}
-        >
-          Login
-        </button>
-      </form>
+      <Form {...form}>
+        <form className="space-y-5 mb-6" onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({field}) => (
+              <FormItem>
+                <FormControl>
+                  <FormInput id="email" label="Email Address" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({field}) => (
+              <FormItem>
+                <FormControl>
+                  <FormInput isPassword id="password" label="Password" type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Link
+            className="text-right text-sm text-[#F90000] w-fit ml-auto hover:underline block -mt-5"
+            href="/auth/business/login/forgot-password"
+          >
+            Forget Password?
+          </Link>
+          <AuthBtn showLoader={isPending} text="Login" />
+        </form>
+      </Form>
       <div className={poppin.className}>
         <div className="flex items-center gap-8 px-4 py-4">
           <div className="flex-1 h-px bg-grey" />

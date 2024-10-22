@@ -30,3 +30,7 @@ export function capitalizeFirstLetter(string = "") {
 
   return getFirstLetter(string)?.toUpperCase() + string.toLowerCase()?.slice(1);
 }
+
+export function showSuccess(message: string) {
+  toast.success(message);
+}

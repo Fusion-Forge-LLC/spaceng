@@ -334,9 +334,9 @@ export default function Home() {
                     d="M1 1L66 41.5L1 82V1Z"
                     fill="white"
                     stroke="#C5C5C5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                   />
                 </svg>
               </button>
