@@ -1,5 +1,7 @@
 import {AxiosError} from "axios";
 import {UseMutationResult, useMutation} from "@tanstack/react-query";
+import {toast} from "sonner";
+import {useRouter} from "next/navigation";
 
 import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {GenericResponse} from "@/lib/generic-types";
@@ -18,7 +20,7 @@ export interface VerifyOtpResponse {
 
 const verifyOtp = async (payload: VerifyOtpPayload) => {
   const {data} = await api.post<GenericResponse<VerifyOtpResponse>>(
-    `${API_ENDPOINTS.AUTH}/otp/verify`,
+    API_ENDPOINTS.AUTH.VERIFY_OTP,
     payload,
   );
 
@@ -30,10 +32,14 @@ export const useVerifyOtp = (): UseMutationResult<
   AxiosError<ErrorData>,
   VerifyOtpPayload
 > => {
+  const router = useRouter();
+
   return useMutation({
     mutationFn: verifyOtp,
     onSuccess: (data) => {
       console.log("data: ", data);
+      toast.success(data.message);
+      router.push("/auth/business/signup/success");
     },
     onError: (error) => {
       displayErrorMessage(error);

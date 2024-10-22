@@ -9,6 +9,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {cn} from "@/lib/utils";
 import {useSignUp} from "@/api/auth/signup";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
+import Loader from "@/components/loader/loader";
 
 import FormInput from "../_components/form-control/form-control";
 import SocialBtn from "../_components/social-btn/social-btn";
@@ -126,11 +127,7 @@ function Page() {
             )}
             disabled={isPending}
           >
-            {isPending ? (
-              <span className="h-5 w-5 block rounded-full border-2 border-white border-t-blue mx-auto animate-spin" />
-            ) : (
-              "Sign Up and Start Listing"
-            )}
+            {isPending ? <Loader /> : "Sign Up and Start Listing"}
           </button>
         </form>
       </Form>
