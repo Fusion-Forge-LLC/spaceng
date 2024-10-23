@@ -1,12 +1,13 @@
-// import { useUser } from "@/context/user";
 import Cookies from "js-cookie";
 
+import {useUser} from "@/context/user";
+
 export function useSignOut() {
-  //   const { setUser } = useUser();
+  const {setUser} = useUser();
 
   function logout() {
     Cookies.remove("spacefinda-token");
-    // setUser(null);
+    setUser(null);
     window.location.reload();
   }
 

@@ -4,7 +4,6 @@ import React, {useEffect} from "react";
 import {useSearchParams} from "next/navigation";
 
 import {useSendOtp} from "@/api/auth/send-otp";
-import {useVerifyOtp} from "@/api/auth/verify-otp";
 
 import EmailVerification from "../../_components/email-verification/email-verification";
 
@@ -17,13 +16,7 @@ function Page() {
     mutate({email});
   }, []);
 
-  return (
-    <EmailVerification
-      email={email}
-      redirect="/auth/business/login"
-      useVerification={useVerifyOtp}
-    />
-  );
+  return <EmailVerification email={email} redirect="/auth/business/signup/success" />;
 }
 
 export default Page;

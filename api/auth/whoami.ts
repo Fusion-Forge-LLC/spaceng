@@ -4,16 +4,16 @@ import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {GenericResponse} from "@/lib/generic-types";
 import {getRequest} from "@/lib/http-helpers";
 
-type User = {
+export type User = {
   _id: string;
+  fullname: string;
   email: string;
   phone: string;
-  role: "client" | "business" | "others";
+  role: string;
   verified: boolean;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  _v: number;
 };
 
 async function whoAmI() {
@@ -32,16 +32,19 @@ export function useWhoAmI() {
     const user = data.data;
     const role = user.role;
 
-    const userInfo = {
-      _id: user._id,
-      email: user.email,
-      phone: user.phone,
-      role: user.role,
-      isEmailVerified: user.verified,
-    };
+    // const userInfo = {
+    //   _id: user._id,
+    //   fullname: user.fullname,
+    //   createdAt: user.createdAt,
+    //   updatedAt: user
+    //   email: user.email,
+    //   phone: user.phone,
+    //   role: user.role,
+    //   verified: user.verified,
+    // };
 
     const payload = {
-      ...userInfo,
+      ...user,
     };
 
     return {

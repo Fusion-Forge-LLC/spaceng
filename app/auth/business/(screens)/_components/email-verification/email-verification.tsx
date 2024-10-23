@@ -11,19 +11,11 @@ import Loader from "@/components/loader/loader";
 
 const worksans = Work_Sans({subsets: ["latin"]});
 
-function EmailVerification({
-  redirect,
-  email,
-  useVerification,
-}: {
-  redirect: string;
-  email: string;
-  useVerification: typeof useVerifyOtp;
-}) {
-  const {isPending, mutate} = useVerification();
+function EmailVerification({redirect, email}: {redirect: string; email: string}) {
   const router = useRouter();
   const [code, setCode] = useState<string[]>(["", "", "", ""]);
   const [countdown, setCoundown] = useState("00:59");
+  const {isPending, mutate} = useVerifyOtp(redirect + `?code=${code.join("")}`);
 
   useEffect(() => {
     startCountDown();

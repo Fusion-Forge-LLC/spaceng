@@ -27,7 +27,9 @@ const verifyOtp = async (payload: VerifyOtpPayload) => {
   return data;
 };
 
-export const useVerifyOtp = (): UseMutationResult<
+export const useVerifyOtp = (
+  redirect: string,
+): UseMutationResult<
   GenericResponse<VerifyOtpResponse>,
   AxiosError<ErrorData>,
   VerifyOtpPayload
@@ -39,7 +41,7 @@ export const useVerifyOtp = (): UseMutationResult<
     onSuccess: (data) => {
       console.log("data: ", data);
       toast.success(data.message);
-      router.push("/auth/business/signup/success");
+      router.push(redirect);
     },
     onError: (error) => {
       displayErrorMessage(error);
