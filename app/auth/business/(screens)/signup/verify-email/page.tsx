@@ -5,7 +5,7 @@ import {useSearchParams} from "next/navigation";
 
 import {useSendOtp} from "@/api/auth/send-otp";
 
-import EmailVerification from "../../../../_components/email-verification/email-verification";
+import EmailVerification from "../../_components/email-verification/email-verification";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -16,9 +16,7 @@ function Page() {
     mutate({email});
   }, []);
 
-  return (
-    <EmailVerification email={email} redirect="/auth/business/login/forgot-password/new-password" />
-  );
+  return <EmailVerification email={email} redirect="/auth/business/signup/success" />;
 }
 
 export default Page;

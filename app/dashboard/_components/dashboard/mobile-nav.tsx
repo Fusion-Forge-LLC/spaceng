@@ -1,6 +1,6 @@
 "use client";
 
-import {LogOutIcon, Menu, X} from "lucide-react";
+import {Menu, X} from "lucide-react";
 import {usePathname} from "next/navigation";
 import React, {useEffect, useState} from "react";
 
@@ -16,6 +16,7 @@ import {
   ManagementIcon,
   SettingsIcon,
 } from "../nav-items/icons/icons";
+import Logout from "../logout/logout";
 
 function MobileNav() {
   const [showMobileNav, setShowMobileNav] = useState(false);
@@ -49,21 +50,14 @@ function MobileNav() {
         </button>
 
         <ul className="pt-12 space-y-2">
-          <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard" />
+          <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard/dashboard" />
           <NavItems Icon={ManagementIcon} name="Management" path="/dashboard/management" />
           <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
           <NavItems Icon={CommunicationIcon} name="Communication" path="/dashboard/communication" />
           <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
           <NavItems Icon={SettingsIcon} name="Settings" path="/dashboard/settings" />
           <NavItems Icon={HelpIcon} name="Help" path="/dashboard/help" />
-          <li className="">
-            <button className="dashboard-nav text-red w-full">
-              <span className="w-10">
-                <LogOutIcon />
-              </span>
-              Logout
-            </button>
-          </li>
+          <Logout />
         </ul>
       </div>
     </div>

@@ -19,7 +19,7 @@ const amenities = [
 
 function Page() {
   return (
-    <div className="flex flex-col-reverse lg:grid lg:grid-cols-11 gap-8 max-lg:pt-5">
+    <div className="flex flex-col-reverse lg:grid lg:grid-cols-11 gap-8 max-lg:pt-5 flex-1 overflow-y-scroll">
       <article className="py-5 lg:col-span-6 text-sm lg:text-base">
         <h4 className="text-lg sm:text-2xl font-semibold mb-2 max-lg:text-center">
           Luxurious Waterfront Getaway in Banana Island

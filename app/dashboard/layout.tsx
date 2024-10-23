@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react";
-import {Bell, Gem, LogOutIcon, Search} from "lucide-react";
+import {Bell, Gem, Search} from "lucide-react";
 import Image from "next/image";
 
 import {Input} from "@/components/ui/input";
@@ -17,6 +17,7 @@ import {
   SettingsIcon,
 } from "./_components/nav-items/icons/icons";
 import MobileNav from "./_components/dashboard/mobile-nav";
+import Logout from "./_components/logout/logout";
 
 function DashboardLyout({children}: {children: ReactNode}) {
   return (
@@ -48,7 +49,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
       <div className="flex-1 flex overflow-hidden">
         <aside className="w-56 h-full hidden md:flex flex-col p-4 pt-0 gap-5 border-r border-grey-200">
           <ul>
-            <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard" />
+            <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard/overview" />
             <NavItems Icon={ManagementIcon} name="Management" path="/dashboard/management" />
             <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
             <NavItems
@@ -59,14 +60,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
             <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
             <NavItems Icon={SettingsIcon} name="Settings" path="/dashboard/settings" />
             <NavItems Icon={HelpIcon} name="Help" path="/dashboard/help" />
-            <li className="">
-              <button className="dashboard-nav text-red w-full">
-                <span className="w-10">
-                  <LogOutIcon />
-                </span>
-                Logout
-              </button>
-            </li>
+            <Logout />
           </ul>
 
           <div className="bg-gradient-to-b from-blue to-grey-300/70 rounded-xl px-3 pt-6 pb-4 mt-auto">
