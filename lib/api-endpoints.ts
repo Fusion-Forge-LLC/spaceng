@@ -20,5 +20,7 @@ export const API_ENDPOINTS = {
 
   PROPERTY: {
     create: "/property",
+    overview: "/property/overview",
+    properties: "/property/management",
   },
 };

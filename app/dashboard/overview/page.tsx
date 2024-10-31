@@ -1,45 +1,16 @@
+"use client";
+
 import React from "react";
 import {Bell, ChevronRight, Mail, Plus} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import Card from "../_components/property-cards/card";
-import Chart from "../_components/charts/charts";
+import {useUser} from "@/context/user";
+import {useGetBusinessDashboard} from "@/api/property/property-overview";
+import Loader from "@/components/loader/loader";
 
-const properties = [
-  {
-    id: 1,
-    image: "/dashboard/image1.png",
-    title: "Sunset Villa",
-    booking: 12,
-    views: 345,
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    image: "/dashboard/image2.png",
-    title: "Urban Loft",
-    booking: 8,
-    views: 278,
-    rating: 4.2,
-  },
-  {
-    id: 3,
-    image: "/dashboard/image3.png",
-    title: "Seaside Cottage",
-    booking: 15,
-    views: 410,
-    rating: 4.8,
-  },
-  {
-    id: 4,
-    image: "/dashboard/image4.png",
-    title: "Country Manor",
-    booking: 12,
-    views: 345,
-    rating: 4.5,
-  },
-];
+import Chart from "../_components/charts/charts";
+import Card from "../_components/property-cards/card";
 
 const payouts = [
   {
@@ -85,11 +56,17 @@ const payouts = [
 ];
 
 function Page() {
+  const {User} = useUser();
+
+  const {data, isLoading} = useGetBusinessDashboard();
+
   return (
     <div className="text-grey-200">
       <section className="flex items-center justify-between px-4 py-3 md:p-3 border-b border-b-grey-200">
         <div>
-          <h1 className="text-grey text-lg sm:text-2xl font-semibold">Welcome Oluwatosin,</h1>
+          <h1 className="text-grey text-lg sm:text-2xl font-semibold capitalize">
+            Welcome {User?.fullname},
+          </h1>
           <p className="font-medium max-sm:text-sm">Manage your properties with ease</p>
         </div>
 
@@ -111,20 +88,26 @@ function Page() {
             See More <ChevronRight className="group-hover:translate-x-1 transition-all" size={16} />
           </Link>
         </h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {properties.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                booking={item.booking}
-                image={item.image}
-                rating={item.rating}
-                title={item.title}
-                views={item.views}
-              />
-            );
-          })}
-        </ul>
+        {isLoading ? (
+          <div className="py-20">
+            <Loader />
+          </div>
+        ) : (
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {data?.data.map((item) => {
+              return (
+                <Card
+                  key={item._id}
+                  booking={0}
+                  image={item.gallery[0]}
+                  rating={item.reviews.length}
+                  title={item.property_title}
+                  views={item.views}
+                />
+              );
+            })}
+          </ul>
+        )}
 
         <div className="grid grid-cols-12 gap-4 pt-10">
           <div className="col-span-12 lg:col-span-6 border border-[#77787D] rounded-xl py-2 px-3">

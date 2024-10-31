@@ -9,14 +9,16 @@ interface Props {
   location: string;
   price: number;
   status: string; //"Active" | "Pending Approval" | "Inactive";
+  post_fix: string;
+  id: string;
 }
 
-function Card({image, title, location, price, status}: Props) {
+function Card({image, title, location, price, status, post_fix, id}: Props) {
   return (
     <li>
       <Link
         className="w-full aspect-[334/342] block relative overflow-hidden"
-        href={"/dashboard/management/200"}
+        href={`/dashboard/management/${id}`}
       >
         <Image
           fill
@@ -28,7 +30,7 @@ function Card({image, title, location, price, status}: Props) {
 
       <div className="flex items-center gap-2 text-blue py-2">
         <h4 className="flex-1 text-lg overflow-hidden whitespace-nowrap text-ellipsis text-grey font-semibold">
-          <Link className="hover:underline hover:text-blue" href={"/dashboard/management/200"}>
+          <Link className="hover:underline hover:text-blue" href={`/dashboard/management/${id}`}>
             {title}
           </Link>
         </h4>
@@ -46,7 +48,9 @@ function Card({image, title, location, price, status}: Props) {
 
       <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">
         <li>Location: {location}</li>
-        <li>Price: ₦{price.toLocaleString()} per night</li>
+        <li>
+          Price: ₦{price.toLocaleString()} {post_fix || "per night"}
+        </li>
         <li className="flex items-center gap-1">Status: {status}</li>
       </ul>
     </li>

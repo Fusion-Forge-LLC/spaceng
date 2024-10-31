@@ -8,6 +8,7 @@ import {cn} from "@/lib/utils";
 import {Toaster as Toast} from "@/components/ui/toaster";
 import {Toaster} from "@/components/ui/sonner";
 import ReactQueryProvider from "@/layout/reactQueryProvider";
+import UserProvider from "@/context/user";
 
 const inter = Inter({subsets: ["latin"]});
 const montesserat = Montserrat({
@@ -35,9 +36,11 @@ export default function RootLayout({
     <html className={cn(montesserat.variable, poppins.variable)} lang="en">
       <body className={inter.className}>
         <ReactQueryProvider>
-          {children}
-          <Toast />
-          <Toaster richColors position="top-right" />
+          <UserProvider>
+            {children}
+            <Toast />
+            <Toaster richColors position="top-right" />
+          </UserProvider>
         </ReactQueryProvider>
       </body>
     </html>
