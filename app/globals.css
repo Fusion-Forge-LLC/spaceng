@@ -95,6 +95,9 @@
   .calender-item {
     @apply h-12 w-12 grid place-content-center hover:bg-blue/40 cursor-pointer rounded;
   }
+  .switch-btn {
+    @apply p-5 text-base font-semibold border-b-4 border-b-transparent text-grey-200 disabled:text-grey-300;
+  }
 }
 
 @layer base {
@@ -245,4 +248,15 @@ abbr:where([title]) {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+.ql-toolbar.ql-snow {
+  border-color: #707070 !important;
+  border-start-start-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.ql-container.ql-snow {
+  height: 200px;
+  border-color: #707070 !important;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }

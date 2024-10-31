@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import {ChevronRight} from "lucide-react";
+
+import {useGetBusinessProperties} from "@/api/property/user-properties";
+import Loader from "@/components/loader/loader";
 
 import Card from "./_component/property-card";
 
@@ -40,8 +45,12 @@ const properties = [
 ];
 
 function Page() {
+  const {data, isLoading} = useGetBusinessProperties();
+
+  console.log(data);
+
   return (
-    <div className="flex-1 overflow-scroll">
+    <div className="flex-1 overflow-y-scroll overflow-x-hidden">
       <article className="py-5">
         <h4 className="text-lg sm:text-2xl font-semibold">Your Properties</h4>
         <p className="text-grey-200 max-sm:text-sm">
@@ -57,32 +66,28 @@ function Page() {
         See More <ChevronRight className="group-hover:translate-x-1 transition-all" size={16} />
       </Link>
 
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {properties.map((item) => {
-          return (
-            <Card
-              key={item.id}
-              image={item.image}
-              location={item.location}
-              price={item.price}
-              status={item.status}
-              title={item.title}
-            />
-          );
-        })}
-        {properties.map((item) => {
-          return (
-            <Card
-              key={item.id}
-              image={item.image}
-              location={item.location}
-              price={item.price}
-              status={item.status}
-              title={item.title}
-            />
-          );
-        })}
-      </ul>
+      {isLoading ? (
+        <div className="py-20">
+          <Loader />
+        </div>
+      ) : (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {data?.data.map((item) => {
+            return (
+              <Card
+                key={item._id}
+                id={item._id}
+                image={item.gallery[0]}
+                location={`${item.property_address.address}, ${item.property_address.neighborhood}, ${item.property_address.location}`}
+                post_fix={item.price_postfix}
+                price={item.price}
+                status={item.status}
+                title={item.property_title}
+              />
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }
