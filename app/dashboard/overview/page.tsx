@@ -93,9 +93,12 @@ function Page() {
           <p className="font-medium max-sm:text-sm">Manage your properties with ease</p>
         </div>
 
-        <button className="bg-blue px-1 py-1 sm:px-4 sm:py-2 text-white font-medium rounded-md hover:opacity-75">
+        <Link
+          className="bg-blue px-1 py-1 sm:px-4 sm:py-2 text-white font-medium rounded-md hover:opacity-75"
+          href={"/dashboard/management/new-property"}
+        >
           <span className="hidden sm:inline">Add New property</span> <Plus className="sm:hidden" />
-        </button>
+        </Link>
       </section>
 
       <section className="px-4 py-3 md:p-3">
