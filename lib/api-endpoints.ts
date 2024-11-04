@@ -22,6 +22,7 @@ export const API_ENDPOINTS = {
     create: "/property",
     overview: "/property/overview",
     properties: "/property/management",
+    modify: (id: string) => `/property/management/${id}`,
   },
 
   LISTING: {

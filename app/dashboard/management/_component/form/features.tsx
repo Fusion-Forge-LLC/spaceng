@@ -7,7 +7,7 @@ interface Props {
   setFeatures: Dispatch<SetStateAction<string[]>>;
 }
 
-function Features({setFeatures}: Props) {
+function Features({setFeatures, features}: Props) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
 
@@ -16,7 +16,6 @@ function Features({setFeatures}: Props) {
     } else {
       setFeatures((prevState) => prevState.filter((item) => item != value));
     }
-    console.log(value);
   };
 
   return (
@@ -26,6 +25,7 @@ function Features({setFeatures}: Props) {
           return (
             <li key={index} className="flex items-center gap-4">
               <input
+                defaultChecked={features.includes(item)}
                 id={item.replace(" ", "")}
                 name="amenities"
                 type="checkbox"

@@ -6,7 +6,7 @@ import Wrapper from "./wrapper";
 function BookingSuccess({isShown, close}: {isShown: boolean; close: () => void}) {
   useEffect(() => {
     if (isShown) {
-      window.document.body.classList.add("overflow-hidden");
+      document.body.classList.add("overflow-hidden");
     }
   }, [isShown]);
 

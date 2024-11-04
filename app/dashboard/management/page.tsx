@@ -47,8 +47,6 @@ const properties = [
 function Page() {
   const {data, isLoading} = useGetBusinessProperties();
 
-  console.log(data);
-
   return (
     <div className="flex-1 overflow-y-scroll overflow-x-hidden">
       <article className="py-5">
@@ -83,6 +81,7 @@ function Page() {
                 price={item.price}
                 status={item.status}
                 title={item.property_title}
+                type={item.type}
               />
             );
           })}

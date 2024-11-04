@@ -25,4 +25,5 @@ export interface PropertyResponse {
   property_title: string;
   _id: string;
   reviews: any[];
+  type: string;
 }

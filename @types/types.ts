@@ -35,7 +35,9 @@ export interface PropertyResponse {
   features: string[];
   gallery: string[];
   price: number;
+  old_price: number;
   price_postfix: string;
+  price_prefix: string;
   property_address: {
     address: string;
     location: string;
