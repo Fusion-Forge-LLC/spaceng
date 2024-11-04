@@ -1,25 +1,49 @@
+"use client";
+
 import React from "react";
+
+import {useGetProperty} from "@/api/property/property";
+import Loader from "@/components/loader/loader";
+import NotFound from "@/components/not-found/not-found";
 
 import DetailsPage from "../../_components/property-detail-page/details-page";
 
-const images = [
-  "/shortlets/image6.png",
-  "/shortlets/image5.png",
-  "/shortlets/image2.png",
-  "/shortlets/image4.png",
-  "/shortlets/image3.png",
-];
+function Page({params}: {params: {id: string}}) {
+  const {data, isLoading} = useGetProperty(params.id);
 
-function Page() {
+  if (isLoading) {
+    return (
+      <div className="h-screen grid place-content-center">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!data?.data) {
+    return <NotFound />;
+  }
+
+  const {
+    property_title,
+    price,
+    property_description,
+    property_address,
+    gallery,
+    features,
+    reviews,
+  } = data.data;
+
   return (
     <DetailsPage
-      cost={25000}
-      description="Our carefully curated collection of stylish shortlets offers the perfect blend of comfort and convenience. Whether you're visiting for business or leisure, our properties provide a home away from home in the heart of Lagos. Enjoy world-class amenities, prime locations, and exceptional service. Book your stay today and experience the best of Lagos living."
-      descriptionTitle="Discover your Lagos haven with Haven Homes."
-      images={images}
+      amenities={features}
+      cost={price}
+      description={property_description}
+      descriptionTitle={property_title}
+      images={gallery}
       label="Guest"
-      location="1001, Estate, Lekki, Lagos"
-      title="Haven Homes"
+      location={`${property_address.address}, ${property_address.neighborhood}, ${property_address.location}`}
+      reviews={reviews}
+      title={property_title}
     />
   );
 }

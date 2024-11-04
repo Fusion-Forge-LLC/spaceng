@@ -23,4 +23,9 @@ export const API_ENDPOINTS = {
     overview: "/property/overview",
     properties: "/property/management",
   },
+
+  LISTING: {
+    listing: (type: string) => `/lists/${type}`,
+    details: (id: string) => `/lists/property/${id}`,
+  },
 };
