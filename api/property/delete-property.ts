@@ -8,7 +8,7 @@ import {displayErrorMessage, showSuccess} from "@/lib/utils";
 import {QueryResponse} from "@/@types/auth";
 
 const deleteProperty = async (payload: string) => {
-  const {data} = await api.delete<QueryResponse<any>>(API_ENDPOINTS.PROPERTY.delete(payload));
+  const {data} = await api.delete<QueryResponse<any>>(API_ENDPOINTS.PROPERTY.modify(payload));
 
   return data;
 };
@@ -24,7 +24,7 @@ export const useDeleteProperty = (): UseMutationResult<
     mutationFn: deleteProperty,
     onSuccess: (data) => {
       showSuccess(data.message);
-      console.log(data);
+
       router.refresh();
     },
     onError: (error) => {

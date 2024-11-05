@@ -29,4 +29,6 @@ export const API_ENDPOINTS = {
     listing: (type: string) => `/lists/${type}`,
     details: (id: string) => `/lists/property/${id}`,
   },
+
+  PRE_BOOKING: `/booking/pre-booking`,
 };
