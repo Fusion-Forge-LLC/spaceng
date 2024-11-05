@@ -22,5 +22,13 @@ export const API_ENDPOINTS = {
     create: "/property",
     overview: "/property/overview",
     properties: "/property/management",
+    modify: (id: string) => `/property/management/${id}`,
   },
+
+  LISTING: {
+    listing: (type: string) => `/lists/${type}`,
+    details: (id: string) => `/lists/property/${id}`,
+  },
+
+  PRE_BOOKING: `/booking/pre-booking`,
 };

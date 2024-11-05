@@ -99,9 +99,11 @@ function Page() {
                 <Card
                   key={item._id}
                   booking={0}
+                  id={item._id}
                   image={item.gallery[0]}
                   rating={item.reviews.length}
                   title={item.property_title}
+                  type={item.type}
                   views={item.views}
                 />
               );

@@ -1,7 +1,8 @@
-import {Edit3, Eye, Trash2} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+import UpdateBtn from "../../_components/property_update/update-btn";
 
 interface Props {
   image: string;
@@ -11,9 +12,10 @@ interface Props {
   status: string; //"Active" | "Pending Approval" | "Inactive";
   post_fix: string;
   id: string;
+  type: string;
 }
 
-function Card({image, title, location, price, status, post_fix, id}: Props) {
+function Card({image, title, location, price, status, post_fix, id, type}: Props) {
   return (
     <li>
       <Link
@@ -35,15 +37,7 @@ function Card({image, title, location, price, status, post_fix, id}: Props) {
           </Link>
         </h4>
 
-        <button className="hover:scale-105 active:scale-90">
-          <Edit3 size={16} />
-        </button>
-        <button className="hover:scale-105 active:scale-90">
-          <Eye size={16} />
-        </button>
-        <button className="hover:scale-105 active:scale-90">
-          <Trash2 size={16} />
-        </button>
+        <UpdateBtn id={id} type={type} />
       </div>
 
       <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">

@@ -1,25 +1,49 @@
+"use client";
+
 import React from "react";
+
+import {useGetProperty} from "@/api/property/property";
+import Loader from "@/components/loader/loader";
+import NotFound from "@/components/not-found/not-found";
 
 import DetailsPage from "../../_components/property-detail-page/details-page";
 
-const images = [
-  "/workspace/image4.png",
-  "/workspace/image5.png",
-  "/workspace/image6.png",
-  "/workspace/image7.png",
-  "/workspace/image8.png",
-];
+function Page({params}: {params: {id: string}}) {
+  const {data, isLoading} = useGetProperty(params.id);
 
-function Page() {
+  if (isLoading) {
+    return (
+      <div className="h-screen grid place-content-center">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!data?.data) {
+    return <NotFound />;
+  }
+
+  const {
+    property_title,
+    price,
+    property_description,
+    property_address,
+    gallery,
+    features,
+    reviews,
+  } = data.data;
+
   return (
     <DetailsPage
-      cost={5000}
-      description="Experience the perfect blend of productivity and community at our co-working space with Co-Worka. Connect with like-minded professionals, network, and thrive in a dynamic environment."
-      descriptionTitle="Lagos' Premier Co-Working Destination"
-      images={images}
-      label="Team"
-      location="1001, Estate, Lekki, Lagos"
-      title="Co-Worka"
+      amenities={features}
+      cost={price}
+      description={property_description}
+      descriptionTitle={property_title}
+      images={gallery}
+      label="Guest"
+      location={`${property_address?.address}, ${property_address?.neighborhood}, ${property_address?.location}`}
+      reviews={reviews}
+      title={property_title}
     />
   );
 }

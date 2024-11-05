@@ -8,12 +8,12 @@ function PaymentSuccess({isShown}: {isShown: boolean}) {
   const router = useRouter();
 
   useEffect(() => {
-    return () => window.document.body.classList.remove("overflow-hidden");
+    return () => document.body.classList.remove("overflow-hidden");
   }, []);
 
   useEffect(() => {
     if (isShown) {
-      window.document.body.classList.add("overflow-hidden");
+      document.body.classList.add("overflow-hidden");
     }
   }, [isShown]);
 

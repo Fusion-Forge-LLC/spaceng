@@ -31,4 +31,5 @@ export interface PropertyResponse {
     neighborhood: string;
   };
   status: "Active" | "Pending Approval" | "Inactive";
+  type: string;
 }

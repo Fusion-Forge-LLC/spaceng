@@ -4,7 +4,7 @@ import React, {ReactNode, useEffect} from "react";
 
 function Wrapper({children}: {children: ReactNode}) {
   useEffect(() => {
-    return () => window.document.body.classList.remove("overflow-hidden");
+    return () => document.body.classList.remove("overflow-hidden");
   }, []);
 
   return (

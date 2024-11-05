@@ -1,8 +1,10 @@
-import {Edit3, Eye, Star, Trash2} from "lucide-react";
+import {Star} from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
 import {Rating} from "@/components/Icons/icons";
+
+import UpdateBtn from "../property_update/update-btn";
 
 interface Props {
   image: string;
@@ -10,9 +12,11 @@ interface Props {
   booking: number;
   views: number;
   rating: number;
+  type: string;
+  id: string;
 }
 
-function Card({image, title, booking, views, rating}: Props) {
+function Card({image, title, booking, views, rating, type, id}: Props) {
   return (
     <li>
       <div className="w-full aspect-[334/342] relative">
@@ -24,15 +28,7 @@ function Card({image, title, booking, views, rating}: Props) {
           {title}
         </h4>
 
-        <button>
-          <Edit3 size={16} />
-        </button>
-        <button>
-          <Eye size={16} />
-        </button>
-        <button>
-          <Trash2 size={16} />
-        </button>
+        <UpdateBtn id={id} type={type} />
       </div>
 
       <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">

@@ -28,3 +28,30 @@ export interface PropertyPayload {
   video: string[];
   features: string[];
 }
+
+export interface PropertyResponse {
+  bedroom: number;
+  createdAt: string;
+  features: string[];
+  gallery: string[];
+  price: number;
+  old_price: number;
+  price_postfix: string;
+  price_prefix: string;
+  property_address: {
+    address: string;
+    location: string;
+    neighborhood: string;
+  };
+  property_description: string;
+  property_title: string;
+  reviews: string[];
+  type: "shortlet" | "workspace";
+  updatedAt: string;
+  user: string;
+  video: string[];
+  __v: number;
+  _id: string;
+  labels: string;
+  status: "Active" | "Pending Approval" | "Inactive";
+}
