@@ -91,10 +91,12 @@ export default function Wishlist() {
                   return (
                     <Card
                       key={index}
+                      id=""
                       image={item.image}
                       labels={item.labels}
                       location={item.location}
                       path={"/shortlet"}
+                      postfix=""
                       price={item.price}
                       rating={item.rating}
                       reviewNum={item.reviewNum}
@@ -106,10 +108,12 @@ export default function Wishlist() {
                   return (
                     <Card
                       key={index}
+                      id=""
                       image={item.image}
                       labels={item.labels}
                       location={item.location}
                       path={"/workspace"}
+                      postfix=""
                       price={item.price}
                       rating={item.rating}
                       reviewNum={item.reviewNum}
