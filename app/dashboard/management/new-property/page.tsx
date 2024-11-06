@@ -1,8 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
+
 import {useCreateProperty} from "@/api/property/new-property";
 
-import PropertyForm from "../_component/form/property-form";
+const PropertyForm = dynamic(() => import("../_component/form/property-form"), {ssr: false});
 
 function Page() {
   const {mutate: uploadProperty, isPending} = useCreateProperty();
