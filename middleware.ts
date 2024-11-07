@@ -23,6 +23,11 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/auth/business/login", req.url));
   }
 
+  //Redirect unauthorized users trying to access checkout page
+  if (!jwt && req.nextUrl.pathname.includes("checkout")) {
+    return NextResponse.redirect(new URL("/auth/client/signin", req.url));
+  }
+
   // Prevent authenticated users from accessing the login pages
   if (jwt && req.nextUrl.pathname.startsWith("/auth")) {
     return NextResponse.redirect(new URL("/dashboard/overview", req.url));

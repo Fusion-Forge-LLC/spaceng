@@ -41,6 +41,9 @@
   .active-payment-method {
     @apply border-2 border-blue text-blue;
   }
+  .password-confirmation-true {
+    @apply bg-[#707070] text-white;
+  }
 }
 
 @layer components {
@@ -97,6 +100,12 @@
   }
   .switch-btn {
     @apply p-5 text-base font-semibold border-b-4 border-b-transparent text-grey-200 disabled:text-grey-300;
+  }
+  .password-confirmation-tag {
+    @apply text-[#707070] bg-white rounded-3xl px-2 py-1 lg:py-1.5 flex items-center border justify-center gap-1.5 w-fit text-xs;
+  }
+  .client-register-input {
+    @apply border-[#707070] border rounded-lg w-full py-3 lg:py-3.5 pr-12 px-3.5 lg:px-4 flex items-center text-grey placeholder:text-[#707070] focus:outline-none focus:border-blue;
   }
 }
 
