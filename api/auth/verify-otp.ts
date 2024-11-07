@@ -39,7 +39,6 @@ export const useVerifyOtp = (
   return useMutation({
     mutationFn: verifyOtp,
     onSuccess: (data) => {
-      console.log("data: ", data);
       toast.success(data.message);
       router.push(redirect);
     },

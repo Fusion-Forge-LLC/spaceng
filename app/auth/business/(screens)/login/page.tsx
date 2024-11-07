@@ -28,7 +28,10 @@ function Page() {
     resolver: yupResolver(loginSchema),
     defaultValues: {email: "", password: ""},
   });
-  const {isPending, mutate: loginUser} = useLogIn();
+  const {isPending, mutate: loginUser} = useLogIn(
+    "/auth/business/signup/verify-email",
+    "/dashboard/overview",
+  );
 
   function onSubmit(data: LoginType) {
     loginUser(data);

@@ -22,7 +22,7 @@ const registerSchema = yup.object({
 type LoginType = yup.InferType<typeof registerSchema>;
 
 function ClientSignIn() {
-  const {mutate, isPending} = useLogIn();
+  const {mutate, isPending} = useLogIn("/auth/client/verify-email", "/account/bookings");
   const form = useForm<LoginType>({
     resolver: yupResolver(registerSchema),
   });

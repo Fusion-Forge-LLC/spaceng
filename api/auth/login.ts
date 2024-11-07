@@ -18,11 +18,10 @@ const logIn = async (payload: LogInPayload) => {
   return data;
 };
 
-export const useLogIn = (): UseMutationResult<
-  QueryResponse<LoginResponse>,
-  AxiosError<ErrorData>,
-  LogInPayload
-> => {
+export const useLogIn = (
+  verifyRedirect: string,
+  pageRedirect: string,
+): UseMutationResult<QueryResponse<LoginResponse>, AxiosError<ErrorData>, LogInPayload> => {
   const router = useRouter();
   const {fetchWhoAmI} = useWhoAmI();
 
@@ -31,7 +30,7 @@ export const useLogIn = (): UseMutationResult<
     onSuccess: (data) => {
       showSuccess(data.message);
       if (data.message !== "Login Successful!") {
-        router.push(`/auth/business/signup/verify-email?email=${data.email}`);
+        router.push(`${verifyRedirect}?email=${data.email}`);
 
         return;
       }
@@ -45,7 +44,10 @@ export const useLogIn = (): UseMutationResult<
       });
 
       fetchWhoAmI && fetchWhoAmI();
-      router.push("/dashboard/overview");
+      const redirect = Cookies.get("spacefinda-redirect");
+
+      console.log(redirect);
+      router.push(redirect || pageRedirect);
     },
     onError: (error) => {
       console.log(error);
