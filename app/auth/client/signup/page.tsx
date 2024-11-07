@@ -1,12 +1,11 @@
 "use client";
 
-import React, {useState} from "react";
+import React from "react";
 import Image from "next/image";
 import * as yup from "yup";
 import Link from "next/link";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {Eye, EyeOff} from "lucide-react";
 import {useRouter} from "next/navigation";
 
 import {useSignUp} from "@/api/auth/signup";
@@ -15,6 +14,7 @@ import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/
 import PasswordValidators from "../components/password-validators";
 import PrimaryAuthButton from "../components/PrimaryAuthButton";
 import EmailInput from "../components/EmailInput";
+import PasswordInput from "../components/password-input";
 
 const registerSchema = yup.object({
   fullname: yup.string().required("Please enter full name"),
@@ -39,7 +39,6 @@ type RegisterType = yup.InferType<typeof registerSchema>;
 
 function ClientSignUp() {
   const router = useRouter();
-  const [passwordType, setPasswordType] = useState<"password" | "text">("password");
   const {isPending, mutateAsync} = useSignUp();
   const form = useForm<RegisterType>({
     resolver: yupResolver(registerSchema),
@@ -121,39 +120,7 @@ function ClientSignUp() {
           render={({field}) => (
             <FormItem>
               <FormControl>
-                <div className="flex flex-col gap-1.5 w-full">
-                  <label className="text-grey" htmlFor="password">
-                    Enter Password
-                  </label>
-                  <div className="mb-1.5 relative">
-                    <input
-                      className="client-register-input"
-                      id="password"
-                      placeholder="Password"
-                      type={passwordType}
-                      {...field}
-                    />
-                    {/* <Mail /> */}
-                    <Image
-                      alt="elements"
-                      className="absolute m-auto right-4 top-0 bottom-0"
-                      height={24}
-                      src="/images/eye.svg"
-                      width={24}
-                    />
-                    <button
-                      className="absolute m-auto right-4 top-0 bottom-0"
-                      type="button"
-                      onClick={() =>
-                        setPasswordType((prevState) =>
-                          prevState === "password" ? "text" : "password",
-                        )
-                      }
-                    >
-                      {passwordType === "password" ? <Eye /> : <EyeOff />}
-                    </button>
-                  </div>
-                </div>
+                <PasswordInput field={field} />
               </FormControl>
               <FormMessage />
             </FormItem>
