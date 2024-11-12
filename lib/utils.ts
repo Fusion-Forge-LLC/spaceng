@@ -34,3 +34,15 @@ export function capitalizeFirstLetter(string = "") {
 export function showSuccess(message: string) {
   toast.success(message);
 }
+
+export const calculateDays = (
+  checkin: string,
+  checkout: string,
+  propertyType: "shortlet" | "workspace",
+) => {
+  const oneDay = 24 * 60 * 60 * 1000;
+  const differenceinMilliseconds = Math.abs(parseInt(checkout) - parseInt(checkin));
+  const differenceInDays = Math.ceil(differenceinMilliseconds / oneDay);
+
+  return propertyType === "shortlet" ? (differenceInDays ?? 1) : differenceInDays + 1;
+};

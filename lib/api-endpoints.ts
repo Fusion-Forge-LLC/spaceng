@@ -30,5 +30,14 @@ export const API_ENDPOINTS = {
     details: (id: string) => `/lists/property/${id}`,
   },
 
+  TRANSACTION: {
+    acceptpayment: (params: string) => `/transaction/acceptpayment?${params}`,
+    bankpayment: "/transaction/paywithbank",
+  },
+
   PRE_BOOKING: `/booking/pre-booking`,
+
+  BOOKING: {
+    initBooking: (transactionRef: string) => `/booking/confirm-payment/${transactionRef}`,
+  },
 };

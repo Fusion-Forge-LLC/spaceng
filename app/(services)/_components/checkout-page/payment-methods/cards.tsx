@@ -10,9 +10,11 @@ import countries from "../../../../../countries/countries";
 function CardsPayment({
   paymentSuccess,
   className,
+  price,
 }: {
   paymentSuccess: () => void;
   className: string;
+  price: string;
 }) {
   const [cardDetails, setCardDetails] = useState({
     card_number: "",
@@ -128,7 +130,7 @@ function CardsPayment({
         <DropdDown className="payment-input w-full" options={countries} placeholder="Select" />
       </div>
 
-      <button className="booking-btn w-full block">Pay ₦25,000</button>
+      <button className="booking-btn w-full block">Pay ₦{price}</button>
     </form>
   );
 }

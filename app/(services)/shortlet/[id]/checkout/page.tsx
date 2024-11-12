@@ -1,9 +1,28 @@
+"use client";
+
 import React from "react";
 
 import Checkout from "@/app/(services)/_components/checkout-page/checkout";
+import {useGetProperty} from "@/api/property/property";
+import Loader from "@/components/loader/loader";
+import NotFound from "@/components/not-found/not-found";
 
-function Page() {
-  return <Checkout label="Guest" />;
+function Page({params}: {params: {id: string}}) {
+  const {data, isLoading} = useGetProperty(params.id);
+
+  if (isLoading) {
+    return (
+      <div className="h-screen grid place-content-center">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!data?.data) {
+    return <NotFound />;
+  }
+
+  return <Checkout label="Guest" price={data.data.price} propertyType="workspace" />;
 }
 
 export default Page;

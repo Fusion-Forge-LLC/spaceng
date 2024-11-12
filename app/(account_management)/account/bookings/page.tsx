@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Bookings() {
   return (
@@ -24,9 +25,12 @@ export default function Bookings() {
           planning your next stay or workspace experience!
         </p>
       </div>
-      <button className="bg-blue rounded-lg py-3 px-4 text-white font-medium block mx-auto lg:mx-0">
+      <Link
+        className="bg-blue w-fit rounded-lg py-3 px-4 text-white font-medium block mx-auto lg:mx-0"
+        href="/shortlet"
+      >
         Start searching
-      </button>
+      </Link>
     </div>
   );
 }
