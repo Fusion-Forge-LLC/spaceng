@@ -1,12 +1,16 @@
 "use client";
 
 import {ArrowLeft, Ellipsis} from "lucide-react";
-import {useRouter} from "next/navigation";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
 import React, {useState} from "react";
+import Paystack from "@paystack/inline-js";
 
 import {Bank, CreditCard, Gpay} from "@/components/Icons/icons";
 import Wrapper from "@/components/wrapper/wrapper";
-import {cn} from "@/lib/utils";
+import {calculateDays, cn} from "@/lib/utils";
+import {useInitTransaction} from "@/api/transaction/initpayment";
+import {useUser} from "@/context/user";
+import {useCreateBooking} from "@/api/booking/create-booking";
 
 import PaymentSuccess from "../modal/payment-success";
 import Booking from "../booking-page/booking";
@@ -21,13 +25,64 @@ enum PaymentMethod {
   BANK = "bank_payment",
 }
 
-function Checkout({label}: {label: "Guest" | "Team"}) {
+function Checkout({
+  label,
+  price,
+  propertyType,
+}: {
+  label: "Guest" | "Team";
+  price: number;
+  propertyType: "workspace" | "shortlet";
+}) {
+  const params = useParams();
+  const {User} = useUser();
+  const searchParams = useSearchParams();
+  const propertyId = params.id as string;
+  const popup = new Paystack();
+  const {mutateAsync} = useInitTransaction();
   const router = useRouter();
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.CARD);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.BANK);
+  const checkin = searchParams.get("checkin");
+  const checkout = searchParams.get("checkout");
+  const {mutate, isPending} = useCreateBooking();
+
+  const totalCost = calculateDays(checkin ?? "", checkout ?? "", propertyType) * price;
+
+  const setCard = () => {
+    setPaymentMethod(PaymentMethod.CARD);
+
+    if (!checkin || !checkout) return;
+    mutateAsync({
+      params: searchParams.toString(),
+      data: {
+        email: User?.email || "",
+        amount: 4000,
+        propertyId,
+        checkin,
+        checkout,
+      },
+    }).then((data) => {
+      console.log(data.data);
+      //@ts-ignore
+      popup.resumeTransaction(data.data.access_code, {
+        //@ts-ignore
+        onSuccess: (transaction) => {
+          console.log("Payment successful", transaction);
+          mutate(transaction.trxref);
+        },
+        onCancel: () => {
+          console.log("onCancel");
+        },
+        onError: (error: any) => {
+          console.log("Error: ", error.message);
+        },
+      });
+    });
+  };
 
   const paymentSuccess = () => {
-    setIsPaymentSuccess(true);
+    // setIsPaymentSuccess(true);
   };
 
   return (
@@ -52,7 +107,7 @@ function Checkout({label}: {label: "Guest" | "Team"}) {
                     ? "active-payment-method"
                     : "non-active-payment-method",
                 )}
-                onClick={() => setPaymentMethod(PaymentMethod.CARD)}
+                onClick={setCard}
               >
                 <CreditCard />
                 <span className="blockfont-medium">Card</span>
@@ -99,9 +154,21 @@ function Checkout({label}: {label: "Guest" | "Team"}) {
                       : "-left-[200%]",
                 )}
               >
-                <CardsPayment className="" paymentSuccess={paymentSuccess} />
-                <GooglePay className="" paymentSuccess={paymentSuccess} />
-                <BankAccount className="" paymentSuccess={paymentSuccess} />
+                <CardsPayment
+                  className=""
+                  paymentSuccess={paymentSuccess}
+                  price={totalCost.toLocaleString()}
+                />
+                <GooglePay
+                  className=""
+                  paymentSuccess={paymentSuccess}
+                  price={totalCost.toLocaleString()}
+                />
+                <BankAccount
+                  className=""
+                  paymentSuccess={paymentSuccess}
+                  price={totalCost.toLocaleString()}
+                />
               </div>
             </div>
           </div>

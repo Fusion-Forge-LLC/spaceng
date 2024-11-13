@@ -5,6 +5,7 @@ import {Poppins} from "next/font/google";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {useRouter} from "next/navigation";
 
 import {useSignUp} from "@/api/auth/signup";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
@@ -37,7 +38,8 @@ const signUpSchema = yup.object({
 type SignUpType = yup.InferType<typeof signUpSchema>;
 
 function Page() {
-  const {isPending, mutate} = useSignUp();
+  const router = useRouter();
+  const {isPending, mutateAsync} = useSignUp();
 
   const form = useForm<SignUpType>({
     resolver: yupResolver(signUpSchema),
@@ -48,7 +50,9 @@ function Page() {
       ...values,
     };
 
-    mutate(payload);
+    mutateAsync(payload).then(() => {
+      router.push(`/auth/business/signup/verify-email?email=${values.email}`);
+    });
   };
 
   return (

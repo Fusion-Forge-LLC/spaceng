@@ -33,12 +33,9 @@ export const useSignUp = (): UseMutationResult<any, AxiosError<ErrorData>, SignU
   return useMutation({
     mutationFn: signUp,
     onSuccess: (data, variables) => {
-      console.log("Hero");
       toast.success(data.message);
-      router.push(`/auth/business/signup/verify-email?email=${variables.email}`);
     },
     onError: (error) => {
-      console.log("Hero");
       displayErrorMessage(error);
     },
     onSettled(data, error) {

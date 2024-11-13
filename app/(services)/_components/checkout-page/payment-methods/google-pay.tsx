@@ -3,7 +3,15 @@ import React from "react";
 import {Gpay, PhoneRedirect} from "@/components/Icons/icons";
 import {cn} from "@/lib/utils";
 
-function GooglePay({paymentSuccess, className}: {paymentSuccess: () => void; className: string}) {
+function GooglePay({
+  paymentSuccess,
+  className,
+  price,
+}: {
+  paymentSuccess: () => void;
+  className: string;
+  price: string;
+}) {
   return (
     <div className={cn("shrink-0 w-full", className)}>
       <div className="py-12 px-4">
@@ -22,7 +30,7 @@ function GooglePay({paymentSuccess, className}: {paymentSuccess: () => void; cla
       </div>
 
       <button className="booking-btn w-full block" onClick={paymentSuccess}>
-        Pay ₦25,000
+        Pay ₦{price}
       </button>
     </div>
   );

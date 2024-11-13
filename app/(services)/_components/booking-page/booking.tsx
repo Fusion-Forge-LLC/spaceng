@@ -1,26 +1,31 @@
 "use client";
 
-import Link from "next/link";
-import {usePathname} from "next/navigation";
-import React, {useState} from "react";
+import {usePathname, useRouter} from "next/navigation";
+import React from "react";
+import {toast} from "sonner";
 
 import {CaretDown} from "@/components/Icons/icons";
 import {PopoverElement} from "@/components/style-guide/style-guide";
 import {Calendar} from "@/components/ui/calendar";
+import {useCheckout} from "@/hooks/use-checkout";
 
 function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"}) {
+  const router = useRouter();
   const pathName = usePathname();
-  const [date, setDate] = React.useState<{checkin: Date | undefined; checkout: Date | undefined}>({
-    checkin: new Date(),
-    checkout: new Date(),
-  });
-  const [guestsCount, setGuestsCount] = useState(1);
+  const {date, guestsCount, setGuestsCount, updateDate} = useCheckout();
 
-  function updateDate(date: Date | undefined, key: "checkin" | "checkout") {
-    setDate((prevState) => {
-      return {...prevState, [key]: date};
-    });
-  }
+  const handleSubmit = () => {
+    const checkin = date.checkin?.getTime();
+    const checkout = date.checkout?.getTime();
+
+    if (!checkin || !checkout) return toast.error("Please select valid dates");
+
+    if (checkin > checkout) return toast.error("Checkin date cannot exceed checkout date");
+
+    router.push(
+      `${pathName}/checkout?guest=${guestsCount}&checkin=${checkin}&checkout=${checkout}`,
+    );
+  };
 
   return (
     <div className="space-y-4 py-6">
@@ -109,9 +114,9 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       </PopoverElement>
 
       {showBtn && (
-        <Link className="booking-btn" href={`${pathName}/checkout?guest=${guestsCount}`}>
+        <button className="booking-btn w-full" onClick={handleSubmit}>
           Book
-        </Link>
+        </button>
       )}
     </div>
   );

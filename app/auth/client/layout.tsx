@@ -9,10 +9,8 @@ const inter = Inter({
 
 function ClientAuthLayout({children}: {children: React.ReactNode}) {
   return (
-    <div className={`p-5 lg:py-[70px] px-5 lg:max-w-4xl xl:max-w-7xl container mx-auto`}>
-      <header className="text-blue font-bold text-2xl lg:text-4xl mb-5 lg:mb-[72.5px]">
-        SpaceFinda
-      </header>
+    <div className={`p-5 lg:py-[40px] px-5 lg:max-w-6xl xl:max-w-7xl container mx-auto`}>
+      <header className="text-blue font-bold text-2xl lg:text-4xl mb-5">SpaceFinda</header>
       <main className="flex flex-col lg:flex-row lg:gap-10 xl:gap-20 justify-between items-center ">
         <div className="w-full flex-1">
           <p className="text-grey lg:mb-7 font-medium text-sm lg:text-lg">
