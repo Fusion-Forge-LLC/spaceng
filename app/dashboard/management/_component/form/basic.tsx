@@ -31,7 +31,8 @@ function Basic({form}: {form: any}) {
         )}
       />
 
-      <div className='h-80 p-5 bg-[url("/dummymap.png")] bg-center space-y-2'>
+      <div className="h-80 p-5 relative space-y-2 z-10">
+        <div className='bg-[url("/dummymap.png")] bg-center opacity-40 h-full w-full absolute top-0 left-0 -z-10' />
         <FormField
           control={form.control}
           name="property_address"

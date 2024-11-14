@@ -54,4 +54,17 @@ export interface PropertyResponse {
   _id: string;
   labels: string;
   status: "Active" | "Pending Approval" | "Inactive";
+  wishlists: {
+    _id: string;
+    user_id: string;
+    property_id: string;
+  }[];
+}
+
+export interface WishlistResponse {
+  _id: string;
+  __v: number;
+  user_id: string;
+  property_id: PropertyResponse;
+  type: string;
 }

@@ -28,6 +28,7 @@ export const API_ENDPOINTS = {
   LISTING: {
     listing: (type: string) => `/lists/${type}`,
     details: (id: string) => `/lists/property/${id}`,
+    updateView: (id: string) => `lists/property/${id}/increase-view`,
   },
 
   TRANSACTION: {
@@ -39,5 +40,10 @@ export const API_ENDPOINTS = {
 
   BOOKING: {
     initBooking: (transactionRef: string) => `/booking/confirm-payment/${transactionRef}`,
+  },
+
+  WISHLIST: {
+    toggleWishlist: (propertyId: string) => `/wishlist/toggle/${propertyId}`,
+    userWishlists: (userId: string) => `/wishlist/lists/${userId}`,
   },
 };

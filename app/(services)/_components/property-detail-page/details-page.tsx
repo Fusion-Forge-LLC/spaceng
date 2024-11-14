@@ -8,6 +8,7 @@ import {usePathname} from "next/navigation";
 
 import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
+import {useUpdateViews} from "@/api/property/update-view";
 
 import ReviewCard from "../../_components/review-card/review-card";
 import SearchProperties from "../../_components/search/search";
@@ -73,6 +74,8 @@ function DetailsPage({
   amenities: string[];
   reviews: any[];
 }) {
+  useUpdateViews();
+
   return (
     <main>
       <Wrapper className="py-10">

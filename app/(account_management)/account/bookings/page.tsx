@@ -5,7 +5,7 @@ export default function Bookings() {
   return (
     <div className="py-6 lg:py-20 px-5 lg:px-24 text-grey-200">
       <h1 className="text-base lg:text-2xl font-semibold text-grey mb-3 lg:mb-6">Bookings</h1>
-      <div className="max-w-[486px]">
+      <div className="max-w-[486px] max-lg:mx-auto">
         <h2 className="hidden lg:block text-lg font-medium text-grey mb-2">
           No bookings made...yet!
         </h2>
