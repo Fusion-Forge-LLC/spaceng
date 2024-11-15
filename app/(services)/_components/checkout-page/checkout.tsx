@@ -63,12 +63,10 @@ function Checkout({
         checkout,
       },
     }).then((data) => {
-      console.log(data.data);
       //@ts-ignore
       popup.resumeTransaction(data.data.access_code, {
         //@ts-ignore
         onSuccess: (transaction) => {
-          console.log("Payment successful", transaction);
           mutate(transaction.trxref);
         },
         onCancel: () => {

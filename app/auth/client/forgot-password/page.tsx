@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 import EmailInput from "../components/EmailInput";
 import PrimaryAuthButton from "../components/PrimaryAuthButton";
@@ -16,7 +16,9 @@ function ForgotPassword() {
       </p>
       <EmailInput
         className="mb-6"
-        onChange={(e) => setFormData({...formData, clientEmail: e.target.value})}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setFormData({...formData, clientEmail: e.target.value})
+        }
       />
       <PrimaryAuthButton buttonName="Request Password Reset" onClick={() => {}} />
     </form>

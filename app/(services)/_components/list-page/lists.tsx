@@ -58,6 +58,7 @@ function Lists({
                     rating={item.reviews.length}
                     reviewNum={item.reviews.length}
                     title={item.property_title}
+                    wishlist={item.wishlists}
                   />
                 );
               })}

@@ -1,7 +1,12 @@
 import {Heart, MapPin} from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, {useState} from "react";
 import Link from "next/link";
+import {toast} from "sonner";
+
+import {useToggleWishlist} from "@/api/wishlist/toggle-wishlist";
+import {useUser} from "@/context/user";
+import {HeartSolid} from "@/components/Icons/icons";
 
 import RatingStars from "./rating-star";
 
@@ -16,6 +21,7 @@ function Card({
   path,
   id,
   postfix,
+  wishlist,
 }: {
   image: string;
   title: string;
@@ -27,7 +33,32 @@ function Card({
   path: string;
   id: string;
   postfix: string;
+  wishlist: {
+    _id: string;
+    user_id: string;
+    property_id: string;
+  }[];
 }) {
+  const {User} = useUser();
+  const {mutate, isPending} = useToggleWishlist();
+  const [isWishlisted, setIsWishlisted] = useState(
+    wishlist.some((item) => item.user_id === User?._id && item.property_id === id),
+  );
+
+  const toggleWishlist = () => {
+    if (!User) {
+      toast.error("Please sign in first");
+
+      return;
+    } else if (User.role === "business") {
+      toast.error("You don't have the permission");
+
+      return;
+    }
+    mutate(id);
+    setIsWishlisted((prevState) => !prevState);
+  };
+
   return (
     <div className="rounded-2xl bg-white p-5 shadow-[0px_3.23px_24.23px_rgba(0,0,0,0.08)] flex flex-col sm:flex-row items-stretch gap-5 overflow-hidden">
       <div className="h-[321px] aspect-[331/321] sm:h-[163px] sm:aspect-[168/163] shrink-0 relative rounded-lg overflow-hidden">
@@ -45,8 +76,15 @@ function Card({
           {/* <span className="sm:ml-auto block w-fit p-2 rounded-md text-xs font-medium bg-[#A0B3E5]">
             New Building
           </span> */}
-          <button className="bg-[#FBFBFB] h-8 w-8 rounded-full grid place-content-center group">
-            <Heart className="group-hover:scale-105 transition-all" color="#205BF3" size={18} />
+          <button
+            className="bg-[#FBFBFB] h-8 w-8 rounded-full grid place-content-center group"
+            onClick={toggleWishlist}
+          >
+            {isWishlisted ? (
+              <HeartSolid />
+            ) : (
+              <Heart className="group-hover:scale-105 transition-all" color="#205BF3" size={18} />
+            )}
           </button>
         </div>
         <p className="flex items-center pt-2 gap-2">
