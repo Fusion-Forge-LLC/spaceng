@@ -17,9 +17,17 @@ function useCheckout() {
   });
   const [guestsCount, setGuestsCount] = useState(guestCount ? parseInt(guestCount) : 1);
 
-  function updateDate(date: Date | undefined, key: "checkin" | "checkout") {
+  function updateDate(newDate: Date | undefined, key: "checkin" | "checkout") {
+    if (!newDate) return;
+
+    if (key === "checkin" && date.checkout! < newDate) {
+      setDate({checkin: newDate, checkout: newDate});
+
+      return;
+    }
+
     setDate((prevState) => {
-      return {...prevState, [key]: date};
+      return {...prevState, [key]: newDate};
     });
   }
 

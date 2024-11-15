@@ -1,8 +1,8 @@
 "use client";
 
-import {usePathname, useRouter} from "next/navigation";
-import React from "react";
-import {toast} from "sonner";
+import {usePathname} from "next/navigation";
+import React, {useMemo} from "react";
+import Link from "next/link";
 
 import {CaretDown} from "@/components/Icons/icons";
 import {PopoverElement} from "@/components/style-guide/style-guide";
@@ -10,22 +10,21 @@ import {Calendar} from "@/components/ui/calendar";
 import {useCheckout} from "@/hooks/use-checkout";
 
 function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"}) {
-  const router = useRouter();
   const pathName = usePathname();
   const {date, guestsCount, setGuestsCount, updateDate} = useCheckout();
 
-  const handleSubmit = () => {
-    const checkin = date.checkin?.getTime();
-    const checkout = date.checkout?.getTime();
+  const params = useMemo(() => {
+    const checkin = date.checkin?.getTime().toString();
+    const checkout = date.checkout?.getTime().toString();
 
-    if (!checkin || !checkout) return toast.error("Please select valid dates");
+    const params = new URLSearchParams();
 
-    if (checkin > checkout) return toast.error("Checkin date cannot exceed checkout date");
+    params.set("guest", guestsCount.toString());
+    params.set("checkin", checkin || "");
+    params.set("checkout", checkout || "");
 
-    router.push(
-      `${pathName}/checkout?guest=${guestsCount}&checkin=${checkin}&checkout=${checkout}`,
-    );
-  };
+    return params.toString();
+  }, [date, guestsCount]);
 
   return (
     <div className="space-y-4 py-6">
@@ -42,6 +41,7 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       >
         <Calendar
           className="rounded-md border"
+          disabled={(date) => date < new Date() || date < new Date("1900-01-01")}
           mode="single"
           selected={date.checkin}
           onSelect={(date) => updateDate(date, "checkin")}
@@ -60,6 +60,7 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       >
         <Calendar
           className="rounded-md border"
+          disabled={(current) => current < date?.checkin! || current < new Date("1900-01-01")}
           mode="single"
           selected={date.checkout}
           onSelect={(date) => updateDate(date, "checkout")}
@@ -114,9 +115,9 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       </PopoverElement>
 
       {showBtn && (
-        <button className="booking-btn w-full" onClick={handleSubmit}>
+        <Link className="booking-btn w-full" href={`${pathName}/checkout?${params}`}>
           Book
-        </button>
+        </Link>
       )}
     </div>
   );

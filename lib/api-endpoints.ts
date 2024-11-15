@@ -40,6 +40,7 @@ export const API_ENDPOINTS = {
 
   BOOKING: {
     initBooking: (transactionRef: string) => `/booking/confirm-payment/${transactionRef}`,
+    getBookings: (status: string) => `/booking/client/${status}`,
   },
 
   WISHLIST: {

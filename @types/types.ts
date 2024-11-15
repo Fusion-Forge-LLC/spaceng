@@ -68,3 +68,19 @@ export interface WishlistResponse {
   property_id: PropertyResponse;
   type: string;
 }
+
+export interface BookingType {
+  amount_paid: number;
+  checkin: string;
+  checkout: string;
+  client_id: string;
+  createdAt: string;
+  duration: number;
+  id: string;
+  payment_method: string;
+  property_id: PropertyResponse;
+  property_owner: string;
+  status: "pending" | "active" | "completed";
+  transaction_id: string;
+  updatedAt: string;
+}

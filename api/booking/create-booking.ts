@@ -28,7 +28,6 @@ export const useCreateBooking = (): UseMutationResult<
     mutationFn: createBooking,
     onSuccess: (data) => {
       showSuccess(data.message);
-      console.log(data);
       router.push("/account/bookings");
     },
     onError: (error) => {
