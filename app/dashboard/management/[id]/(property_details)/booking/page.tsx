@@ -1,12 +1,31 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, {useState} from "react";
+import {DayPicker} from "react-day-picker";
 
 import {DropdDown} from "@/components/style-guide/style-guide";
 
 function Page() {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [month, setMonth] = useState(new Date());
+  const [choosedMonth, setChoosedMonth] = useState<string>(new Date().getMonth().toString());
+  const [choosedYear, setChoosedYear] = useState<string>(new Date().getFullYear().toString());
+
+  React.useEffect(() => {
+    const month = parseInt(choosedMonth);
+    const year = parseInt(choosedYear);
+
+    const newDate = new Date(year, month);
+
+    setMonth(newDate);
+  }, [choosedMonth, choosedYear]);
+
+  // const
+
   return (
-    <div className="flex-1 overflow-y-scroll border border-emerald-500">
+    <div className="flex-1 overflow-y-scroll">
       <div className="sm:p-4 md:p-3 flex flex-col lg:flex-row gap-10 min-[1115px]:gap-40 text-grey-200 overflow-hidden">
         <section className="flex-1">
           <h3 className="text-grey text-xl font-semibold mb-2">Booking Calender</h3>
@@ -15,58 +34,60 @@ function Page() {
           <div className="pt-5 space-y-8">
             <div className="flex justify-between">
               <DropdDown
-                className="w-fit rounded-xl"
+                className="w-fit min-w-28 rounded-xl"
                 options={[
                   {
-                    value: "january",
+                    value: "0",
                     note: "January",
                   },
                   {
-                    value: "february",
+                    value: "1",
                     note: "February",
                   },
                   {
-                    value: "march",
+                    value: "2",
                     note: "March",
                   },
                   {
-                    value: "april",
+                    value: "3",
                     note: "April",
                   },
                   {
-                    value: "may",
+                    value: "4",
                     note: "May",
                   },
                   {
-                    value: "june",
+                    value: "5",
                     note: "June",
                   },
                   {
-                    value: "july",
+                    value: "6",
                     note: "July",
                   },
                   {
-                    value: "august",
+                    value: "7",
                     note: "August",
                   },
                   {
-                    value: "september",
+                    value: "8",
                     note: "September",
                   },
                   {
-                    value: "october",
+                    value: "9",
                     note: "October",
                   },
                   {
-                    value: "november",
+                    value: "10",
                     note: "November",
                   },
                   {
-                    value: "december",
+                    value: "11",
                     note: "December",
                   },
                 ]}
                 placeholder="Month"
+                value={choosedMonth}
+                onValueChange={setChoosedMonth}
               />
 
               <DropdDown
@@ -182,56 +203,32 @@ function Page() {
                   },
                 ]}
                 placeholder="Month"
+                value={choosedYear?.toString()}
+                onValueChange={setChoosedYear}
               />
             </div>
 
-            <div className="border border-grey-200 p-2 rounded-3xl max-lg:w-fit max-w-full max-lg:mx-auto">
-              <h4 className="bg-blue rounded px-5 py-2 text-white w-fit mx-auto">August</h4>
-              <div className="grid grid-cols-7 text-center">
-                <div className="calender-item">Mon</div>
-                <div className="calender-item">Tue</div>
-                <div className="calender-item">Wed</div>
-                <div className="calender-item">Thu</div>
-                <div className="calender-item">Fri</div>
-                <div className="calender-item">Sat</div>
-                <div className="calender-item">Sun</div>
-                <div className="calender-item opacity-45">28</div>
-                <div className="calender-item opacity-45">29</div>
-                <div className="calender-item opacity-45">30</div>
-                <div className="calender-item opacity-45">31</div>
-                <div className="calender-item">2</div>
-                <div className="calender-item">3</div>
-                <div className="calender-item">4</div>
-                <div className="calender-item">5</div>
-                <div className="calender-item">6</div>
-                <div className="calender-item">7</div>
-                <div className="calender-item">8</div>
-                <div className="calender-item">9</div>
-                <div className="calender-item">10</div>
-                <div className="calender-item">11</div>
-                <div className="calender-item">12</div>
-                <div className="calender-item">13</div>
-                <div className="calender-item">14</div>
-                <div className="calender-item">15</div>
-                <div className="calender-item">16</div>
-                <div className="calender-item">17</div>
-                <div className="calender-item">18</div>
-                <div className="calender-item">19</div>
-                <div className="calender-item">20</div>
-                <div className="calender-item">21</div>
-                <div className="calender-item">22</div>
-                <div className="calender-item">23</div>
-                <div className="calender-item">24</div>
-                <div className="calender-item">25</div>
-                <div className="calender-item">26</div>
-                <div className="calender-item">27</div>
-                <div className="calender-item">28</div>
-                <div className="calender-item">29</div>
-                <div className="calender-item bg-blue text-white">30</div>
-                <div className="calender-item">31</div>
-                <div className="calender-item opacity-45">1</div>
-              </div>
-            </div>
+            <DayPicker
+              showOutsideDays
+              captionLayout="dropdown"
+              classNames={{
+                table: "w-full border-collapse space-y-1",
+                nav_button: "hidden",
+                day_outside: "opacity-45",
+                day: "calender-item",
+                head_cell: "h-12 w-12",
+                caption:
+                  "flex justify-center pt-1 relative items-center bg-blue rounded px-5 py-2 text-white w-fit mx-auto",
+                month:
+                  "border border-grey-200 p-2 rounded-3xl max-lg:w-fit max-w-full max-lg:mx-auto",
+                day_selected: "bg-blue text-white",
+              }}
+              mode="single"
+              month={month}
+              selected={date}
+              onMonthChange={setMonth}
+              onSelect={setDate}
+            />
 
             <ul className="[&_li]:flex [&_li]:justify-between space-y-3 text-grey font-medium">
               <li>

@@ -37,10 +37,12 @@ function PropertyForm({
   mutate,
   isPending,
   defaultValues,
+  title,
 }: {
   mutate: any;
   isPending: boolean;
   defaultValues: PropertyResponse | null;
+  title: string;
 }) {
   const [currentTab, setCurrentTab] = useState("basic");
   const [images, setImages] = useState<string[]>(defaultValues ? defaultValues.gallery : []);
@@ -114,7 +116,7 @@ function PropertyForm({
   return (
     <div className="relative flex-1 overflow-y-scroll">
       <div className="py-3 px-5">
-        <h4 className="text-grey text-lg sm:text-2xl font-semibold">Add New Property</h4>
+        <h4 className="text-grey text-lg sm:text-2xl font-semibold">{title}</h4>
 
         <div className="shadow-md mt-3">
           <div className="flex gap-2 bg-grey-300/10 px-4">

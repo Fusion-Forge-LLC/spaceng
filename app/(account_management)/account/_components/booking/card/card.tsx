@@ -2,9 +2,10 @@ import Image from "next/image";
 import React from "react";
 
 import {Badge} from "@/components/ui/badge";
-import {Button} from "@/components/ui/button";
 import {TableCell, TableRow} from "@/components/ui/table";
 import {cn} from "@/lib/utils";
+
+import Review from "../review/review";
 
 interface Props {
   image: string;
@@ -18,19 +19,20 @@ interface Props {
   status: "pending" | "active" | "completed";
   location: string;
   total_paid: number;
+  property_id: string;
 }
 
 function Card({
   image,
   title,
   total_paid,
-  bedroom,
   checkin,
   checkout,
   duration,
   property_type,
   status,
   location,
+  property_id,
 }: Props) {
   return (
     <>
@@ -68,7 +70,7 @@ function Card({
         </TableCell>
         {status === "completed" && (
           <TableCell>
-            <Button>Review</Button>
+            <Review property_id={property_id} thumbnail={image} title={title} />
           </TableCell>
         )}
       </TableRow>

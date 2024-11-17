@@ -84,3 +84,13 @@ export interface BookingType {
   transaction_id: string;
   updatedAt: string;
 }
+
+export interface ReviewTypes {
+  _id: string;
+  name: string;
+  review_text: string;
+  rating: number;
+  property: string;
+  user: string;
+  __v: number;
+}

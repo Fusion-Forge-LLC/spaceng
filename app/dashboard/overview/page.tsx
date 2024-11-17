@@ -98,10 +98,10 @@ function Page() {
               return (
                 <Card
                   key={item._id}
-                  booking={0}
+                  booking={item.booking}
                   id={item._id}
                   image={item.gallery[0]}
-                  rating={item.reviews.length}
+                  rating={item.reviews}
                   title={item.property_title}
                   type={item.type}
                   views={item.views}

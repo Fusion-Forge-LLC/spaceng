@@ -47,4 +47,8 @@ export const API_ENDPOINTS = {
     toggleWishlist: (propertyId: string) => `/wishlist/toggle/${propertyId}`,
     userWishlists: (userId: string) => `/wishlist/lists/${userId}`,
   },
+
+  RATING: {
+    create: "/rating/create",
+  },
 };

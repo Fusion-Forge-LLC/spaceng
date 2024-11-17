@@ -9,20 +9,7 @@ import {useGetProperty} from "@/api/property/property";
 import Loader from "@/components/loader/loader";
 import NotFound from "@/components/not-found/not-found";
 
-import dummyMap from "../../../../public/dummymap.png";
-
-const amenities = [
-  "Wi-Fi",
-  "Air Conditioning",
-  "Private Pool",
-  "Fully Equipped Kitchen",
-  "24/7 Security",
-  "Parking",
-  "Cable TV",
-  "Washing Machine",
-  "Gym",
-  "Terrace with Outdoor Seating",
-];
+import dummyMap from "../../../../../public/dummymap.png";
 
 function Page({params}: {params: {id: string}}) {
   const {data, isPending} = useGetProperty(params.id);

@@ -3,6 +3,7 @@ import {useQuery} from "@tanstack/react-query";
 import api from "@/lib/http";
 import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {GenericResponse} from "@/lib/generic-types";
+import {ReviewTypes} from "@/@types/types";
 
 const getBusinessDashboard = async () => {
   const {data} = await api.get<GenericResponse<PropertyResponse[]>>(
@@ -24,6 +25,7 @@ export interface PropertyResponse {
   gallery: string[];
   property_title: string;
   _id: string;
-  reviews: any[];
+  reviews: ReviewTypes[];
   type: string;
+  booking: [];
 }

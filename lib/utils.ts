@@ -46,3 +46,20 @@ export const calculateDays = (
 
   return propertyType === "shortlet" ? (differenceInDays ?? 1) : differenceInDays + 1;
 };
+
+export const ratingText = (rating: number) => {
+  switch (rating) {
+    case 1:
+      return "I hate it!";
+    case 2:
+      return "I don't like it";
+    case 3:
+      return "I'm undecided";
+    case 4:
+      return "I like it";
+    case 5:
+      return "I love it!";
+    default:
+      return "";
+  }
+};
