@@ -7,6 +7,8 @@ import {toast} from "sonner";
 import {useToggleWishlist} from "@/api/wishlist/toggle-wishlist";
 import {useUser} from "@/context/user";
 import {HeartSolid} from "@/components/Icons/icons";
+import {getAverageRating} from "@/lib/utils";
+import {ReviewTypes} from "@/@types/types";
 
 import RatingStars from "./rating-star";
 
@@ -27,7 +29,7 @@ function Card({
   title: string;
   location: string;
   labels: string[];
-  rating: number;
+  rating: ReviewTypes[];
   reviewNum: number;
   price: number;
   path: string;
@@ -45,6 +47,7 @@ function Card({
     wishlist.some((item) => item.user_id === User?._id && item.property_id === id),
   );
 
+  const averageRating = getAverageRating(rating);
   const toggleWishlist = () => {
     if (!User) {
       toast.error("Please sign in first");
@@ -78,6 +81,7 @@ function Card({
           </span> */}
           <button
             className="bg-[#FBFBFB] h-8 w-8 rounded-full grid place-content-center group"
+            disabled={isPending}
             onClick={toggleWishlist}
           >
             {isWishlisted ? (
@@ -88,14 +92,14 @@ function Card({
           </button>
         </div>
         <p className="flex items-center pt-2 gap-2">
-          <MapPin />
-          <span>{location}</span>
+          <MapPin className="shrink-0" />
+          <span className="flex-1 whitespace-nowrap text-ellipsis overflow-hidden">{location}</span>
         </p>
 
-        <div className="text-grey-200 py-5 sm:py-3 leading-loose flex flex-wrap gap-x-1">
+        <div className="text-grey-200 py-5 sm:py-3 leading-relaxed flex flex-wrap gap-x-1">
           {labels?.map((item, index) => {
             return (
-              <span key={index} className="group text-base">
+              <span key={index} className="group text-babese">
                 <span className="group-first:hidden">• </span> {item}
               </span>
             );
@@ -103,14 +107,14 @@ function Card({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="font-semibold">{rating}</span>
+          <span className="font-semibold">{averageRating}</span>
 
-          <RatingStars rating={rating} />
+          <RatingStars rating={averageRating} />
 
-          <span className="text-grey-200 text-xs">({reviewNum} Reviews)</span>
+          <span className="text-grey-200 text-xs whitespace-nowrap">({reviewNum} Reviews)</span>
 
           <p className="ml-auto text-[#443344] font-semibold text-lg">₦{price.toLocaleString()}</p>
-          <span className="text-[#333333] text-xs">{postfix}</span>
+          <span className="text-[#333333] text-xs whitespace-normal">{postfix}</span>
         </div>
       </div>
     </div>

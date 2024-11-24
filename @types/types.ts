@@ -45,7 +45,7 @@ export interface PropertyResponse {
   };
   property_description: string;
   property_title: string;
-  reviews: string[];
+  reviews: ReviewTypes[];
   type: "shortlet" | "workspace";
   updatedAt: string;
   user: string;

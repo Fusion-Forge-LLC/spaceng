@@ -8,6 +8,7 @@ import {useGetBusinessProperties} from "@/api/property/user-properties";
 import Loader from "@/components/loader/loader";
 
 import Card from "./_component/property-card";
+import DisplayProperties from "./_component/display-cards/display-cards";
 
 function Page() {
   const {data, isLoading} = useGetBusinessProperties();
@@ -34,23 +35,25 @@ function Page() {
           <Loader />
         </div>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {data?.data.map((item) => {
-            return (
-              <Card
-                key={item._id}
-                id={item._id}
-                image={item.gallery[0]}
-                location={`${item.property_address.address}, ${item.property_address.neighborhood}, ${item.property_address.location}`}
-                post_fix={item.price_postfix}
-                price={item.price}
-                status={item.status}
-                title={item.property_title}
-                type={item.type}
-              />
-            );
-          })}
-        </ul>
+        <DisplayProperties data={data}>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {data?.data.map((item) => {
+              return (
+                <Card
+                  key={item._id}
+                  id={item._id}
+                  image={item.gallery[0]}
+                  location={`${item.property_address.address}, ${item.property_address.neighborhood}, ${item.property_address.location}`}
+                  post_fix={item.price_postfix}
+                  price={item.price}
+                  status={item.status}
+                  title={item.property_title}
+                  type={item.type}
+                />
+              );
+            })}
+          </ul>
+        </DisplayProperties>
       )}
     </div>
   );

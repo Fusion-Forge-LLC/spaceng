@@ -52,7 +52,7 @@ function Page({params}: {params: {id: string}}) {
         <div className="py-5">
           <h4 className="font-semibold text-grey text-lg sm:text-2xl">Amenities</h4>
           <ul className="text-grey-200 flex flex-col md:flex-row py-2 gap-x-5 gap-y-2 flex-wrap">
-            {features.map((item, index) => {
+            {features?.map((item, index) => {
               return (
                 <li key={index} className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full grid bg-grey-200" />
@@ -91,7 +91,7 @@ function Page({params}: {params: {id: string}}) {
       </article>
       <div className="lg:col-span-5 space-y-6 lg:space-y-4">
         <div className=" aspect-video relative overflow-hidden">
-          <Image fill alt="Property image" src={"/ikoyi.png"} />
+          <Image fill alt="Property image" src={gallery[0]} />
         </div>
         <h3 className="text-lg sm:text-xl font-semibold">Address: {property_address.address}</h3>
         <Image alt="Dummy Map Image" className="max-lg:w-full" src={dummyMap} />

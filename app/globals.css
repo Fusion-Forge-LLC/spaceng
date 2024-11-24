@@ -269,3 +269,11 @@ abbr:where([title]) {
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 }
+
+.tags-overflow {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

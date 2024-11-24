@@ -11,6 +11,7 @@ import Loader from "@/components/loader/loader";
 
 import Chart from "../_components/charts/charts";
 import Card from "../_components/property-cards/card";
+import DisplayProperties from "../management/_component/display-cards/display-cards";
 
 const payouts = [
   {
@@ -93,22 +94,24 @@ function Page() {
             <Loader />
           </div>
         ) : (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {data?.data.map((item) => {
-              return (
-                <Card
-                  key={item._id}
-                  booking={item.booking}
-                  id={item._id}
-                  image={item.gallery[0]}
-                  rating={item.reviews}
-                  title={item.property_title}
-                  type={item.type}
-                  views={item.views}
-                />
-              );
-            })}
-          </ul>
+          <DisplayProperties data={data}>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {data?.data.map((item) => {
+                return (
+                  <Card
+                    key={item._id}
+                    booking={item.booking}
+                    id={item._id}
+                    image={item.gallery[0]}
+                    rating={item.reviews}
+                    title={item.property_title}
+                    type={item.type}
+                    views={item.views}
+                  />
+                );
+              })}
+            </ul>
+          </DisplayProperties>
         )}
 
         <div className="grid grid-cols-12 gap-4 pt-10">

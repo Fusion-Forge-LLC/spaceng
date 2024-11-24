@@ -56,36 +56,36 @@ const sidebar = [
   {
     icon: "/account_management/personalcard.svg",
     title: "Personal info",
-    url: "/settings/personal-info",
+    url: "/account/settings/personal-info",
   },
   {
     icon: "/account_management/securitycard.svg",
     title: "Security",
-    url: "/settings/security",
+    url: "/account/settings/security",
   },
   {
     icon: "/account_management/paymentcard.svg",
     title: "Payment info",
-    url: "/settings/payment-info",
+    url: "/account/settings/payment-info",
   },
   {
     icon: "/account_management/notificationcard.svg",
     title: "Email Notification",
-    url: "/settings/notifications",
+    url: "/account/settings/notifications",
   },
   {
     icon: "/account_management/user-add.svg",
     title: "Other renters",
-    url: "/settings/renters",
+    url: "/account/settings/renters",
   },
   {
     icon: "/account_management/privacy.svg",
     title: "Privacy",
-    url: "/settings/privacy",
+    url: "/account/settings/privacy",
   },
   {
     icon: "/account_management/preference.svg",
     title: "Preferences",
-    url: "/settings/preference",
+    url: "/account/settings/preference",
   },
 ];

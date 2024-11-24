@@ -3,6 +3,8 @@ import {clsx, type ClassValue} from "clsx";
 import {toast} from "sonner";
 import {twMerge} from "tailwind-merge";
 
+import {ReviewTypes} from "@/@types/types";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -62,4 +64,10 @@ export const ratingText = (rating: number) => {
     default:
       return "";
   }
+};
+
+export const getAverageRating = (rating: ReviewTypes[]) => {
+  if (rating.length === 0) return 0;
+
+  return rating.reduce((accumulator, review) => accumulator + review.rating, 0) / rating.length;
 };

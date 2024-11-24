@@ -55,7 +55,7 @@ function Lists({
                     path={pathname}
                     postfix={item.price_postfix}
                     price={item.price}
-                    rating={item.reviews.length}
+                    rating={item.reviews}
                     reviewNum={item.reviews.length}
                     title={item.property_title}
                     wishlist={item.wishlists}

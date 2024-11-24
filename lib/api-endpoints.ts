@@ -41,6 +41,7 @@ export const API_ENDPOINTS = {
   BOOKING: {
     initBooking: (transactionRef: string) => `/booking/confirm-payment/${transactionRef}`,
     getBookings: (status: string) => `/booking/client/${status}`,
+    details: (propertyId: string, date: number) => `/booking/${propertyId}/${date}`,
   },
 
   WISHLIST: {
@@ -50,5 +51,6 @@ export const API_ENDPOINTS = {
 
   RATING: {
     create: "/rating/create",
+    lists: (id: string) => `/rating/${id}`,
   },
 };

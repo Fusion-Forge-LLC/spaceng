@@ -17,7 +17,7 @@ function ReviewCard({
   return (
     <li className="p-3 rounded-lg">
       <div className="flex items-center mb-4 gap-5">
-        <div className="h-10 md:h-16 w-10 md:w-16 rounded-full relative overflow-hidden">
+        <div className="h-10 md:h-16 w-10 md:w-16 shrink-0 rounded-full relative overflow-hidden">
           <Image fill alt="Reviewer image" className="object-cover object-center" src={image} />
         </div>
         <h4 className="text-grey font-medium mr-auto">{name}</h4>

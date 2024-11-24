@@ -4,6 +4,7 @@ import React from "react";
 
 import {Rating} from "@/components/Icons/icons";
 import {ReviewTypes} from "@/@types/types";
+import {getAverageRating} from "@/lib/utils";
 
 import UpdateBtn from "../property_update/update-btn";
 
@@ -18,8 +19,7 @@ interface Props {
 }
 
 function Card({image, title, booking, views, rating, type, id}: Props) {
-  const averageRating =
-    rating.reduce((accumulator, review) => accumulator + review.rating, 0) / rating.length;
+  const averageRating = getAverageRating(rating);
 
   return (
     <li>
