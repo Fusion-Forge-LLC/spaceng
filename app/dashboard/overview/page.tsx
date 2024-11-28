@@ -8,6 +8,7 @@ import Link from "next/link";
 import {useUser} from "@/context/user";
 import {useGetBusinessDashboard} from "@/api/property/property-overview";
 import Loader from "@/components/loader/loader";
+import {getAmountString} from "@/lib/utils";
 
 import Chart from "../_components/charts/charts";
 import Card from "../_components/property-cards/card";
@@ -59,6 +60,7 @@ const payouts = [
 function Page() {
   const {User} = useUser();
 
+  console.log(User);
   const {data, isLoading} = useGetBusinessDashboard();
 
   return (
@@ -121,11 +123,11 @@ function Page() {
             <div className="text-center flex gap-5 mb-4">
               <div className="text-[#333] space-y-2 py-2 px-8 rounded-lg bg-[#D3D3D3]">
                 <h5 className="text-xs ">Total Earning</h5>
-                <p className="text-xl font-bold">532,750</p>
+                <p className="text-xl font-bold">{getAmountString(User?.total_earnings)}</p>
               </div>
               <div className="text-white space-y-2 py-2 px-8 rounded-lg bg-blue">
                 <h5 className="text-xs ">Pending Payout</h5>
-                <p className="text-xl font-bold">232,420</p>
+                <p className="text-xl font-bold">{getAmountString(User?.pending_payout)}</p>
               </div>
             </div>
 
@@ -142,7 +144,7 @@ function Page() {
                 </tr>
               </thead>
               <tbody>
-                {payouts.map((item, index) => {
+                {User?.payouts.map((item, index) => {
                   return (
                     <tr key={index}>
                       <td>{item.amount}</td>

@@ -2,10 +2,10 @@
 
 import React, {createContext, useContext, useState, Dispatch, SetStateAction} from "react";
 
-import {useWhoAmI, User} from "@/api/auth/whoami";
+import {useWhoAmI, User, whoAmIResponse} from "@/api/auth/whoami";
 
 interface UserContextTypes {
-  User: User | null;
+  User: whoAmIResponse | null;
   setUser: Dispatch<SetStateAction<User | null>>;
 }
 
@@ -26,7 +26,7 @@ const UserProvider = ({children}: {children: React.ReactNode}) => {
     }
   }, [data]);
 
-  return <UserContext.Provider value={{User, setUser}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{User: data, setUser}}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => useContext(UserContext);

@@ -94,3 +94,10 @@ export interface ReviewTypes {
   user: string;
   __v: number;
 }
+
+export interface PayoutTypes {
+  id: string;
+  amount: number;
+  date: string;
+  status: "pending" | "completed" | "failed";
+}

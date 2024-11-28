@@ -71,3 +71,10 @@ export const getAverageRating = (rating: ReviewTypes[]) => {
 
   return rating.reduce((accumulator, review) => accumulator + review.rating, 0) / rating.length;
 };
+
+export const getAmountString = (amount: number | undefined) => {
+  if (!amount) return "₦0";
+  const amountString = amount.toLocaleString();
+
+  return `₦${amountString}`;
+};

@@ -1,10 +1,14 @@
+"use client";
+
 import React, {ReactNode} from "react";
 import {Bell, Gem, Search} from "lucide-react";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 
 import {Input} from "@/components/ui/input";
 import {EmailIcon} from "@/components/Icons/icons";
 import Footer from "@/components/footer/footer";
+import {useUser} from "@/context/user";
 
 import NavItems from "./_components/nav-items/nav-items";
 import {
@@ -20,6 +24,15 @@ import MobileNav from "./_components/dashboard/mobile-nav";
 import Logout from "./_components/logout/logout";
 
 function DashboardLyout({children}: {children: ReactNode}) {
+  const {User} = useUser();
+  const router = useRouter();
+
+  if (User?.role !== "business") {
+    router.push("/");
+
+    return;
+  }
+
   return (
     <div className="md:h-screen flex flex-col">
       <header className="flex justify-between items-center py-5 md:py-3 gap-5 px-4 max-md:flex-wrap">
@@ -42,7 +55,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
             <Bell />
           </button>
           <button className="dashboard-header-btn">
-            <Image alt="Profile image" height={40} src={"/user.png"} width={40} />
+            <Image alt="Profile image" height={40} src={User?.profile_image!} width={40} />
           </button>
         </div>
       </header>
