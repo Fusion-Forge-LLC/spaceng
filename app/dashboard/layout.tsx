@@ -3,7 +3,6 @@
 import React, {ReactNode} from "react";
 import {Bell, Gem, Search} from "lucide-react";
 import Image from "next/image";
-import {useRouter} from "next/navigation";
 
 import {Input} from "@/components/ui/input";
 import {EmailIcon} from "@/components/Icons/icons";
@@ -25,13 +24,6 @@ import Logout from "./_components/logout/logout";
 
 function DashboardLyout({children}: {children: ReactNode}) {
   const {User} = useUser();
-  const router = useRouter();
-
-  if (User?.role !== "business") {
-    router.push("/");
-
-    return;
-  }
 
   return (
     <div className="md:h-screen flex flex-col">

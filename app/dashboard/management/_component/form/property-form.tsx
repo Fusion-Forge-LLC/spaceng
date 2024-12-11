@@ -25,7 +25,7 @@ const propertySchema = yup.object({
   old_price: yup.number(),
   price_prefix: yup.string(),
   price_postfix: yup.string(),
-  type: yup.string().oneOf(["workspace", "shortlet"], "Invalid type").required("Type if required"),
+  type: yup.string().oneOf(["workspace", "shortlet"], "Invalid type").required("Type is required"),
   location: yup.string(),
   neighborhood: yup.string(),
   bedroom: yup.number(),

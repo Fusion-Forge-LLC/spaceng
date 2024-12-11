@@ -8,8 +8,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
-export const description = "A bar chart with a label";
+import Loader from "@/components/loader/loader";
+import {useGetBookingPerWeek} from "@/api/booking/get-booking-per-week";
 
 const chartData = [
   {month: "January", earning: 1200000},
@@ -26,12 +26,30 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function BarCharts() {
+  const {data: chartData, isPending} = useGetBookingPerWeek();
+
+  if (isPending) {
+    return (
+      <div className="h-[300px] overflow-hidden grid place-content-center">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!chartData || chartData.data.length === 0) {
+    return (
+      <div className="h-[300px] overflow-hidden grid place-content-center">
+        <p className="text-center italic">No data found</p>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-10">
       <ChartContainer config={chartConfig}>
         <BarChart
           accessibilityLayer
-          data={chartData}
+          data={chartData.data}
           margin={{
             top: 20,
           }}
@@ -39,13 +57,13 @@ export function BarCharts() {
           <CartesianGrid vertical={false} />
           <XAxis
             axisLine={false}
-            dataKey="month"
-            tickFormatter={(value) => value.slice(0, 3)}
+            dataKey="week"
+            tickFormatter={(value) => value}
             tickLine={false}
             tickMargin={10}
           />
           <ChartTooltip content={<ChartTooltipContent hideLabel />} cursor={false} />
-          <Bar dataKey="earning" fill="var(--color-earning)" radius={8}>
+          <Bar dataKey="totalAmount" fill="var(--color-earning)" radius={8}>
             <LabelList className="fill-foreground" fontSize={12} offset={12} position="top" />
           </Bar>
         </BarChart>

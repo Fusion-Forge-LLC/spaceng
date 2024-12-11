@@ -13,6 +13,7 @@ import {getAmountString} from "@/lib/utils";
 import Chart from "../_components/charts/charts";
 import Card from "../_components/property-cards/card";
 import DisplayProperties from "../management/_component/display-cards/display-cards";
+import PayoutHistoryShort from "../_components/payout-history/payout-history-short";
 
 const payouts = [
   {
@@ -60,7 +61,6 @@ const payouts = [
 function Page() {
   const {User} = useUser();
 
-  console.log(User);
   const {data, isLoading} = useGetBusinessDashboard();
 
   return (
@@ -134,30 +134,12 @@ function Page() {
             <Chart />
           </div>
           <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-3">
-            <h4 className="text-black font-medium mb-5">Payouts</h4>
-
-            <table className="w-full text-sm">
-              <thead>
-                <tr>
-                  <th className="text-left">Amount (N)</th>
-                  <th className="text-right pb-3">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {User?.payouts.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{item.amount}</td>
-                      <td className="text-right py-1.5">{item.date}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <PayoutHistoryShort />
           </div>
           <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-2">
             <h4 className="text-black font-medium mb-2">Notifications</h4>
-            <ul className="space-y-2">
+            <p className="py-10 text-center italic">Notification is Empty</p>
+            <ul className="space-y-2 hidden">
               <li className="flex items-center gap-2 rounded-lg border border-grey-100 p-1.5">
                 <Mail color="#205BF3" size={16} />
                 <div className="flex-1">

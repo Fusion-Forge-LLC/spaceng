@@ -38,7 +38,7 @@ function BankAccount({
   className: string;
   price: string;
 }) {
-  const {data} = useGetBanks();
+  const {data} = useGetBanks("pay_with_bank=true");
   const params = useParams();
   const {User} = useUser();
   const searchParams = useSearchParams();

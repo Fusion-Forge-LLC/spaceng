@@ -34,6 +34,8 @@ export const API_ENDPOINTS = {
   TRANSACTION: {
     acceptpayment: (params: string) => `/transaction/acceptpayment?${params}`,
     bankpayment: "/transaction/paywithbank",
+    getBanks: (query: string) => `/transaction/banks?${query}`,
+    verifyBankAccount: (query: string) => `/transaction/verify-account?${query}`,
   },
 
   PRE_BOOKING: `/booking/pre-booking`,
@@ -42,6 +44,8 @@ export const API_ENDPOINTS = {
     initBooking: (transactionRef: string) => `/booking/confirm-payment/${transactionRef}`,
     getBookings: (status: string) => `/booking/client/${status}`,
     details: (propertyId: string, date: number) => `/booking/${propertyId}/${date}`,
+    bookingPerMonth: "/booking/booking-per-month",
+    bookingPerWeek: "/booking/booking-per-week",
   },
 
   WISHLIST: {
@@ -52,5 +56,11 @@ export const API_ENDPOINTS = {
   RATING: {
     create: "/rating/create",
     lists: (id: string) => `/rating/${id}`,
+  },
+
+  PAYOUT: {
+    payoutMethod: `/payout/payout-method`,
+    payouts: `/payout`,
+    request: `/payout/request`,
   },
 };

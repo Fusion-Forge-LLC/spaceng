@@ -2,23 +2,24 @@ import {useQuery} from "@tanstack/react-query";
 
 import api from "@/lib/http";
 import {GenericResponse} from "@/lib/generic-types";
+import {API_ENDPOINTS} from "@/lib/api-endpoints";
 
-const getBanks = async () => {
+const getBanks = async (query: string) => {
   const {data} = await api.get<GenericResponse<BankResponse[]>>(
-    "https://api.paystack.co/bank?pay_with_bank=true",
+    API_ENDPOINTS.TRANSACTION.getBanks(query),
   );
 
   return data;
 };
 
-export function useGetBanks() {
+export function useGetBanks(query: string) {
   return useQuery({
-    queryKey: ["get-banks"],
-    queryFn: getBanks,
+    queryKey: ["get-banks", query],
+    queryFn: () => getBanks(query),
   });
 }
 
-interface BankResponse {
+export interface BankResponse {
   id: number;
   name: string;
   slug: string;

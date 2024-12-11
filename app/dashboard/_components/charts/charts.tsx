@@ -1,77 +1,53 @@
 "use client";
 
-import React, {PureComponent} from "react";
+import React, {FC} from "react";
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from "recharts";
 
-const data = [
-  {
-    name: "jan",
-    uv: 3000,
-    pv: 30000,
-    amt: 1400,
-  },
-  {
-    name: "feb",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "mar",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "apr",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "may",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "jun",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "aug",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import {useGetBookingPerMonth} from "@/api/booking/get-booking-per-month";
+import Loader from "@/components/loader/loader";
 
-export default class Chart extends PureComponent {
-  render() {
+const Chart: FC = () => {
+  const {data: chartData, isPending} = useGetBookingPerMonth();
+
+  if (isPending) {
     return (
-      <div className="h-[300px] overflow-hidden">
-        <ResponsiveContainer height="100%" width="100%">
-          <AreaChart
-            data={data}
-            height={400}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
-            width={500}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Area dataKey="uv" fill="#205BF3" stroke="#205BF3" type="monotone" />
-          </AreaChart>
-        </ResponsiveContainer>
+      <div className="h-[300px] overflow-hidden grid place-content-center">
+        <Loader />
       </div>
     );
   }
-}
+
+  if (!chartData || chartData.data.length === 0) {
+    return (
+      <div className="h-[300px] overflow-hidden grid place-content-center">
+        <p className="text-center italic">No data found</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-[300px] overflow-hidden">
+      <ResponsiveContainer height="100%" width="100%">
+        <AreaChart
+          data={chartData.data}
+          height={400}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 0,
+            bottom: 0,
+          }}
+          width={500}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Area dataKey="totalAmount" fill="#205BF3" stroke="#205BF3" type="monotone" />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+export default Chart;

@@ -76,7 +76,10 @@ function Header() {
               </Link>
             </div>
           ) : (
-            <Link href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}>
+            <Link
+              className="hidden lg:flex gap-4"
+              href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}
+            >
               <Button className="bg-blue text-white min-w-32">
                 {User.role === "business" ? "Dashboard" : "Account"}
               </Button>

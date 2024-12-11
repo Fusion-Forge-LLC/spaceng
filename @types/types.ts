@@ -101,3 +101,13 @@ export interface PayoutTypes {
   date: string;
   status: "pending" | "completed" | "failed";
 }
+
+export type PayoutResponse = {
+  amount: number;
+  profile: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: 0;
+};
