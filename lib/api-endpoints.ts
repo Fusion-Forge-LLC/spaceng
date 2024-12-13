@@ -46,6 +46,9 @@ export const API_ENDPOINTS = {
     details: (propertyId: string, date: number) => `/booking/${propertyId}/${date}`,
     bookingPerMonth: "/booking/booking-per-month",
     bookingPerWeek: "/booking/booking-per-week",
+    overview: "/booking/overview",
+    habit: "/booking/habit",
+    locations: "/booking/locations",
   },
 
   WISHLIST: {
@@ -62,5 +65,9 @@ export const API_ENDPOINTS = {
     payoutMethod: `/payout/payout-method`,
     payouts: `/payout`,
     request: `/payout/request`,
+  },
+
+  VIEWS: {
+    views: `/views`,
   },
 };

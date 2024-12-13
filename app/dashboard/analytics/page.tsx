@@ -1,7 +1,10 @@
 import React from "react";
 import {TrendingUp} from "lucide-react";
 
-import {PieChartComponent} from "../_components/charts/pie-charts";
+import {ClientsLocation} from "../_components/charts/pie-charts";
+import Views from "../_components/analytics/views";
+import Booking from "../_components/analytics/booking";
+import BookingHabit from "../_components/analytics/booking-habit";
 
 const chartData = [
   {location: "Lagos", percentage: 60, fill: "#205BF3"},
@@ -18,37 +21,11 @@ function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-[1200px]:gap-20">
           <div className="space-y-3">
             <h3 className="font-medium text-lg">Property Views</h3>
-            <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
-              <li className="flex justify-between">
-                <span>Total Views</span>
-                <span>1,200</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Monthly Change</span>
-                <span>+15%</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Top-Performing period</span>
-                <span>August 1-7, 2024 (450 views)</span>
-              </li>
-            </ul>
+            <Views />
           </div>
           <div className="space-y-4">
             <h3 className="font-medium text-lg">Bookings</h3>
-            <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
-              <li className="flex justify-between">
-                <span>Total Bookings</span>
-                <span>35</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Conversion rate</span>
-                <span>2.9%</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Booking Peak</span>
-                <span>August 2024 (12 Bookings)</span>
-              </li>
-            </ul>
+            <Booking />
           </div>
         </div>
       </section>
@@ -79,46 +56,11 @@ function Page() {
           </div>
           <div className="space-y-5 sm:col-span-6 min-[879px]:col-span-4 pt-3">
             <h3 className="font-medium text-lg">Booking Habits</h3>
-            <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
-              <li className="flex justify-between">
-                <span>Average Stay Duration</span>
-                <span>3 Nights</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Booking Lead Time</span>
-                <span>10 Days</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Repeat Guests</span>
-                <span>20</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Locations</span>
-                <span>5</span>
-              </li>
-            </ul>
+            <BookingHabit />
           </div>
           <div className="p-3 rounded-xl border pb-0 border-blue sm:col-span-12 min-[879px]:col-span-5">
             <h3 className="font-medium text-lg">Locations</h3>
-            <div className="flex items-center">
-              <div className="flex-1 max-w-[180px]">
-                <PieChartComponent chartData={chartData} />
-              </div>
-              <ul className="text-sm">
-                {chartData.map((item, index) => {
-                  return (
-                    <li key={index} className="flex gap-4 items-center py-1">
-                      <span
-                        className="block h-2 sm:h-3 w-6 sm:w-12 rounded-full"
-                        style={{backgroundColor: item.fill}}
-                      />
-                      <span>{item.location}</span>
-                      <span className="ml-auto max-xl:text-xs">{item.percentage}%</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            <ClientsLocation chartData={chartData} />
           </div>
         </div>
       </section>
