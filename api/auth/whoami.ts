@@ -31,6 +31,7 @@ export type BusinessProfile = {
   payouts: PayoutTypes[];
   pending_payout: number;
   profile_image: string;
+  address: string;
   sms_notifications: {
     booking: boolean;
     promotion: boolean;
@@ -78,12 +79,27 @@ export type whoAmIResponse = User & {
     _id: string;
   };
   bookings: [];
-  login_history: [];
+  login_history: {
+    device: string;
+    location: string;
+    timestamp: string;
+  }[];
   notifications: [];
   payout_methods: [];
   payouts: PayoutTypes[];
   pending_payout: number;
   profile_image: string;
+  address: string;
+  email_notifications: {
+    booking: boolean;
+    promotion: boolean;
+    Offers: boolean;
+    _id: string;
+  };
+  two_factor_auth: {
+    current_status: boolean;
+    manage: boolean;
+  };
   sms_notifications: {
     booking: boolean;
     promotion: boolean;

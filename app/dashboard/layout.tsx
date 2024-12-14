@@ -46,8 +46,14 @@ function DashboardLyout({children}: {children: ReactNode}) {
           <button className="dashboard-header-btn">
             <Bell />
           </button>
-          <button className="dashboard-header-btn">
-            <Image alt="Profile image" height={40} src={User?.profile_image!} width={40} />
+          <button className="dashboard-header-btn h-10 w-10 overflow-hidden">
+            <Image
+              alt="Profile image"
+              className="object-cover object-top"
+              height={40}
+              src={User?.profile_image!}
+              width={40}
+            />
           </button>
         </div>
       </header>

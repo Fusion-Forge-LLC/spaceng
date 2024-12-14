@@ -44,6 +44,9 @@
   .password-confirmation-true {
     @apply bg-[#707070] text-white;
   }
+  .password-input {
+    @apply h-11 rounded-lg border border-grey-200 focus-visible:ring-blue;
+  }
 }
 
 @layer components {

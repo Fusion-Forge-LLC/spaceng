@@ -7,26 +7,29 @@ import {useWhoAmI, User, whoAmIResponse} from "@/api/auth/whoami";
 interface UserContextTypes {
   User: whoAmIResponse | null;
   setUser: Dispatch<SetStateAction<User | null>>;
+  isLoading: boolean;
 }
 
 const UserContext = createContext<UserContextTypes>({
   User: null,
   setUser: () => null,
+  isLoading: true,
 });
 
 const UserProvider = ({children}: {children: React.ReactNode}) => {
   const [User, setUser] = useState<User | null>(null);
 
-  const {data} = useWhoAmI();
+  const {data, isLoading} = useWhoAmI();
 
   React.useLayoutEffect(() => {
     if (data && data.fullname !== User?.fullname) {
-      console.log("data has beens set");
       setUser(data);
     }
   }, [data]);
 
-  return <UserContext.Provider value={{User: data, setUser}}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{User: data, setUser, isLoading}}>{children}</UserContext.Provider>
+  );
 };
 
 export const useUser = () => useContext(UserContext);

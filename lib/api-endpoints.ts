@@ -70,4 +70,9 @@ export const API_ENDPOINTS = {
   VIEWS: {
     views: `/views`,
   },
+
+  PROFILE: {
+    update: `/user/profile`,
+    changePassword: `/user/change-password`,
+  },
 };
