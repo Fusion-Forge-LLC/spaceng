@@ -10,7 +10,7 @@ import {DashboardIconsProps} from "@/@types/types";
 function NavItems({name, path, Icon}: {name: string; path: string; Icon: FC<DashboardIconsProps>}) {
   const pathName = usePathname();
 
-  const isActive = pathName === path;
+  const isActive = pathName.includes(path);
 
   return (
     <li className="">

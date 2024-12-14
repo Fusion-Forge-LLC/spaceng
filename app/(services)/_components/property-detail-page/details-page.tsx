@@ -9,49 +9,11 @@ import {usePathname} from "next/navigation";
 import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
 import {useUpdateViews} from "@/api/property/update-view";
+import {ReviewTypes} from "@/@types/types";
 
 import ReviewCard from "../../_components/review-card/review-card";
 import SearchProperties from "../../_components/search/search";
 import BookShortlet from "../booking-page/booking";
-
-const reviews = [
-  {
-    image: "/reviews/image1.jpg",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image2.png",
-    name: "Sarah Thomas",
-    rating: 5,
-    text: "Beautiful home and excellent location. We enjoyed our stay, but we did encounter some issues with the Wi-Fi connection.",
-  },
-  {
-    image: "/reviews/image3.jpg",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image4.jpg",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image5.png",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image6.png",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-];
 
 function DetailsPage({
   images,
@@ -72,7 +34,7 @@ function DetailsPage({
   cost: number;
   label: "Guest" | "Team";
   amenities: string[];
-  reviews: any[];
+  reviews: ReviewTypes[];
 }) {
   useUpdateViews();
 
@@ -161,10 +123,10 @@ function DetailsPage({
                     return (
                       <ReviewCard
                         key={index}
-                        image={item.image}
+                        image={"/reviews/image1.jpg"}
                         name={item.name}
                         rating={item.rating}
-                        text={item.text}
+                        text={item.review_text}
                       />
                     );
                   })}

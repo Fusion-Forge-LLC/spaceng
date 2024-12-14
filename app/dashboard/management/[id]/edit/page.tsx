@@ -25,7 +25,14 @@ function Page({params}: {params: {id: string}}) {
     return <NotFound />;
   }
 
-  return <PropertyForm defaultValues={data.data} isPending={updating} mutate={mutate} />;
+  return (
+    <PropertyForm
+      defaultValues={data.data}
+      isPending={updating}
+      mutate={mutate}
+      title="Edit Property"
+    />
+  );
 }
 
 export default Page;

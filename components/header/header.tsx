@@ -7,6 +7,7 @@ import {usePathname} from "next/navigation";
 import {Menu, X} from "lucide-react";
 
 import {cn} from "@/lib/utils";
+import {useUser} from "@/context/user";
 
 import {Button} from "../ui/button";
 import Wrapper from "../wrapper/wrapper";
@@ -18,6 +19,7 @@ const playfair = Playfair_Display_SC({
 });
 
 function Header() {
+  const {User} = useUser();
   const [showMobileNav, setShowMobileNav] = useState(false);
   const pathName = usePathname();
 
@@ -62,16 +64,27 @@ function Header() {
             </ul>
           </nav>
 
-          <div className="hidden lg:flex gap-4">
-            <Link href={"/auth/client/signin"}>
-              <Button className="bg-blue text-white min-w-32">Client</Button>
-            </Link>
-            <Link href={"/auth/business"}>
-              <Button className="border-grey-100 py-2 font-medium min-w-32" variant={"outline"}>
-                Business
+          {!User ? (
+            <div className="hidden lg:flex gap-4">
+              <Link href={"/auth/client/signin"}>
+                <Button className="bg-blue text-white min-w-32">Client</Button>
+              </Link>
+              <Link href={"/auth/business"}>
+                <Button className="border-grey-100 py-2 font-medium min-w-32" variant={"outline"}>
+                  Business
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <Link
+              className="hidden lg:flex gap-4"
+              href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}
+            >
+              <Button className="bg-blue text-white min-w-32">
+                {User.role === "business" ? "Dashboard" : "Account"}
               </Button>
             </Link>
-          </div>
+          )}
 
           <button className="lg:hidden" onClick={toggleMobileMenu}>
             <Menu />

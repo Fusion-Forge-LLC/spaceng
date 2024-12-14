@@ -45,7 +45,7 @@ export interface PropertyResponse {
   };
   property_description: string;
   property_title: string;
-  reviews: string[];
+  reviews: ReviewTypes[];
   type: "shortlet" | "workspace";
   updatedAt: string;
   user: string;
@@ -84,3 +84,30 @@ export interface BookingType {
   transaction_id: string;
   updatedAt: string;
 }
+
+export interface ReviewTypes {
+  _id: string;
+  name: string;
+  review_text: string;
+  rating: number;
+  property: string;
+  user: string;
+  __v: number;
+}
+
+export interface PayoutTypes {
+  id: string;
+  amount: number;
+  date: string;
+  status: "pending" | "completed" | "failed";
+}
+
+export type PayoutResponse = {
+  amount: number;
+  profile: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: 0;
+};

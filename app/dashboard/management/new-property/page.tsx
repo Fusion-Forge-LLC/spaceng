@@ -9,7 +9,14 @@ const PropertyForm = dynamic(() => import("../_component/form/property-form"), {
 function Page() {
   const {mutate: uploadProperty, isPending} = useCreateProperty();
 
-  return <PropertyForm defaultValues={null} isPending={isPending} mutate={uploadProperty} />;
+  return (
+    <PropertyForm
+      defaultValues={null}
+      isPending={isPending}
+      mutate={uploadProperty}
+      title="Add New Property"
+    />
+  );
 }
 
 export default Page;

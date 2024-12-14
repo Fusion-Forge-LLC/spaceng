@@ -59,6 +59,7 @@ export const useLogIn = (
 type LogInPayload = {
   email: string;
   password: string;
+  source: "business" | "client";
 };
 
 export interface LoginResponse {

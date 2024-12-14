@@ -3,20 +3,24 @@ import Image from "next/image";
 import React from "react";
 
 import {Rating} from "@/components/Icons/icons";
+import {ReviewTypes} from "@/@types/types";
+import {getAverageRating} from "@/lib/utils";
 
 import UpdateBtn from "../property_update/update-btn";
 
 interface Props {
   image: string;
   title: string;
-  booking: number;
+  booking: any[];
   views: number;
-  rating: number;
+  rating: ReviewTypes[];
   type: string;
   id: string;
 }
 
 function Card({image, title, booking, views, rating, type, id}: Props) {
+  const averageRating = getAverageRating(rating);
+
   return (
     <li>
       <div className="w-full aspect-[334/342] relative">
@@ -32,20 +36,20 @@ function Card({image, title, booking, views, rating, type, id}: Props) {
       </div>
 
       <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">
-        <li>Bookings: {booking} upcoming</li>
+        <li>Bookings: {booking.length} upcoming</li>
         <li>Views: {views} in the last 30 days</li>
         <li className="flex items-center gap-1">
           Ratings:
           <span className="flex gap-px">
             {Array.from({length: 5}).map((_, index) => {
-              if (index + 1 < rating) {
+              if (index + 1 <= averageRating) {
                 return <Rating key={index} fill={"#6D6E78"} />;
               } else {
                 return <Star key={index} color="#6D6E78" size={13} />;
               }
             })}
           </span>
-          {rating}/5.0
+          {averageRating || 0}/5.0
         </li>
       </ul>
     </li>

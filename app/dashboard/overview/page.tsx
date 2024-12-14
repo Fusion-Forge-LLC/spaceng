@@ -8,9 +8,12 @@ import Link from "next/link";
 import {useUser} from "@/context/user";
 import {useGetBusinessDashboard} from "@/api/property/property-overview";
 import Loader from "@/components/loader/loader";
+import {getAmountString} from "@/lib/utils";
 
 import Chart from "../_components/charts/charts";
 import Card from "../_components/property-cards/card";
+import DisplayProperties from "../management/_component/display-cards/display-cards";
+import PayoutHistoryShort from "../_components/payout-history/payout-history-short";
 
 const payouts = [
   {
@@ -93,22 +96,24 @@ function Page() {
             <Loader />
           </div>
         ) : (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {data?.data.map((item) => {
-              return (
-                <Card
-                  key={item._id}
-                  booking={0}
-                  id={item._id}
-                  image={item.gallery[0]}
-                  rating={item.reviews.length}
-                  title={item.property_title}
-                  type={item.type}
-                  views={item.views}
-                />
-              );
-            })}
-          </ul>
+          <DisplayProperties data={data}>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {data?.data.map((item) => {
+                return (
+                  <Card
+                    key={item._id}
+                    booking={item.booking}
+                    id={item._id}
+                    image={item.gallery[0]}
+                    rating={item.reviews}
+                    title={item.property_title}
+                    type={item.type}
+                    views={item.views}
+                  />
+                );
+              })}
+            </ul>
+          </DisplayProperties>
         )}
 
         <div className="grid grid-cols-12 gap-4 pt-10">
@@ -118,41 +123,23 @@ function Page() {
             <div className="text-center flex gap-5 mb-4">
               <div className="text-[#333] space-y-2 py-2 px-8 rounded-lg bg-[#D3D3D3]">
                 <h5 className="text-xs ">Total Earning</h5>
-                <p className="text-xl font-bold">532,750</p>
+                <p className="text-xl font-bold">{getAmountString(User?.total_earnings)}</p>
               </div>
               <div className="text-white space-y-2 py-2 px-8 rounded-lg bg-blue">
                 <h5 className="text-xs ">Pending Payout</h5>
-                <p className="text-xl font-bold">232,420</p>
+                <p className="text-xl font-bold">{getAmountString(User?.pending_payout)}</p>
               </div>
             </div>
 
             <Chart />
           </div>
           <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-3">
-            <h4 className="text-black font-medium mb-5">Payouts</h4>
-
-            <table className="w-full text-sm">
-              <thead>
-                <tr>
-                  <th className="text-left">Amount (N)</th>
-                  <th className="text-right pb-3">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {payouts.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{item.amount}</td>
-                      <td className="text-right py-1.5">{item.date}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <PayoutHistoryShort />
           </div>
           <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-2">
             <h4 className="text-black font-medium mb-2">Notifications</h4>
-            <ul className="space-y-2">
+            <p className="py-10 text-center italic">Notification is Empty</p>
+            <ul className="space-y-2 hidden">
               <li className="flex items-center gap-2 rounded-lg border border-grey-100 p-1.5">
                 <Mail color="#205BF3" size={16} />
                 <div className="flex-1">

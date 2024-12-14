@@ -4,7 +4,6 @@ import Image from "next/image";
 import {useState} from "react";
 import {ChevronDown} from "lucide-react";
 
-import {PropertyType} from "@/@types/types";
 import Card from "@/app/(services)/_components/property/card";
 import {useGetUserWishlists} from "@/api/wishlist/get-wishlists";
 import {useUser} from "@/context/user";
@@ -109,10 +108,10 @@ export default function Wishlist() {
                     image={item.property_id.gallery[0]}
                     labels={item.property_id.features}
                     location={`${item.property_id.property_address.address}`}
-                    path={item.property_id.type}
+                    path={"/" + item.property_id.type}
                     postfix={item.property_id.price_postfix}
                     price={item.property_id.price}
-                    rating={item.property_id.reviews.length}
+                    rating={item.property_id.reviews}
                     reviewNum={item.property_id.reviews.length}
                     title={item.property_id.property_title}
                     wishlist={item.property_id.wishlists}
@@ -126,99 +125,3 @@ export default function Wishlist() {
     </div>
   );
 }
-
-const workspaces: PropertyType[] = [
-  {
-    image: "/workspace/image1.png",
-    title: "Co-worka",
-    location: "1001, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 4,
-    reviewNum: 75,
-    price: 5000,
-  },
-  {
-    image: "/workspace/image2.png",
-    title: "Work Buddies",
-    location: "1001, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 5,
-    reviewNum: 25,
-    price: 3500,
-  },
-  {
-    image: "/workspace/image3.png",
-    title: "Share a Desk",
-    location: "1001, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 4,
-    reviewNum: 10,
-    price: 400,
-  },
-  {
-    image: "/workspace/image1.png",
-    title: "Co-worka",
-    location: "1001, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 4,
-    reviewNum: 75,
-    price: 5000,
-  },
-  {
-    image: "/workspace/image2.png",
-    title: "Work Buddies",
-    location: "1001, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 5,
-    reviewNum: 25,
-    price: 3500,
-  },
-];
-
-const shortlets: PropertyType[] = [
-  {
-    image: "/shortlets/image1.png",
-    title: "Haven Homes",
-    location: "1001, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 4,
-    reviewNum: 72,
-    price: 25000,
-  },
-  {
-    image: "/shortlets/image2.png",
-    title: "Lotus Court",
-    location: "1002, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 5,
-    reviewNum: 25,
-    price: 12500,
-  },
-  {
-    image: "/shortlets/image3.png",
-    title: "Summer House",
-    location: "1003, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 4,
-    reviewNum: 10,
-    price: 15000,
-  },
-  {
-    image: "/shortlets/image1.png",
-    title: "Haven Homes",
-    location: "1001, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 4,
-    reviewNum: 72,
-    price: 25000,
-  },
-  {
-    image: "/shortlets/image2.png",
-    title: "Lotus Court",
-    location: "1002, Estate, Lekki, Lagos ",
-    labels: ["WiFi", "Air", "conditioning", "Kitchen", "Parking", "Balcony", "Pets Friendly"],
-    rating: 5,
-    reviewNum: 25,
-    price: 12500,
-  },
-];

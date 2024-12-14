@@ -1,105 +1,119 @@
-import {Edit3} from "lucide-react";
-import Image from "next/image";
+"use client";
+
 import React from "react";
 
-import FormControl from "@/app/auth/business/(screens)/_components/form-control/form-control";
+import {useUser} from "@/context/user";
+import Loader from "@/components/loader/loader";
+
+import Avatar from "../_components/settings/avatar";
+import BasicData from "../_components/settings/basic_data";
+import ChangePassword from "../_components/settings/change-password";
+import CheckMark from "../_components/settings/notifications";
 
 function Page() {
+  const {User, isLoading} = useUser();
+
+  console.log(User);
+  if (isLoading) {
+    return (
+      <div className="py-24 grid">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!User) return;
+  const loginHistory = User.login_history;
+
   return (
     <div className="px-4 py-3 sm:p-3 max-md:pb-20">
       <h3 className="font-medium text-xl">Profile Management</h3>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 min-[1200px]:gap-x-20 gap-y-4 pt-8 text-grey-200 text-sm">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 min-[1200px]:gap-x-20 gap-y-4 pt-8 text-grey-200">
         <div>
-          <h4 className="text-grey-200 mb-5 font-medium text-base">Manage Your Profile</h4>
+          <h4 className="text-grey-200 mb-5 font-medium text-lg">Manage Your Profile</h4>
 
           <div>
-            <div className="flex justify-between items-end gap-3 pb-8">
-              <div className="h-20 w-20 rounded-full relative">
-                <Image fill alt="Profile Image" src={"/avatar.png"} />
-              </div>
-
-              <label className="text-blue" htmlFor="upload_image">
-                <Edit3 size={18} />
-                <input hidden id="upload_image" name="upload_image" type="file" />
-              </label>
-            </div>
-
+            <Avatar prevProfileImage={User.profile_image} />
             <ul className="space-y-3">
-              <li className="flex items-center justify-between">
-                Name Oluwatosin Oladele
-                <button className="text-blue">
-                  <Edit3 size={18} />
-                </button>
-              </li>
+              <BasicData label="Name" objKey={"fullname"} prevValue={User.fullname} />
 
               <li className="flex items-center justify-between">
                 <span>
-                  Email <span className="text-blue">tosin@example.com</span>
+                  Email: <span className="text-blue">{User.email}</span>
                 </span>
-                <button className="text-blue">
-                  <Edit3 size={18} />
-                </button>
               </li>
 
-              <li className="flex items-center justify-between">
-                Phone 0712346789
-                <button className="text-blue">
-                  <Edit3 size={18} />
-                </button>
-              </li>
-              <li className="flex items-center justify-between">
-                Address 10 Oladele Street, Lagos, Nigeria
-                <button className="text-blue">
-                  <Edit3 size={18} />
-                </button>
-              </li>
+              <BasicData label="Phone" objKey={"phone"} prevValue={User.phone} />
+
+              <BasicData label="Address" objKey={"address"} prevValue={User.address} />
             </ul>
 
-            <form className="space-y-4 pt-10" method="post">
-              <FormControl
-                isPassword
-                id="current_password"
-                label="Current Password"
-                type="password"
-              />
-              <FormControl isPassword id="new_password" label="New Password" type="password" />
-              <FormControl
-                isPassword
-                id="confirm_password"
-                label="Confirm Password"
-                type="password"
-              />
-            </form>
+            <ChangePassword />
           </div>
         </div>
         <div className="font-medium space-y-6">
           <div>
-            <h4 className="text-grey-200 mb-5 font-medium text-base">Manage Your Profile</h4>
+            <h4 className="text-grey-200 mb-5 font-medium text-lg">Manage Your Profile</h4>
 
             <ul className="space-y-5">
               <li className="flex ">
                 <span className="w-1/2">Email Notification</span>
                 <div className="space-y-2 flex-1">
-                  <CheckMark id="email_booking_alerts" label="Booking Alerts" />
-                  <CheckMark id="email_promotion" label="Promotions" />
+                  <CheckMark
+                    id="email_booking_alerts"
+                    label="Booking Alerts"
+                    objKey="email_notifications.booking"
+                    value={User?.email_notifications?.booking}
+                  />
+                  <CheckMark
+                    id="email_promotion"
+                    label="Promotions"
+                    objKey="email_notifications.promotion"
+                    value={User?.email_notifications?.promotion}
+                  />
                 </div>
               </li>
 
               <li className="flex">
                 <span className="w-1/2">SMS Notification</span>
                 <div className="space-y-2 flex-1">
-                  <CheckMark id="sms_booking_alerts" label="Booking Alerts" />
-                  <CheckMark id="sms_promotion" label="Promotions" />
+                  <CheckMark
+                    id="sms_booking_alerts"
+                    label="Booking Alerts"
+                    objKey="sms_notifications.booking"
+                    value={User?.sms_notifications?.booking}
+                  />
+                  <CheckMark
+                    id="sms_promotion"
+                    label="Promotions"
+                    objKey="sms_notifications.promotion"
+                    value={User?.sms_notifications?.promotion}
+                  />
                 </div>
               </li>
 
               <li className="flex">
                 <span className="w-1/2">App Notifications</span>
                 <div className="space-y-2 flex-1">
-                  <CheckMark id="new_booking" label="New Booking" />
-                  <CheckMark id="messages" label="Messages" />
-                  <CheckMark id="offers" label="Offers" />
+                  <CheckMark
+                    id="new_booking"
+                    label="New Booking"
+                    objKey="app_notifications.booking"
+                    value={User.app_notifications?.booking}
+                  />
+                  <CheckMark
+                    id="messages"
+                    label="Messages"
+                    objKey="app_notifications.promotion"
+                    value={User.app_notifications?.promotion}
+                  />
+                  <CheckMark
+                    id="offers"
+                    label="Offers"
+                    objKey="app_notifications.Offers"
+                    value={User.app_notifications?.Offers}
+                  />
                 </div>
               </li>
             </ul>
@@ -111,8 +125,18 @@ function Page() {
               <li className="flex">
                 <span className="w-1/2">Two - Factor Authentication</span>
                 <div className="space-y-2 flex-1">
-                  <CheckMark id="current_status" label="Current Status" />
-                  <CheckMark id="Manage" label="Manage" />
+                  <CheckMark
+                    id="current_status"
+                    label="Current Status"
+                    objKey="two_factor_auth.current_status"
+                    value={User.two_factor_auth?.current_status}
+                  />
+                  <CheckMark
+                    id="Manage"
+                    label="Manage"
+                    objKey="two_factor_auth.manage"
+                    value={User.two_factor_auth?.manage}
+                  />
                 </div>
               </li>
             </ul>
@@ -120,38 +144,33 @@ function Page() {
 
           <div>
             <h4 className="text-grey-200 mb-5 font-medium text-base">Login History</h4>
-            <ul className="space-y-2 mb-7">
-              <li className="flex justify-between">
-                Last login August 20, 2024, from Lagos, Nigeria
-              </li>
-              <li>Device iPhone 13 Pro Max</li>
-            </ul>
-
-            <button className="border mx-auto block hover:bg-blue hover:text-white transition-all border-blue text text-blue rounded-3xl py-2.5 px-5 text-sm font-medium">
-              Remove Device
-            </button>
+            {loginHistory.length > 1 ? (
+              <div>
+                <ul className="space-y-2 mb-7">
+                  <li className="flex justify-between">
+                    Last login{" "}
+                    {new Date(loginHistory[loginHistory.length - 2].timestamp).toLocaleDateString(
+                      "en",
+                      {
+                        month: "long",
+                        day: "2-digit",
+                        year: "numeric",
+                      },
+                    )}
+                    , from {loginHistory[loginHistory.length - 2].location}
+                  </li>
+                  <li>{loginHistory[loginHistory.length - 2].device}</li>
+                </ul>
+                <button className="border mx-auto block hover:bg-blue hover:text-white transition-all border-blue text text-blue rounded-3xl py-2.5 px-5 text-sm font-medium">
+                  Remove Device
+                </button>
+              </div>
+            ) : (
+              <p className="text-center opacity-75 pb-10">No history found</p>
+            )}
           </div>
         </div>
-
-        <div className="sm:col-span-2">
-          <button className="booking-btn mx-auto">Save Changes</button>
-        </div>
       </section>
-    </div>
-  );
-}
-
-function CheckMark({id, label}: {id: string; label: string}) {
-  return (
-    <div className="w-full flex mgap-10 justify-between">
-      <label htmlFor={id}>{label}</label>
-      <input className="hidden peer" id={id} name={id} type="checkbox" />
-      <label
-        className="ml-auto cursor-pointer block w-12 h-6 rounded-full bg-grey-200 p-1 peer-checked:[&_span]:translate-x-6"
-        htmlFor={id}
-      >
-        <span className="block h-4 w-4 rounded-full bg-white transition-all" />
-      </label>
     </div>
   );
 }
