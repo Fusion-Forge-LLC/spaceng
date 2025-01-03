@@ -13,7 +13,6 @@ import CheckMark from "../_components/settings/notifications";
 function Page() {
   const {User, isLoading} = useUser();
 
-  console.log(User);
   if (isLoading) {
     return (
       <div className="py-24 grid">

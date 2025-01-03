@@ -16,6 +16,7 @@ export const API_ENDPOINTS = {
   UPLOAD: {
     uploadImage: "/media/image",
     uploadVideo: "/media/video",
+    uploadBase64: "/media/base64image",
   },
 
   PROPERTY: {

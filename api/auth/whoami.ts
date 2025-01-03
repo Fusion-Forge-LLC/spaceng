@@ -17,6 +17,13 @@ export type User = {
   _v: number;
 };
 
+type Address = {
+  address: string;
+  city: string;
+  postcode: number;
+  country: string;
+};
+
 export type BusinessProfile = {
   app_notifications: {
     booking: boolean;
@@ -46,6 +53,11 @@ export type BusinessProfile = {
 export type ClientProfile = {
   _id: string;
   profile_image: string;
+  date_of_birth: string;
+  nationality: string;
+  gender: string;
+  location: Address;
+  government_id: string;
   newsletter_and_services: {
     deal_discovery: boolean;
     rewards: boolean;
@@ -89,7 +101,12 @@ export type whoAmIResponse = User & {
   payouts: PayoutTypes[];
   pending_payout: number;
   profile_image: string;
+  date_of_birth: string;
+  nationality: string;
+  gender: string;
   address: string;
+  location: Address;
+  government_id: string;
   email_notifications: {
     booking: boolean;
     promotion: boolean;

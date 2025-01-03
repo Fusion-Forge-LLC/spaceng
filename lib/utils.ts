@@ -101,3 +101,50 @@ export function getRandomHexColor() {
       .padStart(6, "0")
   );
 }
+
+export function hideEmail(email: string) {
+  const [name, domain] = email.split("@");
+  const nameLength = name.length;
+  let hiddenName = "";
+
+  // If the username is less than 4 characters, don't obfuscate
+  if (nameLength <= 3) {
+    return email;
+  }
+
+  // Replace characters in the middle of the username with asterisks
+  for (let i = 0; i < nameLength; i++) {
+    if (i < 2 || i >= nameLength - 1) {
+      hiddenName += name[i];
+    } else {
+      hiddenName += "*";
+    }
+  }
+
+  return `${hiddenName}@${domain}`;
+}
+
+export function hidePhoneNumber(phoneNumber: string) {
+  const phoneNumberLength = phoneNumber.length;
+
+  // Handle short phone numbers
+  if (phoneNumberLength <= 3) {
+    return phoneNumber;
+  }
+
+  // Determine the number of digits to hide
+  const digitsToHide = Math.max(4, 1);
+  const startIndex = Math.floor(phoneNumberLength / 2) - Math.floor(digitsToHide / 2);
+
+  let hiddenNumber = "";
+
+  for (let i = 0; i < phoneNumberLength; i++) {
+    if (i < startIndex || i >= startIndex + digitsToHide) {
+      hiddenNumber += phoneNumber[i];
+    } else {
+      hiddenNumber += "*";
+    }
+  }
+
+  return hiddenNumber;
+}
