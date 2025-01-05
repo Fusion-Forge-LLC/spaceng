@@ -1,9 +1,10 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {toast} from "sonner";
 
 import {useUpdateProfile} from "@/api/profile/update-profile";
+import {useUser} from "@/context/user";
 
 function NotificationCheckMark({
   id,
@@ -18,12 +19,33 @@ function NotificationCheckMark({
 }) {
   const {mutateAsync: profileUpdate, isPending: isUpdating} = useUpdateProfile();
   const [isChecked, setIsChecked] = useState<boolean>(value);
+  const {setUser} = useUser();
+
+  useEffect(() => {
+    setIsChecked(value);
+  }, [value]);
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     profileUpdate({[objKey]: event.target.checked})
       .then(() => {
         toast.success("Notification changed successfully");
-        setIsChecked(true);
+        const keys = objKey.split(".");
+
+        setUser((prevState) => {
+          if (prevState) {
+            return {
+              ...prevState,
+              [keys[0]]: {
+                //@ts-ignore
+                ...prevState[keys[0]],
+                [keys[1]]: !isChecked,
+              },
+            };
+          } else {
+            return null;
+          }
+        });
+        setIsChecked((prevState) => !prevState);
       })
       .catch(() => {
         toast.error("An error occured");

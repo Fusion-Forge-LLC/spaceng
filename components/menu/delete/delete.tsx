@@ -1,26 +1,33 @@
 "use client";
 
-import {Trash2} from "lucide-react";
-import React, {useState} from "react";
+import React, {ReactNode, useState} from "react";
 
-import {useDeleteProperty} from "@/api/property/delete-property";
 import Wrapper from "@/app/(services)/_components/modal/wrapper";
 import Loader from "@/components/loader/loader";
 import {Button} from "@/components/ui/button";
 
-function DeleteDialog({id}: {id: string}) {
-  const {mutate, isPending} = useDeleteProperty();
+function DeleteDialog({
+  mutate,
+  children,
+  isPending,
+  className,
+}: {
+  mutate: () => void;
+  children: ReactNode;
+  isPending: boolean;
+  className?: string;
+}) {
   const [showDialog, setShowDialog] = useState(false);
   const closeDialog = () => setShowDialog(false);
 
   const confirmDelete = async () => {
-    mutate(id);
+    mutate();
   };
 
   return (
     <>
-      <button onClick={() => setShowDialog(true)}>
-        <Trash2 size={16} />
+      <button className={className} onClick={() => setShowDialog(true)}>
+        {children}
       </button>
       {showDialog && (
         <Wrapper>

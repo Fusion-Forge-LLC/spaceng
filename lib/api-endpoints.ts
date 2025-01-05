@@ -75,5 +75,8 @@ export const API_ENDPOINTS = {
   PROFILE: {
     update: `/user/profile`,
     changePassword: `/user/change-password`,
+    delete: (id: string) => `/user/delete/${id}`,
+    requestPasswordReset: `/user/reset-password`,
+    changeClientPassword: `/user/reset-password`,
   },
 };

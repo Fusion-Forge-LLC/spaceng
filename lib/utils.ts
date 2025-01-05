@@ -148,3 +148,9 @@ export function hidePhoneNumber(phoneNumber: string) {
 
   return hiddenNumber;
 }
+
+export function checkAllChecked(newsletters: {[key: string]: string | boolean}) {
+  delete newsletters._id;
+
+  return Object.values(newsletters).every((value) => value === true);
+}

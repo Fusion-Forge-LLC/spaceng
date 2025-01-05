@@ -1,10 +1,20 @@
 "use client";
 import {useState} from "react";
 
+import {useDeleteProfile} from "@/api/profile/delete-profile";
+import {useRequestLink} from "@/api/profile/request-password-reset";
+import Loader from "@/components/loader/loader";
+import DeleteDialog from "@/components/menu/delete/delete";
+import {useUser} from "@/context/user";
+
+type SecurityBlocks = {
+  [key: string]: boolean;
+};
+
 export default function Security() {
-  type SecurityBlocks = {
-    [key: string]: boolean;
-  };
+  const {mutate, isPending} = useDeleteProfile();
+  const {mutate: passwordReset, isPending: isRequesting} = useRequestLink();
+  const {User} = useUser();
 
   const [securityBlocks, setSecurityBlocks] = useState<SecurityBlocks>({
     password: false,
@@ -82,8 +92,12 @@ export default function Security() {
               >
                 Cancel
               </button>
-              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
-                Send email
+              <button
+                className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto"
+                disabled={isRequesting}
+                onClick={passwordReset}
+              >
+                {isRequesting ? <Loader /> : "Send email"}
               </button>
             </div>
           </div>
@@ -178,14 +192,20 @@ export default function Security() {
         >
           <div className="flex flex-col gap-3">
             <h2 className="font-medium">Delete account</h2>
-            <p className="text-grey-200">Permanently delete your SpacesNG.com account</p>
+            <p className="text-grey-200">
+              Permanently delete your spacefindatechnologies.com account
+            </p>
           </div>
-          <span className="text-blue font-medium cursor-pointer w-fit hidden lg:block ">
-            Delete account
-          </span>
-          <span className="text-blue font-medium cursor-pointer w-fit block lg:hidden ml-auto mt-3 ">
-            Delete account
-          </span>
+          <DeleteDialog className="ml-auto" isPending={isPending} mutate={() => mutate(User?._id!)}>
+            <button className="text-blue font-medium cursor-pointer w-fit hidden lg:block hover:bg-blue hover:text-white px-4 py-2 rounded-lg">
+              Delete account
+            </button>
+          </DeleteDialog>
+          <DeleteDialog className="ml-auto" isPending={isPending} mutate={() => mutate(User?._id!)}>
+            <button className="text-blue font-medium cursor-pointer w-fit block lg:hidden ml-auto mt-3 ">
+              Delete account
+            </button>
+          </DeleteDialog>
         </div>
       </div>
     </div>

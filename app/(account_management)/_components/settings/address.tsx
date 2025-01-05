@@ -86,7 +86,7 @@ function Address() {
           </label>
           <select
             className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[380px] "
-            defaultValue={User?.location.country}
+            defaultValue={User?.location?.country}
             id="country"
             style={{borderWidth: "0.5px"}}
             {...register("country")}
@@ -106,7 +106,7 @@ function Address() {
           </label>
           <input
             className="py-3.5 px-4 outline-none border-grey-200 rounded-lg max-w-[399px] "
-            defaultValue={User?.location.address}
+            defaultValue={User?.location?.address}
             id="address"
             placeholder="No 6 park, Agbowo Ikeja"
             style={{borderWidth: "0.5px"}}
@@ -122,7 +122,7 @@ function Address() {
             </label>
             <input
               className="py-3.5 px-3 lg:px-4 outline-none border-grey-200 rounded-lg w-full max-w-[191px] "
-              defaultValue={User?.location.city}
+              defaultValue={User?.location?.city}
               id="city"
               placeholder="Lagos"
               style={{borderWidth: "0.5px"}}
@@ -137,7 +137,7 @@ function Address() {
             </label>
             <input
               className="py-3.5 px-3 lg:px-4 outline-none border-grey-200 rounded-lg w-full max-w-[191px] "
-              defaultValue={User?.location.postcode}
+              defaultValue={User?.location?.postcode}
               id="postcode"
               placeholder="567871"
               style={{borderWidth: "0.5px"}}
