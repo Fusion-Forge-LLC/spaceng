@@ -79,4 +79,9 @@ export const API_ENDPOINTS = {
     requestPasswordReset: `/user/reset-password`,
     changeClientPassword: `/user/reset-password`,
   },
+
+  OTHER_RENTALS: {
+    add: `/other-rentals`,
+    delete: (id: string) => `/other-rentals/${id}`,
+  },
 };
