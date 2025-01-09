@@ -107,7 +107,7 @@ function Basic({form}: {form: any}) {
                   id="price_prefix"
                   label="Price Prefix"
                   labelExample="Example: Starting Form"
-                  type="number"
+                  type="text"
                   {...field}
                 />
               </FormControl>
@@ -125,7 +125,7 @@ function Basic({form}: {form: any}) {
                   id="price_postfix"
                   label="Price Postfix"
                   labelExample="Example: Per Month"
-                  type="number"
+                  type="text"
                   {...field}
                 />
               </FormControl>

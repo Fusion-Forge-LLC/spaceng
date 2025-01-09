@@ -29,7 +29,9 @@ export const API_ENDPOINTS = {
   LISTING: {
     listing: (type: string) => `/lists/${type}`,
     details: (id: string) => `/lists/property/${id}`,
-    updateView: (id: string) => `lists/property/${id}/increase-view`,
+    updateView: (id: string) => `/lists/property/${id}/increase-view`,
+    search: (type: "workspace" | "shortlet", searchString: string) =>
+      `/lists/search/${type}?q=${searchString}`,
   },
 
   TRANSACTION: {

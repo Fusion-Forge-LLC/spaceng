@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
 
@@ -18,12 +18,13 @@ function Lists({
   type,
 }: {
   properties: PropertyResponse[];
-  type: "shortlets" | "workspaces";
+  type: "shortlet" | "workspace";
   total: number;
 }) {
   const pathname = usePathname();
   const offset = 10;
   const totalPages = Math.ceil(total / offset);
+  const [searchedData, setSearchedData] = useState<PropertyResponse[] | null>(null);
 
   return (
     <main>
@@ -31,46 +32,83 @@ function Lists({
         <section>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
             <div>
-              <h5 className="md:text-lg font-medium capitalize">{type} in Lagos, Nigeria</h5>
-              <span className="text-sm md:text-base">250 results</span>
+              <h5 className="md:text-lg font-medium capitalize">{type}s in Nigeria</h5>
+              <span className="text-sm md:text-base">{total} results</span>
             </div>
 
-            <SearchProperties />
+            <SearchProperties setSearchedData={setSearchedData} type={type} />
           </div>
         </section>
       </Wrapper>
 
       <Wrapper className="sm:px-0">
         <section>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
+          <div
+            className={cn(
+              "grid grid-cols-1 lg:grid-cols-2 gap-12 py-12",
+              searchedData && searchedData.length === 0 && "hidden",
+            )}
+          >
             <div className="space-y-10">
-              {properties.map((item) => {
-                return (
-                  <Card
-                    key={item._id}
-                    id={item._id}
-                    image={item.gallery[0]}
-                    labels={item.features}
-                    location={`${item.property_address.address}`}
-                    path={pathname}
-                    postfix={item.price_postfix}
-                    price={item.price}
-                    rating={item.reviews}
-                    reviewNum={item.reviews.length}
-                    title={item.property_title}
-                    wishlist={item.wishlists}
-                  />
-                );
-              })}
+              {searchedData ? (
+                <>
+                  {searchedData.map((item) => {
+                    return (
+                      <Card
+                        key={item._id}
+                        id={item._id}
+                        image={item.gallery[0]}
+                        labels={item.features}
+                        location={`${item.property_address.address}`}
+                        path={pathname}
+                        postfix={item.price_postfix}
+                        price={item.price}
+                        rating={item.reviews}
+                        reviewNum={item.reviews.length}
+                        title={item.property_title}
+                        wishlist={item.wishlists}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {properties.map((item) => {
+                    return (
+                      <Card
+                        key={item._id}
+                        id={item._id}
+                        image={item.gallery[0]}
+                        labels={item.features}
+                        location={`${item.property_address.address}`}
+                        path={pathname}
+                        postfix={item.price_postfix}
+                        price={item.price}
+                        rating={item.reviews}
+                        reviewNum={item.reviews.length}
+                        title={item.property_title}
+                        wishlist={item.wishlists}
+                      />
+                    );
+                  })}
+                </>
+              )}
             </div>
-            <div className="px-4 sm:px-0 hidden lg:block">
+            <div
+              className={cn(
+                "px-4 sm:px-0 hidden lg:block",
+                searchedData && searchedData.length === 0 && "lg:hidden",
+              )}
+            >
               <Image alt="Map Image" placeholder="blur" src={dummyMap} />
             </div>
           </div>
 
-          <div className="lg:pt-20 pb-10">
+          <div
+            className={cn(searchedData && searchedData.length === 0 && "hidden", "lg:pt-20 pb-10")}
+          >
             <ul className="flex justify-center gap-4">
-              {Array.from({length: totalPages}).map((item, index) => {
+              {Array.from({length: totalPages}).map((_, index) => {
                 return (
                   <li key={index}>
                     <button className={cn("pageination-btn", "bg-blue text-white")}>
@@ -82,9 +120,21 @@ function Lists({
             </ul>
           </div>
 
-          <div className="px-4 sm:px-0 lg:hidden py-14">
+          <div
+            className={cn(
+              searchedData && searchedData.length === 0 && "hidden",
+              "px-4 sm:px-0 lg:hidden py-14",
+            )}
+          >
             <Image alt="Map Image" className="mx-auto" placeholder="blur" src={dummyMap} />
           </div>
+
+          {searchedData && searchedData.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-20">
+              <Image alt="No data" height={200} src={"/no-data.png"} width={200} />
+              <span className="text-lg font-medium italic">No Match found</span>
+            </div>
+          )}
         </section>
       </Wrapper>
     </main>

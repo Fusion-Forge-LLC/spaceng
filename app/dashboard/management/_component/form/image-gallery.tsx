@@ -31,7 +31,6 @@ function ImageGallery({images, setImages}: Props) {
       }
 
       await uploadImage(formData).then((res) => {
-        console.log(res.data.uploadedImages);
         showSuccess(res.message);
         res.data.uploadedImages.forEach((item) => {
           setImages((prevState) => [...prevState, item.url]);
