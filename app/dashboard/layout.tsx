@@ -3,6 +3,7 @@
 import React, {ReactNode} from "react";
 import {Bell, Gem, Search} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import {Input} from "@/components/ui/input";
 import {EmailIcon} from "@/components/Icons/icons";
@@ -83,9 +84,12 @@ function DashboardLyout({children}: {children: ReactNode}) {
               Upgrade premium to unlock all features
             </p>
 
-            <button className="bg-blue px-4 py-2 w-full text-white font-medium text-xs rounded-md">
+            <Link
+              className="bg-blue px-4 py-2 block text-center w-full text-white font-medium text-xs rounded-md"
+              href={"/pricing"}
+            >
               Upgrade Premium
-            </button>
+            </Link>
           </div>
         </aside>
         <main className="flex-1 h-full overflow-y-scroll no-scrollbar">{children}</main>

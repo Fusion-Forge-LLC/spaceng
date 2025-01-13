@@ -39,6 +39,7 @@ export const API_ENDPOINTS = {
     bankpayment: "/transaction/paywithbank",
     getBanks: (query: string) => `/transaction/banks?${query}`,
     verifyBankAccount: (query: string) => `/transaction/verify-account?${query}`,
+    initPlan: `/transaction/plan-payment`,
   },
 
   PRE_BOOKING: `/booking/pre-booking`,
@@ -80,6 +81,7 @@ export const API_ENDPOINTS = {
     delete: (id: string) => `/user/delete/${id}`,
     requestPasswordReset: `/user/reset-password`,
     changeClientPassword: `/user/reset-password`,
+    plan: "/user/update-plan",
   },
 
   OTHER_RENTALS: {

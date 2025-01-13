@@ -1,3 +1,5 @@
+"use client";
+
 import {Plus} from "lucide-react";
 import React from "react";
 
@@ -55,7 +57,7 @@ const faqs = [
 
 function Faq() {
   return (
-    <ul className="py-10">
+    <ul className="py-10 space-y-2">
       {faqs.map((item, index) => {
         return <Card key={index} answer={item.answer} question={item.question} />;
       })}
@@ -64,15 +66,19 @@ function Faq() {
 }
 
 function Card({question, answer}: {question: string; answer: string}) {
+  const toggleShow = (e: any) => {
+    e.currentTarget.nextElementSibling.classList.toggle("hidden");
+  };
+
   return (
     <li>
-      <h4 className="flex items-center justify-between bg-grey text-white rounded-lg px-2 sm:px-3 py-2 sm:py-3.5">
+      <h4 className="flex items-center cursor-pointer justify-between bg-grey text-white rounded-lg px-2 sm:px-3 py-2 sm:py-3.5">
         <span className="font-medium text-sm sm:text-xl">{question}</span>
-        <button className="md:text-[36px]">
+        <button className="md:text-[36px]" onClick={toggleShow}>
           <Plus />
         </button>
       </h4>
-      <p className="py-4 md:py-8 px-2 sm:px-3 text-sm sm:text-base">{answer}</p>
+      <p className="py-4 px-2 sm:px-3 text-sm sm:text-base hidden">{answer}</p>
     </li>
   );
 }

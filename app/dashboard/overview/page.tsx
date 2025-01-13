@@ -15,52 +15,8 @@ import Card from "../_components/property-cards/card";
 import DisplayProperties from "../management/_component/display-cards/display-cards";
 import PayoutHistoryShort from "../_components/payout-history/payout-history-short";
 
-const payouts = [
-  {
-    amount: "N56,000",
-    date: "10th August, 2024",
-  },
-  {
-    amount: "N80,000 ",
-    date: "15th August, 2024",
-  },
-  {
-    amount: "N26,500",
-    date: "18th August, 2024",
-  },
-  {
-    amount: "N26,000",
-    date: "20th August, 2024",
-  },
-  {
-    amount: "N16,000 ",
-    date: "22nd August, 2024",
-  },
-  {
-    amount: "N150,000",
-    date: "26th August, 2024",
-  },
-  {
-    amount: "N6,800",
-    date: "27th August, 2024",
-  },
-  {
-    amount: "N31,000",
-    date: "23rd August, 2024",
-  },
-  {
-    amount: "N6,000",
-    date: "28th August, 2024",
-  },
-  {
-    amount: "N47,000",
-    date: "30th August, 2024",
-  },
-];
-
 function Page() {
   const {User} = useUser();
-
   const {data, isLoading} = useGetBusinessDashboard();
 
   return (

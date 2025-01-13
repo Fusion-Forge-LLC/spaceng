@@ -46,6 +46,12 @@ export type BusinessProfile = {
     _id: string;
   };
   total_earnings: number;
+  subscription: {
+    plan: string;
+    subscription_date: string;
+    expiry_date: string;
+    _id: string;
+  };
   __v: number;
   _id: string;
 };
@@ -147,6 +153,12 @@ export type whoAmIResponse = User & {
     _id: string;
   };
   other_rentals: [];
+  subscription: {
+    plan: string;
+    subscription_date: string;
+    expiry_date: string;
+    _id: string;
+  };
   __v: 0;
 };
 

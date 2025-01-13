@@ -110,7 +110,9 @@ function Footer() {
                 <li className="hover:underline">
                   <Link href={"/workspace"}>Workspaces</Link>
                 </li>
-                <li>Pricing</li>
+                <li className="hover:underline">
+                  <Link href={"/pricing"}>Pricing</Link>
+                </li>
                 <li>Blog</li>
               </ul>
             </div>

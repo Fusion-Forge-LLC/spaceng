@@ -280,3 +280,7 @@ abbr:where([title]) {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.text-outline {
+  -webkit-text-stroke: 1px #eaebec;
+}
