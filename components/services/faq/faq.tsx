@@ -75,10 +75,6 @@ function Faq() {
 }
 
 function Card({question, answer}: {question: string; answer: string}) {
-  const toggleShow = (e: any) => {
-    e.currentTarget.nextElementSibling.classList.toggle("hidden");
-  };
-
   return (
     <AccordionItem value={question.replaceAll(" ", "").toLowerCase()}>
       <AccordionTrigger>
