@@ -1,11 +1,26 @@
+"use client";
+
 import {SendHorizonal, Trash} from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, {useEffect, useRef} from "react";
 
+import socket from "@/socket";
 import {Input} from "@/components/ui/input";
 import {Archive} from "@/components/Icons/icons";
+import {useGetMessages} from "@/api/chat/get-messages";
 
-function Page() {
+function Page({params}: {params: {id: string}}) {
+  const messageRef = useRef<HTMLInputElement>(null);
+  const {data, isLoading} = useGetMessages(params.id);
+
+  useEffect(() => {
+    socket.emit("join-room", params.id);
+  }, []);
+
+  const sendMessage = () => {
+    socket.emit("");
+  };
+
   return (
     <section className="flex-1 px-4 overflow-hidden flex flex-col h-full gap-3 pb-1">
       <header className="flex items-center gap-4">
@@ -95,6 +110,7 @@ function Page() {
       </div>
       <form className="relative">
         <Input
+          ref={messageRef}
           className="h-14 p-4 rounded-xl border-[#77787D] focus-visible:ring-blue"
           placeholder="Message"
         />

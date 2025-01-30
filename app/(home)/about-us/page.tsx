@@ -1,45 +1,43 @@
 import React from "react";
 
-import Title from "@/components/main/title/title";
 import Wrapper from "@/components/wrapper/wrapper";
 import MissionCards from "@/components/about-us/mission-cards/mission-cards";
-import MembersCard from "@/components/about-us/members-card/members-card";
 import Faq from "@/components/services/faq/faq";
 
-const members = [
-  {
-    name: "Olawale Eniola",
-    role: "Chief Executive & Information Officer",
-  },
-  {
-    name: "George Okata",
-    role: "Chief Product & Visual Officer",
-  },
-  {
-    name: "Emerald Olumide",
-    role: "Chief Technology Officer",
-  },
-  {
-    name: "Anthony Kelvin",
-    role: "Head of Technology Officer",
-  },
-  {
-    name: "Gbolahan Olanipekun",
-    role: "Product Growth Management Officer",
-  },
-  {
-    name: "Effiong Bassey",
-    role: "Head of Marketing",
-  },
-  {
-    name: "Odujebe Sodiq Pelumi",
-    role: "Head of Social Media Content Management",
-  },
-  {
-    name: "Oluwatosin Oladele",
-    role: "Head of Business Brand Development",
-  },
-];
+// [
+//   {
+//     name: "Olawale Eniola",
+//     role: "Chief Executive & Information Officer",
+//   },
+//   {
+//     name: "George Okata",
+//     role: "Chief Product & Visual Officer",
+//   },
+//   {
+//     name: "Emerald Olumide",
+//     role: "Chief Technology Officer",
+//   },
+//   {
+//     name: "Anthony Kelvin",
+//     role: "Head of Technology Officer",
+//   },
+//   {
+//     name: "Gbolahan Olanipekun",
+//     role: "Product Growth Management Officer",
+//   },
+//   {
+//     name: "Effiong Bassey",
+//     role: "Head of Marketing",
+//   },
+//   {
+//     name: "Odujebe Sodiq Pelumi",
+//     role: "Head of Social Media Content Management",
+//   },
+//   {
+//     name: "Oluwatosin Oladele",
+//     role: "Head of Business Brand Development",
+//   },
+// ];
 
 function Page() {
   return (
@@ -92,17 +90,6 @@ function Page() {
                 <li className="values-list">Serve Selflessly</li>
               </ul>
             </MissionCards>
-          </ul>
-        </Wrapper>
-      </section>
-
-      <section>
-        <Wrapper className="py-24">
-          <Title title="The Inventors" />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-20 sm:gap-10 md:gap-20">
-            {members.map((item, index) => {
-              return <MembersCard key={index} name={item.name} role={item.role} />;
-            })}
           </ul>
         </Wrapper>
       </section>

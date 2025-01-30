@@ -3,13 +3,26 @@ import Link from "next/link";
 import React from "react";
 
 import {BookingResponse} from "@/api/booking/get-booking";
+import {useGetChatRoom} from "@/api/chat/get-room";
+import {useUser} from "@/context/user";
+import Loader from "@/components/loader/loader";
 
 function BookingDetails({booking}: {booking: BookingResponse["booking"]}) {
+  const {mutate, isPending} = useGetChatRoom();
+  const {User} = useUser();
+
   const dateString = (date: string) => {
     return new Date(date).toLocaleDateString("en-us", {
       month: "long",
       day: "2-digit",
       year: "numeric",
+    });
+  };
+
+  const openChat = () => {
+    mutate({
+      clientId: booking.client_id._id,
+      vendorId: User?._id!,
     });
   };
 
@@ -83,12 +96,12 @@ function BookingDetails({booking}: {booking: BookingResponse["booking"]}) {
         >
           Edit Booking
         </Link>
-        <Link
+        <button
           className="border border-blue text-blue font-medium rounded-lg px-2 py-2 hover:bg-blue hover:text-white"
-          href={""}
+          onClick={openChat}
         >
-          Contact Guest
-        </Link>
+          {isPending ? <Loader /> : "Contact Guest"}
+        </button>
         <Link
           className="border border-blue text-blue font-medium rounded-lg px-2 py-2 hover:bg-blue hover:text-white"
           href={""}

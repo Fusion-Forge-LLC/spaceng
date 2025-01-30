@@ -8,7 +8,6 @@ import {Button} from "@/components/ui/button";
 import OverviewWithLabel from "@/components/main/overview/overview";
 import Title from "@/components/main/title/title";
 import Features from "@/components/main/features/features";
-import TestimonialCard from "@/components/main/testimonials/testimonial-card";
 
 import century from "../../public/partners/century.png";
 import remax from "../../public/partners/remax.png";
@@ -209,23 +208,6 @@ export default function Home() {
                 },
               ]}
             />
-
-            {/* <Overview
-                lists={[
-                  {
-                    note: "Flexible rental periods (hours, days, weeks, or months)",
-                    image: "/overview/image4.png",
-                  },
-                  {
-                    image: "/overview/image5.png",
-                  },
-                  {
-                    showPrefix: true,
-                    note: "Remote workers, Freelancers, Entrepreneurs and others.",
-                    image: "/overview/image6.png",
-                  },
-                ]}
-              /> */}
           </div>
 
           <div className="space-y-10">
@@ -246,23 +228,6 @@ export default function Home() {
                 },
               ]}
             />
-
-            {/* <Overview
-                lists={[
-                  {
-                    note: "Access to workshops, webinars, and community events",
-                    image: "/overview/image10.png",
-                  },
-                  {
-                    image: "/overview/image11.png",
-                  },
-                  {
-                    showPrefix: true,
-                    note: "Startups, Small businesses, Innovation teams, Creative agencies and others.",
-                    image: "/overview/image12.png",
-                  },
-                ]}
-              /> */}
           </div>
         </Wrapper>
       </section>
@@ -290,7 +255,7 @@ export default function Home() {
           </ul>
         </Wrapper>
       </section>
-
+      {/* 
       <section>
         <Wrapper className="py-20 space-y-10">
           <Title title="The Partners" />
@@ -351,7 +316,7 @@ export default function Home() {
             })}
           </ul>
         </Wrapper>
-      </section>
+      </section> */}
     </>
   );
 }

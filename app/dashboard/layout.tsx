@@ -29,7 +29,9 @@ function DashboardLyout({children}: {children: ReactNode}) {
   return (
     <div className="md:h-screen flex flex-col">
       <header className="flex justify-between items-center py-5 md:py-3 gap-5 px-4 max-md:flex-wrap">
-        <span className="text-2xl sm:text-3xl font-black text-blue">Spacefinda</span>
+        <Link className="text-2xl sm:text-3xl font-black text-blue" href={"/"}>
+          Spacefinda
+        </Link>
 
         <MobileNav />
         <div className="relative text-[#A7A7A7]/[95%] max-md:w-full max-sm:shrink-0 md:flex-1 md:max-w-96">

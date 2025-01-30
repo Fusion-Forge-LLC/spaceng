@@ -3,14 +3,11 @@
 import React from "react";
 
 import ReviewCard from "@/app/(services)/_components/review-card/review-card";
-import {Receiver, Sender} from "@/app/dashboard/_components/chat/message";
 import {useGetRatings} from "@/api/rating/get-ratings";
 import Loader from "@/components/loader/loader";
-import {useGetProperty} from "@/api/property/property";
 
 function Page({params}: {params: {id: string}}) {
   const {data, isPending} = useGetRatings(params.id);
-  const {data: property} = useGetProperty(params.id);
 
   if (isPending) {
     return (
@@ -27,14 +24,14 @@ function Page({params}: {params: {id: string}}) {
       </div>
     );
   }
-  const reviewList = data?.data || [];
+  const reviewList = data.data.reviews || [];
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-20 pt-10 flex-1 overflow-hidden">
       <section className="h-full md:overflow-y-scroll">
         <h2 className="font-semibold text-grey text-xl mb-2">Reviews & Ratings</h2>
 
-        <p className="font-medium">Guest Reviews & Ratings for {property?.data.property_title}</p>
+        <p className="font-medium">Guest Reviews & Ratings for {data.data.title}</p>
 
         {reviewList.length === 0 ? (
           <div className="py-20 text-center">
@@ -42,7 +39,7 @@ function Page({params}: {params: {id: string}}) {
           </div>
         ) : (
           <ul className="pt-4">
-            {data.data.map((item, index) => {
+            {reviewList?.map((item, index) => {
               return (
                 <ReviewCard
                   key={index}
@@ -57,7 +54,7 @@ function Page({params}: {params: {id: string}}) {
         )}
       </section>
 
-      <section>
+      {/* <section>
         <Sender
           name="Sarah Thomas"
           profileImage="/reviews/image4.jpg"
@@ -80,7 +77,7 @@ function Page({params}: {params: {id: string}}) {
           profileImage="/avatar.png"
           text="Thank you for your feedback! We apologize for the inconvenience with the Wi-Fi and appreciate your understanding. We’ll work on improving this for future guests"
         />
-      </section>
+      </section> */}
     </div>
   );
 }

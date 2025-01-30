@@ -88,4 +88,9 @@ export const API_ENDPOINTS = {
     add: `/other-rentals`,
     delete: (id: string) => `/other-rentals/${id}`,
   },
+
+  CHAT: {
+    getRoom: `/room`,
+    messages: (id: string) => `/messages/${id}`,
+  },
 };

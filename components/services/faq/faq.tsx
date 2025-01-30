@@ -3,6 +3,13 @@
 import {Plus} from "lucide-react";
 import React from "react";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 const faqs = [
   {
     question: "What is Spacefinda?",
@@ -57,11 +64,13 @@ const faqs = [
 
 function Faq() {
   return (
-    <ul className="py-10 space-y-2">
-      {faqs.map((item, index) => {
-        return <Card key={index} answer={item.answer} question={item.question} />;
-      })}
-    </ul>
+    <div className="py-10 ">
+      <Accordion collapsible className="w-full space-y-2" type="single">
+        {faqs.map((item, index) => {
+          return <Card key={index} answer={item.answer} question={item.question} />;
+        })}
+      </Accordion>
+    </div>
   );
 }
 
@@ -71,15 +80,15 @@ function Card({question, answer}: {question: string; answer: string}) {
   };
 
   return (
-    <li>
-      <h4 className="flex items-center cursor-pointer justify-between bg-grey text-white rounded-lg px-2 sm:px-3 py-2 sm:py-3.5">
-        <span className="font-medium text-sm sm:text-xl">{question}</span>
-        <button className="md:text-[36px]" onClick={toggleShow}>
-          <Plus />
-        </button>
-      </h4>
-      <p className="py-4 px-2 sm:px-3 text-sm sm:text-base hidden">{answer}</p>
-    </li>
+    <AccordionItem value={question.replaceAll(" ", "").toLowerCase()}>
+      <AccordionTrigger>
+        <span className="font-medium text-sm sm:text-xl text-left">{question}</span>
+        <Plus className="h-4 w-4 shrink-0 transition-transform duration-200" />
+      </AccordionTrigger>
+      <AccordionContent>
+        <p className="py-4 px-2 sm:px-3 text-sm sm:text-base">{answer}</p>
+      </AccordionContent>
+    </AccordionItem>
   );
 }
 

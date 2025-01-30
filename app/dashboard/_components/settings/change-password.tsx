@@ -62,7 +62,7 @@ function ChangePassword() {
               hasUppercase: (value) => /[A-Z]/.test(value) || "Must include an uppercase letter",
               hasNumber: (value) => /\d/.test(value) || "Must include a number",
               hasSpecialChar: (value) =>
-                /[@$!%*?&]/.test(value) || "Must include a special character",
+                /[!@#$%^&*()]/.test(value) || "Must include a special character",
               hasMinLength: (value) => value.length >= 8 || "Must be at least 8 characters long",
             },
           })}
