@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useParams} from "next/navigation";
 
-import TabBtn from "@/app/dashboard/_components/tab-btn/tab-btn";
+import TabBtn from "@/app/dashboard/(others)/_components/tab-btn/tab-btn";
 import {Form} from "@/components/ui/form";
 import {PropertyPayload, PropertyResponse} from "@/@types/types";
 import {Button} from "@/components/ui/button";

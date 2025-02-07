@@ -54,7 +54,7 @@ function MessageBox({
           return (
             <li key={message[0]}>
               <span className="tag">{formatMessageDate(message[0])}</span>
-              <ul className="py-5 space-y-4 px-5">
+              <ul className="py-5 space-y-4 md:px-5">
                 {message[1].map((item, index) => {
                   const isFirstUnread =
                     item.receiverRole === "client" &&

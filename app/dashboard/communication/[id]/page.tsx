@@ -11,7 +11,7 @@ import {Messages} from "@/@types/types";
 import Loader from "@/components/loader/loader";
 import {useGetChatPeer} from "@/api/chat/get-chat-peer";
 
-import MessageBox from "../../_components/chat/messageBox";
+import MessageBox from "../../(others)/_components/chat/messageBox";
 
 function Page({params}: {params: {id: string}}) {
   const messageRef = useRef<HTMLInputElement>(null);

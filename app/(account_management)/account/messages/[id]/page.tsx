@@ -13,7 +13,7 @@ function Page({params}: {params: {id: string}}) {
 
   return (
     <div className="h-full flex ">
-      <ChatList />
+      <ChatList className="hidden md:flex md:w-80 lg:w-96" />
       <ChatBox roomId={params.id} />
     </div>
   );

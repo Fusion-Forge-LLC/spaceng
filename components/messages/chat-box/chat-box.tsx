@@ -36,7 +36,7 @@ function ChatBox({roomId}: {roomId: string}) {
   };
 
   return (
-    <div className="flex-1 border border-grey-200 border-b-0 border-l-0 flex flex-col overflow-hidden">
+    <div className="flex-1 border border-grey-200 border-b-0 md:border-l-0 flex flex-col overflow-hidden">
       <ChatHead id={roomId} />
       <div className="flex-1 overflow-hidden">
         {isLoading ? (

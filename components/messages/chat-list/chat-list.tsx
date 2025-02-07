@@ -9,12 +9,17 @@ import Loader from "@/components/loader/loader";
 
 import List from "./list";
 
-function ChatList() {
+function ChatList({className}: {className: string}) {
   const [chatsPreference, setChatPreference] = useState<"all" | "unread">("all");
   const {data, isLoading} = useGetChatList();
 
   return (
-    <aside className="h-full w-96 border border-grey-200 border-b-0 text-black flex flex-col overflow-hidden">
+    <aside
+      className={cn(
+        "h-full border border-grey-200 border-b-0 text-black flex-col overflow-hidden",
+        className,
+      )}
+    >
       <header className="flex items-center gap-8 py-5 px-5">
         <span className="font-semibold text-xl mr-auto">Messages</span>
         <button className="chat-header-btn">

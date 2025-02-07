@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {toast} from "sonner";
 
 import {useUpdateProfile} from "@/api/profile/update-profile";
-import NotificationCheckMark from "@/app/dashboard/_components/settings/notifications";
+import NotificationCheckMark from "@/app/dashboard/(others)/_components/settings/notifications";
 import {useUser} from "@/context/user";
 import {checkAllChecked} from "@/lib/utils";
 

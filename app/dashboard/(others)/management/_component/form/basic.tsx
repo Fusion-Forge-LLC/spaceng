@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {FormField, FormItem, FormMessage, FormControl} from "@/components/ui/form";
-import FormInput from "@/app/dashboard/_components/form-control/form-input";
+import FormInput from "@/app/dashboard/(others)/_components/form-control/form-input";
 import {Button} from "@/components/ui/button";
 import "react-quill/dist/quill.snow.css";
 

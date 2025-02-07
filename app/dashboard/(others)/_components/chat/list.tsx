@@ -17,11 +17,13 @@ function ChatList() {
     return (
       <div
         className={cn(
-          "h-full grid place-content-center overflow-hidden gap-3 px-3",
+          "h-full px-3 border-r border-r-grey-200",
           pathname === "/dashboard/communication" ? "" : "max-[956px]:hidden",
         )}
       >
-        <Loader />
+        <div className="min-[956px]:w-64 lg:w-96 h-full grid place-content-center overflow-hidden">
+          <Loader />
+        </div>
       </div>
     );
   }
@@ -29,13 +31,13 @@ function ChatList() {
   return (
     <div
       className={cn(
-        "h-full flex flex-col overflow-hidden gap-3 px-3",
+        "h-full w-full min-[956px]:w-64 lg:w-96 flex flex-col overflow-hidden gap-3 px-3 md:border-r border-r-grey-200",
         pathname === "/dashboard/communication" ? "" : "max-[956px]:hidden",
       )}
     >
       <h3 className="text-lg font-medium">Inbox Overview</h3>
 
-      <ul className="w-full min-[956px]:w-64 lg:w-96 flex-1 overflow-y-scroll no-scrollbar">
+      <ul className="w-full flex-1 overflow-y-scroll no-scrollbar">
         {data?.data.map((item, index) => {
           return (
             <li key={index}>
