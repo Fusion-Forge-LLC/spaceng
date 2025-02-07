@@ -9,7 +9,7 @@ import {useGetProperty} from "@/api/property/property";
 import Loader from "@/components/loader/loader";
 import NotFound from "@/components/not-found/not-found";
 
-import dummyMap from "../../../../../public/dummymap.png";
+import dummyMap from "../../../../../../public/dummymap.png";
 
 function Page({params}: {params: {id: string}}) {
   const {data, isPending} = useGetProperty(params.id);
