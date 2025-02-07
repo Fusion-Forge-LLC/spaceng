@@ -37,12 +37,12 @@ function FormControl(props: FormInput) {
             "border border-grey-200 focus-visible:ring-blue",
             props.classNames || "h-12 sm:h-14 rounded-2xl",
           )}
-          type={type}
           {...props}
+          type={type}
         />
         {props.isPassword && (
           <button
-            className="absolute z-10 top-1/2 -translate-y-1/2 right-4"
+            className="absolute z-10 top-1/2 -translate-y-1/2 right-4 hover:scale-105"
             type="button"
             onClick={updateType}
           >

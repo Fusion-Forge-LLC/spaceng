@@ -4,6 +4,7 @@ import {toast} from "sonner";
 import {twMerge} from "tailwind-merge";
 
 import {ReviewTypes} from "@/@types/types";
+import {oauth_google} from "@/config";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -214,3 +215,19 @@ export function formatDateString(dateString: string) {
     return date.toLocaleDateString("en-GB", {year: "numeric", month: "short", day: "numeric"});
   }
 }
+
+export function googleSignin(type: string) {
+  localStorage.setItem("oathRedirect", type);
+  const query = {
+    client_id: oauth_google.client_id,
+    redirect_uri: oauth_google.redirect_uri,
+    response_type: "code",
+    scope: oauth_google.scopes,
+  };
+  const url = new URL(oauth_google.endpoint);
+
+  url.search = new URLSearchParams(query).toString();
+  window.location.href = url.toString();
+}
+
+export function faceBookSignin() {}

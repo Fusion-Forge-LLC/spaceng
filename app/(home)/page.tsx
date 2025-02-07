@@ -1,84 +1,19 @@
 import {Playfair_Display_SC} from "next/font/google";
 import Image from "next/image";
-import {Search} from "lucide-react";
 
 import Wrapper from "@/components/wrapper/wrapper";
-import {DropdDown} from "@/components/style-guide/style-guide";
-import {Button} from "@/components/ui/button";
 import OverviewWithLabel from "@/components/main/overview/overview";
 import Title from "@/components/main/title/title";
 import Features from "@/components/main/features/features";
+import SearchProperties from "@/components/main/search/search";
 
-import century from "../../public/partners/century.png";
-import remax from "../../public/partners/remax.png";
-import zillow from "../../public/partners/zillow.png";
 import about from "../../public/about.png";
 import hero from "../../public/hero-image.png";
-import apartments from "../../public/partners/apartments.png";
 
 const playfair = Playfair_Display_SC({
   subsets: ["latin"],
   weight: "400",
 });
-
-const partners = [zillow, remax, apartments, century];
-
-const testimonies = [
-  {
-    user: {
-      name: "Emily Chen",
-      occupation: "Graphics designer",
-      reviewType: "Shortlet Reviews",
-    },
-    testimony:
-      "Spacefinda Shortlet was a lifesaver for my remote team,We needed a temporary space for a project, and their flexible rentals and amenities made it easy to get work done. 10/10 would recommend.",
-  },
-  {
-    user: {
-      name: "David Plate",
-      occupation: "Engineer",
-      reviewType: "Shortlet Reviews",
-    },
-    testimony:
-      "I was traveling for work and needed a productive space to get some work done. FusionForge's Shortlet provided a comfortable and equipped space that helped me stay focused. Great experience.",
-  },
-  {
-    user: {
-      name: "Sarah Lee",
-      occupation: "Freelancer",
-      reviewType: "Shortlet Reviews",
-    },
-    testimony:
-      "As a freelancer, I need flexible workspace options. FusionForge's Shortlet has been a game-changer for me  easy to book, great amenities, and a supportive community",
-  },
-  {
-    user: {
-      name: "Raj Desai",
-      occupation: "Developer",
-      reviewType: "Workspace Reivews",
-    },
-    testimony:
-      "Spacefinda's Workspace helped our startup scale quickly by providing a collaborative environment and access to resources we needed. We've seen significant growth since moving in",
-  },
-  {
-    user: {
-      name: "Mia Kim",
-      occupation: "Product Designer",
-      reviewType: "Workspace Reivews",
-    },
-    testimony:
-      "As a creative agency, we need a space that inspires us. FusionForge's Workspace delivers - from the design to the community events, it's helped us produce our best work yet.",
-  },
-  {
-    user: {
-      name: "Jack Taylor",
-      occupation: "Site Engineer",
-      reviewType: "Workspace Reviews",
-    },
-    testimony:
-      "Spacefinda's Workspace has been instrumental in connecting us with other innovators and potential partners. The networking opportunities have been invaluable for our business",
-  },
-];
 
 export default function Home() {
   return (
@@ -95,32 +30,7 @@ export default function Home() {
         </div>
 
         <div className="relative mt-8 flex flex-col-reverse gap-8 md:block">
-          <div className="bg-grey p-4 w-11/12 mx-auto md:mx-0 md:w-80 md:absolute md:top-1/2 md:-translate-y-1/2 md:left-0">
-            <h4 className="flex items-center justify-between text-white">
-              Find Your Spacefinda
-              <Search />
-            </h4>
-            <div className="space-y-3.5 mt-4">
-              <DropdDown
-                options={[
-                  {value: "lagos", note: "Lagos"},
-                  {value: "ibadan", note: "Ibadan"},
-                  {value: "abuja", note: "Abuja"},
-                ]}
-                placeholder="Location"
-              />
-              <DropdDown
-                options={[
-                  {value: "shortlet", note: "Shortlet"},
-                  {value: "workspace", note: "Worksplace"},
-                  {value: "rent", note: "Rent"},
-                ]}
-                placeholder="Type"
-              />
-              <DropdDown options={[]} placeholder="Date" />
-              <Button className="bg-blue text-white rounded-none w-full">Find my Spacefinda</Button>
-            </div>
-          </div>
+          <SearchProperties />
           <Image
             alt="A room with desk and chairs"
             className="md:ml-auto w-full md:w-11/12 lg:w-[75%]"
@@ -166,11 +76,11 @@ export default function Home() {
 
             <ul className="bg-white text-center flex px-3 md:px-6 py-3 gap-2.5 md:gap-8 absolute -bottom-5 right-0 md:-right-8">
               <li className="about-count-wrapper">
-                <span className="text-xs sm:text-lg font-semibold">10000+</span>
+                <span className="text-xs sm:text-lg font-semibold">10+</span>
                 <span className="font-medium text-[8px] sm:text-xs">request completed</span>
               </li>
               <li className="about-count-wrapper">
-                <span className="text-xs sm:text-lg font-semibold">5000+</span>
+                <span className="text-xs sm:text-lg font-semibold">5+</span>
                 <span className="font-medium text-[8px] sm:text-xs">Uptime request</span>
               </li>
               <li className="about-count-wrapper">
@@ -178,7 +88,7 @@ export default function Home() {
                 <span className="font-medium text-[8px] sm:text-xs">satisfaction rate</span>
               </li>
               <li className="about-count-wrapper">
-                <span className="text-xs sm:text-lg font-semibold">2000+</span>
+                <span className="text-xs sm:text-lg font-semibold">5+</span>
                 <span className="font-medium text-[8px] sm:text-xs">Business Supported</span>
               </li>
             </ul>
@@ -255,68 +165,6 @@ export default function Home() {
           </ul>
         </Wrapper>
       </section>
-      {/* 
-      <section>
-        <Wrapper className="py-20 space-y-10">
-          <Title title="The Partners" />
-          <div className="grid grid-cols-2 sm:flex items-center justify-between">
-            {partners.map((item, index) => {
-              return (
-                <Image
-                  key={index}
-                  alt="Partner logo"
-                  className="h-12 object-contain aspect-auto "
-                  src={item}
-                />
-              );
-            })}
-          </div>
-        </Wrapper>
-      </section>
-
-      <section>
-        <Wrapper className="py-20 space-y-10">
-          <Title title="The Testimonials" />
-          <div className=" relative">
-            <video poster="/video-poster.png">
-              <source src="" type="video/mp4" />
-            </video>
-            <button className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <svg
-                fill="none"
-                height="83"
-                viewBox="0 0 67 83"
-                width="67"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 1L66 41.5L1 82V1Z"
-                  fill="white"
-                  stroke="#C5C5C5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
-            {testimonies.map((item, index) => {
-              return (
-                <TestimonialCard
-                  key={index}
-                  image="/user.png"
-                  name={item.user.name}
-                  occupation={item.user.occupation}
-                  reviewType={item.user.reviewType}
-                  testimony={item.testimony}
-                />
-              );
-            })}
-          </ul>
-        </Wrapper>
-      </section> */}
     </>
   );
 }

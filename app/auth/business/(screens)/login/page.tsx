@@ -9,6 +9,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 
 import {useLogIn} from "@/api/auth/login";
 import {Form, FormField, FormItem, FormMessage, FormControl} from "@/components/ui/form";
+import {faceBookSignin, googleSignin} from "@/lib/utils";
 
 import SocialBtn from "../_components/social-btn/social-btn";
 import FormInput from "../_components/form-control/form-control";
@@ -89,8 +90,16 @@ function Page() {
         </div>
 
         <div className="flex justify-center gap-3 pt-4">
-          <SocialBtn image="/icons/facebook.svg" name="Continue with Facebook" />
-          <SocialBtn image="/icons/google.svg" name="Continue with Google" />
+          <SocialBtn
+            image="/icons/facebook.svg"
+            name="Continue with Facebook"
+            signIn={faceBookSignin}
+          />
+          <SocialBtn
+            image="/icons/google.svg"
+            name="Continue with Google"
+            signIn={() => googleSignin("business")}
+          />
         </div>
       </div>
     </div>

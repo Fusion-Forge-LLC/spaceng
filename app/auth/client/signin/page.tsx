@@ -9,6 +9,7 @@ import {useForm} from "react-hook-form";
 
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {useLogIn} from "@/api/auth/login";
+import {googleSignin} from "@/lib/utils";
 
 import EmailInput from "../components/EmailInput";
 import PrimaryAuthButton from "../components/PrimaryAuthButton";
@@ -78,6 +79,7 @@ function ClientSignIn() {
             <button
               className="outline-none text-[#707070] font-medium flex items-center justify-center gap-1.5 bg-[#F2F2F2] rounded-lg py-3.5 w-full"
               type="button"
+              onClick={() => googleSignin("client")}
             >
               <Image
                 alt="google signIn"

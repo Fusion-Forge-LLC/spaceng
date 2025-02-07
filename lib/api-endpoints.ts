@@ -8,7 +8,7 @@ export const API_ENDPOINTS = {
     REGISTER: "auth/register",
     SEND_OTP: "auth/send-otp",
     VERIFY_OTP: "auth/verify-otp",
-    GOOGLE: "auth/google",
+    GOOGLE: "oauth/google/verify",
     CHANGE_PASSWORD: "auth/update-user-password",
     UPDATE_ROLE: "/auth/update-user-role",
   },
@@ -32,6 +32,7 @@ export const API_ENDPOINTS = {
     updateView: (id: string) => `/lists/property/${id}/increase-view`,
     search: (type: "workspace" | "shortlet", searchString: string) =>
       `/lists/search/${type}?q=${searchString}`,
+    locations: `/lists//address/locations`,
   },
 
   TRANSACTION: {

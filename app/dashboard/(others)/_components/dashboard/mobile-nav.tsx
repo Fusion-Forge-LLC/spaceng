@@ -50,7 +50,7 @@ function MobileNav() {
         </button>
 
         <ul className="pt-12 space-y-2">
-          <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard/dashboard" />
+          <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard/overview" />
           <NavItems Icon={ManagementIcon} name="Management" path="/dashboard/management" />
           <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
           <NavItems Icon={CommunicationIcon} name="Communication" path="/dashboard/communication" />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Playfair_Display_SC} from "next/font/google";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
@@ -22,6 +22,10 @@ function Header() {
   const {User} = useUser();
   const [showMobileNav, setShowMobileNav] = useState(false);
   const pathName = usePathname();
+
+  useEffect(() => {
+    setShowMobileNav(false);
+  }, [pathName]);
 
   function toggleMobileMenu() {
     setShowMobileNav((prevState) => !prevState);
@@ -106,29 +110,70 @@ function Header() {
 
         <ul className="space-y-8 pt-10">
           <li>
-            <Link className="mobile-nav-link" href={"/"}>
+            <Link
+              className={cn("mobile-nav-link", pathName === "/" && "underline text-blue")}
+              href={"/"}
+            >
               <HomeIcon />
               Home
             </Link>
           </li>
           <li>
-            <Link className="mobile-nav-link" href={"/services"}>
+            <Link
+              className={cn("mobile-nav-link", pathName === "/services" && "underline text-blue")}
+              href={"/services"}
+            >
               <ServicesIcon />
               Services
             </Link>
           </li>
           <li>
-            <Link className="mobile-nav-link" href={"/about-us"}>
+            <Link
+              className={cn("mobile-nav-link", pathName === "/about-us" && "underline text-blue")}
+              href={"/about-us"}
+            >
               <AboutIcon />
               About us
             </Link>
           </li>
           <li>
-            <Link className="mobile-nav-link" href={"/contact-us"}>
+            <Link
+              className={cn("mobile-nav-link", pathName === "/contact-us" && "underline text-blue")}
+              href={"/contact-us"}
+            >
               <PhoneIcon />
               Contact Us
             </Link>
           </li>
+          <>
+            {!User ? (
+              <>
+                <li>
+                  <Link href={"/auth/client/signin"}>
+                    <Button className="bg-blue text-white w-full">Client</Button>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/auth/business"}>
+                    <Button className="border-grey-100 py-2 font-medium w-full" variant={"outline"}>
+                      Business
+                    </Button>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link
+                  className="hidden lg:flex gap-4"
+                  href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}
+                >
+                  <Button className="bg-blue text-white min-w-32">
+                    {User.role === "business" ? "Dashboard" : "Account"}
+                  </Button>
+                </Link>
+              </li>
+            )}
+          </>
         </ul>
       </div>
     </header>

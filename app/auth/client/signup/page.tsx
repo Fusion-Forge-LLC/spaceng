@@ -10,6 +10,7 @@ import {useRouter} from "next/navigation";
 
 import {useSignUp} from "@/api/auth/signup";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
+import {googleSignin} from "@/lib/utils";
 
 import PasswordValidators from "../components/password-validators";
 import PrimaryAuthButton from "../components/PrimaryAuthButton";
@@ -155,6 +156,7 @@ function ClientSignUp() {
             <button
               className="outline-none text-[#707070] font-medium flex items-center justify-center gap-1.5 bg-[#F2F2F2] rounded-lg py-3.5 w-full"
               type="button"
+              onClick={() => googleSignin("client")}
             >
               <Image
                 alt="google signIn"
