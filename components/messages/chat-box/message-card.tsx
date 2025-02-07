@@ -18,10 +18,10 @@ function MessageCard({
 }) {
   return (
     <li className={cn("flex", senderRole === "client" ? "justify-end" : "justify-start")}>
-      <div className="w-full max-w-lg bg-grey-200/20 rounded-lg p-3">
+      <div className="w-fit max-w-lg bg-grey-200/20 rounded-lg p-3">
         <p>{text}</p>
         <div className="flex items-center gap-2 justify-end">
-          <span>{time}</span>
+          <span className="text-sm">{time}</span>
           {senderRole === "client" && isRead && <CheckCheck size={16} />}
         </div>
       </div>

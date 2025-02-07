@@ -188,8 +188,8 @@ export function useWhoAmI() {
     const {user, profile} = data.data;
 
     const payload = {
-      ...user,
       ...profile,
+      ...user,
     };
 
     return {

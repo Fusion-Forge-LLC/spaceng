@@ -92,5 +92,6 @@ export const API_ENDPOINTS = {
   CHAT: {
     getRoom: `/room`,
     messages: (id: string) => `/messages/${id}`,
+    chatPeer: (id: string) => `/room/${id}`,
   },
 };

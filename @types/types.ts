@@ -133,3 +133,18 @@ export interface MessageTypes {
   senderRole: Role;
   updatedAt: string;
 }
+
+export interface Messages {
+  __v: number;
+  _id: string;
+  createdAt: string;
+  creator: string;
+  isRead: boolean;
+  message: string;
+  readAt: null | string;
+  receiver: string;
+  receiverRole: "client" | "business";
+  roomId: string;
+  senderRole: "client" | "business";
+  updatedAt: string;
+}

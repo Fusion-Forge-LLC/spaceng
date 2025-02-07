@@ -154,3 +154,63 @@ export function checkAllChecked(newsletters: {[key: string]: string | boolean}) 
 
   return Object.values(newsletters).every((value) => value === true);
 }
+
+export function formatMessageDate(inputDate: string) {
+  const currentDate = new Date();
+  const givenDate = new Date(inputDate);
+
+  const diffTime = currentDate.getTime() - givenDate.getTime();
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  // Format givenDate for fallback (when it's not within a week)
+  const fallbackDate = givenDate.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  // Check conditions
+  if (diffDays === 0) {
+    return "today";
+  } else if (diffDays === 1) {
+    return "yesterday";
+  } else if (diffDays < 7) {
+    return givenDate.toLocaleDateString(undefined, {weekday: "long"});
+  } else {
+    return fallbackDate;
+  }
+}
+
+export function formatDateString(dateString: string) {
+  const date = new Date(dateString);
+  const today = new Date();
+  const yesterday = new Date(today);
+
+  yesterday.setDate(today.getDate() - 1);
+
+  const timeDiff = today.getTime() - date.getTime();
+  const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+
+  if (timeDiff < oneDayInMilliseconds) {
+    const hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${hours}:${minutes}`;
+  } else if (date >= yesterday) {
+    return "Yesterday";
+  } else if (date.getTime() >= today.getTime() - 7 * 24 * 60 * 60 * 1000) {
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    return daysOfWeek[date.getDay()];
+  } else {
+    return date.toLocaleDateString("en-GB", {year: "numeric", month: "short", day: "numeric"});
+  }
+}

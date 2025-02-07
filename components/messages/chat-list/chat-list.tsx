@@ -4,14 +4,17 @@ import {ChevronDown, Search, Settings2Icon} from "lucide-react";
 import React, {useState} from "react";
 
 import {cn} from "@/lib/utils";
+import {useGetChatList} from "@/api/chat/get-chatlist";
+import Loader from "@/components/loader/loader";
 
 import List from "./list";
 
 function ChatList() {
   const [chatsPreference, setChatPreference] = useState<"all" | "unread">("all");
+  const {data, isLoading} = useGetChatList();
 
   return (
-    <aside className="h-full w-96 border border-grey-200 border-b-0 text-black">
+    <aside className="h-full w-96 border border-grey-200 border-b-0 text-black flex flex-col overflow-hidden">
       <header className="flex items-center gap-8 py-5 px-5">
         <span className="font-semibold text-xl mr-auto">Messages</span>
         <button className="chat-header-btn">
@@ -42,8 +45,14 @@ function ChatList() {
           Unread
         </button>
       </div>
-      <div className="py-8 flex flex-col items-center w-full px-5 gap-4">
-        <List />
+      <div className="py-8 flex flex-col items-center w-full px-5 gap-4 flex-1 overflow-hidden">
+        {isLoading ? (
+          <div className="h-full w-full grid place-content-center">
+            <Loader />
+          </div>
+        ) : (
+          <List chatList={data?.data || []} />
+        )}
       </div>
     </aside>
   );

@@ -116,6 +116,9 @@
   .chat-header-btn {
     @apply h-8 w-8 bg-[#DDD9D9] grid place-content-center rounded-full;
   }
+  .tag {
+    @apply block w-fit mx-auto bg-[#FAFAFA] px-2 py-1 capitalize rounded text-[#2F364B] text-xs;
+  }
 }
 
 @layer base {

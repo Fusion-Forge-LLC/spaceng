@@ -2,7 +2,6 @@
 
 import {UseMutationResult, useMutation} from "@tanstack/react-query";
 import {AxiosError} from "axios";
-import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 
 import {API_ENDPOINTS} from "@/lib/api-endpoints";
@@ -22,14 +21,10 @@ const signUp = async (payload: SignUpPayload) => {
   console.log(API_ENDPOINTS.AUTH.REGISTER);
   const {data} = await postRequest<any, SignUpPayload>(API_ENDPOINTS.AUTH.REGISTER, payload);
 
-  console.log(data);
-
   return data;
 };
 
 export const useSignUp = (): UseMutationResult<any, AxiosError<ErrorData>, SignUpPayload> => {
-  const router = useRouter();
-
   return useMutation({
     mutationFn: signUp,
     onSuccess: (data, variables) => {
@@ -37,9 +32,6 @@ export const useSignUp = (): UseMutationResult<any, AxiosError<ErrorData>, SignU
     },
     onError: (error) => {
       displayErrorMessage(error);
-    },
-    onSettled(data, error) {
-      console.log(data, error);
     },
   });
 };

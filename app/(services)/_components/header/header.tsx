@@ -7,9 +7,12 @@ import {Menu, X} from "lucide-react";
 import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
 import {AboutIcon, HomeIcon, PhoneIcon, ServicesIcon} from "@/components/Icons/icons";
+import {Button} from "@/components/ui/button";
+import {useUser} from "@/context/user";
 
 function Header() {
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const {User} = useUser();
 
   function toggleMobileMenu() {
     setShowMobileNav((prevState) => !prevState);
@@ -29,20 +32,31 @@ function Header() {
           <Link href={"/contact-us"}>Contact us</Link>
         </nav>
 
-        <div className="font-medium hidden md:flex gap-5 text-center">
+        {!User ? (
+          <div className="font-medium hidden md:flex gap-5 text-center">
+            <Link
+              className="font-medium rounded-[11px] w-28 py-2 px-3 border border-blue bg-blue text-white hover:bg-transparent hover:text-blue"
+              href={"/"}
+            >
+              Business
+            </Link>
+            <Link
+              className="rounded-[11px] w-28 py-2 px-3 border border-[#505050] hover:bg-[#505050] hover:text-white"
+              href={"/auth/client/signin"}
+            >
+              Client
+            </Link>
+          </div>
+        ) : (
           <Link
-            className="font-medium rounded-[11px] w-28 py-2 px-3 border border-blue bg-blue text-white hover:bg-transparent hover:text-blue"
-            href={"/"}
+            className="hidden lg:flex gap-4"
+            href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}
           >
-            Business
+            <Button className="bg-blue text-white min-w-32">
+              {User.role === "business" ? "Dashboard" : "Account"}
+            </Button>
           </Link>
-          <Link
-            className="rounded-[11px] w-28 py-2 px-3 border border-[#505050] hover:bg-[#505050] hover:text-white"
-            href={"/auth/client/signin"}
-          >
-            Client
-          </Link>
-        </div>
+        )}
 
         <button className="md:hidden" onClick={toggleMobileMenu}>
           <Menu />

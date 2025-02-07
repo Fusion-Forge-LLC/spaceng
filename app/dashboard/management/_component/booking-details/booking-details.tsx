@@ -11,6 +11,7 @@ function BookingDetails({booking}: {booking: BookingResponse["booking"]}) {
   const {mutate, isPending} = useGetChatRoom();
   const {User} = useUser();
 
+  console.log(User);
   const dateString = (date: string) => {
     return new Date(date).toLocaleDateString("en-us", {
       month: "long",
