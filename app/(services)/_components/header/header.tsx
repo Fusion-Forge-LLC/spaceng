@@ -36,7 +36,7 @@ function Header() {
           <div className="font-medium hidden md:flex gap-5 text-center">
             <Link
               className="font-medium rounded-[11px] w-28 py-2 px-3 border border-blue bg-blue text-white hover:bg-transparent hover:text-blue"
-              href={"/"}
+              href={"/auth/business/login"}
             >
               Business
             </Link>

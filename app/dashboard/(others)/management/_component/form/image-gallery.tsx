@@ -53,7 +53,11 @@ function ImageGallery({images, setImages}: Props) {
             return (
               <div key={index} className="aspect-square relative">
                 <Image fill alt="Property image" src={item} />
-                <button className="absolute top-2 right-2" onClick={() => removeImage(item)}>
+                <button
+                  className="absolute top-2 right-2"
+                  type="button"
+                  onClick={() => removeImage(item)}
+                >
                   <Trash2 size={20} />
                 </button>
               </div>

@@ -3,6 +3,7 @@
 import React, {useEffect} from "react";
 
 import {useLogIn} from "@/api/auth/google-login";
+import Loader from "@/components/loader/loader";
 
 function Page({searchParams}: {searchParams: {code: string}}) {
   const {mutate, isPending} = useLogIn();
@@ -16,7 +17,11 @@ function Page({searchParams}: {searchParams: {code: string}}) {
     });
   }, []);
 
-  return <div>{searchParams.code}</div>;
+  return (
+    <div className="h-screen w-full grid place-content-center">
+      <Loader />
+    </div>
+  );
 }
 
 export default Page;
