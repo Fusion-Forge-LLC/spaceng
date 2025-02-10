@@ -101,6 +101,35 @@ function Header() {
               Contact Us
             </Link>
           </li>
+          <>
+            {!User ? (
+              <>
+                <li>
+                  <Link href={"/auth/client/signin"}>
+                    <Button className="bg-blue text-white w-full">Client</Button>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/auth/business"}>
+                    <Button className="border-grey-100 py-2 font-medium w-full" variant={"outline"}>
+                      Business
+                    </Button>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link
+                  className="hidden lg:flex gap-4"
+                  href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}
+                >
+                  <Button className="bg-blue text-white min-w-32">
+                    {User.role === "business" ? "Dashboard" : "Account"}
+                  </Button>
+                </Link>
+              </li>
+            )}
+          </>
         </ul>
       </div>
     </header>
