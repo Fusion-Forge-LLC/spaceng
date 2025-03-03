@@ -1,7 +1,6 @@
 "use client";
 
 import React, {useEffect, useState} from "react";
-import {Playfair_Display_SC} from "next/font/google";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Menu, X} from "lucide-react";
@@ -12,11 +11,6 @@ import {useUser} from "@/context/user";
 import {Button} from "../ui/button";
 import Wrapper from "../wrapper/wrapper";
 import {AboutIcon, HomeIcon, PhoneIcon, ServicesIcon} from "../Icons/icons";
-
-const playfair = Playfair_Display_SC({
-  subsets: ["latin"],
-  weight: "400",
-});
 
 function Header() {
   const {User} = useUser();
@@ -32,37 +26,22 @@ function Header() {
   }
 
   return (
-    <header className="py-6">
+    <header className="py-6 z-10">
       <Wrapper>
-        <div className="flex items-center justify-between">
-          <span className={cn(playfair.className, "text-2xl md:text-4xl")}>SPACEFINDA</span>
+        <div className="flex items-center justify-between text-white">
+          <span className={cn("text-xl")}>SPACE FINDA</span>
           <nav className="px-4 py-2.5 hidden lg:block">
-            <ul className="flex items-center justify-center gap-12">
-              <li className={cn("hover:text-blue", pathName === "/" && "border-b-2 border-b-blue")}>
+            <ul className="flex items-center justify-center gap-12 text-[#C4C4C4]">
+              <li className={cn("hover:text-blue", pathName === "/" && "text-white")}>
                 <Link href={"/"}>Home</Link>
               </li>
-              <li
-                className={cn(
-                  "hover:text-blue",
-                  pathName === "/services" && "border-b-2 border-b-blue",
-                )}
-              >
+              <li className={cn("hover:text-blue", pathName === "/services" && "text-white")}>
                 <Link href={"/services"}>Services</Link>
               </li>
-              <li
-                className={cn(
-                  "hover:text-blue",
-                  pathName === "/about-us" && "border-b-2 border-b-blue",
-                )}
-              >
+              <li className={cn("hover:text-blue", pathName === "/about-us" && "text-white")}>
                 <Link href={"/about-us"}>About Us</Link>
               </li>
-              <li
-                className={cn(
-                  "hover:text-blue",
-                  pathName === "/contact-us" && "border-b-2 border-b-blue",
-                )}
-              >
+              <li className={cn("hover:text-blue", pathName === "/contact-us" && "text-white")}>
                 <Link href={"/contact-us"}>Contact Us</Link>
               </li>
             </ul>
@@ -71,10 +50,13 @@ function Header() {
           {!User ? (
             <div className="hidden lg:flex gap-4">
               <Link href={"/auth/client/signin"}>
-                <Button className="bg-blue text-white min-w-32">Client</Button>
+                <Button className="border border-white bg-blue text-white min-w-32">Client</Button>
               </Link>
               <Link href={"/auth/business"}>
-                <Button className="border-grey-100 py-2 font-medium min-w-32" variant={"outline"}>
+                <Button
+                  className="border-grey-100 py-2 font-medium min-w-32 text-[#707070]"
+                  variant={"outline"}
+                >
                   Business
                 </Button>
               </Link>

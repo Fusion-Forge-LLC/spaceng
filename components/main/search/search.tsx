@@ -1,6 +1,5 @@
 "use client";
 
-import {Search} from "lucide-react";
 import {useRouter} from "next/navigation";
 import React, {FormEvent, useState} from "react";
 
@@ -22,12 +21,9 @@ function SearchProperties() {
   };
 
   return (
-    <div className="bg-grey p-4 w-11/12 mx-auto md:mx-0 md:w-80 md:absolute md:top-1/2 md:-translate-y-1/2 md:left-0">
-      <h4 className="flex items-center justify-between text-white">
-        Find Your Spacefinda
-        <Search />
-      </h4>
-      <form className="space-y-3.5 mt-4" onSubmit={handleSubmit}>
+    <div className="bg-[#181818] p-4 pb-10 md:w-10/12 border-2 z-10 border-white">
+      <h4>Find Your Space</h4>
+      <form className="space-y-6 mt-4 text-[#434343]" onSubmit={handleSubmit}>
         <DropdDown
           options={
             data
@@ -49,7 +45,7 @@ function SearchProperties() {
           value={type}
           onValueChange={(value) => setType(value)}
         />
-        <Button className="bg-blue text-white rounded-none w-full">Find my Spacefinda</Button>
+        <Button className="bg-blue text-white rounded-none w-full py-2">Search</Button>
       </form>
     </div>
   );
