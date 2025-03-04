@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {useState} from "react";
 
 import Fullname from "@/app/(account_management)/_components/settings/fullname";
@@ -13,6 +12,7 @@ import Nationality from "@/app/(account_management)/_components/settings/nationa
 import Gender from "@/app/(account_management)/_components/settings/gender";
 import Address from "@/app/(account_management)/_components/settings/address";
 import Id from "@/app/(account_management)/_components/settings/id";
+import ProfilePicture from "@/app/(account_management)/_components/settings/profile-picture";
 
 type PersonalInfoBlocks = {
   [key: string]: boolean;
@@ -59,81 +59,10 @@ export default function PersonalInfoPage() {
             Update your information and found out how it’s used
           </p>
         </div>
-        <Image
-          alt="profile picture"
-          className="w-12 h-12 lg:w-16 lg:h-16 rounded-full"
-          height={64}
-          src={"/account_management/Image holder.svg"}
-          width={64}
-        />
+        <ProfilePicture profileImage={User.profile_image} />
       </div>
       <div className="py-2 md:p-4 flex flex-col gap-4">
         <Fullname prevValue={User.fullname} />
-
-        {/* <div className="">
-          <div
-            className={` ${personalInfoBlocks.displayName ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
-            style={{borderBottomWidth: "0.1px"}}
-          >
-            <div className="flex flex-col gap-3">
-              <h2 className="font-medium">Display name</h2>
-              <p className="text-grey-200">Choose a display name</p>
-            </div>
-            <button
-              className="text-blue font-medium cursor-pointer hidden lg:block"
-              onClick={() => handleEdit("displayName")}
-            >
-              Edit
-            </button>
-            <button
-              className="text-blue font-medium cursor-pointer block lg:hidden ml-auto"
-              onClick={() => handleEdit("displayName")}
-            >
-              Edit
-            </button>
-          </div>
-          <div
-            className={` ${personalInfoBlocks.displayName ? "" : "hidden"}  py-4 border-grey-200 box-border `}
-            style={{borderBottomWidth: "0.1px"}}
-          >
-            <div className="flex justify-between gap-2 mb-3">
-              <h2 className="font-medium">Display name</h2>
-              <button
-                className="text-blue font-medium cursor-pointer hidden lg:block"
-                onClick={() => handleEdit("displayName")}
-              >
-                Cancel
-              </button>
-            </div>
-            <p className="text-grey-200 mb-6">
-              This how your first name will appear to hosts and guests
-            </p>
-            <div className="flex flex-col gap-1 mb-4">
-              <label className="text-grey-200 text-sm" htmlFor="displayName">
-                Preferred name (optional)
-              </label>
-              <input
-                className="py-3.5 px-4 outline-none border-[#D5D8DA] rounded-lg max-w-[380px] "
-                id="firstName"
-                name="firstName"
-                placeholder="Peters"
-                style={{borderWidth: "0.5px"}}
-                type="text"
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="text-blue font-medium cursor-pointer text-sm lg:hidden"
-                onClick={() => handleEdit("displayName")}
-              >
-                Cancel
-              </button>
-              <button className="py-2 lg:py-3 px-2.5 lg:px-4 text-sm lg:text-base bg-blue rounded-lg text-white block ml-auto">
-                Save
-              </button>
-            </div>
-          </div>
-        </div> */}
 
         <div className="">
           <div

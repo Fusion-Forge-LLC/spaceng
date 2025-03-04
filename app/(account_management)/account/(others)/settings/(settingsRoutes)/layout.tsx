@@ -83,9 +83,9 @@ const sidebar = [
     title: "Privacy",
     url: "/account/settings/privacy",
   },
-  {
-    icon: "/account_management/preference.svg",
-    title: "Preferences",
-    url: "/account/settings/preference",
-  },
+  // {
+  //   icon: "/account_management/preference.svg",
+  //   title: "Preferences",
+  //   url: "/account/settings/preference",
+  // },
 ];

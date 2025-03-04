@@ -7,6 +7,8 @@ import {useSearchParams} from "next/navigation";
 import {useSendOtp} from "@/api/auth/send-otp";
 import {useVerifyOtp} from "@/api/auth/verify-otp";
 import {InputOTP, InputOTPGroup, InputOTPSlot} from "@/components/ui/input-otp";
+import {useReSendOtp} from "@/api/auth/resend-otp";
+import Loader from "@/components/loader/loader";
 
 import PrimaryAuthButton from "../components/PrimaryAuthButton";
 
@@ -16,6 +18,7 @@ function VerifyEmail() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
   const {mutate: sendTop} = useSendOtp();
+  const {isPending: isOtpResending, mutate: ResendOtp} = useReSendOtp();
 
   const {isPending, mutate: verifyOtp} = useVerifyOtp(
     `/auth/client/verify-email/success?code=${code}`,
@@ -30,6 +33,8 @@ function VerifyEmail() {
     verifyOtp({otpCode: code, id: ""});
   };
 
+  const resendCode = () => ResendOtp({email});
+
   return (
     <form className="py-10 px-2 lg:px-6 md:text-base w-full" onSubmit={submitCode}>
       <h1 className="text-grey font-semibold text-2xl mb-6">Verify email</h1>
@@ -38,7 +43,7 @@ function VerifyEmail() {
         Below
       </p>
       <div className="py-4">
-        <h3 className="mb-2">Enter 6 Digit Code</h3>
+        <h3 className="mb-2">Enter 4 Digit Code</h3>
         <InputOTP
           maxLength={4}
           pattern={REGEXP_ONLY_DIGITS}
@@ -66,8 +71,13 @@ function VerifyEmail() {
         isLoading={isPending}
         onClick={() => {}}
       />
-      <button className="text-[#707070] font-medium mx-auto block py-2.5 hover:bg-grey-200/10 w-full rounded-md">
-        Resend verification code
+      <button
+        className="text-[#707070] font-medium mx-auto block py-2.5 hover:bg-grey-200/10 w-full rounded-md"
+        disabled={isOtpResending}
+        type="button"
+        onClick={resendCode}
+      >
+        {isOtpResending ? <Loader /> : "Resend verification code"}
       </button>
     </form>
   );

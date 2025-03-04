@@ -74,7 +74,7 @@ function Page() {
                 </div>
               </li>
 
-              <li className="flex">
+              {/* <li className="flex">
                 <span className="w-1/2">SMS Notification</span>
                 <div className="space-y-2 flex-1">
                   <CheckMark
@@ -90,7 +90,7 @@ function Page() {
                     value={User?.sms_notifications?.promotion}
                   />
                 </div>
-              </li>
+              </li> */}
 
               <li className="flex">
                 <span className="w-1/2">App Notifications</span>
@@ -118,7 +118,7 @@ function Page() {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h4 className="text-grey-200 mb-5 font-medium text-base">Security Settings</h4>
             <ul>
               <li className="flex">
@@ -139,7 +139,7 @@ function Page() {
                 </div>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div>
             <h4 className="text-grey-200 mb-5 font-medium text-base">Login History</h4>
@@ -160,9 +160,9 @@ function Page() {
                   </li>
                   <li>{loginHistory[loginHistory.length - 2].device}</li>
                 </ul>
-                <button className="border mx-auto block hover:bg-blue hover:text-white transition-all border-blue text text-blue rounded-3xl py-2.5 px-5 text-sm font-medium">
+                {/* <button className="border mx-auto block hover:bg-blue hover:text-white transition-all border-blue text text-blue rounded-3xl py-2.5 px-5 text-sm font-medium">
                   Remove Device
-                </button>
+                </button> */}
               </div>
             ) : (
               <p className="text-center opacity-75 pb-10">No history found</p>

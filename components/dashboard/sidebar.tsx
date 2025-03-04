@@ -8,7 +8,6 @@ import {
   CommunicationIcon,
   DashboardIcon,
   FinanceIcon,
-  HelpIcon,
   ManagementIcon,
   SettingsIcon,
 } from "@/app/dashboard/(others)/_components/nav-items/icons/icons";
@@ -24,7 +23,7 @@ function Sidebar() {
         <NavItems Icon={CommunicationIcon} name="Communication" path="/dashboard/communication" />
         <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
         <NavItems Icon={SettingsIcon} name="Settings" path="/dashboard/settings" />
-        <NavItems Icon={HelpIcon} name="Help" path="/dashboard/help" />
+        {/* <NavItems Icon={HelpIcon} name="Help" path="/dashboard/help" /> */}
         <Logout />
       </ul>
 

@@ -154,9 +154,9 @@ export function PayoutHistory() {
       <div className="flex items-center py-4">
         <Input
           className="max-w-sm"
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
+          placeholder="Filter Status..."
+          value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
+          onChange={(event) => table.getColumn("status")?.setFilterValue(event.target.value)}
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

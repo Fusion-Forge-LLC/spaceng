@@ -12,6 +12,7 @@ import {useUser} from "@/context/user";
 import {useInitPlan} from "@/api/transaction/initPlan";
 import {useNewPlan} from "@/api/profile/plan";
 import Loader from "@/components/loader/loader";
+import {useFreePlan} from "@/api/profile/free-plan";
 
 function Page() {
   return (
@@ -93,9 +94,17 @@ function Card({
   const {User} = useUser();
   const {mutateAsync, isPending} = useInitPlan();
   const {mutate, isPending: isLoading} = useNewPlan();
+  const {mutate: Freeplan, isPending: freePlanLoading} = useFreePlan();
+
   const handleClick = () => {
     if (!User) {
       router.push("/auth/business/login?redirect=/pricing");
+
+      return;
+    }
+
+    if (plan === "basic") {
+      Freeplan(null);
 
       return;
     }
@@ -151,7 +160,7 @@ function Card({
         disabled={isPending || isLoading}
         onClick={handleClick}
       >
-        {isPending || isLoading ? <Loader /> : "Get Started"}
+        {isPending || isLoading || freePlanLoading ? <Loader /> : "Get Started"}
       </button>
     </div>
   );

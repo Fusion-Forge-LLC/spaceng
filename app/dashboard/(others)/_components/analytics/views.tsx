@@ -23,7 +23,7 @@ function Views() {
       </li>
       <li className="flex justify-between">
         <span>Monthly Change</span>
-        <span>+{data?.data.percentageChange}%</span>
+        <span>+{data?.data.percentageChange ? Math.ceil(data?.data.percentageChange) : 0}%</span>
       </li>
       <li className="flex justify-between">
         <span>Top-Performing period</span>

@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/select";
 import {FormField, FormItem, FormMessage, FormControl} from "@/components/ui/form";
 import FormInput from "@/app/dashboard/(others)/_components/form-control/form-input";
-import {Button} from "@/components/ui/button";
 import "react-quill/dist/quill.snow.css";
 
 function Basic({form}: {form: any}) {
@@ -45,7 +44,7 @@ function Basic({form}: {form: any}) {
             </FormItem>
           )}
         />
-        <Button className="bg-blue">Find Address</Button>
+        {/* <Button className="bg-blue">Find Address</Button> */}
       </div>
 
       <div>

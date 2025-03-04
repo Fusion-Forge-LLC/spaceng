@@ -29,7 +29,9 @@ function Header({className}: {className?: {[key: string]: string}}) {
     <header className="py-6 z-10">
       <Wrapper>
         <div className="flex items-center justify-between text-white">
-          <span className={cn("text-xl", className?.logo ?? "text-[#292D32]")}>SPACE FINDA</span>
+          <Link className={cn("text-xl", className?.logo ?? "text-[#292D32]")} href={"/"}>
+            SPACE FINDA
+          </Link>
           <nav className="px-4 py-2.5 hidden lg:block">
             <ul
               className={cn(
@@ -175,10 +177,10 @@ function Header({className}: {className?: {[key: string]: string}}) {
             ) : (
               <li>
                 <Link
-                  className="hidden lg:flex gap-4"
+                  className="flex gap-4"
                   href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}
                 >
-                  <Button className="bg-blue text-white min-w-32">
+                  <Button className="bg-blue text-white w-full">
                     {User.role === "business" ? "Dashboard" : "Account"}
                   </Button>
                 </Link>

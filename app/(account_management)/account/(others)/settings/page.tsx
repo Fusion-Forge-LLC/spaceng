@@ -80,11 +80,11 @@ const settingsList = [
     image: "/account_management/privacy.svg",
     url: "/account/settings/privacy",
   },
-  {
-    title: "Privacy",
-    description: "Change your language, currency and time zone",
-    link: "Manage preferences",
-    image: "/account_management/preference.svg",
-    url: "/account/settings/preferences",
-  },
+  // {
+  //   title: "Privacy",
+  //   description: "Change your language, currency and time zone",
+  //   link: "Manage preferences",
+  //   image: "/account_management/preference.svg",
+  //   url: "/account/settings/preferences",
+  // },
 ];

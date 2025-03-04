@@ -1,8 +1,9 @@
 import {ChevronLeft} from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
-import {ChatIcon, EmailIcon2, PhoneIcon2, PlayIcon} from "@/components/Icons/icons";
+import {ChatIcon, EmailIcon2, PlayIcon} from "@/components/Icons/icons";
 
 const faqs = [
   {
@@ -104,24 +105,27 @@ function Page() {
           </div>
           <div className="min-[1200px]:text-base space-y-5">
             <h4 className="mb-3 font-medium text-base">Contact Support</h4>
-            <div className="flex items-center gap-5">
+            <Link className="flex items-center gap-5" href={"https://x.com/spacefinda"}>
               <span className="flex items-center gap-2">
                 <ChatIcon /> Live Chat
               </span>
               <span className="flex-1">Chat with a support agent for real-time assistance.</span>
-            </div>
-            <div className="flex items-center gap-5">
+            </Link>
+            <Link
+              className="flex items-center gap-5"
+              href={"mailto:spacefindatechnologiesltd@gmail.com"}
+            >
               <span className="flex items-center gap-2">
                 <EmailIcon2 /> Email Support
               </span>
               <span className="flex-1">Submit a ticket for complex inquiries.</span>
-            </div>
-            <div className="flex items-center gap-5">
+            </Link>
+            {/* <div className="flex items-center gap-5">
               <span className="flex items-center gap-2">
                 <PhoneIcon2 /> Email Support
               </span>
               <span className="flex-1">Call our support line during business hours..</span>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>
