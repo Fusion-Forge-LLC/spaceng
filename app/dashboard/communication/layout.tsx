@@ -1,47 +1,27 @@
+"use client";
+
 import React, {ReactNode} from "react";
 
-import ChatList from "../_components/chat/list";
+import Header from "@/components/dashboard/header";
+import Sidebar from "@/components/dashboard/sidebar";
 
-const messages = [
-  {
-    image: "/reviews/image1.jpg",
-    name: "Femi Andrew",
-    text: "Hi, I need a work space for a team of 10 on the 10th of September",
-  },
-  {
-    image: "/reviews/image2.png",
-    name: "Sarah Thomas",
-    text: "Where can I get the Key",
-  },
-  {
-    image: "/reviews/image3.jpg",
-    name: "Femi Andrew",
-    text: "Hi, I need a work space for a team of 10 on the 10th of September",
-  },
-  {
-    image: "/reviews/image4.jpg",
-    name: "Abigail Jack",
-    text: "Where can I get the Key",
-  },
-  {
-    image: "/reviews/image5.png",
-    name: "George Emmanuel",
-    text: "Hi, I need a work space for a team of 10 on the 10th of September",
-  },
-  {
-    image: "/reviews/image6.png",
-    name: "Femi Andrew",
-    text: "Hi, I need a work space for a team of 10 on the 10th of September",
-  },
-];
+import ChatList from "../(others)/_components/chat/list";
 
-function Layout({children}: {children: ReactNode}) {
+function DashboardLyout({children}: {children: ReactNode}) {
   return (
-    <div className="h-full overflow-hidden flex no-scrollbar gap-2 lg:gap-5 min-[1200px]:gap-20">
-      <ChatList messages={messages} />
-      {children}
+    <div className="h-screen flex flex-col">
+      <Header />
+      <div className="flex-1 flex overflow-hidden">
+        <Sidebar />
+        <main className="flex-1 h-full overflow-y-scroll no-scrollbar">
+          <div className="h-full overflow-hidden flex no-scrollbar gap-2 lg:gap-5 min-[1200px]:gap-20">
+            <ChatList />
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
 
-export default Layout;
+export default DashboardLyout;

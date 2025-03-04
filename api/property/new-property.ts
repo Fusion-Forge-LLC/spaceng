@@ -30,7 +30,6 @@ export const useCreateProperty = (): UseMutationResult<
     mutationFn: newProperty,
     onSuccess: (data) => {
       showSuccess(data.message);
-      console.log(data);
       router.push("/dashboard/overview");
     },
     onError: (error) => {

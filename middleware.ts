@@ -34,7 +34,9 @@ export function middleware(req: NextRequest) {
 
     response.cookies.set("spacefinda-redirect", req.nextUrl.pathname);
 
-    return NextResponse.redirect(new URL("/auth/client/signin", req.url));
+    return NextResponse.redirect(
+      new URL(`/auth/client/signin?redirect=${req.nextUrl.pathname}`, req.url),
+    );
   }
 
   // Prevent authenticated users from accessing the login pages

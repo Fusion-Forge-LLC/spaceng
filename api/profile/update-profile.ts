@@ -9,7 +9,7 @@ import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {QueryResponse} from "@/@types/auth";
 
 type payload = {
-  [key: string]: string | boolean;
+  [key: string]: string | boolean | {[key: string]: any};
 };
 
 const updateProfile = async (payload: payload) => {
@@ -25,7 +25,7 @@ export const useUpdateProfile = (): UseMutationResult<
 > => {
   return useMutation({
     mutationFn: updateProfile,
-    onSuccess: (data) => {},
+    onSuccess: () => {},
     onError: (error) => {
       displayErrorMessage(error);
     },

@@ -17,6 +17,13 @@ export type User = {
   _v: number;
 };
 
+type Address = {
+  address: string;
+  city: string;
+  postcode: number;
+  country: string;
+};
+
 export type BusinessProfile = {
   app_notifications: {
     booking: boolean;
@@ -39,6 +46,12 @@ export type BusinessProfile = {
     _id: string;
   };
   total_earnings: number;
+  subscription: {
+    plan: string;
+    subscription_date: string;
+    expiry_date: string;
+    _id: string;
+  };
   __v: number;
   _id: string;
 };
@@ -46,6 +59,11 @@ export type BusinessProfile = {
 export type ClientProfile = {
   _id: string;
   profile_image: string;
+  date_of_birth: string;
+  nationality: string;
+  gender: string;
+  location: Address;
+  government_id: string;
   newsletter_and_services: {
     deal_discovery: boolean;
     rewards: boolean;
@@ -89,7 +107,12 @@ export type whoAmIResponse = User & {
   payouts: PayoutTypes[];
   pending_payout: number;
   profile_image: string;
+  date_of_birth: string;
+  nationality: string;
+  gender: string;
   address: string;
+  location: Address;
+  government_id: string;
   email_notifications: {
     booking: boolean;
     promotion: boolean;
@@ -130,6 +153,12 @@ export type whoAmIResponse = User & {
     _id: string;
   };
   other_rentals: [];
+  subscription: {
+    plan: string;
+    subscription_date: string;
+    expiry_date: string;
+    _id: string;
+  };
   __v: 0;
 };
 
@@ -159,8 +188,8 @@ export function useWhoAmI() {
     const {user, profile} = data.data;
 
     const payload = {
-      ...user,
       ...profile,
+      ...user,
     };
 
     return {

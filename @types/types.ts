@@ -111,3 +111,40 @@ export type PayoutResponse = {
   _id: string;
   __v: 0;
 };
+
+export type Role = "PharmacyProfile" | "User";
+
+export type UserDetails = {
+  avatar: null | string;
+  name: string;
+};
+
+export interface MessageTypes {
+  chatId: string;
+  createdAt: string;
+  isRead: boolean;
+  message: string;
+  readAt: null | string;
+  receiver: string;
+  receiverDetails: UserDetails;
+  receiverRole: Role;
+  sender: string;
+  senderDetails: UserDetails;
+  senderRole: Role;
+  updatedAt: string;
+}
+
+export interface Messages {
+  __v: number;
+  _id: string;
+  createdAt: string;
+  creator: string;
+  isRead: boolean;
+  message: string;
+  readAt: null | string;
+  receiver: string;
+  receiverRole: "client" | "business";
+  roomId: string;
+  senderRole: "client" | "business";
+  updatedAt: string;
+}

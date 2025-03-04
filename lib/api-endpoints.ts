@@ -8,7 +8,7 @@ export const API_ENDPOINTS = {
     REGISTER: "auth/register",
     SEND_OTP: "auth/send-otp",
     VERIFY_OTP: "auth/verify-otp",
-    GOOGLE: "auth/google",
+    GOOGLE: "oauth/google/verify",
     CHANGE_PASSWORD: "auth/update-user-password",
     UPDATE_ROLE: "/auth/update-user-role",
   },
@@ -16,6 +16,7 @@ export const API_ENDPOINTS = {
   UPLOAD: {
     uploadImage: "/media/image",
     uploadVideo: "/media/video",
+    uploadBase64: "/media/base64image",
   },
 
   PROPERTY: {
@@ -28,7 +29,10 @@ export const API_ENDPOINTS = {
   LISTING: {
     listing: (type: string) => `/lists/${type}`,
     details: (id: string) => `/lists/property/${id}`,
-    updateView: (id: string) => `lists/property/${id}/increase-view`,
+    updateView: (id: string) => `/lists/property/${id}/increase-view`,
+    search: (type: "workspace" | "shortlet", searchString: string) =>
+      `/lists/search/${type}?q=${searchString}`,
+    locations: `/lists//address/locations`,
   },
 
   TRANSACTION: {
@@ -36,6 +40,7 @@ export const API_ENDPOINTS = {
     bankpayment: "/transaction/paywithbank",
     getBanks: (query: string) => `/transaction/banks?${query}`,
     verifyBankAccount: (query: string) => `/transaction/verify-account?${query}`,
+    initPlan: `/transaction/plan-payment`,
   },
 
   PRE_BOOKING: `/booking/pre-booking`,
@@ -74,5 +79,20 @@ export const API_ENDPOINTS = {
   PROFILE: {
     update: `/user/profile`,
     changePassword: `/user/change-password`,
+    delete: (id: string) => `/user/delete/${id}`,
+    requestPasswordReset: `/user/reset-password`,
+    changeClientPassword: `/user/reset-password`,
+    plan: "/user/update-plan",
+  },
+
+  OTHER_RENTALS: {
+    add: `/other-rentals`,
+    delete: (id: string) => `/other-rentals/${id}`,
+  },
+
+  CHAT: {
+    getRoom: `/room`,
+    messages: (id: string) => `/messages/${id}`,
+    chatPeer: (id: string) => `/room/${id}`,
   },
 };

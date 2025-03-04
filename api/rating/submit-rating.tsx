@@ -16,7 +16,7 @@ type Payload = {
   propertyId: string;
 };
 
-const logIn = async (payload: Payload) => {
+const submitRatin = async (payload: Payload) => {
   const {data} = await api.post<QueryResponse<null>>(API_ENDPOINTS.RATING.create, payload);
 
   return data;
@@ -30,14 +30,13 @@ export const useSubmitRating = (): UseMutationResult<
   const router = useRouter();
 
   return useMutation({
-    mutationFn: logIn,
+    mutationFn: submitRatin,
     onSuccess: (data) => {
       showSuccess(data.message);
 
       router.push("/account/bookings");
     },
     onError: (error) => {
-      console.log(error);
       displayErrorMessage(error);
     },
   });

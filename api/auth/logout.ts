@@ -18,5 +18,5 @@ export function useSignOut() {
 
 export function logoutUser() {
   Cookies.remove("spacefinda-token");
-  window.location.href = "/auth/login";
+  window.location.href = "/";
 }

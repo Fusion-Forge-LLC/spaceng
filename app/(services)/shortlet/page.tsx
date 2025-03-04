@@ -22,7 +22,7 @@ function Page() {
     <Lists
       properties={data?.data.properties || []}
       total={data?.data.total_properties || 0}
-      type="shortlets"
+      type="shortlet"
     />
   );
 }

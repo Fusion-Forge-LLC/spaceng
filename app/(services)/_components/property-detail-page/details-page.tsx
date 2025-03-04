@@ -11,8 +11,7 @@ import {cn} from "@/lib/utils";
 import {useUpdateViews} from "@/api/property/update-view";
 import {ReviewTypes} from "@/@types/types";
 
-import ReviewCard from "../../_components/review-card/review-card";
-import SearchProperties from "../../_components/search/search";
+import ReviewCard from "../review-card/review-card";
 import BookShortlet from "../booking-page/booking";
 
 function DetailsPage({
@@ -49,7 +48,7 @@ function DetailsPage({
             </p>
           </div>
 
-          <SearchProperties />
+          {/* <SearchProperties /> */}
         </div>
 
         <div className="py-10">

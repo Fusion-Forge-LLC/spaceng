@@ -47,6 +47,9 @@
   .password-input {
     @apply h-11 rounded-lg border border-grey-200 focus-visible:ring-blue;
   }
+  .contact-input {
+    @apply border border-[#C5C5C5] rounded-[5px] bg-white focus:border-blue focus-visible:ring-0 shadow-none;
+  }
 }
 
 @layer components {
@@ -109,6 +112,15 @@
   }
   .client-register-input {
     @apply border-[#707070] border rounded-lg w-full py-3 lg:py-3.5 pr-12 px-3.5 lg:px-4 flex items-center text-grey placeholder:text-[#707070] focus:outline-none focus:border-blue;
+  }
+  .chat-switch-btn {
+    @apply rounded-full px-4 py-2 font-medium flex gap-2 items-center justify-between border border-grey-200 hover:bg-grey-200;
+  }
+  .chat-header-btn {
+    @apply h-8 w-8 bg-[#DDD9D9] grid place-content-center rounded-full;
+  }
+  .tag {
+    @apply block w-fit mx-auto bg-[#FAFAFA] px-2 py-1 capitalize rounded text-[#2F364B] text-xs;
   }
 }
 
@@ -279,4 +291,8 @@ abbr:where([title]) {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px #eaebec;
 }
