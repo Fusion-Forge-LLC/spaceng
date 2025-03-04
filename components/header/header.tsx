@@ -12,7 +12,7 @@ import {Button} from "../ui/button";
 import Wrapper from "../wrapper/wrapper";
 import {AboutIcon, HomeIcon, PhoneIcon, ServicesIcon} from "../Icons/icons";
 
-function Header() {
+function Header({className}: {className?: {[key: string]: string}}) {
   const {User} = useUser();
   const [showMobileNav, setShowMobileNav] = useState(false);
   const pathName = usePathname();
@@ -29,19 +29,48 @@ function Header() {
     <header className="py-6 z-10">
       <Wrapper>
         <div className="flex items-center justify-between text-white">
-          <span className={cn("text-xl")}>SPACE FINDA</span>
+          <span className={cn("text-xl", className?.logo ?? "text-[#292D32]")}>SPACE FINDA</span>
           <nav className="px-4 py-2.5 hidden lg:block">
-            <ul className="flex items-center justify-center gap-12 text-[#C4C4C4]">
-              <li className={cn("hover:text-blue", pathName === "/" && "text-white")}>
+            <ul
+              className={cn(
+                "flex items-center justify-center gap-12 font-medium",
+                className?.navColor ?? "text-[#707070]",
+              )}
+            >
+              <li
+                className={cn(
+                  "hover:text-blue",
+                  pathName === "/" && (className?.active || "text-[#434343]"),
+                  pathName === "/" && "font-bold",
+                )}
+              >
                 <Link href={"/"}>Home</Link>
               </li>
-              <li className={cn("hover:text-blue", pathName === "/services" && "text-white")}>
+              <li
+                className={cn(
+                  "hover:text-blue",
+                  pathName === "/services" && (className?.active || "text-[#434343]"),
+                  pathName === "/services" && "font-bold",
+                )}
+              >
                 <Link href={"/services"}>Services</Link>
               </li>
-              <li className={cn("hover:text-blue", pathName === "/about-us" && "text-white")}>
+              <li
+                className={cn(
+                  "hover:text-blue",
+                  pathName === "/about-us" && (className?.active || "text-[#434343]"),
+                  pathName === "/about-us" && "font-bold",
+                )}
+              >
                 <Link href={"/about-us"}>About Us</Link>
               </li>
-              <li className={cn("hover:text-blue", pathName === "/contact-us" && "text-white")}>
+              <li
+                className={cn(
+                  "hover:text-blue",
+                  pathName === "/contact-us" && (className?.active || "text-[#434343]"),
+                  pathName === "/contact-us" && "font-bold",
+                )}
+              >
                 <Link href={"/contact-us"}>Contact Us</Link>
               </li>
             </ul>
@@ -73,7 +102,7 @@ function Header() {
           )}
 
           <button className="lg:hidden" onClick={toggleMobileMenu}>
-            <Menu />
+            <Menu color={className ? "#FFF" : "#434343"} />
           </button>
         </div>
       </Wrapper>

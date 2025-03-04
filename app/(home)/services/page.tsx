@@ -1,38 +1,24 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
 
 import Wrapper from "@/components/wrapper/wrapper";
-
-import businessImage from "../../../public/business.png";
-import clientImage from "../../../public/client.png";
+import ServiceList from "@/components/main/services/service-list";
 
 function Page() {
   return (
-    <section>
-      <Wrapper className="py-10 pb-20">
-        <article className="pb-24">
-          <h1 className="font-medium text-lg mb-8">Welcome to SpacesNG!</h1>
-          <p className="leading-loose">
-            We&apos;re excited to help you find the perfect workspace or shortlet solution for your
-            business. <br />
-            Explore our suite of categories and experience the best of SpacesNG.
+    <section className="bg-[#F6F6F6] mb-10 sm:mb-20">
+      <Wrapper className="py-20">
+        <article className="pb-8 sm:pb-14">
+          <h1 className="font-semibold text-[22px] sm:text-3xl mb-2">
+            Our Excellent <span className="block sm:inline">Services</span>
+          </h1>
+          <p className="leading-loose max-w-[651px] hidden sm:block text-[#707070]">
+            Spacefinda connects you with a diverse range of flexible spaces, including shortlets for
+            temporary stays, workspaces for increased productivity, and corporate venues for
+            professional gatherings. Find the perfect space to suit your needs, all in one
+            convenient platform
           </p>
         </article>
-        <div className="grid grid-cols1 sm:grid-cols-2 gap-14 sm:gap-10 md:gap-16 lg:gap-20">
-          <div className="relative drop-shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)]">
-            <Image alt="A woman smiling" className="w-full" src={businessImage} />
-            <Link className="service-link" href="/auth/business">
-              Business
-            </Link>
-          </div>
-          <div className="relative drop-shadow-[0px_2px_24.23px_rgba(0,0,0,0.08)]">
-            <Image alt="A woman smiling" className="w-full" src={clientImage} />
-            <Link className="service-link" href="/auth/client/signin">
-              Client
-            </Link>
-          </div>
-        </div>
+        <ServiceList />
       </Wrapper>
     </section>
   );

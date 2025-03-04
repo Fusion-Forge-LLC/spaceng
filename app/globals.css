@@ -47,6 +47,9 @@
   .password-input {
     @apply h-11 rounded-lg border border-grey-200 focus-visible:ring-blue;
   }
+  .contact-input {
+    @apply border border-[#C5C5C5] rounded-[5px] bg-white focus:border-blue focus-visible:ring-0 shadow-none;
+  }
 }
 
 @layer components {

@@ -5,21 +5,17 @@ import Wrapper from "@/components/wrapper/wrapper";
 import FeaturesCard from "@/components/main/features/features";
 import SearchProperties from "@/components/main/search/search";
 import Header from "@/components/header/header";
-import Card from "@/components/main/services/card";
 import {cn} from "@/lib/utils";
-import DifferentCard from "@/components/main/uniqueness/card";
-import {Check, Tag, Time, Variety} from "@/components/Icons/icons";
 import Testimony from "@/components/main/testimonials/testimony";
 import Footer from "@/components/footer/footer";
+import ServiceList from "@/components/main/services/service-list";
+import Uniqueness from "@/components/main/uniqueness/unigueness";
+import OurStory from "@/components/main/our-story/our-story";
 
-import ourStory from "../public/our-story.png";
 import hero from "../public/hero-image.png";
 import feature3 from "../public/features/unsplash_4ojhpgKpS68.png";
 import feature2 from "../public/features/unsplash_yqu6tJkSQ_k.png";
 import feature1 from "../public/features/unsplash_kerFMg52cUA.png";
-import workspaceImage from "../public/services/workspace.png";
-import spacesImage from "../public/services/spaces.png";
-import shortletImage from "../public/services/shortlet.png";
 import heroMobile from "../public/hero-mobile.png";
 
 const poppin = Poppins({subsets: ["latin"], weight: ["500", "600", "700", "400"]});
@@ -28,7 +24,13 @@ export default function Home() {
   return (
     <>
       <div className="md:h-screen bg-gradient-to-br from-[#474747] to-[#222222]">
-        <Header />
+        <Header
+          className={{
+            navColor: "text-[#C4C4C4]",
+            logo: "text-white",
+            active: "text-white",
+          }}
+        />
         <div className="relative overflow-hidden flex-1 z-10">
           <Wrapper>
             <section className="flex-row hidden md:flex">
@@ -82,23 +84,7 @@ export default function Home() {
             Services
           </h4>
 
-          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            <Card
-              image={spacesImage}
-              note="Book professional meeting rooms and event spaces to impress clients and host successful gatherings."
-              title="Corporate Spaces"
-            />
-            <Card
-              image={shortletImage}
-              note="Find the perfect short-term rental for your stay, from cozy apartments to stylish homes."
-              title="Short-lets"
-            />
-            <Card
-              image={workspaceImage}
-              note="Discover inspiring workspaces designed to boost productivity, whether you need a hot desk or a private office."
-              title="Work-spaces"
-            />
-          </ul>
+          <ServiceList />
         </Wrapper>
       </div>
       <div className="mb-20">
@@ -115,55 +101,10 @@ export default function Home() {
                 Different?
               </span>
             </h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
-              <DifferentCard
-                Icon={Variety}
-                note="Spacefinda offers the widest selection of flexible spaces to meet any need."
-                title="Space Variety"
-              />
-              <DifferentCard
-                Icon={Tag}
-                note="Our intuitive platform make finding and booking spaces quick, easy, and stress-free."
-                title="Ease of Use"
-              />
-              <DifferentCard
-                Icon={Time}
-                note="Spacefinda helps you discover the best spaces at competitive prices."
-                title="Best Value"
-              />
-              <DifferentCard
-                Icon={Check}
-                note="Whether you're looking for a temporary home or workspace, Spacefinda is your one-stop shop."
-                title="Space Solution"
-              />
-            </ul>
+            <Uniqueness />
           </section>
 
-          <section className="py-10 md:py-20 space-y-10 flex flex-col-reverse md:flex-row gap-5 items-center">
-            <div className="space-y-5 flex-1">
-              <h3
-                className={cn(
-                  poppin.className,
-                  "text-[#242527] text-2xl sm:text-3xl md:text-5xl font-semibold",
-                )}
-              >
-                <span className="leading-snug">
-                  Our Story <br />
-                  Who we are
-                </span>
-              </h3>
-              <p className="text-[#707070] leading-loose">
-                Spacefinda was born from the need for a simpler, more comprehensive way to find and
-                book flexible spaces. We envisioned a platform that seamlessly connects people with
-                diverse space requirements, from short-term stays to productive workspaces and
-                professional venues. Our mission is to empower individuals and businesses to
-                discover the perfect space for any purpose, all in one convenient location.
-              </p>
-            </div>
-            <div className="shadow-md flex-1">
-              <Image alt="Our Story" src={ourStory} />
-            </div>
-          </section>
+          <OurStory />
 
           <section className="py-10 md:py-20 space-y-10">
             <h3
