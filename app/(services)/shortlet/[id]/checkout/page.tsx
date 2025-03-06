@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 
-import Checkout from "@/app/(services)/_components/checkout-page/checkout";
 import {useGetProperty} from "@/api/property/property";
 import Loader from "@/components/loader/loader";
 import NotFound from "@/components/not-found/not-found";
+
+const Checkout = dynamic(() => import("../../../_components/checkout-page/checkout"), {ssr: false});
 
 function Page({params}: {params: {id: string}}) {
   const {data, isLoading} = useGetProperty(params.id);
