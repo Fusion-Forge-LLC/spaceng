@@ -16,14 +16,14 @@ function Views() {
   }
 
   return (
-    <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+    <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
       <li className="flex justify-between">
         <span>Total Views</span>
         <span>{data?.data.recentCount.toLocaleString()}</span>
       </li>
       <li className="flex justify-between">
         <span>Monthly Change</span>
-        <span>+{data?.data.percentageChange}%</span>
+        <span>+{data?.data.percentageChange ? Math.ceil(data?.data.percentageChange) : 0}%</span>
       </li>
       <li className="flex justify-between">
         <span>Top-Performing period</span>

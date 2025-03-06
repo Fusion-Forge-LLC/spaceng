@@ -21,7 +21,7 @@ function Page() {
 
   return (
     <div className="text-grey-200">
-      <section className="flex items-center justify-between px-4 py-3 md:p-3 border-b border-b-grey-200">
+      <section className="flex items-center justify-between px-4 py-6 md:p-3 border-b border-b-grey-200">
         <div>
           <h1 className="text-grey text-lg sm:text-2xl font-semibold capitalize">
             Welcome {User?.fullname},
@@ -38,7 +38,7 @@ function Page() {
       </section>
 
       <section className="px-4 py-3 md:p-3">
-        <h2 className="text-black font-medium text-sm sm:text-base md:text-lg mb-4 max-md:py-2 flex items-center justify-between">
+        <h2 className="text-black font-medium text-sm sm:text-base md:text-xl mb-4 max-md:py-2 flex items-center justify-between">
           Your Properties at a glance
           <Link
             className="flex items-center gap-0.5 text-xs sm:text-sm group"
@@ -73,7 +73,7 @@ function Page() {
         )}
 
         <div className="grid grid-cols-12 gap-4 pt-10">
-          <div className="col-span-12 lg:col-span-6 border border-[#77787D] rounded-xl py-2 px-3">
+          <div className="col-span-12 lg:col-span-6 bg-grey-100/20 rounded-xl py-2 px-3">
             <h4 className="text-black font-medium mb-2">Your Earnings</h4>
 
             <div className="text-center flex gap-5 mb-4">
@@ -89,10 +89,10 @@ function Page() {
 
             <Chart />
           </div>
-          <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-3">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-3 bg-grey-100/20 rounded-xl py-2 px-3">
             <PayoutHistoryShort />
           </div>
-          <div className="col-span-12 sm:col-span-6 lg:col-span-3 border border-[#77787D] rounded-xl py-2 px-2">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-3 border bg-grey-100/20 rounded-xl py-2 px-2">
             <h4 className="text-black font-medium mb-2">Notifications</h4>
             <p className="py-10 text-center italic">Notification is Empty</p>
             <ul className="space-y-2 hidden">

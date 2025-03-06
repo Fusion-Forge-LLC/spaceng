@@ -1,17 +1,21 @@
 "use client";
 
-import {usePathname} from "next/navigation";
-import React, {useMemo} from "react";
-import Link from "next/link";
+import {usePathname, useRouter} from "next/navigation";
+import React, {useMemo, useState} from "react";
 
 import {CaretDown} from "@/components/Icons/icons";
 import {PopoverElement} from "@/components/style-guide/style-guide";
 import {Calendar} from "@/components/ui/calendar";
 import {useCheckout} from "@/hooks/use-checkout";
+import {useUser} from "@/context/user";
+import Loader from "@/components/loader/loader";
 
 function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"}) {
+  const {User} = useUser();
   const pathName = usePathname();
+  const router = useRouter();
   const {date, guestsCount, setGuestsCount, updateDate} = useCheckout();
+  const [isLoading, setisLoading] = useState(false);
 
   const params = useMemo(() => {
     const checkin = date.checkin?.getTime().toString();
@@ -25,6 +29,18 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
 
     return params.toString();
   }, [date, guestsCount]);
+
+  const checkoutBooking = () => {
+    const path = `${pathName}/checkout?${params}`;
+
+    setisLoading(true);
+    if (User) {
+      router.push(path);
+    } else {
+      sessionStorage.setItem("redirectLink", path);
+      router.push("/auth/client/signin");
+    }
+  };
 
   return (
     <div className="space-y-4 py-6">
@@ -115,9 +131,9 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       </PopoverElement>
 
       {showBtn && (
-        <Link className="booking-btn w-full" href={`${pathName}/checkout?${params}`}>
-          Book
-        </Link>
+        <button className="booking-btn w-full" onClick={checkoutBooking}>
+          {isLoading ? <Loader /> : "Book"}
+        </button>
       )}
     </div>
   );

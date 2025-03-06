@@ -3,19 +3,19 @@
 import {ArrowUp, Delete} from "lucide-react";
 import {Work_Sans} from "next/font/google";
 import React, {useEffect, useState} from "react";
-import {useRouter} from "next/navigation";
 
 import {useVerifyOtp} from "@/api/auth/verify-otp";
 import {cn} from "@/lib/utils";
 import Loader from "@/components/loader/loader";
+import {useReSendOtp} from "@/api/auth/resend-otp";
 
 const worksans = Work_Sans({subsets: ["latin"]});
 
 function EmailVerification({redirect, email}: {redirect: string; email: string}) {
-  const router = useRouter();
   const [code, setCode] = useState<string[]>(["", "", "", ""]);
   const [countdown, setCoundown] = useState("00:59");
   const {isPending, mutate} = useVerifyOtp(redirect + `?code=${code.join("")}`);
+  const {isPending: isOtpResending, mutate: ResendOtp} = useReSendOtp();
 
   useEffect(() => {
     startCountDown();
@@ -61,6 +61,11 @@ function EmailVerification({redirect, email}: {redirect: string; email: string})
     mutate({otpCode: code.join(""), id: ""});
   };
 
+  const resendCode = () => {
+    ResendOtp({email});
+    startCountDown();
+  };
+
   return (
     <div className="business-auth-wrapper font-poppin px-8">
       <h3 className="auth-title mb-2">Please verify your email address</h3>
@@ -84,8 +89,19 @@ function EmailVerification({redirect, email}: {redirect: string; email: string})
             );
           })}
         </div>
-        <button className="text-xs font-medium px-3 rounded-md bg-grey-100/5">
-          Resend code <span className={cn(countdown === "00:00" && "hidden")}>in {countdown}</span>
+        <button
+          className="text-xs font-medium px-3 rounded-md bg-grey-100/5 hover:scale-105 transition-all"
+          disabled={countdown === "00:00" ? false : true}
+          onClick={resendCode}
+        >
+          {isOtpResending ? (
+            <Loader />
+          ) : (
+            <>
+              Resend code{" "}
+              <span className={cn(countdown === "00:00" && "hidden")}>in {countdown}</span>
+            </>
+          )}
         </button>
         <div className={cn(worksans.className, "grid grid-cols-3 w-full gap-2")}>
           <button className="verify-btn" onClick={() => selectNumber(1)}>

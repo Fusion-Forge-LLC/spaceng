@@ -36,12 +36,6 @@ export default function Wishlist() {
             {isPending ? 0 : data?.data.total_wishlists}
           </div>
         </button>
-        <button className="py-1.5 px-4 rounded-lg text-blue bg-[#E2EAFF] font-medium">
-          Share list
-        </button>
-        <button className="py-1.5 px-4 rounded-lg bg-blue text-white font-medium">
-          Create a list
-        </button>
       </div>
       {data?.data.total_wishlists === 0 ? (
         <div className="px-5 lg:px-24 py-7">

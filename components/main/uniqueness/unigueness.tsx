@@ -6,7 +6,7 @@ import DifferentCard from "./card";
 
 function Uniqueness() {
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-sm:text-center">
       <DifferentCard
         Icon={Variety}
         note="Spacefinda offers the widest selection of flexible spaces to meet any need."

@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
     LOGIN: "auth/login",
     REGISTER: "auth/register",
     SEND_OTP: "auth/send-otp",
+    RESEND_OTP: "auth/resend-otp",
     VERIFY_OTP: "auth/verify-otp",
     GOOGLE: "oauth/google/verify",
     CHANGE_PASSWORD: "auth/update-user-password",
@@ -79,10 +80,11 @@ export const API_ENDPOINTS = {
   PROFILE: {
     update: `/user/profile`,
     changePassword: `/user/change-password`,
-    delete: (id: string) => `/user/delete/${id}`,
+    delete: `/user/delete`,
     requestPasswordReset: `/user/reset-password`,
     changeClientPassword: `/user/reset-password`,
     plan: "/user/update-plan",
+    free_plan: "/user/update-freeplan",
   },
 
   OTHER_RENTALS: {
@@ -92,7 +94,10 @@ export const API_ENDPOINTS = {
 
   CHAT: {
     getRoom: `/room`,
-    messages: (id: string) => `/messages/${id}`,
+    messages: (id: string) => `/messages/peer/${id}`,
     chatPeer: (id: string) => `/room/${id}`,
+    unreadMessages: "/messages/unread",
   },
+
+  CONTACT: "/contact/form",
 };

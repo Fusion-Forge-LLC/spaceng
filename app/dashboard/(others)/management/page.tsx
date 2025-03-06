@@ -14,7 +14,7 @@ function Page() {
   const {data, isLoading} = useGetBusinessProperties();
 
   return (
-    <div className="flex-1 h-full overflow-y-scroll overflow-x-hidden px-4">
+    <div className="flex-1 h-full px-4">
       <article className="py-5">
         <h4 className="text-lg sm:text-2xl font-semibold">Your Properties</h4>
         <p className="text-grey-200 max-sm:text-sm">

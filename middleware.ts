@@ -30,13 +30,9 @@ export function middleware(req: NextRequest) {
 
   //Redirect unauthorized users trying to access checkout page
   if (!jwt && req.nextUrl.pathname.includes("checkout")) {
-    const response = NextResponse.next();
+    const redirectPath = req.nextUrl.pathname + req.nextUrl.search;
 
-    response.cookies.set("spacefinda-redirect", req.nextUrl.pathname);
-
-    return NextResponse.redirect(
-      new URL(`/auth/client/signin?redirect=${req.nextUrl.pathname}`, req.url),
-    );
+    return NextResponse.redirect(new URL(`/auth/client/signin?redirect=${redirectPath}`, req.url));
   }
 
   // Prevent authenticated users from accessing the login pages

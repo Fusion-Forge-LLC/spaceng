@@ -7,6 +7,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/navigation";
 
+import "yup-phone-lite";
 import {useSignUp} from "@/api/auth/signup";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {faceBookSignin, googleSignin} from "@/lib/utils";
@@ -24,7 +25,10 @@ const signUpSchema = yup.object({
     .email()
     .required("Please enter email address")
     .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, "Email must have a valid domain"),
-  phone_number: yup.string().required("Phone Number is required"),
+  phone_number: yup
+    .string()
+    .phone(undefined, "Invalid phone number, number must start with country code")
+    .required("Phone Number is required"),
   role: yup.string().oneOf(["client", "business"], "Invalid role").required("Role is required"),
   password: yup
     .string()

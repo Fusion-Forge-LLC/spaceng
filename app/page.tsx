@@ -23,7 +23,7 @@ const poppin = Poppins({subsets: ["latin"], weight: ["500", "600", "700", "400"]
 export default function Home() {
   return (
     <>
-      <div className="md:h-screen bg-gradient-to-br from-[#474747] to-[#222222]">
+      <div className="bg-gradient-to-br from-[#474747] to-[#222222]">
         <Header
           className={{
             navColor: "text-[#C4C4C4]",
@@ -31,7 +31,7 @@ export default function Home() {
             active: "text-white",
           }}
         />
-        <div className="relative overflow-hidden flex-1 z-10">
+        <div className="relative overflow-hidden max-w-[1349px] mx-auto flex-1 z-10">
           <Wrapper>
             <section className="flex-row hidden md:flex">
               <div className="py-10 space-y-5 md:w-1/2 lg:w-2/5 text-white">

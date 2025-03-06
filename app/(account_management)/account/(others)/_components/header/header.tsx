@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {useSignOut} from "@/api/auth/logout";
+import {useUser} from "@/context/user";
 
 const acountManagementNavigation = [
   {
@@ -40,11 +41,11 @@ const acountManagementNavigation = [
     title: "Wishlist",
     url: "/account/wishlist",
   },
-  {
-    icon: "/account_management/help.svg",
-    title: "Help center",
-    url: "/account/help",
-  },
+  // {
+  //   icon: "/account_management/help.svg",
+  //   title: "Help center",
+  //   url: "/account/help",
+  // },
   {
     icon: "/account_management/logout.svg",
     title: "Sign out",
@@ -55,21 +56,22 @@ const acountManagementNavigation = [
 export default function Header() {
   const pathName = usePathname();
   const {logout} = useSignOut();
+  const {User} = useUser();
 
   return (
     <header
       className=" py-5 px-5 lg:px-24 flex justify-between items-center sticky"
       style={{boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)"}}
     >
-      <Link href={"/"}>
+      <Link href={"/account/settings"}>
         <h1 className="text-blue font-bold text-lg">SpaceFinda</h1>
       </Link>
       <div className="flex gap-2 items-center">
         <Image
           alt="avatar"
-          className="rounded-full lg:w-10 lg:h-10"
+          className="rounded-full lg:w-10 lg:h-10 object-cover object-top shrink-0"
           height={40}
-          src="/account_management/Profile.svg"
+          src={User?.profile_image || "/account_management/Profile.svg"}
           width={40}
         />
         <DropdownMenu>

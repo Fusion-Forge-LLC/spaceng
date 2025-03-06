@@ -8,26 +8,31 @@ import api, {ErrorData} from "@/lib/http";
 import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {QueryResponse} from "@/@types/auth";
 
-import {logoutUser} from "../auth/logout";
+type Payload = {
+  full_name: string;
+  email: string;
+  number: string;
+  comment: string;
+};
 
-const deleteProfile = async () => {
-  const {data} = await api.delete<QueryResponse<any>>(API_ENDPOINTS.PROFILE.delete);
+const sendContactMessage = async (payload: Payload) => {
+  const {data} = await api.post<QueryResponse<null>>(API_ENDPOINTS.CONTACT, payload);
 
   return data;
 };
 
-export const useDeleteProfile = (): UseMutationResult<
-  QueryResponse<any>,
+export const useSendContactMessage = (): UseMutationResult<
+  QueryResponse<null>,
   AxiosError<ErrorData>,
-  string
+  Payload
 > => {
   return useMutation({
-    mutationFn: deleteProfile,
-    onSuccess: () => {
-      showSuccess("Account deleted successfully");
-      logoutUser();
+    mutationFn: sendContactMessage,
+    onSuccess: (data) => {
+      showSuccess(data.message);
     },
     onError: (error) => {
+      console.log(error);
       displayErrorMessage(error);
     },
   });

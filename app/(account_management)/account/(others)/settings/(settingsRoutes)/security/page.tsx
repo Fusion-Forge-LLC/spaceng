@@ -103,7 +103,7 @@ export default function Security() {
           </div>
         </div>
 
-        <div className="">
+        {/* <div className="">
           <div
             className={` ${securityBlocks.twoFactor ? "hidden" : "lg:flex"} py-4  justify-between items-start border-grey-200 box-border `}
             style={{borderBottomWidth: "0.1px"}}
@@ -147,12 +147,12 @@ export default function Security() {
                 using Google Authenticator or Microsoft Authenticator
               </span>
             </p>
-            {/* <button
+            <button
               className="text-blue font-medium cursor-pointer ml-auto block mb-8"
               onClick={() => handleEdit("twoFactor")}
             >
               Edit
-            </button> */}
+            </button> 
             <div className="flex items-center justify-between">
               <button
                 className="text-blue font-medium cursor-pointer text-sm lg:hidden"
@@ -184,7 +184,7 @@ export default function Security() {
           <span className="text-blue font-medium cursor-pointer w-fit block lg:hidden ml-auto mt-3 ">
             Sign out
           </span>
-        </div>
+        </div> */}
 
         <div
           className="py-4 lg:flex justify-between items-start border-grey-200 box-border "

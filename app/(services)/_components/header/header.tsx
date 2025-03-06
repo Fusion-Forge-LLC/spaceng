@@ -120,10 +120,10 @@ function Header() {
             ) : (
               <li>
                 <Link
-                  className="hidden lg:flex gap-4"
+                  className="flex"
                   href={User.role === "business" ? "/dashboard/overview" : "/account/bookings"}
                 >
-                  <Button className="bg-blue text-white min-w-32">
+                  <Button className="bg-blue text-white w-full">
                     {User.role === "business" ? "Dashboard" : "Account"}
                   </Button>
                 </Link>

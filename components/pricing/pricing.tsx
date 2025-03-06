@@ -12,6 +12,7 @@ import {useUser} from "@/context/user";
 import {useInitPlan} from "@/api/transaction/initPlan";
 import {useNewPlan} from "@/api/profile/plan";
 import Loader from "@/components/loader/loader";
+import {useFreePlan} from "@/api/profile/free-plan";
 
 function Page() {
   return (
@@ -93,9 +94,17 @@ function Card({
   const {User} = useUser();
   const {mutateAsync, isPending} = useInitPlan();
   const {mutate, isPending: isLoading} = useNewPlan();
+  const {mutate: Freeplan, isPending: freePlanLoading} = useFreePlan();
+
   const handleClick = () => {
     if (!User) {
       router.push("/auth/business/login?redirect=/pricing");
+
+      return;
+    }
+
+    if (plan === "basic") {
+      Freeplan(null);
 
       return;
     }
@@ -113,7 +122,12 @@ function Card({
   };
 
   return (
-    <div className="rounded-3xl p-8 border border-[#EAEBEC] flex flex-col hover:shadow-2xl">
+    <div
+      className={cn(
+        "rounded-3xl p-8 border border-[#EAEBEC] flex flex-col hover:shadow-2xl",
+        plan !== "basic" && "invisible",
+      )}
+    >
       <header className="flex gap-3 py-3 border-b border-b-[#EAEBEC]">
         <div className={cn("h-16 w-16 grid place-content-center rounded-xl", bg)}>
           <Image alt="Trophy" height={40} src={"/vector.svg"} width={40} />
@@ -121,7 +135,7 @@ function Card({
         <div>
           <span className={cn("font-medium text-lg", text)}>{plan}</span>
           <p className="flex items-end gap-3">
-            $ <span className="font-medium text-4xl">{amount}</span>
+            ₦ <span className="font-medium text-4xl">{amount}</span>
           </p>
         </div>
         <div className="flex items-end">
@@ -151,7 +165,7 @@ function Card({
         disabled={isPending || isLoading}
         onClick={handleClick}
       >
-        {isPending || isLoading ? <Loader /> : "Get Started"}
+        {isPending || isLoading || freePlanLoading ? <Loader /> : "Get Started"}
       </button>
     </div>
   );

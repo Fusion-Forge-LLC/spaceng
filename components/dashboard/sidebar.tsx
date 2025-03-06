@@ -8,7 +8,6 @@ import {
   CommunicationIcon,
   DashboardIcon,
   FinanceIcon,
-  HelpIcon,
   ManagementIcon,
   SettingsIcon,
 } from "@/app/dashboard/(others)/_components/nav-items/icons/icons";
@@ -16,7 +15,7 @@ import NavItems from "@/app/dashboard/(others)/_components/nav-items/nav-items";
 
 function Sidebar() {
   return (
-    <aside className="w-56 h-full hidden md:flex flex-col p-4 pt-0 gap-5 border-r border-grey-200">
+    <aside className="w-56 h-full hidden md:flex flex-col p-4 pt-4 gap-5 border-r border-grey-200">
       <ul>
         <NavItems Icon={DashboardIcon} name="Dashboard" path="/dashboard/overview" />
         <NavItems Icon={ManagementIcon} name="Management" path="/dashboard/management" />
@@ -24,7 +23,7 @@ function Sidebar() {
         <NavItems Icon={CommunicationIcon} name="Communication" path="/dashboard/communication" />
         <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
         <NavItems Icon={SettingsIcon} name="Settings" path="/dashboard/settings" />
-        <NavItems Icon={HelpIcon} name="Help" path="/dashboard/help" />
+        {/* <NavItems Icon={HelpIcon} name="Help" path="/dashboard/help" /> */}
         <Logout />
       </ul>
 

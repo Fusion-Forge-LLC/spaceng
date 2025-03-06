@@ -69,9 +69,9 @@ function BookingTable() {
               <TableHead>Thumbnail</TableHead>
               <TableHead>Checkin/Checkout</TableHead>
               <TableHead>Property Details</TableHead>
-              <TableHead className="text-center">Property Type</TableHead>
+              <TableHead className="text-center whitespace-nowrap">Property Type</TableHead>
               <TableHead className="text-center">Duration</TableHead>
-              <TableHead className="text-center">Total Paid</TableHead>
+              <TableHead className="text-center whitespace-nowrap">Total Paid</TableHead>
               <TableHead className="text-center">Location</TableHead>
               <TableHead>Status</TableHead>
               {display === "completed" && <TableHead>Review</TableHead>}
