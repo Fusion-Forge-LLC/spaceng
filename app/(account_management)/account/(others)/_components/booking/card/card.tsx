@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 import {Badge} from "@/components/ui/badge";
 import {TableCell, TableRow} from "@/components/ui/table";
@@ -48,13 +49,15 @@ function Card({
         </TableCell>
         <TableCell>
           <div className="flex flex-col justify-between gap-4">
-            <h4 className="w-full whitespace-nowrap text-ellipsis overflow-hidden">{title}</h4>
+            <h4 className="w-full whitespace-nowrap text-ellipsis overflow-hidden hover:underline">
+              <Link href={`/${property_type}/${property_id}`}>{title}</Link>
+            </h4>
           </div>
         </TableCell>
         <TableCell className="text-center">{property_type}</TableCell>
         <TableCell className="text-center">{duration}</TableCell>
         <TableCell className="text-center">{total_paid}</TableCell>
-        <TableCell className="text-center">{location}</TableCell>
+        <TableCell className="text-center whitespace-nowrap">{location}</TableCell>
         <TableCell>
           <Badge
             className={cn(

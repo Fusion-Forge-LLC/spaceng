@@ -2,15 +2,22 @@
 
 import {UseMutationResult, useMutation} from "@tanstack/react-query";
 import {AxiosError} from "axios";
-import {useRouter} from "next/navigation";
 
 import {displayErrorMessage, showSuccess} from "@/lib/utils";
 import api, {ErrorData} from "@/lib/http";
 import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {QueryResponse} from "@/@types/auth";
 
+export type BookingResponse = {
+  amountPaid: number;
+  refNumber: string;
+  time: string;
+  method: string;
+  clientName: string;
+};
+
 const createBooking = async (transactionRef: string) => {
-  const {data} = await api.get<QueryResponse<any>>(
+  const {data} = await api.get<QueryResponse<BookingResponse>>(
     API_ENDPOINTS.BOOKING.initBooking(transactionRef),
   );
 
@@ -18,17 +25,14 @@ const createBooking = async (transactionRef: string) => {
 };
 
 export const useCreateBooking = (): UseMutationResult<
-  QueryResponse<any>,
+  QueryResponse<BookingResponse>,
   AxiosError<ErrorData>,
   string
 > => {
-  const router = useRouter();
-
   return useMutation({
     mutationFn: createBooking,
     onSuccess: (data) => {
       showSuccess(data.message);
-      router.push("/account/bookings");
     },
     onError: (error) => {
       console.log(error);

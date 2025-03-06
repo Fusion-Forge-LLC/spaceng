@@ -31,7 +31,7 @@ function ChatList() {
   return (
     <div
       className={cn(
-        "h-full w-full min-[956px]:w-64 lg:w-96 flex flex-col overflow-hidden gap-3 px-3 md:border-r border-r-grey-200",
+        "h-full w-full min-[956px]:w-64 lg:w-96 flex flex-col overflow-hidden gap-3 px-3 pt-5 md:border-r border-r-grey-200",
         pathname === "/dashboard/communication" ? "" : "max-[956px]:hidden",
       )}
     >

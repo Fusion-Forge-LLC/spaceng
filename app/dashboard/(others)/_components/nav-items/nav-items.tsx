@@ -14,7 +14,7 @@ function NavItems({name, path, Icon}: {name: string; path: string; Icon: FC<Dash
 
   return (
     <li className="">
-      <Link className={cn("dashboard-nav", isActive ? "text-blue" : "text-grey-300")} href={path}>
+      <Link className={cn("dashboard-nav", isActive ? "text-blue" : "text-grey-200")} href={path}>
         <span className="w-10">
           <Icon fill={isActive ? "#205BF3" : "#9D9D9D"} />
         </span>

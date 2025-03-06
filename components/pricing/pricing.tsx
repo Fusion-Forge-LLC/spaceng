@@ -122,7 +122,12 @@ function Card({
   };
 
   return (
-    <div className="rounded-3xl p-8 border border-[#EAEBEC] flex flex-col hover:shadow-2xl">
+    <div
+      className={cn(
+        "rounded-3xl p-8 border border-[#EAEBEC] flex flex-col hover:shadow-2xl",
+        plan !== "basic" && "invisible",
+      )}
+    >
       <header className="flex gap-3 py-3 border-b border-b-[#EAEBEC]">
         <div className={cn("h-16 w-16 grid place-content-center rounded-xl", bg)}>
           <Image alt="Trophy" height={40} src={"/vector.svg"} width={40} />
@@ -130,7 +135,7 @@ function Card({
         <div>
           <span className={cn("font-medium text-lg", text)}>{plan}</span>
           <p className="flex items-end gap-3">
-            $ <span className="font-medium text-4xl">{amount}</span>
+            ₦ <span className="font-medium text-4xl">{amount}</span>
           </p>
         </div>
         <div className="flex items-end">

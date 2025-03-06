@@ -24,7 +24,7 @@ function BookingHabit() {
   }
 
   return (
-    <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+    <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
       <li className="flex justify-between">
         <span>Average Stay Duration</span>
         <span>{Math.ceil(data.data.average_stay.averageDuration)} Nights</span>

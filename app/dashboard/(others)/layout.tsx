@@ -12,7 +12,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
       <Header />
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
-        <main className="flex-1 h-full overflow-y-scroll no-scrollbar">{children}</main>
+        <main className="flex-1 h-full overflow-y-scroll">{children}</main>
       </div>
       <div className="md:hidden">
         <Footer />

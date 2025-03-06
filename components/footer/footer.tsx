@@ -16,7 +16,9 @@ function Footer() {
       <Wrapper>
         <div className=" md:flex gap-20">
           <article className="space-y-4 md:w-1/3 lg:w-2/5 mb-16 md:mb-0">
-            <span className="font-medium text-lg">SpaceFinda</span>
+            <Link className="font-medium text-lg" href={"/"}>
+              SpaceFinda
+            </Link>
             <p className="text-sm md:text-base leading-loose md:max-w-96">
               Experience the freedom of flexible living and working with our curated selection of
               shortlets and workspaces.

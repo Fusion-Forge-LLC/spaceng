@@ -10,7 +10,8 @@ import Wrapper from "@/components/wrapper/wrapper";
 import {calculateDays, cn} from "@/lib/utils";
 import {useInitTransaction} from "@/api/transaction/initpayment";
 import {useUser} from "@/context/user";
-import {useCreateBooking} from "@/api/booking/create-booking";
+import {BookingResponse, useCreateBooking} from "@/api/booking/create-booking";
+import Loader from "@/components/loader/loader";
 
 import PaymentSuccess from "../modal/payment-success";
 import Booking from "../booking-page/booking";
@@ -41,19 +42,19 @@ function Checkout({
   const popup = new Paystack();
   const {mutateAsync} = useInitTransaction();
   const router = useRouter();
-  const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.BANK);
   const checkin = searchParams.get("checkin");
   const checkout = searchParams.get("checkout");
-  const {mutate, isPending} = useCreateBooking();
+  const {mutateAsync: createBooking, isPending} = useCreateBooking();
+  const [bookingData, setBookingData] = useState<BookingResponse | null>(null);
 
   const totalCost = calculateDays(checkin ?? "", checkout ?? "", propertyType) * price;
 
-  const setCard = () => {
+  const setCard = async () => {
     setPaymentMethod(PaymentMethod.CARD);
 
     if (!checkin || !checkout) return;
-    mutateAsync({
+    const data = await mutateAsync({
       params: searchParams.toString(),
       data: {
         email: User?.email || "",
@@ -62,20 +63,22 @@ function Checkout({
         checkin,
         checkout,
       },
-    }).then((data) => {
+    });
+
+    //@ts-ignore
+    popup.resumeTransaction(data.data.access_code, {
       //@ts-ignore
-      popup.resumeTransaction(data.data.access_code, {
-        //@ts-ignore
-        onSuccess: (transaction) => {
-          mutate(transaction.trxref);
-        },
-        onCancel: () => {
-          console.log("onCancel");
-        },
-        onError: (error: any) => {
-          console.log("Error: ", error.message);
-        },
-      });
+      onSuccess: async (transaction) => {
+        const data = await createBooking(transaction.trxref);
+
+        setBookingData(data.data);
+      },
+      onCancel: () => {
+        console.log("onCancel");
+      },
+      onError: (error: any) => {
+        console.log("Error: ", error.message);
+      },
     });
   };
 
@@ -85,7 +88,13 @@ function Checkout({
 
   return (
     <main>
-      <PaymentSuccess isShown={isPaymentSuccess} />
+      {isPending && (
+        <div className="h-full w-full z-10 fixed top-0 left-0 grid place-content-center">
+          <div className="h-full w-full absolute bg-black/30" />
+          <Loader />
+        </div>
+      )}
+      {bookingData && <PaymentSuccess {...bookingData} />}
       <Wrapper className="pt-10">
         <div className="py-5">
           <button className="flex items-center gap-3" onClick={() => router.back()}>

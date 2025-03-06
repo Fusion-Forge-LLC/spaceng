@@ -80,7 +80,7 @@ export const API_ENDPOINTS = {
   PROFILE: {
     update: `/user/profile`,
     changePassword: `/user/change-password`,
-    delete: (id: string) => `/user/delete/${id}`,
+    delete: `/user/delete`,
     requestPasswordReset: `/user/reset-password`,
     changeClientPassword: `/user/reset-password`,
     plan: "/user/update-plan",
@@ -94,7 +94,10 @@ export const API_ENDPOINTS = {
 
   CHAT: {
     getRoom: `/room`,
-    messages: (id: string) => `/messages/${id}`,
+    messages: (id: string) => `/messages/peer/${id}`,
     chatPeer: (id: string) => `/room/${id}`,
+    unreadMessages: "/messages/unread",
   },
+
+  CONTACT: "/contact/form",
 };

@@ -24,7 +24,7 @@ function Booking() {
   }
 
   return (
-    <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+    <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
       <li className="flex justify-between">
         <span>Total Bookings</span>
         <span>{data?.data.total_bookings}</span>

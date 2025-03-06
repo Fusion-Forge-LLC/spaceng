@@ -16,7 +16,7 @@ function Views() {
   }
 
   return (
-    <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+    <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
       <li className="flex justify-between">
         <span>Total Views</span>
         <span>{data?.data.recentCount.toLocaleString()}</span>

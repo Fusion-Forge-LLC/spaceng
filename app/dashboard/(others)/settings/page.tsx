@@ -4,6 +4,8 @@ import React from "react";
 
 import {useUser} from "@/context/user";
 import Loader from "@/components/loader/loader";
+import DeleteDialog from "@/components/menu/delete/delete";
+import {useDeleteProfile} from "@/api/profile/delete-profile";
 
 import Avatar from "../_components/settings/avatar";
 import BasicData from "../_components/settings/basic_data";
@@ -12,6 +14,7 @@ import CheckMark from "../_components/settings/notifications";
 
 function Page() {
   const {User, isLoading} = useUser();
+  const {mutate, isPending} = useDeleteProfile();
 
   if (isLoading) {
     return (
@@ -25,7 +28,7 @@ function Page() {
   const loginHistory = User.login_history;
 
   return (
-    <div className="px-4 py-3 sm:p-3 max-md:pb-20">
+    <div className="px-4 py-3 sm:p-3 max-md:pb-20 md:py-5 bg-grey-300/5">
       <h3 className="font-medium text-xl">Profile Management</h3>
 
       <section className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 min-[1200px]:gap-x-20 gap-y-4 pt-8 text-grey-200">
@@ -160,13 +163,21 @@ function Page() {
                   </li>
                   <li>{loginHistory[loginHistory.length - 2].device}</li>
                 </ul>
-                {/* <button className="border mx-auto block hover:bg-blue hover:text-white transition-all border-blue text text-blue rounded-3xl py-2.5 px-5 text-sm font-medium">
-                  Remove Device
-                </button> */}
               </div>
             ) : (
               <p className="text-center opacity-75 pb-10">No history found</p>
             )}
+          </div>
+          <div>
+            <DeleteDialog
+              className="ml-auto"
+              isPending={isPending}
+              mutate={() => mutate(User?._id!)}
+            >
+              <button className="border mx-auto block hover:bg-blue hover:text-white transition-all border-blue text text-blue rounded-3xl py-2.5 px-5 text-sm font-medium">
+                Delete Account
+              </button>
+            </DeleteDialog>
           </div>
         </div>
       </section>

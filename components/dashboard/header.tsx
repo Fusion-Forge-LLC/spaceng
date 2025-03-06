@@ -5,15 +5,22 @@ import {Bell} from "lucide-react";
 
 import MobileNav from "@/app/dashboard/(others)/_components/dashboard/mobile-nav";
 import {useUser} from "@/context/user";
+import {useGetUnreadCount} from "@/api/chat/get-unread-count";
 
 import {EmailIcon} from "../Icons/icons";
 
 function Header() {
   const {User} = useUser();
+  const {data, isLoading} = useGetUnreadCount();
+
+  console.log(data?.data);
 
   return (
     <header className="flex justify-between items-center py-5 md:py-3 gap-5 px-4 max-md:flex-wrap border-b border-grey-200">
-      <Link className="text-2xl sm:text-3xl font-black text-blue" href={"/dashboard/overview"}>
+      <Link
+        className="text-2xl sm:text-3xl font-black text-blue px-2.5"
+        href={"/dashboard/overview"}
+      >
         Spacefinda
       </Link>
 
@@ -27,10 +34,18 @@ function Header() {
       </div> */}
 
       <div className="hidden md:flex gap-5">
-        <Link className="dashboard-header-btn" href={"/dashboard/communication"}>
+        <Link
+          className="dashboard-header-btn bg-blue/20 relative"
+          href={"/dashboard/communication"}
+        >
           <EmailIcon />
+          {data && data.data.length > 0 ? (
+            <span className="text-xs font-semibold absolute right-0 top-0 bg-red text-white grid place-content-center h-4 w-4 rounded-full">
+              {data?.data[0].totalCount}
+            </span>
+          ) : null}
         </Link>
-        <button className="dashboard-header-btn">
+        <button className="dashboard-header-btn hidden">
           <Bell />
         </button>
         <button className="dashboard-header-btn h-10 w-10 overflow-hidden">

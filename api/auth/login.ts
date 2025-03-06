@@ -3,7 +3,7 @@
 import {UseMutationResult, useMutation} from "@tanstack/react-query";
 import {AxiosError} from "axios";
 import Cookies from "js-cookie";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 import {displayErrorMessage, showSuccess} from "@/lib/utils";
 import api, {ErrorData} from "@/lib/http";
@@ -23,9 +23,8 @@ export const useLogIn = (
   pageRedirect: string,
 ): UseMutationResult<QueryResponse<LoginResponse>, AxiosError<ErrorData>, LogInPayload> => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const {fetchWhoAmI} = useWhoAmI();
-  const redirectTo = searchParams.get("redirect");
+  const redirectTo = sessionStorage.getItem("redirectLink");
 
   return useMutation({
     mutationFn: logIn,
@@ -46,12 +45,12 @@ export const useLogIn = (
       });
 
       fetchWhoAmI && fetchWhoAmI();
-      const redirect = Cookies.get("spacefinda-redirect");
 
       if (redirectTo) {
+        sessionStorage.removeItem("redirectLink");
         router.push(redirectTo);
       } else {
-        router.push(redirect || pageRedirect);
+        router.push(pageRedirect);
       }
     },
     onError: (error) => {

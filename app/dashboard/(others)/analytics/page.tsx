@@ -15,7 +15,7 @@ const chartData = [
 
 function Page() {
   return (
-    <div className="px-4 md:px-3 text-grey-200 space-y-8 pb-20 md:pb-4 max-lg:pt-5">
+    <div className="px-4 md:px-3 text-grey-200 space-y-8 pb-20 md:pb-4 pt-5">
       <section className="space-y-3">
         <h2 className="text-grey text-xl font-medium">Property Performance Overview</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-[1200px]:gap-20">
@@ -33,9 +33,9 @@ function Page() {
       <section className="space-y-3">
         <h2 className="text-grey text-xl font-medium">Guest Demographics Breakdown</h2>
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-5">
-          <div className="space-y-5 sm:col-span-6 min-[879px]:col-span-3 pt-3">
+          <div className="space-y-5 sm:col-span-6 min-[879px]:col-span-3 pt-3 hidden">
             <h3 className="font-medium text-lg">Age Group</h3>
-            <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+            <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
               <li className="flex justify-between">
                 <span>18 - 24 Years</span>
                 <span>30%</span>
@@ -58,35 +58,35 @@ function Page() {
             <h3 className="font-medium text-lg">Booking Habits</h3>
             <BookingHabit />
           </div>
-          <div className="p-3 rounded-xl border pb-0 border-blue sm:col-span-12 min-[879px]:col-span-5">
+          <div className="p-3 rounded-xl border pb-0 border-blue bg-grey-300/5 sm:col-span-12 min-[879px]:col-span-5">
             <h3 className="font-medium text-lg">Locations</h3>
             <ClientsLocation chartData={chartData} />
           </div>
         </div>
       </section>
 
-      <section className="space-y-3">
+      <section className="space-y-3 hidden">
         <h2 className="text-grey text-xl font-medium flex items-center gap-3">
           Market Trends <TrendingUp />
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 min-[1200px]:flex gap-5 min-[1200px]:gap-10 justify-between max-xl:text-sm">
           <div className="space-y-3">
             <h3 className="font-medium text-lg">Pricing Trends</h3>
-            <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+            <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5 ">
               <li>Average Nightly Rate in Lagos: N50,000</li>
               <li>Competitor Pricing Range: N45,000 - N55,000</li>
             </ul>
           </div>
           <div className="space-y-4">
             <h3 className="font-medium text-lg">Occupancy Rate</h3>
-            <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+            <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
               <li>Current Property: 80%</li>
               <li>Market Average: 75%</li>
             </ul>
           </div>
           <div className="space-y-4 sm:col-span-2">
             <h3 className="font-medium text-lg">Local Competition</h3>
-            <ul className="p-3 space-y-1.5 rounded-xl border border-blue">
+            <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
               <li>Top Competitor: Lagos Lagoon View Apartments</li>
               <li>Average Review Rating: 4.7/5</li>
             </ul>

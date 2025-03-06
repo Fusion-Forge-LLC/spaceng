@@ -84,7 +84,7 @@ function ChangePassword() {
         />
         {errors.confirm_password && <p className="text-red">{errors.confirm_password.message}</p>}
       </div>
-      <button className={cn("booking-btn mx-auto", "py-1.5 text-base")}>
+      <button className={cn("booking-btn", "py-2 md:text-base")}>
         {isPending ? <Loader /> : "Save Changes"}
       </button>
     </form>
