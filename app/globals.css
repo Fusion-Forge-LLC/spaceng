@@ -72,7 +72,7 @@
     @apply block rounded-2xl border-2 border-blue w-full sm:text-lg font-medium sm:font-semibold px-8 py-2 sm:w-44 text-center active:scale-95;
   }
   .business-auth-wrapper {
-    @apply py-12 px-4 sm:px-8 md:px-10 bg-white w-11/12 sm:w-full sm:max-w-xl mx-auto;
+    @apply py-10 px-4 sm:px-8 md:px-10 bg-white w-11/12 sm:w-full sm:max-w-xl mx-auto;
   }
   .auth-title {
     @apply sm:text-2xl text-center font-semibold;

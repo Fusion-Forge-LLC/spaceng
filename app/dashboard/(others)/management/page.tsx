@@ -14,10 +14,10 @@ function Page() {
   const {data, isLoading} = useGetBusinessProperties();
 
   return (
-    <div className="flex-1 h-full px-4">
+    <div className="flex-1 h-full px-4 max-sm:pb-20">
       <article className="py-5">
-        <h4 className="text-lg sm:text-2xl font-semibold">Your Properties</h4>
-        <p className="text-grey-200 max-sm:text-sm">
+        <h4 className="text-lg font-semibold">Your Properties</h4>
+        <p className="text-grey-200 text-sm">
           Manage your properties with effeciently, Quickly access key details, make updates, and
           monitor status{" "}
         </p>

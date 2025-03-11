@@ -13,8 +13,6 @@ function Header() {
   const {User} = useUser();
   const {data, isLoading} = useGetUnreadCount();
 
-  console.log(data?.data);
-
   return (
     <header className="flex justify-between items-center py-5 md:py-3 gap-5 px-4 max-md:flex-wrap border-b border-grey-200">
       <Link
@@ -48,7 +46,10 @@ function Header() {
         <button className="dashboard-header-btn hidden">
           <Bell />
         </button>
-        <button className="dashboard-header-btn h-10 w-10 overflow-hidden">
+        <Link
+          className="dashboard-header-btn h-10 w-10 overflow-hidden"
+          href={"/dashboard/settings"}
+        >
           <Image
             alt="Profile image"
             className="object-cover object-top"
@@ -56,7 +57,7 @@ function Header() {
             src={User?.profile_image!}
             width={40}
           />
-        </button>
+        </Link>
       </div>
     </header>
   );

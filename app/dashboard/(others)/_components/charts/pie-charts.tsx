@@ -124,7 +124,7 @@ export function ClientsLocation({chartData}: {chartData: ChartData[]}) {
                 style={{backgroundColor: item.fill}}
               />
               <span>{item.city}</span>
-              <span className="ml-auto max-xl:text-xs">{item.percentage}%</span>
+              <span className="ml-auto max-xl:text-xs">{Math.floor(item.percentage)}%</span>
             </li>
           );
         })}

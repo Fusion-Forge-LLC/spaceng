@@ -14,7 +14,7 @@ function DashboardLyout({children}: {children: ReactNode}) {
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
         <main className="flex-1 h-full overflow-y-scroll no-scrollbar">
-          <div className="h-full overflow-hidden flex no-scrollbar gap-2 lg:gap-5 min-[1200px]:gap-20">
+          <div className="h-full overflow-hidden flex no-scrollbar">
             <ChatList />
             {children}
           </div>

@@ -46,7 +46,10 @@ function Page() {
 
   return (
     <div className="business-auth-wrapper absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <h3 className="auth-title mb-6">Welcome Back!</h3>
+      <header className="text-blue font-bold text-2xl mb-4">
+        <Link href={"/"}>SpaceFinda</Link>
+      </header>
+      <h3 className="auth-title mb-3">Welcome Back!</h3>
       <Form {...form}>
         <form className="space-y-5 mb-6" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField

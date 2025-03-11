@@ -17,7 +17,7 @@ function ChatList() {
     return (
       <div
         className={cn(
-          "h-full px-3 border-r border-r-grey-200",
+          "h-full px-3",
           pathname === "/dashboard/communication" ? "" : "max-[956px]:hidden",
         )}
       >
@@ -31,7 +31,7 @@ function ChatList() {
   return (
     <div
       className={cn(
-        "h-full w-full min-[956px]:w-64 lg:w-96 flex flex-col overflow-hidden gap-3 px-3 pt-5 md:border-r border-r-grey-200",
+        "h-full w-full min-[956px]:w-64 lg:w-96 flex flex-col overflow-hidden gap-3 px-3 pt-5",
         pathname === "/dashboard/communication" ? "" : "max-[956px]:hidden",
       )}
     >
@@ -43,7 +43,7 @@ function ChatList() {
             <li key={index}>
               <Link
                 className="px-3 py-2 hover:bg-grey-300/10 block rounded-lg "
-                href={pathname + "/" + item._id}
+                href={"/dashboard/communication/" + item._id}
               >
                 <div className="flex items-center gap-2 mb-1">
                   <div className="h-10 w-10 rounded-full relative overflow-hidden">

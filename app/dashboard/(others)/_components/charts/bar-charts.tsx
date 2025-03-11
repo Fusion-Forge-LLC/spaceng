@@ -30,7 +30,7 @@ export function BarCharts() {
 
   if (isPending) {
     return (
-      <div className="h-[300px] overflow-hidden grid place-content-center">
+      <div className="h-[300px] overflow-hidden grid place-content-center border border-grey-300/10 bg-grey-300/5">
         <Loader />
       </div>
     );
@@ -45,7 +45,7 @@ export function BarCharts() {
   }
 
   return (
-    <div className="pt-10">
+    <div className="pt-10 border border-grey-300/10 bg-grey-300/5">
       <ChartContainer config={chartConfig}>
         <BarChart
           accessibilityLayer

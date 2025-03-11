@@ -23,22 +23,23 @@ function Page() {
     <div className="text-grey-200">
       <section className="flex items-center justify-between px-4 py-6 md:p-3 border-b border-b-grey-200">
         <div>
-          <h1 className="text-grey text-lg sm:text-2xl font-semibold capitalize">
+          <h1 className="text-grey text-lg sm:text-xl font-semibold capitalize">
             Welcome {User?.fullname},
           </h1>
-          <p className="font-medium max-sm:text-sm">Manage your properties with ease</p>
+          <p className="font-medium text-sm">Manage your properties with ease</p>
         </div>
 
         <Link
           className="bg-blue px-1 py-1 sm:px-4 sm:py-2 text-white font-medium rounded-md hover:opacity-75"
           href={"/dashboard/management/new-property"}
         >
-          <span className="hidden sm:inline">Add New property</span> <Plus className="sm:hidden" />
+          <span className="hidden sm:inline text-sm">Add New property</span>{" "}
+          <Plus className="sm:hidden" />
         </Link>
       </section>
 
       <section className="px-4 py-3 md:p-3">
-        <h2 className="text-black font-medium text-sm sm:text-base md:text-xl mb-4 max-md:py-2 flex items-center justify-between">
+        <h2 className="text-black font-medium text-sm sm:text-base md:text-lg mb-2 max-md:py-2 flex items-center justify-between">
           Your Properties at a glance
           <Link
             className="flex items-center gap-0.5 text-xs sm:text-sm group"

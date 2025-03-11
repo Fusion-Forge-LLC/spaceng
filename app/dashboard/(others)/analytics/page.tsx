@@ -17,23 +17,23 @@ function Page() {
   return (
     <div className="px-4 md:px-3 text-grey-200 space-y-8 pb-20 md:pb-4 pt-5">
       <section className="space-y-3">
-        <h2 className="text-grey text-xl font-medium">Property Performance Overview</h2>
+        <h2 className="text-grey text-lg font-medium">Property Performance Overview</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-[1200px]:gap-20">
-          <div className="space-y-3">
-            <h3 className="font-medium text-lg">Property Views</h3>
+          <div className="space-y-1">
+            <h3 className="font-medium">Property Views</h3>
             <Views />
           </div>
-          <div className="space-y-4">
-            <h3 className="font-medium text-lg">Bookings</h3>
+          <div className="space-y-1">
+            <h3 className="font-medium">Bookings</h3>
             <Booking />
           </div>
         </div>
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-grey text-xl font-medium">Guest Demographics Breakdown</h2>
+      <section className="md:space-y-3">
+        <h2 className="text-grey text-lg font-medium">Guest Demographics Breakdown</h2>
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-5">
-          <div className="space-y-5 sm:col-span-6 min-[879px]:col-span-3 pt-3 hidden">
+          <div className="space-y-5 col-span-12 lg:col-span-6 pt-3 hidden">
             <h3 className="font-medium text-lg">Age Group</h3>
             <ul className="p-3 space-y-1.5 rounded-xl border border-blue bg-grey-300/5">
               <li className="flex justify-between">
@@ -54,11 +54,11 @@ function Page() {
               </li>
             </ul>
           </div>
-          <div className="space-y-5 sm:col-span-6 min-[879px]:col-span-4 pt-3">
-            <h3 className="font-medium text-lg">Booking Habits</h3>
+          <div className="space-y-3 md:space-y-5 col-span-12 lg:col-span-6  pt-3">
+            <h3 className="font-medium">Booking Habits</h3>
             <BookingHabit />
           </div>
-          <div className="p-3 rounded-xl border pb-0 border-blue bg-grey-300/5 sm:col-span-12 min-[879px]:col-span-5">
+          <div className="p-3 rounded-xl border pb-0 border-grey-300/10 bg-grey-300/5 col-span-12 lg:col-span-6">
             <h3 className="font-medium text-lg">Locations</h3>
             <ClientsLocation chartData={chartData} />
           </div>
