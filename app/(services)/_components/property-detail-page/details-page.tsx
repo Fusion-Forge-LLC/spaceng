@@ -8,56 +8,12 @@ import {usePathname} from "next/navigation";
 
 import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
+import {useUpdateViews} from "@/api/property/update-view";
+import {ReviewTypes} from "@/@types/types";
+import ShareButtons from "@/components/share-property/share-property";
 
-import ReviewCard from "../../_components/review-card/review-card";
-import SearchProperties from "../../_components/search/search";
+import ReviewCard from "../review-card/review-card";
 import BookShortlet from "../booking-page/booking";
-
-const amenities = [
-  "Elevator",
-  "24 Hour CCTV Mointoring",
-  "Easy Access from the Bus Stop",
-  "Parking Space Avaliable",
-];
-
-const reviews = [
-  {
-    image: "/reviews/image1.jpg",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image2.png",
-    name: "Sarah Thomas",
-    rating: 5,
-    text: "Beautiful home and excellent location. We enjoyed our stay, but we did encounter some issues with the Wi-Fi connection.",
-  },
-  {
-    image: "/reviews/image3.jpg",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image4.jpg",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image5.png",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-  {
-    image: "/reviews/image6.png",
-    name: "Femi Andrew",
-    rating: 5,
-    text: "Absolutely stunning property with breathtaking views. The perfect getaway for our family vacation!”",
-  },
-];
 
 function DetailsPage({
   images,
@@ -67,6 +23,8 @@ function DetailsPage({
   description,
   cost,
   label,
+  amenities,
+  reviews,
 }: {
   images: string[];
   title: string;
@@ -75,8 +33,11 @@ function DetailsPage({
   description: string;
   cost: number;
   label: "Guest" | "Team";
+  amenities: string[];
+  reviews: ReviewTypes[];
 }) {
-  const pathname = usePathname();
+  useUpdateViews();
+  const postUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
     <main>
@@ -89,30 +50,29 @@ function DetailsPage({
             </p>
           </div>
 
-          <SearchProperties />
+          {/* <SearchProperties /> */}
         </div>
 
         <div className="py-10">
-          <div className="hidden sm:grid grid-cols-4 gap-3">
+          <div
+            className={cn(
+              "hidden sm:grid gap-3",
+              images.length >= 4
+                ? "grid-cols-4"
+                : images.length === 3
+                  ? "grid-cols-3"
+                  : images.length === 2
+                    ? "grid-cols-2"
+                    : "grid-cols-1",
+            )}
+          >
             {images.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className="aspect-[300/255] group relative first:col-span-2 first:row-span-2 rounded-md first:rounded-lg overflow-hidden"
-                >
-                  <Image
-                    fill
-                    alt="Shortlet property image"
-                    className="object-cover object-center"
-                    src={item}
-                  />
-                  <button className="bg-[#F4F4F4]/80 hover:bg-[#F4F4F4] rounded-lg items-center px-3 lg:px-5 py-2 lg:py-3 gap-4 hidden group-last:flex absolute right-2 md:right-3 lg:right-6 bottom-2 md:bottom-3 lg:lbottom-6">
-                    <ImageIcon /> Gallery
-                  </button>
-                </div>
-              );
+              if (index > 4) return;
+
+              return <PropertyImage key={index} totalImage={images.length} url={item} />;
             })}
           </div>
+
           <div className="aspect-[331/321] relative rounded-md sm:hidden overflow-hidden">
             <Image
               fill
@@ -132,7 +92,10 @@ function DetailsPage({
 
                 <h5 className="text-lg mb-6 font-medium text-grey">{descriptionTitle}</h5>
 
-                <p className="leading-loose mb-8">{description}</p>
+                <div
+                  dangerouslySetInnerHTML={{__html: description}}
+                  className="leading-loose mb-8"
+                />
 
                 <h5 className="text-lg  md:mb-6 font-medium text-grey">Amenities</h5>
 
@@ -150,10 +113,15 @@ function DetailsPage({
               <BookingCard className="md:hidden my-16" cost={cost} label={label} />
 
               <div className="pt-12">
+                <h5 className="text-lg mb-2 font-medium text-grey">Share</h5>
+                <ShareButtons postUrl={postUrl} title={title} />
+              </div>
+
+              <div className="pt-12">
                 <h4 className="mb-6">Reviews & Ratings</h4>
 
                 <h5 className="text-lg mb-6 font-medium text-grey">
-                  Our Guest Reviews & Ratings for Haven Homes
+                  Our Guest Reviews & Ratings for {title}
                 </h5>
 
                 <ul>
@@ -161,14 +129,15 @@ function DetailsPage({
                     return (
                       <ReviewCard
                         key={index}
-                        image={item.image}
+                        image={item.client.profile_image}
                         name={item.name}
                         rating={item.rating}
-                        text={item.text}
+                        text={item.review_text}
                       />
                     );
                   })}
                 </ul>
+                {reviews.length === 0 && <p className="py-10 italic text-center">No review yet</p>}
               </div>
             </article>
 
@@ -210,6 +179,26 @@ function BookingCard({
           <BookShortlet showBtn label={label} />
         </div>
       </div>
+    </div>
+  );
+}
+
+function PropertyImage({url, totalImage}: {url: string; totalImage: number}) {
+  return (
+    <div
+      className={cn(
+        "aspect-[300/255] group relative rounded-md first:rounded-lg overflow-hidden",
+        totalImage >= 5 || totalImage === 3
+          ? "first:col-span-2 first:row-span-2"
+          : totalImage === 4
+            ? "first:col-span-3 first:row-span-3"
+            : null,
+      )}
+    >
+      <Image fill alt="Shortlet property image" className="object-cover object-center" src={url} />
+      <button className="bg-[#F4F4F4]/80 hover:bg-[#F4F4F4] rounded-lg items-center px-3 lg:px-5 py-2 lg:py-3 gap-4 hidden group-last:flex absolute right-2 md:right-3 lg:right-6 bottom-2 md:bottom-3 lg:lbottom-6">
+        <ImageIcon /> Gallery
+      </button>
     </div>
   );
 }

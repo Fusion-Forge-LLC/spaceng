@@ -1,26 +1,55 @@
 "use client";
 
-import Link from "next/link";
-import {usePathname} from "next/navigation";
-import React, {useState} from "react";
+import {usePathname, useRouter} from "next/navigation";
+import React, {useMemo, useState} from "react";
 
 import {CaretDown} from "@/components/Icons/icons";
 import {PopoverElement} from "@/components/style-guide/style-guide";
 import {Calendar} from "@/components/ui/calendar";
+import {useCheckout} from "@/hooks/use-checkout";
+import {useUser} from "@/context/user";
+import Loader from "@/components/loader/loader";
 
 function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"}) {
+  const {User} = useUser();
   const pathName = usePathname();
-  const [date, setDate] = React.useState<{checkin: Date | undefined; checkout: Date | undefined}>({
-    checkin: new Date(),
-    checkout: new Date(),
-  });
-  const [guestsCount, setGuestsCount] = useState(1);
+  const router = useRouter();
+  const {date, guestsCount, setGuestsCount, updateDate} = useCheckout();
+  const [isLoading, setisLoading] = useState(false);
 
-  function updateDate(date: Date | undefined, key: "checkin" | "checkout") {
-    setDate((prevState) => {
-      return {...prevState, [key]: date};
-    });
-  }
+  const params = useMemo(() => {
+    const checkin = date.checkin?.getTime().toString();
+    const checkout = date.checkout?.getTime().toString();
+
+    const params = new URLSearchParams();
+
+    params.set("guest", guestsCount.toString());
+    params.set("checkin", checkin || "");
+    params.set("checkout", checkout || "");
+
+    if (typeof window !== "undefined") {
+      const parsedUrl = new URL(window.location.href);
+
+      parsedUrl.searchParams.set("guest", guestsCount.toString());
+      parsedUrl.searchParams.set("checkin", checkin || "");
+      parsedUrl.searchParams.set("checkout", checkout || "");
+      router.push(parsedUrl.toString());
+    }
+
+    return params.toString();
+  }, [date, guestsCount, guestsCount]);
+
+  const checkoutBooking = () => {
+    const path = `${pathName}/checkout?${params}`;
+
+    setisLoading(true);
+    if (User) {
+      router.push(path);
+    } else {
+      sessionStorage.setItem("redirectLink", path);
+      router.push("/auth/client/signin");
+    }
+  };
 
   return (
     <div className="space-y-4 py-6">
@@ -37,6 +66,7 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       >
         <Calendar
           className="rounded-md border"
+          disabled={(date) => date < new Date() || date < new Date("1900-01-01")}
           mode="single"
           selected={date.checkin}
           onSelect={(date) => updateDate(date, "checkin")}
@@ -55,6 +85,7 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       >
         <Calendar
           className="rounded-md border"
+          disabled={(current) => current < date?.checkin! || current < new Date("1900-01-01")}
           mode="single"
           selected={date.checkout}
           onSelect={(date) => updateDate(date, "checkout")}
@@ -109,9 +140,9 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       </PopoverElement>
 
       {showBtn && (
-        <Link className="booking-btn" href={`${pathName}/checkout?guest=${guestsCount}`}>
-          Book
-        </Link>
+        <button className="booking-btn w-full" onClick={checkoutBooking}>
+          {isLoading ? <Loader /> : "Book"}
+        </button>
       )}
     </div>
   );

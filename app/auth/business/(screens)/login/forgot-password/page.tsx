@@ -1,12 +1,9 @@
 "use client";
 
 import React, {FormEvent} from "react";
-import {Poppins} from "next/font/google";
 import {useRouter} from "next/navigation";
 
 import {CallIcon, EmailIcon} from "@/components/Icons/icons";
-
-const poppin = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
 
 function Page() {
   const router = useRouter();

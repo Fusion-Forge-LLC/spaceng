@@ -1,18 +1,30 @@
 "use client";
 
-import React from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
 
 import Wrapper from "@/components/wrapper/wrapper";
-import {PropertyType} from "@/@types/types";
+import {PropertyResponse} from "@/@types/types";
+import {cn} from "@/lib/utils";
 
 import dummyMap from "../../../../public/dummymap.png";
 import SearchProperties from "../search/search";
 import Card from "../property/card";
 
-function Lists({properties, type}: {properties: PropertyType[]; type: "shortlets" | "workspaces"}) {
+function Lists({
+  properties,
+  total,
+  type,
+}: {
+  properties: PropertyResponse[];
+  type: "shortlet" | "workspace";
+  total: number;
+}) {
   const pathname = usePathname();
+  const offset = 10;
+  const totalPages = Math.ceil(total / offset);
+  const [searchedData, setSearchedData] = useState<PropertyResponse[] | null>(null);
 
   return (
     <main>
@@ -20,63 +32,109 @@ function Lists({properties, type}: {properties: PropertyType[]; type: "shortlets
         <section>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
             <div>
-              <h5 className="md:text-lg font-medium capitalize">{type} in Lagos, Nigeria</h5>
-              <span className="text-sm md:text-base">250 results</span>
+              <h5 className="md:text-lg font-medium capitalize">{type}s in Nigeria</h5>
+              <span className="text-sm md:text-base">{total} results</span>
             </div>
 
-            <SearchProperties />
+            <SearchProperties setSearchedData={setSearchedData} type={type} />
           </div>
         </section>
       </Wrapper>
 
-      <Wrapper className="max-sm:px-0">
+      <Wrapper className="sm:px-0">
         <section>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 py-12">
+          <div
+            className={cn(
+              "grid grid-cols-1 lg:grid-cols-2 gap-12 py-12",
+              searchedData && searchedData.length === 0 && "hidden",
+            )}
+          >
             <div className="space-y-10">
-              {properties.map((item, index) => {
-                return (
-                  <Card
-                    key={index}
-                    image={item.image}
-                    labels={item.labels}
-                    location={item.location}
-                    path={pathname}
-                    price={item.price}
-                    rating={item.rating}
-                    reviewNum={item.reviewNum}
-                    title={item.title}
-                  />
-                );
-              })}
+              {searchedData ? (
+                <>
+                  {searchedData.map((item) => {
+                    return (
+                      <Card
+                        key={item._id}
+                        id={item._id}
+                        image={item.gallery[0]}
+                        labels={item.features}
+                        location={`${item.property_address.address}`}
+                        path={pathname}
+                        postfix={item.price_postfix}
+                        price={item.price}
+                        rating={item.reviews}
+                        reviewNum={item.reviews.length}
+                        title={item.property_title}
+                        wishlist={item.wishlists}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {properties.map((item) => {
+                    return (
+                      <Card
+                        key={item._id}
+                        id={item._id}
+                        image={item.gallery[0]}
+                        labels={item.features}
+                        location={`${item.property_address.address}`}
+                        path={pathname}
+                        postfix={item.price_postfix}
+                        price={item.price}
+                        rating={item.reviews}
+                        reviewNum={item.reviews.length}
+                        title={item.property_title}
+                        wishlist={item.wishlists}
+                      />
+                    );
+                  })}
+                </>
+              )}
             </div>
-            <div className="px-4 sm:px-0 hidden lg:block">
+            <div
+              className={cn(
+                "px-4 sm:px-0 hidden lg:block",
+                searchedData && searchedData.length === 0 && "lg:hidden",
+              )}
+            >
               <Image alt="Map Image" placeholder="blur" src={dummyMap} />
             </div>
           </div>
 
-          <div className="lg:pt-20 pb-10">
+          <div
+            className={cn(searchedData && searchedData.length === 0 && "hidden", "lg:pt-20 pb-10")}
+          >
             <ul className="flex justify-center gap-4">
-              <li>
-                <button className="pageination-btn bg-blue text-white">1</button>
-              </li>
-              <li>
-                <button className="pageination-btn">2</button>
-              </li>
-              <li>
-                <button className="pageination-btn">3</button>
-              </li>
-              <li>
-                <button className="pageination-btn">4</button>
-              </li>
-              <li>
-                <button className="pageination-btn">5</button>
-              </li>
+              {Array.from({length: totalPages}).map((_, index) => {
+                return (
+                  <li key={index}>
+                    <button className={cn("pageination-btn", "bg-blue text-white")}>
+                      {index + 1}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          <div className="px-4 sm:px-0 lg:hidden py-14">
+          <div
+            className={cn(
+              searchedData && searchedData.length === 0 && "hidden",
+              "px-4 sm:px-0 lg:hidden py-14",
+            )}
+          >
             <Image alt="Map Image" className="mx-auto" placeholder="blur" src={dummyMap} />
           </div>
+
+          {searchedData && searchedData.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-20">
+              <Image alt="No data" height={200} src={"/no-data.png"} width={200} />
+              <span className="text-lg font-medium italic">No Match found</span>
+            </div>
+          )}
         </section>
       </Wrapper>
     </main>

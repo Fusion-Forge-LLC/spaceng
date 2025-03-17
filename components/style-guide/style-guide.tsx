@@ -14,11 +14,21 @@ interface Props {
   placeholder: string;
   options: {value: string; note: string}[];
   className?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
+  defaultValue?: string;
 }
 
-export function DropdDown({placeholder, options, className}: Props) {
+export function DropdDown({
+  placeholder,
+  options,
+  className,
+  value,
+  defaultValue,
+  onValueChange,
+}: Props) {
   return (
-    <Select>
+    <Select defaultValue={defaultValue} value={value} onValueChange={onValueChange}>
       <SelectTrigger className={cn("bg-white rounded-none", className)}>
         <SelectValue className="capitalize" placeholder={placeholder} />
       </SelectTrigger>

@@ -7,13 +7,7 @@ import {cn} from "@/lib/utils";
 
 import countries from "../../../../../countries/countries";
 
-function CardsPayment({
-  paymentSuccess,
-  className,
-}: {
-  paymentSuccess: () => void;
-  className: string;
-}) {
+function CardsPayment({className, price}: {className: string; price: string}) {
   const [cardDetails, setCardDetails] = useState({
     card_number: "",
     expiry_date: "",
@@ -68,7 +62,6 @@ function CardsPayment({
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    paymentSuccess();
   }
 
   return (
@@ -128,7 +121,7 @@ function CardsPayment({
         <DropdDown className="payment-input w-full" options={countries} placeholder="Select" />
       </div>
 
-      <button className="booking-btn w-full block">Pay ₦25,000</button>
+      <button className="booking-btn w-full block">Pay ₦{price}</button>
     </form>
   );
 }

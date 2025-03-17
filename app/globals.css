@@ -41,6 +41,15 @@
   .active-payment-method {
     @apply border-2 border-blue text-blue;
   }
+  .password-confirmation-true {
+    @apply bg-[#707070] text-white;
+  }
+  .password-input {
+    @apply h-11 rounded-lg border border-grey-200 focus-visible:ring-blue;
+  }
+  .contact-input {
+    @apply border border-[#C5C5C5] rounded-[5px] bg-white focus:border-blue focus-visible:ring-0 shadow-none;
+  }
 }
 
 @layer components {
@@ -63,25 +72,25 @@
     @apply block rounded-2xl border-2 border-blue w-full sm:text-lg font-medium sm:font-semibold px-8 py-2 sm:w-44 text-center active:scale-95;
   }
   .business-auth-wrapper {
-    @apply py-12 px-4 sm:px-8 md:px-10 bg-white w-11/12 sm:w-full sm:max-w-xl mx-auto;
+    @apply py-10 px-4 sm:px-8 md:px-10 bg-white w-11/12 sm:w-full sm:max-w-xl mx-auto;
   }
   .auth-title {
     @apply sm:text-2xl text-center font-semibold;
   }
   .verify-btn {
-    @apply text-black bg-[#D9D9D9] rounded-lg text-xs sm:text-2xl lg:text-3xl font-medium p-2 w-full block hover:bg-grey-100;
+    @apply text-black bg-[#D9D9D9] rounded-lg text-xs sm:text-xl font-medium p-1.5 w-full block hover:bg-grey-100;
   }
   .dashboard-nav {
     @apply flex items-center gap-2 px-2.5 py-2 hover:bg-grey-300/5 rounded-lg;
   }
   .dashboard-header-btn {
-    @apply h-10 w-10 rounded-full border border-blue grid place-content-center;
+    @apply h-10 w-10 rounded-full border grid place-content-center;
   }
   .service-link {
     @apply absolute bottom-5 md:bottom-8 left-1/2 block text-center -translate-x-1/2 bg-blue rounded-lg w-10/12 md:w-3/5 px-8 py-6 hover:bg-white hover:text-blue text-white border border-white;
   }
   .property-tab-link {
-    @apply block w-fit p-1.5 lg:p-2.5 hover:bg-blue/10 text-sm lg:text-base;
+    @apply block w-fit p-1.5 lg:p-2.5 hover:bg-blue/10 text-sm whitespace-nowrap;
   }
   .property-tab-link.active {
     @apply border-b-2 border-b-blue text-grey;
@@ -94,6 +103,24 @@
   }
   .calender-item {
     @apply h-12 w-12 grid place-content-center hover:bg-blue/40 cursor-pointer rounded;
+  }
+  .switch-btn {
+    @apply p-5 text-base font-semibold border-b-4 border-b-transparent text-grey-200 disabled:text-grey-300;
+  }
+  .password-confirmation-tag {
+    @apply text-[#707070] bg-white rounded-3xl px-2 py-1 lg:py-1.5 flex items-center border justify-center gap-1.5 w-fit text-xs;
+  }
+  .client-register-input {
+    @apply border-[#707070] border rounded-lg w-full py-3 lg:py-3.5 pr-12 px-3.5 lg:px-4 flex items-center text-grey placeholder:text-[#707070] focus:outline-none focus:border-blue;
+  }
+  .chat-switch-btn {
+    @apply rounded-full px-4 py-2 font-medium flex gap-2 items-center justify-between border border-grey-200 hover:bg-grey-200;
+  }
+  .chat-header-btn {
+    @apply h-8 w-8 bg-[#DDD9D9] grid place-content-center rounded-full;
+  }
+  .tag {
+    @apply block w-fit mx-auto bg-[#FAFAFA] px-2 py-1 capitalize rounded text-[#2F364B] text-xs;
   }
 }
 
@@ -245,4 +272,27 @@ abbr:where([title]) {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+.ql-toolbar.ql-snow {
+  border-color: #707070 !important;
+  border-start-start-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.ql-container.ql-snow {
+  height: 200px;
+  border-color: #707070 !important;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.tags-overflow {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px #eaebec;
 }

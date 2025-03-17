@@ -1,19 +1,28 @@
 "use client";
 
+import * as yup from "yup";
 import React from "react";
-import {Poppins} from "next/font/google";
 import {useRouter} from "next/navigation";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
 
-import FormControl from "../../../_components/form-control/form-control";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 
-const poppin = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
+import FormInput from "../../../_components/form-control/form-control";
+import AuthBtn from "../../../_components/auth-btn/auth-btn";
+
+const loginSchema = yup.object({
+  email: yup.string().email().required("Please enter email address"),
+});
+
+type LoginType = yup.InferType<typeof loginSchema>;
 
 function Page() {
+  const form = useForm<LoginType>({resolver: yupResolver(loginSchema), defaultValues: {email: ""}});
   const router = useRouter();
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
 
-    router.push("/auth/business/login/forgot-password/email/verify");
+  const onSubmit = (values: LoginType) => {
+    router.push(`/auth/business/login/forgot-password/email/verify?email=${values.email}`);
   };
 
   return (
@@ -22,14 +31,25 @@ function Page() {
       <p className="text-grey-200 text-sm text-center max-w-sm mx-auto">
         Provide your registered email to receive a link to reset your password
       </p>
-      <form className="" onSubmit={handleSubmit}>
-        <div className="py-6 space-y-5">
-          <FormControl id="email" label="Email" type="email" />
-        </div>
-        <button className="business-auth-button text-white bg-blue hover:bg-white py-3 hover:text-blue w-full font-medium">
-          Continue
-        </button>
-      </form>
+      <Form {...form}>
+        <form className="" onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="py-6 space-y-5">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({field}) => (
+                <FormItem>
+                  <FormControl>
+                    <FormInput id="email" label="Email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <AuthBtn showLoader={false} text="Continue" />
+        </form>
+      </Form>
     </div>
   );
 }

@@ -1,28 +1,63 @@
 "use client";
 
 import {ArrowLeft} from "lucide-react";
-import {useRouter} from "next/navigation";
-import React, {FormEvent, useState} from "react";
+import {useParams, useRouter} from "next/navigation";
+import React, {useState} from "react";
 import Calendar from "react-calendar";
+import * as yup from "yup";
 
+// import FormControl from "./_components/form-control/form-control";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+
+import {Form, FormField, FormItem, FormMessage, FormControl} from "@/components/ui/form";
 import Wrapper from "@/components/wrapper/wrapper";
+import {useCreatePreBooking} from "@/api/pre-booking";
+import Loader from "@/components/loader/loader";
 
 import BookingSuccess from "../modal/booking-success";
 
-import FormControl, {PhoneNumber, TextArea} from "./_components/form-control/form-control";
+import FormInput, {PhoneNumber, TextArea} from "./_components/form-control/form-control";
 
 type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
+const preBookingSchema = yup.object({
+  full_name: yup.string().required("Please enter your full name"),
+  email: yup
+    .string()
+    .email()
+    .required("Please enter email address")
+    .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, "Email must have a valid domain"),
+  phone_number: yup.string().required("Phone Number is required"),
+  reason: yup.string().required("Please state your reason for visit"),
+});
+
+type PreBookingType = yup.InferType<typeof preBookingSchema>;
+
 function BookingPage() {
   const router = useRouter();
+  const params = useParams();
+  const id = params.id as string;
   const [date, setDate] = React.useState<Value>(new Date());
   const [isBookingSuccess, setIsBookingSuccess] = useState(false);
+  const {mutateAsync: createPreBooking, isPending} = useCreatePreBooking();
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setIsBookingSuccess(true);
+  const form = useForm<PreBookingType>({
+    resolver: yupResolver(preBookingSchema),
+  });
+
+  const onsubmit = (values: PreBookingType) => {
+    const payload = {
+      id,
+      ...values,
+      date: date?.toLocaleString() || "",
+    };
+
+    createPreBooking(payload).then(() => {
+      setIsBookingSuccess(true);
+    });
   };
 
   return (
@@ -39,17 +74,67 @@ function BookingPage() {
           <div className="flex-1">
             <h3 className="text-lg font-medium mb-8">Arrange A Pre-Booking</h3>
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <FormControl label="Full Name" />
+            <Form {...form}>
+              <form className="space-y-4" onSubmit={form.handleSubmit(onsubmit)}>
+                <FormField
+                  control={form.control}
+                  name="full_name"
+                  render={({field}) => (
+                    <FormItem>
+                      <FormControl>
+                        <FormInput id="full_name" label="Full Name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormControl label="Email" type="email" />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({field}) => (
+                    <FormItem>
+                      <FormControl>
+                        <FormInput id="email" label="Email" type="email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <PhoneNumber />
-              <TextArea />
-              <div className="pt-4 sm:pt-8">
-                <button className="booking-btn w-full ">Submit Request</button>
-              </div>
-            </form>
+                <FormField
+                  control={form.control}
+                  name="phone_number"
+                  render={({field}) => (
+                    <FormItem>
+                      <FormControl>
+                        <PhoneNumber id="phone_number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="reason"
+                  render={({field}) => (
+                    <FormItem>
+                      <FormControl>
+                        <TextArea id="reason" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="pt-4 sm:pt-8">
+                  <button className="booking-btn w-full" disabled={isPending}>
+                    {isPending ? <Loader /> : "Submit Request"}
+                  </button>
+                </div>
+              </form>
+            </Form>
           </div>
 
           <div className="w-full sm:max-w-64 md:max-w-80 lg:max-w-sm">
