@@ -184,8 +184,8 @@ export default function Renters() {
               />
               <label htmlFor="confirm">
                 I confirm that I’m authorised to provide the personal data of any co-renter to
-                SpaceNG for this service. In addition, I confirm that I’ve informed the other renter
-                that I’m providing their personal data to SpaceNG
+                Spacefinda for this service. In addition, I confirm that I’ve informed the other
+                renter that I’m providing their personal data to Spacefinda
               </label>
             </div>
           </div>

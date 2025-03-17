@@ -41,7 +41,7 @@ const NotificationsPage: React.FC = () => {
           <div className="">
             <p className="mb-4 text-sm lg:text-base">
               Hello Akin, we detected an unusual attempt as someone is trying to login in your
-              account from unverified device. SpaceNG has blocked them but you should check what
+              account from unverified device. Spacefinda has blocked them but you should check what
               happened. Review your account activity to make sure no one else has access.
             </p>
             <button className="bg-blue text-white font-medium px-2 lg:px-4 py-3 text-sm lg:text-base rounded-lg mb-1 block">

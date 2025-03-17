@@ -114,7 +114,7 @@ function PropertyForm({
   };
 
   return (
-    <div className="relative flex-1 overflow-y-scroll">
+    <div className="relative flex-1">
       <div className="py-3 px-5">
         <h4 className="text-grey text-lg sm:text-2xl font-semibold">{title}</h4>
 

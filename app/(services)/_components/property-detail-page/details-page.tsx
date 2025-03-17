@@ -10,6 +10,7 @@ import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
 import {useUpdateViews} from "@/api/property/update-view";
 import {ReviewTypes} from "@/@types/types";
+import ShareButtons from "@/components/share-property/share-property";
 
 import ReviewCard from "../review-card/review-card";
 import BookShortlet from "../booking-page/booking";
@@ -36,6 +37,7 @@ function DetailsPage({
   reviews: ReviewTypes[];
 }) {
   useUpdateViews();
+  const postUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
     <main>
@@ -111,6 +113,11 @@ function DetailsPage({
               <BookingCard className="md:hidden my-16" cost={cost} label={label} />
 
               <div className="pt-12">
+                <h5 className="text-lg mb-2 font-medium text-grey">Share</h5>
+                <ShareButtons postUrl={postUrl} title={title} />
+              </div>
+
+              <div className="pt-12">
                 <h4 className="mb-6">Reviews & Ratings</h4>
 
                 <h5 className="text-lg mb-6 font-medium text-grey">
@@ -122,7 +129,7 @@ function DetailsPage({
                     return (
                       <ReviewCard
                         key={index}
-                        image={"/reviews/image1.jpg"}
+                        image={item.client.profile_image}
                         name={item.name}
                         rating={item.rating}
                         text={item.review_text}

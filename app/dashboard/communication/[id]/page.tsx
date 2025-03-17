@@ -1,11 +1,10 @@
 "use client";
 
-import {SendHorizonal, Trash} from "lucide-react";
+import {SendHorizonal} from "lucide-react";
 import React, {FormEvent, useEffect, useRef, useState} from "react";
 
 import socket from "@/socket";
 import {Input} from "@/components/ui/input";
-import {Archive} from "@/components/Icons/icons";
 import {useGetMessages} from "@/api/chat/get-messages";
 import {Messages} from "@/@types/types";
 import Loader from "@/components/loader/loader";
@@ -41,18 +40,8 @@ function Page({params}: {params: {id: string}}) {
   };
 
   return (
-    <section className="flex-1 px-4 overflow-hidden flex flex-col h-full gap-3 pb-1">
-      <header className="flex items-center gap-4">
-        <h3 className="text-lg font-semibold mr-auto">Chats Details</h3>
-
-        <button>
-          <Archive />
-        </button>
-        <button>
-          <Trash size={18} />
-        </button>
-      </header>
-      <div className="flex-1 overflow-y-scroll no-scrollbar">
+    <section className="flex-1 px-4 overflow-hidden flex flex-col h-full gap-3 pb-1 bg-grey-100/20">
+      <div className="flex-1 overflow-y-scroll no-scrollbar pt-2">
         {isLoading ? (
           <div className="h-full grid place-content-center">
             <Loader />
@@ -64,7 +53,7 @@ function Page({params}: {params: {id: string}}) {
       <form className="relative" onSubmit={sendMessage}>
         <Input
           ref={messageRef}
-          className="h-14 p-4 rounded-xl border-[#77787D] focus-visible:ring-blue"
+          className="h-14 p-4 rounded-xl border-[#77787D] bg-white focus-visible:ring-blue"
           placeholder="Message"
         />
         <button className="absolute top-1/2 -translate-y-1/2 right-4 hover:scale-105 transition-all">

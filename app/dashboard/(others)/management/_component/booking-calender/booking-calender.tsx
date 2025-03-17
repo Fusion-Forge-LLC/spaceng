@@ -62,7 +62,8 @@ function BookingCalender({
           head_cell: "h-12 w-12",
           caption:
             "flex justify-center pt-1 relative items-center bg-blue rounded px-5 py-2 text-white w-fit mx-auto",
-          month: "border border-grey-200 p-2 rounded-3xl max-lg:w-fit max-w-full max-lg:mx-auto",
+          month:
+            "border border-grey-200/20 bg-grey-200/10 p-2 rounded-3xl max-lg:w-fit max-w-full max-lg:mx-auto",
           day_selected: "bg-blue text-white",
         }}
         components={{

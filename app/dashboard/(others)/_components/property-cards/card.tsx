@@ -27,15 +27,15 @@ function Card({image, title, booking, views, rating, type, id}: Props) {
         <Image fill alt="property image" className="object-cover object-center" src={image} />
       </div>
 
-      <div className="flex items-center gap-2 text-blue py-2">
-        <h4 className="flex-1 text-lg overflow-hidden whitespace-nowrap text-ellipsis text-grey font-semibold">
+      <div className="flex items-center gap-2 text-blue pt-1">
+        <h4 className="flex-1 2xl:text-lg overflow-hidden whitespace-nowrap text-ellipsis text-grey font-medium">
           {title}
         </h4>
 
         <UpdateBtn id={id} type={type} />
       </div>
 
-      <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">
+      <ul className="text-[#6D6E78] text-xs space-y-1">
         <li>Bookings: {booking.length} upcoming</li>
         <li>Views: {views} in the last 30 days</li>
         <li className="flex items-center gap-1">

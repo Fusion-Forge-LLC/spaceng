@@ -49,8 +49,8 @@ export default function Privacy() {
             Exercise your privacy rights under local law. To make a request to SpacesNG.com and have
             it routed to the SpacesNG.com privacy team, use the ‘Data subject request form’.
             <br />
-            For more information, or to exercise other rights, please take a look at our SpaceNG.com
-            Privacy Statement
+            For more information, or to exercise other rights, please take a look at our
+            Spacefindatechnologies.com Privacy Statement
           </p>
           <div className="mb-5 lg:mb-6 flex flex-col gap-4">
             <div className="flex flex-col gap-1 w-full">

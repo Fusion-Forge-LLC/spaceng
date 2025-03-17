@@ -63,7 +63,7 @@ export default function Header() {
       className=" py-5 px-5 lg:px-24 flex justify-between items-center sticky"
       style={{boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)"}}
     >
-      <Link href={"/account/settings"}>
+      <Link href={"/"}>
         <h1 className="text-blue font-bold text-lg">SpaceFinda</h1>
       </Link>
       <div className="flex gap-2 items-center">

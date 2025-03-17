@@ -7,15 +7,7 @@ import {cn} from "@/lib/utils";
 
 import countries from "../../../../../countries/countries";
 
-function CardsPayment({
-  paymentSuccess,
-  className,
-  price,
-}: {
-  paymentSuccess: () => void;
-  className: string;
-  price: string;
-}) {
+function CardsPayment({className, price}: {className: string; price: string}) {
   const [cardDetails, setCardDetails] = useState({
     card_number: "",
     expiry_date: "",
@@ -70,7 +62,6 @@ function CardsPayment({
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    paymentSuccess();
   }
 
   return (

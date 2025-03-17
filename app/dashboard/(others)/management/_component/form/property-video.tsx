@@ -23,6 +23,13 @@ function PropertyVideo({video, setVideo}: Props) {
 
         return;
       }
+
+      if (selectedVideos[0].size > 10 * 1024 * 1024) {
+        toast.error("File size exceeds 5MB. Please upload a smaller video.");
+
+        return;
+      }
+
       const formData = new FormData();
 
       formData.append("video", selectedVideos[0]);

@@ -30,7 +30,6 @@ export const useGetBooking = (): UseMutationResult<
     mutationFn: getBooking,
     onSuccess: (data) => {},
     onError: (error) => {
-      console.log(error);
       displayErrorMessage(error);
     },
   });
@@ -45,12 +44,14 @@ export interface BookingResponse {
     duration: number;
     transaction_id: string;
     payment_method: string;
-    client_id: {
+    client: {
       _id: string;
       fullname: string;
       email: string;
       phone: string;
     };
+    profile: {profile_image: string};
+    no_of_guest: number;
     property_owner: string;
     status: string;
     amount_paid: number;

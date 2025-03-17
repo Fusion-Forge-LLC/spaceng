@@ -30,8 +30,8 @@ function Card({image, title, location, price, status, post_fix, id, type}: Props
         />
       </Link>
 
-      <div className="flex items-center gap-2 text-blue py-2">
-        <h4 className="flex-1 text-lg overflow-hidden whitespace-nowrap text-ellipsis text-grey font-semibold">
+      <div className="flex items-center gap-2 text-blue pt-2 pb-1">
+        <h4 className="flex-1 overflow-hidden whitespace-nowrap text-ellipsis text-grey font-medium">
           <Link className="hover:underline hover:text-blue" href={`/dashboard/management/${id}`}>
             {title}
           </Link>
@@ -40,8 +40,8 @@ function Card({image, title, location, price, status, post_fix, id, type}: Props
         <UpdateBtn id={id} type={type} />
       </div>
 
-      <ul className="text-[#6D6E78] text-sm space-y-2 md:space-y-1">
-        <li>Location: {location}</li>
+      <ul className="text-[#6D6E78] text-xs 2xl:text-sm space-y-1">
+        <li className="text-nowrap overflow-hidden text-ellipsis">Location: {location}</li>
         <li>
           Price: ₦{price.toLocaleString()} {post_fix || "per night"}
         </li>

@@ -27,8 +27,8 @@ function Page({params}: {params: {id: string}}) {
   const reviewList = data.data.reviews || [];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-20 pt-10 flex-1 overflow-hidden">
-      <section className="h-full md:overflow-y-scroll">
+    <div className="sm:pt-10 flex-1">
+      <section className="">
         <h2 className="font-semibold text-grey text-xl mb-2">Reviews & Ratings</h2>
 
         <p className="font-medium">Guest Reviews & Ratings for {data.data.title}</p>
@@ -43,7 +43,7 @@ function Page({params}: {params: {id: string}}) {
               return (
                 <ReviewCard
                   key={index}
-                  image={"/reviews/image5.png"}
+                  image={item.client.profile_image}
                   name={item.name}
                   rating={item.rating}
                   text={item.review_text}
@@ -53,31 +53,6 @@ function Page({params}: {params: {id: string}}) {
           </ul>
         )}
       </section>
-
-      {/* <section>
-        <Sender
-          name="Sarah Thomas"
-          profileImage="/reviews/image4.jpg"
-          rating={5}
-          text="Beautiful home and excellent location. We enjoyed our stay, but we did encounter some issues with the Wi-Fi connection. However, the host was quick to assist, and it didn’t impact our overall experience. We would definitely consider staying here again."
-        />
-        <Receiver
-          name="Oluwatosin Oladele"
-          profileImage="/avatar.png"
-          text="Thank you for your feedback! We apologize for the inconvenience with the Wi-Fi and appreciate your understanding. We’ll work on improving this for future guests"
-        />
-        <Sender
-          name="Sarah Thomas"
-          profileImage="/reviews/image4.jpg"
-          rating={5}
-          text="Beautiful home and excellent location. We enjoyed our stay, but we did encounter some issues with the Wi-Fi connection. However, the host was quick to assist, and it didn’t impact our overall experience. We would definitely consider staying here again."
-        />
-        <Receiver
-          name="Oluwatosin Oladele"
-          profileImage="/avatar.png"
-          text="Thank you for your feedback! We apologize for the inconvenience with the Wi-Fi and appreciate your understanding. We’ll work on improving this for future guests"
-        />
-      </section> */}
     </div>
   );
 }

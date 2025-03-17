@@ -33,10 +33,13 @@ function PayoutMethod() {
           <AddPayoutMethod showText />
         </div>
       ) : (
-        <ul>
+        <ul className="space-y-2">
           {data.data.map((item) => {
             return (
-              <li key={item._id} className="border border-grey-200 p-3 rounded-3xl">
+              <li
+                key={item._id}
+                className="border border-grey-300/10 bg-grey-300/5 p-3 rounded-3xl"
+              >
                 <table className="w-full">
                   <tbody className="text-sm font-medium">
                     <tr>
