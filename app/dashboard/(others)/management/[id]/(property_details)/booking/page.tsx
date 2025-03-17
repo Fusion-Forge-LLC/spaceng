@@ -12,10 +12,25 @@ function Page({params}: {params: {id: string}}) {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const {mutateAsync, isPending} = useGetBooking();
   const [data, setData] = useState<BookingResponse | null>(null);
+  const propertyId = params.id;
+
+  useEffect(() => {
+    const dateObj = new Date();
+
+    dateObj.setHours(0, 0, 0, 0);
+    const payload = {
+      propertyId,
+      date: dateObj.getTime(),
+    };
+
+    mutateAsync(payload).then((data) => {
+      setData(data.data);
+    });
+  }, []);
 
   useEffect(() => {
     const payload = {
-      propertyId: params.id,
+      propertyId,
       date: selectedDate.getTime(),
     };
 
@@ -23,10 +38,9 @@ function Page({params}: {params: {id: string}}) {
       setData(data.data);
     });
   }, [selectedDate]);
-  console.log();
 
   return (
-    <div className="flex-1 overflow-y-scroll">
+    <div className="flex-1">
       <div className="sm:p-4 md:p-3 flex flex-col lg:flex-row gap-10 min-[1115px]:gap-40 text-grey-200 overflow-hidden">
         <section className="flex-1 lg:max-w-96">
           <h3 className="text-grey text-xl font-semibold mb-2">Booking Calender</h3>
@@ -38,18 +52,6 @@ function Page({params}: {params: {id: string}}) {
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
             />
-
-            {/* <ul className="[&_li]:flex [&_li]:justify-between space-y-3 text-grey font-medium">
-              <li>
-                Booked Date: <span>30th August 2024</span>
-              </li>
-              <li>
-                Available Date: <span>30th August 2024</span>
-              </li>
-              <li>
-                Pending Bookings: <span>30th August 2024</span>
-              </li>
-            </ul> */}
           </div>
         </section>
 

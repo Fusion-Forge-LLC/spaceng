@@ -56,7 +56,7 @@ function Card({
         </TableCell>
         <TableCell className="text-center">{property_type}</TableCell>
         <TableCell className="text-center">{duration}</TableCell>
-        <TableCell className="text-center">{total_paid}</TableCell>
+        <TableCell className="text-center">₦{total_paid.toLocaleString()}</TableCell>
         <TableCell className="text-center whitespace-nowrap">{location}</TableCell>
         <TableCell>
           <Badge

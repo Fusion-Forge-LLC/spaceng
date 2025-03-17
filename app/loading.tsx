@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 import Loader from "@/components/loader/loader";
 
 export const metadata: Metadata = {
-  title: "SpaceNG",
+  title: "Spacefinda",
   description: "",
 };
 

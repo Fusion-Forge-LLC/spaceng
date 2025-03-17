@@ -93,6 +93,9 @@ export interface ReviewTypes {
   property: string;
   user: string;
   __v: number;
+  client: {
+    profile_image: string;
+  };
 }
 
 export interface PayoutTypes {

@@ -27,8 +27,17 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
     params.set("checkin", checkin || "");
     params.set("checkout", checkout || "");
 
+    if (typeof window !== "undefined") {
+      const parsedUrl = new URL(window.location.href);
+
+      parsedUrl.searchParams.set("guest", guestsCount.toString());
+      parsedUrl.searchParams.set("checkin", checkin || "");
+      parsedUrl.searchParams.set("checkout", checkout || "");
+      router.push(parsedUrl.toString());
+    }
+
     return params.toString();
-  }, [date, guestsCount]);
+  }, [date, guestsCount, guestsCount]);
 
   const checkoutBooking = () => {
     const path = `${pathName}/checkout?${params}`;

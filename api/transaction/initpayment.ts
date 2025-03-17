@@ -17,6 +17,8 @@ type TransactionPayload = {
     propertyId: string;
     checkin: string;
     checkout: string;
+    channel: string;
+    guestCount: string | number;
   };
 };
 

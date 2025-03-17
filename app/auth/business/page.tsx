@@ -5,7 +5,7 @@ function Page() {
   return (
     <main className='h-screen w-full bg-[url("/business-bg.png")] bg-cover bg-center grid place-content-center px-4'>
       <div className="text-white text-center w-fit max-w-full">
-        <h3 className="font-bold text-3xl mb-2">Welcome to SpaceNG</h3>
+        <h3 className="font-bold text-3xl mb-2">Welcome to Spacefinda</h3>
         <p className="font-medium text-lg">Manage and lease your properties with ease</p>
 
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-12">

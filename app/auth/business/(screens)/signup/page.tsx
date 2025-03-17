@@ -10,7 +10,7 @@ import {useRouter} from "next/navigation";
 import "yup-phone-lite";
 import {useSignUp} from "@/api/auth/signup";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
-import {faceBookSignin, googleSignin} from "@/lib/utils";
+import {googleSignin} from "@/lib/utils";
 
 import FormInput from "../_components/form-control/form-control";
 import SocialBtn from "../_components/social-btn/social-btn";
@@ -143,10 +143,9 @@ function Page() {
         </div>
 
         <div className="grid grid-cols-2 px-8 sm:px-0 sm:flex justify-center gap-2 sm:gap-8 pt-4">
-          <SocialBtn image="/icons/facebook.svg" name="Facebook" signIn={faceBookSignin} />
           <SocialBtn
             image="/icons/google.svg"
-            name="Google"
+            name="Sign up with Google"
             signIn={() => googleSignin("business")}
           />
         </div>

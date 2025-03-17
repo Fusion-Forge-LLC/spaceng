@@ -9,8 +9,6 @@ import {useGetProperty} from "@/api/property/property";
 import Loader from "@/components/loader/loader";
 import NotFound from "@/components/not-found/not-found";
 
-import dummyMap from "../../../../../../public/dummymap.png";
-
 function Page({params}: {params: {id: string}}) {
   const {data, isPending} = useGetProperty(params.id);
   const pathName = usePathname();
@@ -38,7 +36,7 @@ function Page({params}: {params: {id: string}}) {
   } = data.data;
 
   return (
-    <div className="flex flex-col-reverse lg:grid lg:grid-cols-11 gap-8 max-lg:pt-5 flex-1 overflow-y-scroll">
+    <div className="flex flex-col-reverse lg:grid lg:grid-cols-11 gap-8 max-lg:pt-5 flex-1">
       <article className="py-5 lg:col-span-6 text-sm lg:text-base">
         <h4 className="text-lg sm:text-2xl font-semibold mb-2 max-lg:text-center">
           {property_title}
@@ -63,17 +61,6 @@ function Page({params}: {params: {id: string}}) {
           </ul>
         </div>
 
-        <h4 className="text-lg sm:text-2xl font-semibold mb-2">Neighborhood Insights</h4>
-        <p className="text-grey-200">
-          Banana Island is one of Lagos&apos; most prestigious and secure neighborhoods, known for
-          its serene environment and luxurious residences. The area offers easy access to top
-          restaurants, shopping centers, and cultural attractions. Nearby, you&apos;ll find the
-          Lekki Conservation Centre, perfect for a day of nature exploration, and the vibrant
-          nightlife of Victoria Island just a short drive away. Whether you&apos;re in Lagos for
-          business or leisure, Banana Island provides a tranquil escape with all the conveniences of
-          city life at your doorstep.
-        </p>
-
         <div className="flex flex-col sm:flex-row gap-5 md:gap-8 sm:justify-center pt-8">
           <Link
             className="property-page-link bg-blue w-full text-white hover:opacity-85"
@@ -91,10 +78,10 @@ function Page({params}: {params: {id: string}}) {
       </article>
       <div className="lg:col-span-5 space-y-6 lg:space-y-4">
         <div className=" aspect-video relative overflow-hidden">
-          <Image fill alt="Property image" src={gallery[0]} />
+          <Image fill alt="Property image" className="object-cover object-top" src={gallery[0]} />
         </div>
         <h3 className="text-lg sm:text-xl font-semibold">Address: {property_address.address}</h3>
-        <Image alt="Dummy Map Image" className="max-lg:w-full" src={dummyMap} />
+        {/* <Image alt="Dummy Map Image" className="max-lg:w-full" src={dummyMap} /> */}
       </div>
     </div>
   );

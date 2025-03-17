@@ -29,15 +29,7 @@ const FormSchema = yup.object({
 
 type FormType = yup.InferType<typeof FormSchema>;
 
-function BankAccount({
-  paymentSuccess,
-  className,
-  price,
-}: {
-  paymentSuccess: () => void;
-  className: string;
-  price: string;
-}) {
+function BankAccount({className, price}: {className: string; price: string}) {
   const {data} = useGetBanks("pay_with_bank=true");
   const params = useParams();
   const {User} = useUser();

@@ -14,11 +14,8 @@ function Header() {
   const {data, isLoading} = useGetUnreadCount();
 
   return (
-    <header className="flex justify-between items-center py-5 md:py-3 gap-5 px-4 max-md:flex-wrap border-b border-grey-200">
-      <Link
-        className="text-2xl sm:text-3xl font-black text-blue px-2.5"
-        href={"/dashboard/overview"}
-      >
+    <header className="flex justify-between items-center py-3 gap-5 px-4 max-md:flex-wrap border-b border-grey-200">
+      <Link className="text-xl sm:text-3xl font-bold sm:font-black text-blue sm:px-2.5" href={"/"}>
         Spacefinda
       </Link>
 
