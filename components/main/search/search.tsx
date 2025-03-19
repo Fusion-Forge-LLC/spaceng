@@ -8,7 +8,7 @@ import {DropdDown} from "@/components/style-guide/style-guide";
 import {Button} from "@/components/ui/button";
 
 function SearchProperties() {
-  const {data, isLoading} = useGetPropertiesLocations();
+  const {data} = useGetPropertiesLocations();
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const router = useRouter();
@@ -39,7 +39,7 @@ function SearchProperties() {
         <DropdDown
           options={[
             {value: "shortlet", note: "Shortlet"},
-            {value: "workspace", note: "Worksplace"},
+            {value: "workspace", note: "Workspace"},
           ]}
           placeholder="Type"
           value={type}
