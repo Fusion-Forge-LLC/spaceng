@@ -13,6 +13,7 @@ import {
 import {FormField, FormItem, FormMessage, FormControl} from "@/components/ui/form";
 import FormInput from "@/app/dashboard/(others)/_components/form-control/form-input";
 import "react-quill/dist/quill.snow.css";
+import {nigeriaStates} from "@/countries/states";
 
 function Basic({form}: {form: any}) {
   return (
@@ -181,6 +182,36 @@ function Basic({form}: {form: any}) {
             </FormItem>
           )}
         />
+        <div>
+          <label className="text-grey-200 block mb-2 text-left" htmlFor={"type"}>
+            State
+          </label>
+          <FormField
+            control={form.control}
+            name="state"
+            render={({field}) => (
+              <FormItem>
+                <FormControl>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger className="rounded-md bg-white border border-grey-200 h-12  focus-visible:ring-blue">
+                      <SelectValue className="capitalize" placeholder={"Select property state"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {nigeriaStates.map((item, index) => {
+                        return (
+                          <SelectItem key={index} value={item}>
+                            {item}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="bedroom"

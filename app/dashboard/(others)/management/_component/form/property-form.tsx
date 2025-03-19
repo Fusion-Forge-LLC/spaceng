@@ -28,6 +28,7 @@ const propertySchema = yup.object({
   type: yup.string().oneOf(["workspace", "shortlet"], "Invalid type").required("Type is required"),
   location: yup.string(),
   neighborhood: yup.string(),
+  state: yup.string().required("Please select state"),
   bedroom: yup.number(),
 });
 
@@ -66,6 +67,7 @@ function PropertyForm({
             type: defaultValues.type,
             location: defaultValues.property_address.location,
             neighborhood: defaultValues.property_address.neighborhood,
+            state: defaultValues.property_address.state,
             bedroom: defaultValues.bedroom,
           },
   });

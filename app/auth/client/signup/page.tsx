@@ -143,8 +143,13 @@ function ClientSignUp() {
           />
         </div>
         {/* TODO: Extract these validators into a single component with props */}
-        <PasswordValidators password={form.getValues("password")} />
-        <p className="text-[#707070] mb-6">By signing up, you agree to SpacesNG Global Policy</p>
+        <PasswordValidators password={form.watch("password")} />
+        <p className="text-[#707070] mb-6">
+          By signing up, you agree to Spacefinda{" "}
+          <Link className="text-blue hover:underline" href={"/privacy-policy"}>
+            Policy
+          </Link>
+        </p>
         <div>
           <PrimaryAuthButton
             buttonName="Sign Up"
