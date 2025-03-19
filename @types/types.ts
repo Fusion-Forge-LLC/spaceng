@@ -23,6 +23,7 @@ export interface PropertyPayload {
   type: "workspace" | "shortlet";
   location?: string;
   neighborhood?: string;
+  state: string;
   bedroom?: number;
   gallery: string[];
   video: string[];
@@ -42,6 +43,7 @@ export interface PropertyResponse {
     address: string;
     location: string;
     neighborhood: string;
+    state: string;
   };
   property_description: string;
   property_title: string;

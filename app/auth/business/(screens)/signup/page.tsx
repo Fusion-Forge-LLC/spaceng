@@ -11,6 +11,7 @@ import "yup-phone-lite";
 import {useSignUp} from "@/api/auth/signup";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {googleSignin} from "@/lib/utils";
+import PasswordValidators from "@/app/auth/client/components/password-validators";
 
 import FormInput from "../_components/form-control/form-control";
 import SocialBtn from "../_components/social-btn/social-btn";
@@ -128,6 +129,7 @@ function Page() {
               )}
             />
           </div>
+          <PasswordValidators password={form.watch("password")} />
           <AuthBtn showLoader={isPending} text="Sign Up and Start Listing" />
         </form>
       </Form>
