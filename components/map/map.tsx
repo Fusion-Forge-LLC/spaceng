@@ -16,20 +16,11 @@ const DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-interface Property {
-  title?: string;
-  price?: string;
-  link?: string;
-  latitude: number;
-  longitude: number;
-}
-
 interface MapComponentProps {
   properties: PropertyResponse[];
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({properties}) => {
-  console.log(properties);
   const propertiesList = properties
     .map((item) => {
       if (!item?.property_address?.coordinates?.length) return;
