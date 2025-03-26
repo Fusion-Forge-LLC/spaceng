@@ -11,6 +11,7 @@ import {cn} from "@/lib/utils";
 import {useUpdateViews} from "@/api/property/update-view";
 import {ReviewTypes} from "@/@types/types";
 import ShareButtons from "@/components/share-property/share-property";
+import SingleMap from "@/components/map/singlemap";
 
 import ReviewCard from "../review-card/review-card";
 import BookShortlet from "../booking-page/booking";
@@ -25,6 +26,7 @@ function DetailsPage({
   label,
   amenities,
   reviews,
+  coordinate,
 }: {
   images: string[];
   title: string;
@@ -35,6 +37,7 @@ function DetailsPage({
   label: "Guest" | "Team";
   amenities: string[];
   reviews: ReviewTypes[];
+  coordinate?: number[];
 }) {
   useUpdateViews();
   const postUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -91,14 +94,12 @@ function DetailsPage({
                 <h4 className="mb-6">About Us</h4>
 
                 <h5 className="text-lg mb-6 font-medium text-grey">{descriptionTitle}</h5>
-
                 <div
                   dangerouslySetInnerHTML={{__html: description}}
                   className="leading-loose mb-8"
                 />
 
                 <h5 className="text-lg  md:mb-6 font-medium text-grey">Amenities</h5>
-
                 <ul className="sm:grid grid-rows-3 grid-flow-col gap-8 py-3">
                   {amenities.map((item, index) => {
                     return (
@@ -108,6 +109,15 @@ function DetailsPage({
                     );
                   })}
                 </ul>
+
+                {coordinate && (
+                  <div>
+                    <h5 className="text-lg  md:mb-6 font-medium text-grey">Property Location</h5>
+                    <div className="h-80">
+                      <SingleMap posix={[coordinate[0], coordinate[1]]} />
+                    </div>
+                  </div>
+                )}
               </div>
 
               <BookingCard className="md:hidden my-16" cost={cost} label={label} />
