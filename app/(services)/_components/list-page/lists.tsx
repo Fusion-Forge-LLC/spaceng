@@ -7,10 +7,34 @@ import {usePathname} from "next/navigation";
 import Wrapper from "@/components/wrapper/wrapper";
 import {PropertyResponse} from "@/@types/types";
 import {cn} from "@/lib/utils";
+import MapComponent from "@/components/map/map";
 
-import dummyMap from "../../../../public/dummymap.png";
 import SearchProperties from "../search/search";
 import Card from "../property/card";
+
+const propert = [
+  {
+    title: "Luxury Apartment",
+    price: "$500,000",
+    link: "/property/1",
+    latitude: 9.0765,
+    longitude: 7.3986,
+  },
+  {
+    title: "Commercial Space",
+    price: "$1,200,000",
+    link: "/property/2",
+    latitude: 6.4654,
+    longitude: 3.4064,
+  },
+  {
+    title: "Land in Abuja",
+    price: "$200,000",
+    link: "/property/3",
+    latitude: 9.0556,
+    longitude: 7.4986,
+  },
+];
 
 function Lists({
   properties,
@@ -100,7 +124,7 @@ function Lists({
                 searchedData && searchedData.length === 0 && "lg:hidden",
               )}
             >
-              <Image alt="Map Image" placeholder="blur" src={dummyMap} />
+              <MapComponent properties={properties} />
             </div>
           </div>
 
@@ -126,7 +150,7 @@ function Lists({
               "px-4 sm:px-0 lg:hidden py-14",
             )}
           >
-            <Image alt="Map Image" className="mx-auto" placeholder="blur" src={dummyMap} />
+            <MapComponent properties={properties} />
           </div>
 
           {searchedData && searchedData.length === 0 && (

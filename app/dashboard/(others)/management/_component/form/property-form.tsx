@@ -29,6 +29,7 @@ const propertySchema = yup.object({
   location: yup.string(),
   neighborhood: yup.string(),
   state: yup.string().required("Please select state"),
+  coordinates: yup.array(yup.number()).length(2),
   bedroom: yup.number(),
 });
 
@@ -68,6 +69,7 @@ function PropertyForm({
             location: defaultValues.property_address.location,
             neighborhood: defaultValues.property_address.neighborhood,
             state: defaultValues.property_address.state,
+            coordinates: defaultValues.property_address.coordinates,
             bedroom: defaultValues.bedroom,
           },
   });

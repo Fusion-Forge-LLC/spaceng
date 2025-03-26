@@ -3,6 +3,7 @@
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {DayPicker} from "react-day-picker";
 
+import "react-day-picker/style.css";
 import {DropdDown} from "@/components/style-guide/style-guide";
 import {cn} from "@/lib/utils";
 

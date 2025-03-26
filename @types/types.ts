@@ -24,6 +24,7 @@ export interface PropertyPayload {
   location?: string;
   neighborhood?: string;
   state: string;
+  coordinates?: (number | undefined)[];
   bedroom?: number;
   gallery: string[];
   video: string[];
@@ -44,6 +45,7 @@ export interface PropertyResponse {
     location: string;
     neighborhood: string;
     state: string;
+    coordinates?: number[];
   };
   property_description: string;
   property_title: string;
@@ -152,4 +154,21 @@ export interface Messages {
   roomId: string;
   senderRole: "client" | "business";
   updatedAt: string;
+}
+
+export interface GeoLocation {
+  place_id: number;
+  licence: string;
+  osm_type: string;
+  osm_id: number;
+  lat: string;
+  lon: string;
+  class: string;
+  type: string;
+  place_rank: number;
+  importance: number;
+  addresstype: string;
+  name: string;
+  display_name: string;
+  boundingbox: string[];
 }
