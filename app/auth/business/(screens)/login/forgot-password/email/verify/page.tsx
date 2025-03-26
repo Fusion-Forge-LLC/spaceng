@@ -10,7 +10,7 @@ import EmailVerification from "../../../../_components/email-verification/email-
 function Page() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
-  const {isPending, mutate} = useSendOtp();
+  const {mutate} = useSendOtp();
 
   useEffect(() => {
     mutate({email});

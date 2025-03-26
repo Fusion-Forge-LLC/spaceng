@@ -3,7 +3,6 @@
 import React from "react";
 import PhoneInputWithCountrySelect from "react-phone-number-input";
 import Image from "next/image";
-
 import "react-phone-number-input/style.css";
 import "./styles.css";
 import * as yup from "yup";
