@@ -19,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {useUser} from "@/context/user";
 import {useInitBankTransaction} from "@/api/transaction/initPaywithBank";
 
 const FormSchema = yup.object({
@@ -32,9 +31,7 @@ type FormType = yup.InferType<typeof FormSchema>;
 function BankAccount({className, price}: {className: string; price: string}) {
   const {data} = useGetBanks("pay_with_bank=true");
   const params = useParams();
-  const {User} = useUser();
   const searchParams = useSearchParams();
-  const propertyId = params.id as string;
   const popup = new Paystack();
   const {mutateAsync, isPending} = useInitBankTransaction();
   const form = useForm<FormType>({
@@ -43,37 +40,7 @@ function BankAccount({className, price}: {className: string; price: string}) {
   const checkin = searchParams.get("checkin");
   const checkout = searchParams.get("checkout");
 
-  const handleSubmit = (values: FormType) => {
-    if (!checkin || !checkout) return;
-    // mutateAsync({
-    //   params: searchParams.toString(),
-    //   data: {
-    //     email: User?.email || "",
-    //     amount: 4000,
-    //     propertyId,
-    //     checkin,
-    //     checkout,
-    //     ...values
-    //   }
-    // }).then((data) => {
-    //   console.log(data.data)
-    //@ts-ignore
-    popup.resumeTransaction("w9iksigq1whgml1", {
-      //@ts-ignore
-      onSuccess: (transaction) => {
-        console.log(transaction);
-      },
-      onCancel: () => {
-        console.log("onCancel");
-      },
-      onError: (error: any) => {
-        console.log("Error: ", error.message);
-      },
-    });
-    // })
-
-    // paymentSuccess();
-  };
+  const handleSubmit = () => {};
 
   return (
     <Form {...form}>
@@ -148,7 +115,6 @@ function BankAccount({className, price}: {className: string; price: string}) {
               </FormItem>
             )}
           />
-          {/* <Input className="payment-input" id="bank_name" placeholder="Guaranty trust bank" /> */}
         </div>
 
         <button className="booking-btn w-full block">

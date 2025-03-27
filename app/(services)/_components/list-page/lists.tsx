@@ -3,38 +3,16 @@
 import React, {useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
+import dynamic from "next/dynamic";
 
 import Wrapper from "@/components/wrapper/wrapper";
 import {PropertyResponse} from "@/@types/types";
 import {cn} from "@/lib/utils";
-import MapComponent from "@/components/map/map";
 
 import SearchProperties from "../search/search";
 import Card from "../property/card";
 
-const propert = [
-  {
-    title: "Luxury Apartment",
-    price: "$500,000",
-    link: "/property/1",
-    latitude: 9.0765,
-    longitude: 7.3986,
-  },
-  {
-    title: "Commercial Space",
-    price: "$1,200,000",
-    link: "/property/2",
-    latitude: 6.4654,
-    longitude: 3.4064,
-  },
-  {
-    title: "Land in Abuja",
-    price: "$200,000",
-    link: "/property/3",
-    latitude: 9.0556,
-    longitude: 7.4986,
-  },
-];
+const MapComponent = dynamic(() => import("@/components/map/map"), {ssr: false});
 
 function Lists({
   properties,

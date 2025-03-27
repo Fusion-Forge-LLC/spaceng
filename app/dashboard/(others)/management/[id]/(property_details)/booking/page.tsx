@@ -56,7 +56,7 @@ function Page({params}: {params: {id: string}}) {
         </section>
 
         <section className="max-[1200px]:max-w-md">
-          <h3 className="text-grey text-xl font-semibold mb-2">Booking Calender</h3>
+          <h3 className="text-grey text-xl font-semibold mb-2">Booking Details</h3>
 
           {isPending ? (
             <div className="py-20 grid place-content-center">

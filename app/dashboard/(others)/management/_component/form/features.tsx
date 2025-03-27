@@ -5,9 +5,11 @@ import {amenities} from "./amenities";
 interface Props {
   features: string[];
   setFeatures: Dispatch<SetStateAction<string[]>>;
+  form: any;
 }
 
-function Features({setFeatures, features}: Props) {
+function Features({setFeatures, features, form}: Props) {
+  const propertyType: "shortlet" | "workspace" = form.watch("type");
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
 
@@ -19,9 +21,9 @@ function Features({setFeatures, features}: Props) {
   };
 
   return (
-    <div className="">
-      <ul className="grid grid-cols-3 gap-4">
-        {amenities.map((item, index) => {
+    <div className="min-h-full">
+      <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {amenities[propertyType].map((item, index) => {
           return (
             <li key={index} className="flex items-center gap-4">
               <input

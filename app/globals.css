@@ -105,7 +105,7 @@
     @apply h-12 w-12 grid place-content-center hover:bg-blue/40 cursor-pointer rounded;
   }
   .switch-btn {
-    @apply p-5 text-base font-semibold border-b-4 border-b-transparent text-grey-200 disabled:text-grey-300;
+    @apply px-2 py-3 sm:px-5 sm:py-5 text-base font-semibold border-b-4 border-b-transparent text-grey-200 disabled:text-grey-300;
   }
   .password-confirmation-tag {
     @apply text-[#707070] bg-white rounded-3xl px-2 py-1 lg:py-1.5 flex items-center border justify-center gap-1.5 w-fit text-xs;

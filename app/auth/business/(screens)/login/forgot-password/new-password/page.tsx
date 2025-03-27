@@ -5,6 +5,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {toast} from "sonner";
 
 import {Form, FormField, FormItem, FormMessage, FormControl} from "@/components/ui/form";
 import {useResetPassword} from "@/api/auth/reset-password";
@@ -37,7 +38,7 @@ function Page() {
       await resetPassword({otp: otpId as string, ...data});
       router.push("/auth/business/login/forgot-password/new-password/success");
     } catch (e) {
-      console.error(e);
+      toast.error("An error occured");
     }
   }
 

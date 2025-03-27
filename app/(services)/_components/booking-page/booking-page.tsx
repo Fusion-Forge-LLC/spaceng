@@ -5,8 +5,6 @@ import {useParams, useRouter} from "next/navigation";
 import React, {useState} from "react";
 import Calendar from "react-calendar";
 import * as yup from "yup";
-
-// import FormControl from "./_components/form-control/form-control";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 
