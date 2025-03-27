@@ -36,12 +36,13 @@ function Page({params}: {params: {id: string}}) {
   return (
     <DetailsPage
       amenities={features}
+      coordinate={property_address?.coordinates}
       cost={price}
       description={property_description}
       descriptionTitle={property_title}
       images={gallery}
       label="Guest"
-      location={`${property_address.address}, ${property_address.neighborhood}, ${property_address.location}`}
+      location={`${property_address.address}, ${property_address.neighborhood || ""}, ${property_address.location || ""}`}
       reviews={reviews}
       title={property_title}
     />

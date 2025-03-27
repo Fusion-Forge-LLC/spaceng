@@ -42,7 +42,7 @@ const ShareButtons = ({postUrl, title}: {postUrl: string; title: string}) => {
         onClick={() => {
           if (navigator.share) {
             navigator.share({
-              title: "Check out this blog post!",
+              title: "Check out my property on spacefinda",
               url: postUrl,
             });
           }

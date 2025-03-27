@@ -3,14 +3,16 @@
 import React, {useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
+import dynamic from "next/dynamic";
 
 import Wrapper from "@/components/wrapper/wrapper";
 import {PropertyResponse} from "@/@types/types";
 import {cn} from "@/lib/utils";
 
-import dummyMap from "../../../../public/dummymap.png";
 import SearchProperties from "../search/search";
 import Card from "../property/card";
+
+const MapComponent = dynamic(() => import("@/components/map/map"), {ssr: false});
 
 function Lists({
   properties,
@@ -100,7 +102,7 @@ function Lists({
                 searchedData && searchedData.length === 0 && "lg:hidden",
               )}
             >
-              <Image alt="Map Image" placeholder="blur" src={dummyMap} />
+              <MapComponent properties={properties} />
             </div>
           </div>
 
@@ -126,7 +128,7 @@ function Lists({
               "px-4 sm:px-0 lg:hidden py-14",
             )}
           >
-            <Image alt="Map Image" className="mx-auto" placeholder="blur" src={dummyMap} />
+            <MapComponent properties={properties} />
           </div>
 
           {searchedData && searchedData.length === 0 && (

@@ -29,6 +29,7 @@ const propertySchema = yup.object({
   location: yup.string(),
   neighborhood: yup.string(),
   state: yup.string().required("Please select state"),
+  coordinates: yup.array(yup.number()).length(2),
   bedroom: yup.number(),
 });
 
@@ -68,11 +69,12 @@ function PropertyForm({
             location: defaultValues.property_address.location,
             neighborhood: defaultValues.property_address.neighborhood,
             state: defaultValues.property_address.state,
+            coordinates: defaultValues.property_address.coordinates,
             bedroom: defaultValues.bedroom,
           },
   });
 
-  const {property_title, property_address} = form.getValues();
+  const {property_title, property_address, type} = form.getValues();
 
   function moveTab() {
     setCurrentTab((prevState) => {
@@ -116,28 +118,28 @@ function PropertyForm({
   };
 
   return (
-    <div className="relative flex-1">
-      <div className="py-3 px-5">
-        <h4 className="text-grey text-lg sm:text-2xl font-semibold">{title}</h4>
+    <div className="relative flex-1 min-h-full">
+      <div className="py-3 sm:px-5">
+        <h4 className="text-grey text-lg sm:text-2xl font-semibold max-sm:px-4">{title}</h4>
 
-        <div className="shadow-md mt-3">
-          <div className="flex gap-2 bg-grey-300/10 px-4">
+        <div className="sm:shadow-md mt-3">
+          <div className="flex gap-2 bg-grey-300/10 px-4 max-sm:overflow-x-scroll">
             <TabBtn currentTab={currentTab} setTab={setCurrentTab} tab="basic" />
             <TabBtn
               currentTab={currentTab}
-              isDisabled={!property_address || !property_title}
+              isDisabled={!property_address || !property_title || !type}
               setTab={setCurrentTab}
               tab="gallery"
             />
             <TabBtn
               currentTab={currentTab}
-              isDisabled={!property_address || !property_title}
+              isDisabled={!property_address || !property_title || !type}
               setTab={setCurrentTab}
               tab="video"
             />
             <TabBtn
               currentTab={currentTab}
-              isDisabled={!property_address || !property_title}
+              isDisabled={!property_address || !property_title || !type}
               setTab={setCurrentTab}
               tab="features"
             />
@@ -152,13 +154,13 @@ function PropertyForm({
               {currentTab === "video" && <PropertyVideo setVideo={setVideo} video={video} />}
 
               {currentTab === "features" && (
-                <Features features={features} setFeatures={setFeatures} />
+                <Features features={features} form={form} setFeatures={setFeatures} />
               )}
             </form>
           </Form>
         </div>
       </div>
-      <div className="sticky bottom-0 left-0 w-full px-4 bg-white py-5 border-t border-t-grey flex justify-between">
+      <div className="sticky bottom-0 left-0 w-full px-4 bg-white py-5 border-t border-t-grey flex justify-between z-50">
         <Button
           className="bg-blue"
           disabled={currentTab === "basic"}
@@ -169,7 +171,12 @@ function PropertyForm({
         </Button>
 
         {currentTab !== "features" ? (
-          <Button className="bg-blue" type="button" onClick={moveTab}>
+          <Button
+            className="bg-blue"
+            disabled={!property_address || !property_title || !type}
+            type="button"
+            onClick={moveTab}
+          >
             Next
           </Button>
         ) : (

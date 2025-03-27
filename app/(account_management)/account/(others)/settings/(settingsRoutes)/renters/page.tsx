@@ -18,7 +18,7 @@ type RentersType = {
 
 export default function Renters() {
   const [rentersBlock, setRentersBlock] = useState(false);
-  const {data, isLoading} = useGetOtherRentals();
+  const {data} = useGetOtherRentals();
   const {mutate, isPending} = useAddOtherRental();
   const {mutate: deleteRental, isPending: deleting} = useDeleteOtherRental();
   const {
@@ -30,8 +30,6 @@ export default function Renters() {
   const onSubmit: SubmitHandler<RentersType> = (data) => {
     mutate(data);
   };
-
-  console.log(data?.data);
 
   return (
     <div className="w-full text-grey-200">

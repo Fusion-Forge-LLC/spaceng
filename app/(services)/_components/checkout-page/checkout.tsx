@@ -79,12 +79,8 @@ function Checkout({
 
         setBookingData(data.data);
       },
-      onCancel: () => {
-        console.log("onCancel");
-      },
-      onError: (error: any) => {
-        console.log("Error: ", error.message);
-      },
+      onCancel: () => {},
+      onError: (error: any) => {},
     });
   };
 

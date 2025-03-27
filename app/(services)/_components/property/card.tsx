@@ -96,7 +96,7 @@ function Card({
           <span className="flex-1 whitespace-nowrap text-ellipsis overflow-hidden">{location}</span>
         </p>
 
-        <div className="text-grey-200 py-5 sm:py-3 leading-relaxed flex flex-wrap gap-x-1">
+        <div className="text-grey-200 py-5 sm:py-3 leading-relaxed flex flex-wrap gap-x-1 max-h-[62px] overflow-hidden">
           {labels?.map((item, index) => {
             return (
               <span key={index} className="group text-babese">
