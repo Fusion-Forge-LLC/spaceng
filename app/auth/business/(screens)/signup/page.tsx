@@ -144,7 +144,7 @@ function Page() {
           <div className="flex-1 h-px bg-grey" />
         </div>
 
-        <div className="grid grid-cols-2 px-8 sm:px-0 sm:flex justify-center gap-2 sm:gap-8 pt-4">
+        <div className="px-8 flex justify-center pt-4">
           <SocialBtn
             image="/icons/google.svg"
             name="Sign up with Google"

@@ -1,10 +1,18 @@
 "use client";
 
-import React from "react";
-import {ArrowRight, CalendarDaysIcon, ImageIcon, MapPin} from "lucide-react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {
+  ArrowRight,
+  CalendarDaysIcon,
+  ChevronLeft,
+  ChevronRight,
+  ImageIcon,
+  MapPin,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
+import {useSwipeable} from "react-swipeable";
 
 import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
@@ -41,19 +49,106 @@ function DetailsPage({
 }) {
   useUpdateViews();
   const postUrl = typeof window !== "undefined" ? window.location.href : "";
+  const [fullScreenImage, setFullScreenImage] = useState<number | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const pathSegments = pathname.split("/").filter((segment) => segment);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+
+      if (hash.startsWith("#gallery-")) {
+        const imageIndex = parseInt(hash.replace("#gallery-", ""), 10);
+
+        if (!isNaN(imageIndex) && imageIndex >= 1 && imageIndex <= 10) {
+          setFullScreenImage(imageIndex);
+        }
+      }
+    }
+  }, []);
+
+  const closeFullScreen = () => {
+    setFullScreenImage(null);
+    router.push("");
+  };
+
+  const prevImage = () => {
+    setFullScreenImage((prevImage) => {
+      if (prevImage) {
+        return prevImage > 1 ? prevImage - 1 : prevImage;
+      } else {
+        return null;
+      }
+    });
+    if (fullScreenImage && fullScreenImage > 1) {
+      router.push(`#gallery-${fullScreenImage - 1}`);
+    }
+  };
+
+  const nextImage = () => {
+    setFullScreenImage((prevImage) => {
+      if (prevImage) {
+        return prevImage === images.length ? prevImage : prevImage + 1;
+      } else {
+        return null;
+      }
+    });
+    if (fullScreenImage && fullScreenImage < images.length) {
+      router.push(`#gallery-${fullScreenImage + 1}`);
+    }
+  };
+
+  const handlers = useSwipeable({
+    onSwipedLeft: nextImage,
+    onSwipedRight: prevImage,
+    //@ts-ignore
+    preventDefaultTouchmoveEvent: true,
+    trackTouch: true,
+  });
 
   return (
     <main>
       <Wrapper className="py-10">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10">
-          <div className="max-sm:space-y-3">
-            <h5 className="md:text-lg font-medium">{title}</h5>
-            <p className="flex gap-1 ">
-              <MapPin /> {location}{" "}
-            </p>
-          </div>
+        <div>
+          <nav className="text-sm pb-4">
+            <ul className="flex items-center space-x-2">
+              <li>
+                <Link className="text-blue-600 hover:underline" href="/">
+                  Home
+                </Link>
+              </li>
 
-          {/* <SearchProperties /> */}
+              {pathSegments.map((segment, index) => {
+                const isLast = index === pathSegments.length - 1;
+                const url = `/${pathSegments.slice(0, index + 1).join("/")}`;
+                const formattedName = segment.replace(/-/g, " ");
+
+                return (
+                  <li
+                    key={index}
+                    className="flex items-center space-x-2 whitespace-nowrap overflow-hidden text-ellipsis"
+                  >
+                    <span>/</span>
+                    {isLast ? (
+                      <span className="text-gray-500">{title}</span>
+                    ) : (
+                      <Link className="text-blue-600 hover:underline capitalize" href={url}>
+                        {formattedName}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+
+        <div className="max-sm:space-y-3">
+          <h5 className="md:text-lg font-medium">{title}</h5>
+          <p className="flex gap-1 ">
+            <MapPin /> {location}{" "}
+          </p>
         </div>
 
         <div className="py-10">
@@ -72,7 +167,15 @@ function DetailsPage({
             {images.map((item, index) => {
               if (index > 4) return;
 
-              return <PropertyImage key={index} totalImage={images.length} url={item} />;
+              return (
+                <PropertyImage
+                  key={index}
+                  index={index}
+                  setFullScreenImage={setFullScreenImage}
+                  totalImage={images.length}
+                  url={item}
+                />
+              );
             })}
           </div>
 
@@ -83,7 +186,10 @@ function DetailsPage({
               className="object-cover object-center"
               src={images[0]}
             />
-            <button className="bg-[#F4F4F4]/80 rounded-lg items-center px-5 py-3 gap-4 flex absolute right-4 bottom-4">
+            <button
+              className="bg-[#F4F4F4]/80 rounded-lg items-center px-5 py-3 gap-4 flex absolute right-4 bottom-4"
+              onClick={() => setFullScreenImage(1)}
+            >
               <ImageIcon /> Gallery
             </button>
           </div>
@@ -110,7 +216,7 @@ function DetailsPage({
                   })}
                 </ul>
 
-                {coordinate && (
+                {coordinate?.length && (
                   <div>
                     <h5 className="text-lg  md:mb-6 font-medium text-grey">Property Location</h5>
                     <div className="h-80">
@@ -154,6 +260,45 @@ function DetailsPage({
             <BookingCard className="hidden md:block" cost={cost} label={label} />
           </div>
         </div>
+        {fullScreenImage !== null && (
+          <div
+            {...handlers}
+            className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
+          >
+            <div className="absolute top-0 left-0 px-4 py-2 flex justify-between items-center w-full text-white">
+              <span className="text-sm">
+                {fullScreenImage}/{images.length}
+              </span>
+              <button className="text-2xl" onClick={closeFullScreen}>
+                ✖
+              </button>
+            </div>
+            <div className="flex justify-between w-full left-0 top-1/2 -translate-y-1/2 absolute  px-2 md:px-4">
+              <button
+                className="h-8 sm:h-10 w-8 sm:w-10 bg-black/30 hover:bg-black/50 grid place-content-center disabled:cursor-not-allowed disabled:hover:bg-black/30"
+                disabled={fullScreenImage === 1}
+                onClick={prevImage}
+              >
+                <ChevronLeft color="#FFF" size={24} />
+              </button>
+              <button
+                className="h-8 sm:h-10 w-8 sm:w-10 bg-black/30 hover:bg-black/50 grid place-content-center disabled:cursor-not-allowed disabled:hover:bg-black/30"
+                disabled={fullScreenImage === images.length}
+                onClick={nextImage}
+              >
+                <ChevronRight color="#FFF" size={24} />
+              </button>
+            </div>
+            <div className="w-[95%] sm:w-[80%] h-[80%] rounded-lg relative">
+              <Image
+                fill
+                alt={`Property`}
+                className="object-contain"
+                src={images[fullScreenImage - 1]}
+              />
+            </div>
+          </div>
+        )}
       </Wrapper>
     </main>
   );
@@ -193,7 +338,24 @@ function BookingCard({
   );
 }
 
-function PropertyImage({url, totalImage}: {url: string; totalImage: number}) {
+function PropertyImage({
+  url,
+  totalImage,
+  setFullScreenImage,
+  index,
+}: {
+  url: string;
+  totalImage: number;
+  setFullScreenImage: Dispatch<SetStateAction<null | number>>;
+  index: number;
+}) {
+  const router = useRouter();
+
+  const handleImageClick = () => {
+    router.push(`#gallery-${index + 1}`);
+    setFullScreenImage(index + 1);
+  };
+
   return (
     <div
       className={cn(
@@ -205,10 +367,21 @@ function PropertyImage({url, totalImage}: {url: string; totalImage: number}) {
             : null,
       )}
     >
-      <Image fill alt="Shortlet property image" className="object-cover object-center" src={url} />
-      <button className="bg-[#F4F4F4]/80 hover:bg-[#F4F4F4] rounded-lg items-center px-3 lg:px-5 py-2 lg:py-3 gap-4 hidden group-last:flex absolute right-2 md:right-3 lg:right-6 bottom-2 md:bottom-3 lg:lbottom-6">
-        <ImageIcon /> Gallery
-      </button>
+      <Image
+        fill
+        alt="Shortlet property"
+        className="object-cover object-center"
+        src={url}
+        onClick={handleImageClick}
+      />
+      {totalImage >= 5 && (
+        <button
+          className="bg-[#F4F4F4]/80 hover:bg-[#F4F4F4] rounded-lg items-center px-3 lg:px-5 py-2 lg:py-3 gap-4 hidden group-last:flex absolute right-2 md:right-3 lg:right-6 bottom-2 md:bottom-3 lg:lbottom-6"
+          onClick={handleImageClick}
+        >
+          <ImageIcon /> Gallery (+{totalImage - 4})
+        </button>
+      )}
     </div>
   );
 }

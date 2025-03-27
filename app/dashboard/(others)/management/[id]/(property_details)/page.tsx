@@ -10,6 +10,8 @@ import Loader from "@/components/loader/loader";
 import NotFound from "@/components/not-found/not-found";
 import SingleMap from "@/components/map/singlemap";
 
+import Share from "../../_component/share/share";
+
 function Page({params}: {params: {id: string}}) {
   const {data, isPending} = useGetProperty(params.id);
   const pathName = usePathname();
@@ -26,15 +28,8 @@ function Page({params}: {params: {id: string}}) {
     return <NotFound />;
   }
 
-  const {
-    property_title,
-    price,
-    property_description,
-    property_address,
-    gallery,
-    features,
-    reviews,
-  } = data.data;
+  const {property_title, property_description, property_address, gallery, features, _id, type} =
+    data.data;
 
   return (
     <div className="flex flex-col-reverse lg:grid lg:grid-cols-11 gap-8 max-lg:pt-5 flex-1">
@@ -62,9 +57,9 @@ function Page({params}: {params: {id: string}}) {
           </ul>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-5 md:gap-8 sm:justify-center pt-8">
+        <div className="flex flex-col sm:flex-row gap-4 sm:justify-center pt-8">
           <Link
-            className="property-page-link bg-blue w-full text-white hover:opacity-85"
+            className="property-page-link text-blue w-full hover:bg-blue hover:text-white "
             href={`${pathName}/edit`}
           >
             Edit Property
@@ -75,6 +70,7 @@ function Page({params}: {params: {id: string}}) {
           >
             View Booking
           </Link>
+          <Share id={_id} title={property_title} type={type} />
         </div>
       </article>
       <div className="lg:col-span-5 space-y-6 lg:space-y-4">
