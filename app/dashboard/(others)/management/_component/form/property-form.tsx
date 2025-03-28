@@ -1,10 +1,11 @@
 "use client";
 
 import * as yup from "yup";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useParams} from "next/navigation";
+import {toast} from "sonner";
 
 import TabBtn from "@/app/dashboard/(others)/_components/tab-btn/tab-btn";
 import {Form} from "@/components/ui/form";
@@ -28,7 +29,7 @@ const propertySchema = yup.object({
   type: yup.string().oneOf(["workspace", "shortlet"], "Invalid type").required("Type is required"),
   location: yup.string(),
   neighborhood: yup.string(),
-  state: yup.string().required("Please select state"),
+  state: yup.string().required("Please select property state"),
   coordinates: yup.array(yup.number()).length(2),
   bedroom: yup.number(),
 });
@@ -74,7 +75,20 @@ function PropertyForm({
           },
   });
 
+  const {errors} = form.formState;
+
   const {property_title, property_address, type} = form.getValues();
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      const errorKey = Object.keys(errors)[0];
+
+      //@ts-ignore
+      toast.error(errors[errorKey].message);
+
+      return;
+    }
+  }, [errors]);
 
   function moveTab() {
     setCurrentTab((prevState) => {
