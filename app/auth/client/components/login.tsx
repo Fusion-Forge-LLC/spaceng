@@ -7,9 +7,10 @@ import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
 
-import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {useLogIn} from "@/api/auth/login";
 import {googleSignin} from "@/lib/utils";
+import {Checkbox} from "@/components/ui/checkbox";
 
 import EmailInput from "./EmailInput";
 import PrimaryAuthButton from "./PrimaryAuthButton";
@@ -18,6 +19,7 @@ import PasswordInput from "./password-input";
 const registerSchema = yup.object({
   email: yup.string().required("Email is required"),
   password: yup.string().required("Password is required"),
+  rememberMe: yup.boolean().default(false).optional(),
 });
 
 type LoginType = yup.InferType<typeof registerSchema>;
@@ -69,8 +71,26 @@ function ClientSignIn() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="rememberMe"
+            render={({field}) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0 py-3">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    className="accent-blue"
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>Remember Login</FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
           <Link href={"/auth/client/forgot-password"}>
-            <span className="text-[#707070] text-right font-medium">Forget Password?</span>
+            <span className="text-[#707070] text-right block font-medium">Forget Password?</span>
           </Link>
         </div>
         <div>
@@ -89,19 +109,6 @@ function ClientSignIn() {
                 width={24}
               />
               <span>Sign In With Google</span>
-            </button>
-            <button
-              className="text-[#707070] font-medium flex items-center justify-center gap-1.5 bg-[#F2F2F2] rounded-lg py-3.5 w-full"
-              type="button"
-            >
-              <Image
-                alt="facebook SignIn"
-                className=""
-                height={24}
-                src="/images/FacebookIcon.svg"
-                width={24}
-              />
-              <span>Sign In With Facebook</span>
             </button>
             <div className="text-grey flex gap-2 items-center justify-center py-1.5">
               <p>Don’t have an account?</p>

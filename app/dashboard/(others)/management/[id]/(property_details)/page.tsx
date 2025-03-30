@@ -78,15 +78,15 @@ function Page({params}: {params: {id: string}}) {
           <Image fill alt="Property image" className="object-cover object-top" src={gallery[0]} />
         </div>
         <h3 className="text-lg font-semibold">Address: {property_address.address}</h3>
-        <div className="h-80">
-          <SingleMap
-            posix={
-              property_address.coordinates
-                ? [property_address.coordinates[0], property_address.coordinates[1]]
-                : [7.3786064, 3.8969928]
-            }
-          />
-        </div>
+        {property_address.coordinates &&
+          property_address.coordinates.length > 0 &&
+          property_address.coordinates[0] !== undefined && (
+            <div className="h-80">
+              <SingleMap
+                posix={[property_address.coordinates[0], property_address.coordinates[1]]}
+              />
+            </div>
+          )}
       </div>
     </div>
   );

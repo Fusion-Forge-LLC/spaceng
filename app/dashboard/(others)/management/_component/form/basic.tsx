@@ -109,7 +109,7 @@ function Basic({form}: {form: any}) {
         <div className="opacity-40 h-full w-full absolute top-0 left-0 -z-10 overflow-hidden">
           <Map
             posix={
-              selectedAddress
+              selectedAddress && selectedAddress.latitude !== undefined
                 ? [selectedAddress.latitude, selectedAddress.longitude]
                 : [7.3786064, 3.8969928]
             }

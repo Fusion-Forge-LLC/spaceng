@@ -35,13 +35,14 @@ export const useLogIn = (
 
         return;
       }
-      const expirationDate = new Date();
+      const expirationOptions = data.data.rememberMe
+        ? {expires: 365}
+        : {expires: new Date(new Date().setHours(new Date().getHours() + 2))};
 
-      expirationDate.setHours(expirationDate.getHours() + 2);
       Cookies.set("spacefinda-token", data.data.token, {
         secure: true,
         sameSite: "Strict",
-        expires: expirationDate,
+        ...expirationOptions,
       });
 
       fetchWhoAmI && fetchWhoAmI();
@@ -63,6 +64,7 @@ type LogInPayload = {
   email: string;
   password: string;
   source: "business" | "client";
+  rememberMe: boolean;
 };
 
 export interface LoginResponse {
@@ -78,6 +80,7 @@ export interface LoginResponse {
     __v: number;
   };
   token: string;
+  rememberMe: boolean;
   message: string;
   success: boolean;
 }
