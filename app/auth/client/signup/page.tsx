@@ -142,7 +142,6 @@ function ClientSignUp() {
             )}
           />
         </div>
-        {/* TODO: Extract these validators into a single component with props */}
         <PasswordValidators password={form.watch("password")} />
         <p className="text-[#707070] mb-6">
           By signing up, you agree to Spacefinda{" "}
@@ -171,19 +170,6 @@ function ClientSignUp() {
                 width={24}
               />
               <span>Sign Up With Google</span>
-            </button>
-            <button
-              className="text-[#707070] font-medium flex items-center justify-center gap-1.5 bg-[#F2F2F2] rounded-lg py-3.5 w-full"
-              type="button"
-            >
-              <Image
-                alt="facebook SignIn"
-                className=""
-                height={24}
-                src="/images/FacebookIcon.svg"
-                width={24}
-              />
-              <span>Sign Up With Facebook</span>
             </button>
             <div className="text-grey flex gap-2 items-center justify-center py-1.5">
               <p>Don’t have an account?</p>

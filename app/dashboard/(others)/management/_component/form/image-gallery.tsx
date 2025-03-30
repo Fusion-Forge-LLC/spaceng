@@ -1,11 +1,12 @@
-import {LucideUploadCloud, Trash2} from "lucide-react";
-import Image from "next/image";
+import {LucideUploadCloud} from "lucide-react";
 import React from "react";
 import {toast} from "sonner";
 
 import {showSuccess} from "@/lib/utils";
 import Loader from "@/components/loader/loader";
 import {useUploadImage} from "@/api/upload-image";
+
+import ImageSort from "./image-sort";
 
 interface Props {
   images: string[];
@@ -39,31 +40,10 @@ function ImageGallery({images, setImages}: Props) {
     }
   };
 
-  const removeImage = (item: string) => {
-    setImages((prevState) => {
-      return prevState.filter((state) => item !== state);
-    });
-  };
-
   return (
     <div className="space-y-6">
       <div>
-        <div className="grid grid-cols-6 gap-5 pb-8">
-          {images.map((item, index) => {
-            return (
-              <div key={index} className="aspect-square relative">
-                <Image fill alt="Property image" src={item} />
-                <button
-                  className="absolute top-2 right-2"
-                  type="button"
-                  onClick={() => removeImage(item)}
-                >
-                  <Trash2 size={20} />
-                </button>
-              </div>
-            );
-          })}
-        </div>
+        <ImageSort images={images} setImages={setImages} />
         <span className="text-grey-200 block mb-2 text-left">Property Image</span>
         <div className="rounded-3xl border border-dashed border-grey-200 flex flex-col items-center gap-6 py-10 relative">
           <span className="text-sm absolute top-5 right-5">{images.length}/10</span>
