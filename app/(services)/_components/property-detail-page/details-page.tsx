@@ -4,6 +4,7 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {
   ArrowRight,
   CalendarDaysIcon,
+  CheckCheck,
   ChevronLeft,
   ChevronRight,
   ImageIcon,
@@ -24,6 +25,8 @@ import SingleMap from "@/components/map/singlemap";
 import ReviewCard from "../review-card/review-card";
 import BookShortlet from "../booking-page/booking";
 
+import PropertyVideos from "./property-videos";
+
 function DetailsPage({
   images,
   title,
@@ -35,6 +38,8 @@ function DetailsPage({
   amenities,
   reviews,
   coordinate,
+  cautionFee,
+  video,
 }: {
   images: string[];
   title: string;
@@ -46,6 +51,8 @@ function DetailsPage({
   amenities: string[];
   reviews: ReviewTypes[];
   coordinate?: number[];
+  cautionFee?: number;
+  video: string[];
 }) {
   useUpdateViews();
   const postUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -206,27 +213,34 @@ function DetailsPage({
                 />
 
                 <h5 className="text-lg  md:mb-6 font-medium text-grey">Amenities</h5>
-                <ul className="sm:grid grid-rows-3 grid-flow-col gap-8 py-3">
+                <ul className="sm:grid grid-rows-3 grid-flow-col gap-6 py-3">
                   {amenities.map((item, index) => {
                     return (
-                      <li key={index} className="py-3 sm:py-0">
-                        {item}
+                      <li key={index} className="py-3 sm:py-0 flex items-center gap-2">
+                        <CheckCheck size={18} /> {item}
                       </li>
                     );
                   })}
                 </ul>
 
-                {coordinate?.length && (
+                {video?.length ? <PropertyVideos src={video[0]} /> : null}
+
+                {coordinate?.length ? (
                   <div>
                     <h5 className="text-lg  md:mb-6 font-medium text-grey">Property Location</h5>
                     <div className="h-80">
                       <SingleMap posix={[coordinate[0], coordinate[1]]} />
                     </div>
                   </div>
-                )}
+                ) : null}
               </div>
 
-              <BookingCard className="md:hidden my-16" cost={cost} label={label} />
+              <BookingCard
+                cautionFee={cautionFee}
+                className="md:hidden my-16"
+                cost={cost}
+                label={label}
+              />
 
               <div className="pt-12">
                 <h5 className="text-lg mb-2 font-medium text-grey">Share</h5>
@@ -257,7 +271,12 @@ function DetailsPage({
               </div>
             </article>
 
-            <BookingCard className="hidden md:block" cost={cost} label={label} />
+            <BookingCard
+              cautionFee={cautionFee}
+              className="hidden md:block"
+              cost={cost}
+              label={label}
+            />
           </div>
         </div>
         {fullScreenImage !== null && (
@@ -308,10 +327,12 @@ function BookingCard({
   className,
   cost,
   label,
+  cautionFee,
 }: {
   className: string;
   cost: number;
   label: "Guest" | "Team";
+  cautionFee: number | undefined;
 }) {
   const pathname = usePathname();
 
@@ -329,7 +350,14 @@ function BookingCard({
           ₦ {cost.toLocaleString("en-Us")}{" "}
           <span className="text-[#333] text-xs font-normal">/night</span>
         </p>
-
+        {cautionFee && (
+          <div>
+            <span className="text-[#443344]">
+              Caution Fee: ₦{cautionFee.toLocaleString("en-Us")}
+            </span>{" "}
+            <span className="italic text-xs">Refundable</span>{" "}
+          </div>
+        )}
         <div>
           <BookShortlet showBtn label={label} />
         </div>

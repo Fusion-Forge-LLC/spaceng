@@ -39,7 +39,7 @@ export interface PropertyResponse {
   price: number;
   old_price: number;
   price_postfix: string;
-  price_prefix: string;
+  caution_fee: number;
   property_address: {
     address: string;
     location: string;

@@ -47,7 +47,7 @@ export const calculateDays = (
   const differenceinMilliseconds = Math.abs(parseInt(checkout) - parseInt(checkin));
   const differenceInDays = Math.ceil(differenceinMilliseconds / oneDay);
 
-  return propertyType === "shortlet" ? (differenceInDays ?? 1) : differenceInDays + 1;
+  return propertyType === "shortlet" ? differenceInDays || 1 : differenceInDays + 1;
 };
 
 export const ratingText = (rating: number) => {

@@ -24,7 +24,14 @@ function Page({params}: {params: {id: string}}) {
     return <NotFound />;
   }
 
-  return <Checkout label="Guest" price={data.data.price} propertyType="workspace" />;
+  return (
+    <Checkout
+      cautionFee={data.data.caution_fee}
+      label="Guest"
+      price={data.data.price}
+      propertyType="workspace"
+    />
+  );
 }
 
 export default Page;

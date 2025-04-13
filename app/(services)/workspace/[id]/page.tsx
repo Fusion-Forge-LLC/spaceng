@@ -31,11 +31,14 @@ function Page({params}: {params: {id: string}}) {
     gallery,
     features,
     reviews,
+    caution_fee,
+    video,
   } = data.data;
 
   return (
     <DetailsPage
       amenities={features}
+      cautionFee={caution_fee}
       coordinate={property_address?.coordinates}
       cost={price}
       description={property_description}
@@ -45,6 +48,7 @@ function Page({params}: {params: {id: string}}) {
       location={`${property_address?.address}, ${property_address?.neighborhood || ""}, ${property_address?.location || ""}`}
       reviews={reviews}
       title={property_title}
+      video={video}
     />
   );
 }
