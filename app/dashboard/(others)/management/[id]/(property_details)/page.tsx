@@ -11,6 +11,7 @@ import NotFound from "@/components/not-found/not-found";
 import SingleMap from "@/components/map/singlemap";
 
 import Share from "../../_component/share/share";
+import DisableDates from "../../_component/disable-dates/disable-dates";
 
 function Page({params}: {params: {id: string}}) {
   const {data, isPending} = useGetProperty(params.id);
@@ -28,8 +29,16 @@ function Page({params}: {params: {id: string}}) {
     return <NotFound />;
   }
 
-  const {property_title, property_description, property_address, gallery, features, _id, type} =
-    data.data;
+  const {
+    property_title,
+    property_description,
+    property_address,
+    gallery,
+    features,
+    _id,
+    type,
+    disabledDates,
+  } = data.data;
 
   return (
     <div className="flex flex-col-reverse lg:grid lg:grid-cols-11 gap-8 max-lg:pt-5 flex-1">
@@ -71,6 +80,7 @@ function Page({params}: {params: {id: string}}) {
             View Booking
           </Link>
           <Share id={_id} title={property_title} type={type} />
+          <DisableDates disabledDates={disabledDates} id={_id} />
         </div>
       </article>
       <div className="lg:col-span-5 space-y-6 lg:space-y-4">

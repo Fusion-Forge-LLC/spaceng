@@ -63,6 +63,7 @@ export interface PropertyResponse {
     user_id: string;
     property_id: string;
   }[];
+  disabledDates: Date[];
 }
 
 export interface WishlistResponse {

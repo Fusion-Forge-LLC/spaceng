@@ -25,6 +25,7 @@ export const API_ENDPOINTS = {
     overview: "/property/overview",
     properties: "/property/management",
     modify: (id: string) => `/property/management/${id}`,
+    disableDates: (id: string) => `/property/management/updateDisabled/${id}`,
   },
 
   LISTING: {

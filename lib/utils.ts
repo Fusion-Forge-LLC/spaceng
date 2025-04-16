@@ -231,3 +231,76 @@ export function googleSignin(type: string) {
 }
 
 export function faceBookSignin() {}
+
+export function formatDateRanges(dates: Date[] | undefined) {
+  if (!dates || dates.length === 0) {
+    return [];
+  }
+
+  const sortedDates = [...dates].sort((a, b) => a.getTime() - b.getTime());
+  const formattedRanges = [];
+  let i = 0;
+
+  while (i < sortedDates.length) {
+    const startDate = sortedDates[i];
+    let endDate = startDate;
+    let j = i + 1;
+
+    while (j < sortedDates.length && isConsecutive(endDate, sortedDates[j])) {
+      endDate = sortedDates[j];
+      j++;
+    }
+
+    if (startDate.getTime() === endDate.getTime()) {
+      formattedRanges.push(formatSingleDate(startDate));
+    } else {
+      formattedRanges.push(
+        `${formatSingleDate(startDate).replace(/, \d{4}$/, "")} - ${formatSingleDate(endDate)}`,
+      );
+    }
+
+    i = j;
+  }
+
+  return formattedRanges;
+}
+
+function isConsecutive(date1: Date, date2: Date) {
+  const nextDay = new Date(date1);
+
+  nextDay.setDate(date1.getDate() + 1);
+
+  return (
+    nextDay.getFullYear() === date2.getFullYear() &&
+    nextDay.getMonth() === date2.getMonth() &&
+    nextDay.getDate() === date2.getDate()
+  );
+}
+
+function formatSingleDate(date: Date) {
+  const day = date.getDate();
+  const month = new Intl.DateTimeFormat("en-US", {month: "short"}).format(date);
+  const year = date.getFullYear();
+
+  let dayWithSuffix;
+
+  if (day >= 11 && day <= 13) {
+    dayWithSuffix = `${day}th`;
+  } else {
+    switch (day % 10) {
+      case 1:
+        dayWithSuffix = `${day}st`;
+        break;
+      case 2:
+        dayWithSuffix = `${day}nd`;
+        break;
+      case 3:
+        dayWithSuffix = `${day}rd`;
+        break;
+      default:
+        dayWithSuffix = `${day}th`;
+    }
+  }
+
+  return `${dayWithSuffix} ${month}, ${year}`;
+}
