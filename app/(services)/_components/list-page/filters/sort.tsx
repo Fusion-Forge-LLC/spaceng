@@ -26,7 +26,7 @@ function Sort() {
   return (
     <div className="z-[1000] flex items-center gap-2">
       <div className="flex items-center gap-3">
-        <label className="text-sm">Sort By</label>
+        <label className="text-sm whitespace-nowrap">Sort By</label>
         <Select value={sort} onValueChange={updateSort}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Sort By" />

@@ -3,15 +3,15 @@
 import React from "react";
 import {useSearchParams} from "next/navigation";
 
-import {useGetPropertiesList} from "@/api/property/property-list";
+import {Type, useGetPropertiesList} from "@/api/property/property-list";
 import Loader from "@/components/loader/loader";
 
 import Lists from "../_components/list-page/lists";
 
-function Page() {
+function Page({params}: {params: {type: Type}}) {
   const param = useSearchParams().entries();
   const query = Object.fromEntries(param);
-  const {data, isLoading} = useGetPropertiesList("shortlet", query);
+  const {data, isLoading} = useGetPropertiesList(params.type, query);
 
   if (isLoading) {
     return (
@@ -25,7 +25,7 @@ function Page() {
     <Lists
       properties={data?.data.properties || []}
       total={data?.data.total_properties || 0}
-      type="shortlet"
+      type={params.type}
     />
   );
 }

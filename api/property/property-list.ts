@@ -5,7 +5,7 @@ import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {GenericResponse} from "@/lib/generic-types";
 import {PropertyResponse} from "@/@types/types";
 
-type Type = "workspace" | "shortlet";
+export type Type = "workspace" | "shortlet";
 
 const getPropertiesList = async (type: Type, query: {[k: string]: string}) => {
   const sortBy = query["sort"] || "newest";

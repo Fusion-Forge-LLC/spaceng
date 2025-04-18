@@ -5,10 +5,11 @@ import React from "react";
 import {useGetProperty} from "@/api/property/property";
 import Loader from "@/components/loader/loader";
 import NotFound from "@/components/not-found/not-found";
+import {Type} from "@/api/property/property-list";
 
 import DetailsPage from "../../_components/property-detail-page/details-page";
 
-function Page({params}: {params: {id: string}}) {
+function Page({params}: {params: {type: Type; id: string}}) {
   const {data, isLoading} = useGetProperty(params.id);
 
   if (isLoading) {
@@ -45,7 +46,7 @@ function Page({params}: {params: {id: string}}) {
       description={property_description}
       descriptionTitle={property_title}
       images={gallery}
-      label="Guest"
+      label={params.type === "shortlet" ? "Guest" : "Team"}
       location={`${property_address.address}, ${property_address.neighborhood || ""}, ${property_address.location || ""}`}
       property_terms={property_terms}
       reviews={reviews}

@@ -44,10 +44,10 @@ function Lists({
               <span className="text-sm md:text-base">{total} results</span>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               <Sort />
               <LocationFilter />
-              <BedFilter />
+              {type === "shortlet" && <BedFilter />}
             </div>
           </div>
         </section>

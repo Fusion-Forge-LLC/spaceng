@@ -6,10 +6,11 @@ import dynamic from "next/dynamic";
 import {useGetProperty} from "@/api/property/property";
 import Loader from "@/components/loader/loader";
 import NotFound from "@/components/not-found/not-found";
+import {Type} from "@/api/property/property-list";
 
 const Checkout = dynamic(() => import("../../../_components/checkout-page/checkout"), {ssr: false});
 
-function Page({params}: {params: {id: string}}) {
+function Page({params}: {params: {type: Type; id: string}}) {
   const {data, isLoading} = useGetProperty(params.id);
 
   if (isLoading) {
@@ -27,9 +28,9 @@ function Page({params}: {params: {id: string}}) {
   return (
     <Checkout
       cautionFee={data.data.caution_fee}
-      label="Guest"
+      label={params.type === "shortlet" ? "Guest" : "Team"}
       price={data.data.price}
-      propertyType="shortlet"
+      propertyType={params.type}
     />
   );
 }
