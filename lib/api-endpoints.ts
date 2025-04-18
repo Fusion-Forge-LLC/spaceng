@@ -25,10 +25,17 @@ export const API_ENDPOINTS = {
     overview: "/property/overview",
     properties: "/property/management",
     modify: (id: string) => `/property/management/${id}`,
+    disableDates: (id: string) => `/property/management/updateDisabled/${id}`,
   },
 
   LISTING: {
-    listing: (type: string) => `/lists/${type}`,
+    listing: (
+      type: string,
+      sort: string,
+      location: string,
+      bedrooms: string,
+      searchString: string,
+    ) => `/lists/${type}?sort=${sort}&location=${location}&bedrooms=${bedrooms}&q=${searchString}`,
     details: (id: string) => `/lists/property/${id}`,
     updateView: (id: string) => `/lists/property/${id}/increase-view`,
     search: (type: "workspace" | "shortlet", searchString: string) =>

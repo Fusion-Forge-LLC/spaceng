@@ -17,6 +17,7 @@ import ImageGallery from "./image-gallery";
 import PropertyVideo from "./property-video";
 import Features from "./features";
 import Basic from "./basic";
+import CautionFee from "./caution-fee";
 
 const propertySchema = yup.object({
   property_title: yup.string().required("Please enter property title"),
@@ -24,7 +25,7 @@ const propertySchema = yup.object({
   property_description: yup.string(),
   price: yup.number().required("Please enter price"),
   old_price: yup.number(),
-  price_prefix: yup.string(),
+  caution_fee: yup.number(),
   price_postfix: yup.string(),
   type: yup.string().oneOf(["workspace", "shortlet"], "Invalid type").required("Type is required"),
   location: yup.string(),
@@ -32,6 +33,7 @@ const propertySchema = yup.object({
   state: yup.string().required("Please select property state"),
   coordinates: yup.array(yup.number()).length(2),
   bedroom: yup.number(),
+  property_terms: yup.string(),
 });
 
 type PropertyType = yup.InferType<typeof propertySchema>;
@@ -64,7 +66,7 @@ function PropertyForm({
             property_description: defaultValues.property_description,
             price: defaultValues.price,
             old_price: defaultValues.old_price,
-            price_prefix: defaultValues.price_prefix,
+            caution_fee: defaultValues.caution_fee,
             price_postfix: defaultValues.price_postfix,
             type: defaultValues.type,
             location: defaultValues.property_address.location,
@@ -72,6 +74,7 @@ function PropertyForm({
             state: defaultValues.property_address.state,
             coordinates: defaultValues.property_address.coordinates,
             bedroom: defaultValues.bedroom,
+            property_terms: defaultValues.property_terms,
           },
   });
 
@@ -99,6 +102,8 @@ function PropertyForm({
           return "video";
         case "video":
           return "features";
+        case "features":
+          return "caution";
         default:
           return "basic";
       }
@@ -113,6 +118,8 @@ function PropertyForm({
         return "gallery";
       } else if (prevState === "features") {
         return "video";
+      } else if (prevState === "caution") {
+        return "features";
       } else {
         return "basic";
       }
@@ -123,6 +130,7 @@ function PropertyForm({
     const payload: PropertyPayload = {
       ...values,
       property_description: values.property_description || "",
+      property_terms: values.property_terms || "",
       gallery: images,
       video,
       features,
@@ -157,6 +165,13 @@ function PropertyForm({
               setTab={setCurrentTab}
               tab="features"
             />
+
+            <TabBtn
+              currentTab={currentTab}
+              isDisabled={!property_address || !property_title || !type}
+              setTab={setCurrentTab}
+              tab="caution"
+            />
           </div>
 
           <Form {...form}>
@@ -170,6 +185,8 @@ function PropertyForm({
               {currentTab === "features" && (
                 <Features features={features} form={form} setFeatures={setFeatures} />
               )}
+
+              {currentTab === "caution" && <CautionFee form={form} />}
             </form>
           </Form>
         </div>
@@ -184,7 +201,7 @@ function PropertyForm({
           Previous
         </Button>
 
-        {currentTab !== "features" ? (
+        {currentTab !== "caution" ? (
           <Button
             className="bg-blue"
             disabled={!property_address || !property_title || !type}
@@ -194,9 +211,14 @@ function PropertyForm({
             Next
           </Button>
         ) : (
-          <Button className="bg-blue" disabled={isPending} form="property-form" type="submit">
+          <button
+            className="bg-blue h-9 px-4 py-2 text-white rounded-md text-sm"
+            disabled={isPending}
+            form="property-form"
+            type="submit"
+          >
             {isPending ? <Loader /> : "Submit Property"}
-          </Button>
+          </button>
         )}
       </div>
     </div>

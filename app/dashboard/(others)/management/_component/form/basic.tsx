@@ -207,24 +207,6 @@ function Basic({form}: {form: any}) {
         />
         <FormField
           control={form.control}
-          name="price_prefix"
-          render={({field}) => (
-            <FormItem>
-              <FormControl>
-                <FormInput
-                  id="price_prefix"
-                  label="Price Prefix"
-                  labelExample="Example: Starting Form"
-                  type="text"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
           name="price_postfix"
           render={({field}) => (
             <FormItem>

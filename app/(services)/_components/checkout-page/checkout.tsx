@@ -30,10 +30,12 @@ function Checkout({
   label,
   price,
   propertyType,
+  cautionFee,
 }: {
   label: "Guest" | "Team";
   price: number;
   propertyType: "workspace" | "shortlet";
+  cautionFee?: number;
 }) {
   const params = useParams();
   const {User} = useUser();
@@ -48,16 +50,17 @@ function Checkout({
   const guestCount = searchParams.get("guest");
   const {mutateAsync: createBooking, isPending} = useCreateBooking();
   const [bookingData, setBookingData] = useState<BookingResponse | null>(null);
+  const duration = calculateDays(checkin ?? "", checkout ?? "", propertyType);
+  const totalRentalFee = duration * price;
+  const serviceCharge = (totalRentalFee + (cautionFee || 0)) * 0.025;
 
-  const totalCost = calculateDays(checkin ?? "", checkout ?? "", propertyType) * price;
+  const totalCost = totalRentalFee + serviceCharge + (cautionFee || 0);
 
   const makePayment = async () => {
     if (!checkin || !checkout) return;
-    if (!paymentMethod) {
-      toast.error("Please select a payment method");
+    if (!paymentMethod) return toast.error("Please select a payment method");
+    if (User?.role !== "client") return toast.error("Please login your client account");
 
-      return;
-    }
     const data = await mutateAsync({
       params: searchParams.toString(),
       data: {
@@ -104,6 +107,38 @@ function Checkout({
       <Wrapper className="pt-8 md:pt-0 pb-20 max-sm:px-0">
         <div className="md:grid md:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="md:col-span-6 lg:col-span-7 property-book">
+            <div className="mb-10">
+              <h4 className="text-xl text-center font-semibold mb-4">Payment Summary</h4>
+              <ul className="space-y-2">
+                <li className="flex justify-between">
+                  <p>
+                    Rental Charge{" "}
+                    <span className="italic text-xs">
+                      {duration}day{duration > 1 && "s"}
+                    </span>
+                  </p>
+                  <span className="text-[#6D6E78]">₦{totalRentalFee.toLocaleString()}</span>
+                </li>
+                {cautionFee && (
+                  <li className="flex justify-between">
+                    <p>
+                      Caution Fee <span className="italic text-xs">Refundable</span>
+                    </p>
+                    <span className="text-[#6D6E78]">₦{cautionFee.toLocaleString()}</span>
+                  </li>
+                )}
+                <li className="flex justify-between border-b border-b-[#6D6E78]/50 pb-1">
+                  <p>
+                    Service Charge <span className="italic text-xs">2.5%</span>
+                  </p>
+                  <span className="text-[#6D6E78]">₦{serviceCharge.toLocaleString()}</span>
+                </li>
+                <li className="flex justify-between">
+                  Total Fee
+                  <span className="text-[#6D6E78]">₦{totalCost.toLocaleString()}</span>
+                </li>
+              </ul>
+            </div>
             <h4 className="text-xl text-center font-semibold mb-10">Select Payment Method</h4>
 
             <div className="text-[#6D6E78] text-sm flex flex-col gap-5 mb-8">
@@ -148,7 +183,7 @@ function Checkout({
             </div>
 
             <button className="booking-btn w-full block" onClick={makePayment}>
-              {initatingTransaction ? <Loader /> : <span>Pay ₦{price.toLocaleString()}</span>}
+              {initatingTransaction ? <Loader /> : <span>Pay ₦{totalCost.toLocaleString()}</span>}
             </button>
 
             <div className="relative overflow-hidden hidden">

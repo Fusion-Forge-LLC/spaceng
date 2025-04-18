@@ -1,14 +1,17 @@
 "use client";
 
 import React from "react";
+import {useSearchParams} from "next/navigation";
 
+import {Type, useGetPropertiesList} from "@/api/property/property-list";
 import Loader from "@/components/loader/loader";
-import {useGetPropertiesList} from "@/api/property/property-list";
 
 import Lists from "../_components/list-page/lists";
 
-function Page() {
-  const {data, isLoading} = useGetPropertiesList("workspace");
+function Page({params}: {params: {type: Type}}) {
+  const param = useSearchParams().entries();
+  const query = Object.fromEntries(param);
+  const {data, isLoading} = useGetPropertiesList(params.type, query);
 
   if (isLoading) {
     return (
@@ -22,7 +25,7 @@ function Page() {
     <Lists
       properties={data?.data.properties || []}
       total={data?.data.total_properties || 0}
-      type="workspace"
+      type={params.type}
     />
   );
 }

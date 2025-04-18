@@ -7,7 +7,7 @@ async function DashboardLayout({children}: {children: ReactNode}) {
   const data = await fetchUser();
   const userRole = data?.data?.user?.role;
 
-  if (userRole !== "business") {
+  if (userRole !== "business" && userRole === "client") {
     redirect("/account/settings");
   }
 

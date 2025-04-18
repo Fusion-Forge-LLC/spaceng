@@ -121,7 +121,6 @@ function Footer() {
                 <li className="hover:underline">
                   <Link href={"/pricing"}>Pricing</Link>
                 </li>
-                <li>Blog</li>
               </ul>
             </div>
             <div>
@@ -138,12 +137,16 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h4 className="font-medium text-[17px] mb-6">About Us</h4>
+              <h4 className="font-medium text-[17px] mb-6">Help Center</h4>
               <ul className="space-y-5">
-                <li>Terms</li>
-                <li>Help Center</li>
-                <li>Cancellation Policy</li>
-                <li>Blog</li>
+                <li>
+                  <Link href={"tel:+2348020343070"}>+234 802 034 3070</Link>
+                </li>
+                <li>
+                  <Link href={"mailto:Spacefindatechnologiesltd@gmail.com"}>
+                    Spacefindatechnologiesltd@gmail.com
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

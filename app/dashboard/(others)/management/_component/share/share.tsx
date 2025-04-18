@@ -26,7 +26,7 @@ function Share({title, type, id}: {title: string; type: string; id: string}) {
       title="Share"
       trigger={
         <button className="property-page-link text-blue w-full hover:bg-blue hover:text-white flex justify-center items-center gap-2">
-          Share <Share2 />
+          Share <Share2 size={16} />
         </button>
       }
     >
