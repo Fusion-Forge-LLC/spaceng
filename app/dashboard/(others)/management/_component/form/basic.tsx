@@ -207,18 +207,6 @@ function Basic({form}: {form: any}) {
         />
         <FormField
           control={form.control}
-          name="caution_fee"
-          render={({field}) => (
-            <FormItem>
-              <FormControl>
-                <FormInput id="caution_fee" label="Caution Fee" type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
           name="price_postfix"
           render={({field}) => (
             <FormItem>

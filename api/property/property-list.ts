@@ -7,16 +7,22 @@ import {PropertyResponse} from "@/@types/types";
 
 type Type = "workspace" | "shortlet";
 
-const getPropertiesList = async (type: Type) => {
-  const {data} = await api.get<GenericResponse<Response>>(API_ENDPOINTS.LISTING.listing(type));
+const getPropertiesList = async (type: Type, query: {[k: string]: string}) => {
+  const sortBy = query["sort"] || "newest";
+  const location = query["location"] || "all";
+  const bedrooms = query["bedrooms"] || "all";
+  const searchString = query["q"] || "";
+  const {data} = await api.get<GenericResponse<Response>>(
+    API_ENDPOINTS.LISTING.listing(type, sortBy, location, bedrooms, searchString),
+  );
 
   return data;
 };
 
-export function useGetPropertiesList(type: Type) {
+export function useGetPropertiesList(type: Type, query: {[k: string]: string}) {
   return useQuery({
-    queryKey: ["properties-list", type],
-    queryFn: () => getPropertiesList(type),
+    queryKey: ["properties-list", type, query],
+    queryFn: () => getPropertiesList(type, query),
   });
 }
 

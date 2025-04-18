@@ -29,6 +29,7 @@ export interface PropertyPayload {
   gallery: string[];
   video: string[];
   features: string[];
+  property_terms: string;
 }
 
 export interface PropertyResponse {
@@ -64,6 +65,7 @@ export interface PropertyResponse {
     property_id: string;
   }[];
   disabledDates: Date[];
+  property_terms: string;
 }
 
 export interface WishlistResponse {

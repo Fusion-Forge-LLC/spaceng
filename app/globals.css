@@ -96,7 +96,7 @@
     @apply border-b-2 border-b-blue text-grey;
   }
   .property-page-link {
-    @apply block w-fit px-8 py-2.5 border border-blue font-medium rounded-xl transition-all text-center;
+    @apply block w-fit px-4 whitespace-nowrap py-2.5 border text-sm border-blue font-medium rounded-xl transition-all text-center;
   }
   .mobile-nav-link {
     @apply flex items-center gap-5 sm:hover:bg-blue/30 py-2.5 px-2 rounded-lg;

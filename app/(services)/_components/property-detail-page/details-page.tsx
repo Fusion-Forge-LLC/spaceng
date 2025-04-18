@@ -40,6 +40,7 @@ function DetailsPage({
   coordinate,
   cautionFee,
   video,
+  property_terms,
 }: {
   images: string[];
   title: string;
@@ -53,6 +54,7 @@ function DetailsPage({
   coordinate?: number[];
   cautionFee?: number;
   video: string[];
+  property_terms: string;
 }) {
   useUpdateViews();
   const postUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -201,7 +203,7 @@ function DetailsPage({
             </button>
           </div>
 
-          <div className="py-12 text-grey-200 flex gap-10 lg:gap-40">
+          <div className="py-12 text-grey-200 flex gap-10 lg:gap-40 relative">
             <article className="text-grey-200 flex-1">
               <div>
                 <h4 className="mb-6">About Us</h4>
@@ -225,8 +227,18 @@ function DetailsPage({
 
                 {video?.length ? <PropertyVideos src={video[0]} /> : null}
 
+                {property_terms && (
+                  <div className="pt-10">
+                    <h5 className="text-lg mb-6 font-medium text-grey">Property Terms</h5>
+                    <div
+                      dangerouslySetInnerHTML={{__html: property_terms}}
+                      className="leading-loose mb-8"
+                    />
+                  </div>
+                )}
+
                 {coordinate?.length ? (
-                  <div>
+                  <div className="pt-10">
                     <h5 className="text-lg  md:mb-6 font-medium text-grey">Property Location</h5>
                     <div className="h-80">
                       <SingleMap posix={[coordinate[0], coordinate[1]]} />
@@ -273,7 +285,7 @@ function DetailsPage({
 
             <BookingCard
               cautionFee={cautionFee}
-              className="hidden md:block"
+              className="hidden md:block sticky top-0 right-0"
               cost={cost}
               label={label}
             />

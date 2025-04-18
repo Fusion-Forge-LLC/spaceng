@@ -33,6 +33,7 @@ function Page({params}: {params: {id: string}}) {
     reviews,
     caution_fee,
     video,
+    property_terms,
   } = data.data;
 
   return (
@@ -46,6 +47,7 @@ function Page({params}: {params: {id: string}}) {
       images={gallery}
       label="Guest"
       location={`${property_address.address}, ${property_address.neighborhood || ""}, ${property_address.location || ""}`}
+      property_terms={property_terms}
       reviews={reviews}
       title={property_title}
       video={video}

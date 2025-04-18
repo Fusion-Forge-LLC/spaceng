@@ -11,6 +11,7 @@ import Footer from "@/components/footer/footer";
 import ServiceList from "@/components/main/services/service-list";
 import Uniqueness from "@/components/main/uniqueness/unigueness";
 import OurStory from "@/components/main/our-story/our-story";
+import FloatingButton from "@/components/floating-button/floating-button";
 
 import hero from "../public/hero-image.png";
 import feature3 from "../public/features/unsplash_4ojhpgKpS68.png";
@@ -135,7 +136,7 @@ export default function Home() {
           </section>
         </Wrapper>
       </div>
-
+      <FloatingButton />
       <Testimony />
       <Footer />
     </>

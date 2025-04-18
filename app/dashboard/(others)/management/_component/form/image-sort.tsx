@@ -81,11 +81,14 @@ const SortableImage = ({
       style={style}
     >
       <Image fill alt="Property image" src={img} />
-      <button className="absolute top-2 right-2" type="button" onClick={() => removeImage(img)}>
+      <button
+        className="absolute top-1 right-1 lg:top-2 lg:right-2"
+        type="button"
+        onClick={() => removeImage(img)}
+      >
         <Trash2 size={20} />
       </button>
     </div>
-    // <img ref={setNodeRef} {...attributes} {...listeners} src={img} alt="Draggable" style={style} />
   );
 };
 
