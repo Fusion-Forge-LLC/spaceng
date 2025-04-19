@@ -35,7 +35,9 @@ export const API_ENDPOINTS = {
       location: string,
       bedrooms: string,
       searchString: string,
-    ) => `/lists/${type}?sort=${sort}&location=${location}&bedrooms=${bedrooms}&q=${searchString}`,
+      page: string,
+    ) =>
+      `/lists/${type}?sort=${sort}&location=${location}&bedrooms=${bedrooms}&q=${searchString}&page=${page}`,
     details: (id: string) => `/lists/property/${id}`,
     updateView: (id: string) => `/lists/property/${id}/increase-view`,
     search: (type: "workspace" | "shortlet", searchString: string) =>

@@ -12,8 +12,9 @@ const getPropertiesList = async (type: Type, query: {[k: string]: string}) => {
   const location = query["location"] || "all";
   const bedrooms = query["bedrooms"] || "all";
   const searchString = query["q"] || "";
+  const page = query["page"] || 1;
   const {data} = await api.get<GenericResponse<Response>>(
-    API_ENDPOINTS.LISTING.listing(type, sortBy, location, bedrooms, searchString),
+    API_ENDPOINTS.LISTING.listing(type, sortBy, location, bedrooms, searchString, page),
   );
 
   return data;

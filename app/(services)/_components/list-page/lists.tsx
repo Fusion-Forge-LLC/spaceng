@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import dynamic from "next/dynamic";
 
 import Wrapper from "@/components/wrapper/wrapper";
@@ -27,9 +27,19 @@ function Lists({
   type: "shortlet" | "workspace";
   total: number;
 }) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const pathname = usePathname();
+  const currentPage = searchParams.get("page") || "1";
   const offset = 10;
   const totalPages = Math.ceil(total / offset);
+
+  const openPage = (number: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("page", number.toString());
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <main>
@@ -87,7 +97,17 @@ function Lists({
                     {Array.from({length: totalPages}).map((_, index) => {
                       return (
                         <li key={index}>
-                          <button className={cn("pageination-btn", "bg-blue text-white")}>
+                          <button
+                            className={cn(
+                              "pageination-btn",
+                              cn(
+                                currentPage === (index + 1).toString()
+                                  ? "bg-blue text-white"
+                                  : null,
+                              ),
+                            )}
+                            onClick={() => openPage(index + 1)}
+                          >
                             {index + 1}
                           </button>
                         </li>
