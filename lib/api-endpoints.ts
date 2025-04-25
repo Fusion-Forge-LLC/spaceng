@@ -42,7 +42,8 @@ export const API_ENDPOINTS = {
     updateView: (id: string) => `/lists/property/${id}/increase-view`,
     search: (type: "workspace" | "shortlet", searchString: string) =>
       `/lists/search/${type}?q=${searchString}`,
-    locations: `/lists/address/locations`,
+    locations: (type: "workspace" | "shortlet" | undefined) =>
+      `/lists/address/locations?${type && `type=${type}`}`,
   },
 
   TRANSACTION: {

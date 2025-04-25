@@ -8,7 +8,7 @@ import {DropdDown} from "@/components/style-guide/style-guide";
 import {Button} from "@/components/ui/button";
 
 function SearchProperties() {
-  const {data} = useGetPropertiesLocations();
+  const {data} = useGetPropertiesLocations(undefined);
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const router = useRouter();
@@ -16,7 +16,7 @@ function SearchProperties() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (type && location) {
-      router.push(`/${type}?q=${location}`);
+      router.push(`/${type}?location=${location}`);
     }
   };
 

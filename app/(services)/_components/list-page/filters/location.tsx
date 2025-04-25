@@ -15,8 +15,8 @@ import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {cn} from "@/lib/utils";
 import {useGetPropertiesLocations} from "@/api/property/properties-location";
 
-function LocationFilter() {
-  const {data} = useGetPropertiesLocations();
+function LocationFilter({type}: {type: "shortlet" | "workspace"}) {
+  const {data} = useGetPropertiesLocations(type);
   const searchParams = useSearchParams();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
@@ -35,6 +35,7 @@ function LocationFilter() {
     const params = new URLSearchParams(searchParams.toString());
 
     params.set("location", currentValue);
+    params.set("page", "1");
     router.push(`?${params.toString()}`);
   };
 

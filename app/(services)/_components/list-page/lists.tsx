@@ -56,7 +56,7 @@ function Lists({
 
             <div className="flex gap-2 flex-wrap">
               <Sort />
-              <LocationFilter />
+              <LocationFilter type={type} />
               {type === "shortlet" && <BedFilter />}
             </div>
           </div>
