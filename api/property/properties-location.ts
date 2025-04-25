@@ -4,16 +4,18 @@ import api from "@/lib/http";
 import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {GenericResponse} from "@/lib/generic-types";
 
-const getPropertiesLocations = async () => {
-  const {data} = await api.get<GenericResponse<Response[]>>(API_ENDPOINTS.LISTING.locations);
+type Types = "workspace" | "shortlet" | undefined;
+
+const getPropertiesLocations = async (type: Types) => {
+  const {data} = await api.get<GenericResponse<Response[]>>(API_ENDPOINTS.LISTING.locations(type));
 
   return data;
 };
 
-export function useGetPropertiesLocations() {
+export function useGetPropertiesLocations(type: Types) {
   return useQuery({
     queryKey: ["properties-location"],
-    queryFn: getPropertiesLocations,
+    queryFn: () => getPropertiesLocations(type),
   });
 }
 

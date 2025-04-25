@@ -67,20 +67,19 @@ const SortableImage = ({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    cursor: "grab",
     borderRadius: "8px",
     boxShadow: "2px 2px 10px rgba(0,0,0,0.2)",
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      className="aspect-square relative"
-      style={style}
-    >
+    <div className="aspect-square relative" style={style}>
       <Image fill alt="Property image" src={img} />
+      <div
+        ref={setNodeRef}
+        {...attributes}
+        {...listeners}
+        className="absolute h-full bottom-0 left-0 w-full cursor-grab"
+      />
       <button
         className="absolute top-1 right-1 lg:top-2 lg:right-2"
         type="button"
