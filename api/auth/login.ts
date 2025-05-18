@@ -48,8 +48,10 @@ export const useLogIn = (
       fetchWhoAmI && fetchWhoAmI();
 
       if (redirectTo) {
-        sessionStorage.removeItem("redirectLink");
         router.push(redirectTo);
+        sessionStorage.removeItem("redirectLink");
+
+        return;
       } else {
         router.push(pageRedirect);
       }
