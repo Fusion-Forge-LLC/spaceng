@@ -1,6 +1,6 @@
 "use client";
 
-import {usePathname, useRouter} from "next/navigation";
+import {useParams, usePathname, useRouter} from "next/navigation";
 import React, {useMemo, useState} from "react";
 
 import {CaretDown} from "@/components/Icons/icons";
@@ -9,12 +9,16 @@ import {Calendar} from "@/components/ui/calendar";
 import {useCheckout} from "@/hooks/use-checkout";
 import {useUser} from "@/context/user";
 import Loader from "@/components/loader/loader";
+import {useCheckDateAvailability} from "@/api/booking/check-date";
 
 function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"}) {
   const {User} = useUser();
   const pathName = usePathname();
   const router = useRouter();
+  const param = useParams();
+  const propertyId = param.id as string;
   const {date, guestsCount, setGuestsCount, updateDate} = useCheckout();
+  const {mutateAsync: checkDateAvailable, isPending} = useCheckDateAvailability();
   const [isLoading, setisLoading] = useState(false);
 
   const params = useMemo(() => {
@@ -39,70 +43,102 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
     return params.toString();
   }, [date, guestsCount, guestsCount]);
 
-  const checkoutBooking = () => {
+  const checkoutBooking = async () => {
     const path = `${pathName}/checkout?${params}`;
+    const checkin = date.checkin?.getTime().toString();
+    const checkout = date.checkout?.getTime().toString();
 
     setisLoading(true);
     if (User) {
-      router.push(path);
+      if (checkin && checkout) {
+        try {
+          const result = await checkDateAvailable({
+            propertyId,
+            checkin,
+            checkout,
+          });
+
+          router.push(path);
+        } catch {
+          setisLoading(false);
+        }
+      }
     } else {
-      sessionStorage.setItem("redirectLink", path);
+      sessionStorage.setItem("redirectLink", `${pathName}?${params}`);
       router.push("/auth/client/signin");
     }
   };
+
+  const checkInMonth = date.checkin
+    ? new Date(date.checkin.getFullYear(), date.checkin.getMonth())
+    : new Date(new Date().getFullYear(), new Date().getMonth());
+  const checkoutMonth = date.checkout
+    ? new Date(date.checkout.getFullYear(), date.checkout.getMonth())
+    : new Date(new Date().getFullYear(), new Date().getMonth());
 
   return (
     <div className="space-y-4 py-6">
       <PopoverElement
         trigger={
-          <div className="border border-grey-200 cursor-pointer rounded-lg p-4 flex items-center justify-between w-full">
-            <div className="flex flex-col gap-2">
+          <button
+            className="border border-grey-200 cursor-pointer rounded-lg p-4 flex items-center justify-between w-full"
+            disabled={!showBtn}
+          >
+            <span className="flex flex-col gap-2">
               <span className="font-medium text-xs">{"CHECK-IN"}</span>
               <span>{date.checkin?.toLocaleDateString()}</span>
-            </div>
+            </span>
             <CaretDown />
-          </div>
+          </button>
         }
       >
         <Calendar
           className="rounded-md border"
           disabled={(date) => date < new Date() || date < new Date("1900-01-01")}
           mode="single"
+          month={checkInMonth}
           selected={date.checkin}
           onSelect={(date) => updateDate(date, "checkin")}
         />
       </PopoverElement>
       <PopoverElement
         trigger={
-          <div className="border border-grey-200 cursor-pointer rounded-lg p-4 flex items-center justify-between w-full">
-            <div className="flex flex-col gap-2">
+          <button
+            className="border border-grey-200 cursor-pointer rounded-lg p-4 flex items-center justify-between w-full"
+            disabled={!showBtn}
+          >
+            <span className="flex flex-col gap-2">
               <span className="font-medium text-xs">{"CHECK-OUT"}</span>
               <span>{date.checkout?.toLocaleDateString()}</span>
-            </div>
+            </span>
             <CaretDown />
-          </div>
+          </button>
         }
       >
         <Calendar
           className="rounded-md border"
           disabled={(current) => current < date?.checkin! || current < new Date("1900-01-01")}
           mode="single"
+          month={checkoutMonth}
           selected={date.checkout}
           onSelect={(date) => updateDate(date, "checkout")}
         />
       </PopoverElement>
       <PopoverElement
         trigger={
-          <div className="border border-grey-200 cursor-pointer rounded-lg p-4 flex items-center justify-between w-full">
-            <div className="flex flex-col gap-2">
+          <button
+            className="border border-grey-200 cursor-pointer rounded-lg p-4 flex items-center justify-between w-full"
+            disabled={!showBtn}
+          >
+            <span className="flex flex-col gap-2">
               <span className="font-medium text-xs">No of {label}</span>
               <span>
                 {guestsCount} {label}
                 {guestsCount > 1 && "s"}
               </span>
-            </div>
+            </span>
             <CaretDown />
-          </div>
+          </button>
         }
       >
         <ul>

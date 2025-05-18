@@ -65,6 +65,7 @@ export const API_ENDPOINTS = {
     overview: "/booking/overview",
     habit: "/booking/habit",
     locations: "/booking/locations",
+    checAvailable: `/booking/check-date`,
   },
 
   WISHLIST: {
