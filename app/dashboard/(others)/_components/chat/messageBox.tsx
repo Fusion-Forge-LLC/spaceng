@@ -69,14 +69,19 @@ function MessageBox({
                       {isFirstUnread && unreadCount > 0 && (
                         <span className="tag">{unreadCount} Unread Messages</span>
                       )}
-                      <div className="px-3 py-2">
+                      <div
+                        className={cn(
+                          "px-3 py-2 bg-white w-fit rounded-md max-w-[90%]",
+                          item.senderRole === "business" && "ml-auto",
+                        )}
+                      >
                         <div
                           className={cn(
                             "flex items-center gap-3 mb-1",
                             item.senderRole === "business" && "flex-row-reverse",
                           )}
                         >
-                          <div className="h-12 w-12 rounded-full relative overflow-hidden">
+                          <div className="h-10 w-10 rounded-full relative overflow-hidden">
                             <Image
                               fill
                               alt="profile image"
@@ -98,6 +103,12 @@ function MessageBox({
                         >
                           {item.message}
                         </p>
+                        <span className="text-sm text-left">
+                          {new Date(item.createdAt).toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "numeric",
+                          })}
+                        </span>
                       </div>
                     </ul>
                   );

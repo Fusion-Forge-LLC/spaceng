@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import {useRouter} from "next/navigation";
 
 import {BookingResponse} from "@/api/booking/get-booking";
 import {useGetChatRoom} from "@/api/chat/get-room";
@@ -7,8 +8,9 @@ import {useUser} from "@/context/user";
 import Loader from "@/components/loader/loader";
 
 function BookingDetails({booking}: {booking: BookingResponse["booking"]}) {
-  const {mutate, isPending} = useGetChatRoom();
+  const {mutateAsync, isPending} = useGetChatRoom();
   const {User} = useUser();
+  const router = useRouter();
 
   const dateString = (date: string) => {
     return new Date(date).toLocaleDateString("en-us", {
@@ -18,11 +20,13 @@ function BookingDetails({booking}: {booking: BookingResponse["booking"]}) {
     });
   };
 
-  const openChat = () => {
-    mutate({
+  const openChat = async () => {
+    const result = await mutateAsync({
       clientId: booking.client._id,
       vendorId: User?._id!,
     });
+
+    router.push(`/dashboard/communication/${result.data._id}`);
   };
 
   return (

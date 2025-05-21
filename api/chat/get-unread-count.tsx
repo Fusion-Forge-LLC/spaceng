@@ -16,7 +16,7 @@ const getUnreadCount = async () => {
 
 export function useGetUnreadCount() {
   return useQuery({
-    queryKey: ["chat-peer"],
+    queryKey: ["unread-count"],
     queryFn: () => getUnreadCount(),
   });
 }

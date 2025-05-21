@@ -10,6 +10,7 @@ import {
   FinanceIcon,
   ManagementIcon,
   SettingsIcon,
+  TagIcon,
 } from "@/app/dashboard/(others)/_components/nav-items/icons/icons";
 import NavItems from "@/app/dashboard/(others)/_components/nav-items/nav-items";
 
@@ -21,6 +22,7 @@ function Sidebar() {
         <NavItems Icon={ManagementIcon} name="Management" path="/dashboard/management" />
         <NavItems Icon={FinanceIcon} name="Finance" path="/dashboard/finance" />
         <NavItems Icon={CommunicationIcon} name="Communication" path="/dashboard/communication" />
+        <NavItems Icon={TagIcon} name="Coupon" path="/dashboard/coupon" />
         <NavItems Icon={AnalyticIcon} name="Analytics" path="/dashboard/analytics" />
         <NavItems Icon={SettingsIcon} name="Settings" path="/dashboard/settings" />
         {/* <NavItems Icon={HelpIcon} name="Help" path="/dashboard/help" /> */}

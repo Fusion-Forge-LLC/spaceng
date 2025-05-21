@@ -7,6 +7,7 @@ import {
   CheckCheck,
   ChevronLeft,
   ChevronRight,
+  HandCoins,
   ImageIcon,
   MapPin,
 } from "lucide-react";
@@ -14,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
 import {useSwipeable} from "react-swipeable";
+import {toast} from "sonner";
 
 import Wrapper from "@/components/wrapper/wrapper";
 import {cn} from "@/lib/utils";
@@ -21,6 +23,8 @@ import {useUpdateViews} from "@/api/property/update-view";
 import {ReviewTypes} from "@/@types/types";
 import ShareButtons from "@/components/share-property/share-property";
 import SingleMap from "@/components/map/singlemap";
+import {useUser} from "@/context/user";
+import {useGetChatRoom} from "@/api/chat/get-room";
 
 import ReviewCard from "../review-card/review-card";
 import BookShortlet from "../booking-page/booking";
@@ -41,6 +45,7 @@ function DetailsPage({
   cautionFee,
   video,
   property_terms,
+  ownerId,
 }: {
   images: string[];
   title: string;
@@ -55,6 +60,7 @@ function DetailsPage({
   cautionFee?: number;
   video: string[];
   property_terms: string;
+  ownerId: string;
 }) {
   useUpdateViews();
   const postUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -252,6 +258,7 @@ function DetailsPage({
                 className="md:hidden my-16"
                 cost={cost}
                 label={label}
+                ownerId={ownerId}
               />
 
               <div className="pt-12">
@@ -288,6 +295,7 @@ function DetailsPage({
               className="hidden md:block sticky top-0 right-0"
               cost={cost}
               label={label}
+              ownerId={ownerId}
             />
           </div>
         </div>
@@ -340,13 +348,37 @@ function BookingCard({
   cost,
   label,
   cautionFee,
+  ownerId,
 }: {
   className: string;
   cost: number;
   label: "Guest" | "Team";
   cautionFee: number | undefined;
+  ownerId: string;
 }) {
   const pathname = usePathname();
+  const {mutateAsync: getRoom, isPending} = useGetChatRoom();
+  const {User} = useUser();
+  const router = useRouter();
+  const pathName = usePathname();
+
+  const chatOwner = async () => {
+    const userId = User?._id;
+
+    if (User?.role === "business") return toast.error("Please use a client account");
+    if (userId) {
+      const result = await getRoom({
+        clientId: userId,
+        vendorId: ownerId,
+      });
+
+      router.push(`/account/messages/${result.data._id}`);
+    } else {
+      toast.error("You must login first");
+      sessionStorage.setItem("redirectLink", pathName);
+      router.push("/auth/client/signin");
+    }
+  };
 
   return (
     <div className={cn("sm:w-[310px] lg:w-[435px] shrink-0 space-y-5", className)}>
@@ -374,6 +406,13 @@ function BookingCard({
           <BookShortlet showBtn label={label} />
         </div>
       </div>
+
+      <button className="flex items-center group property-book gap-4 w-full" onClick={chatOwner}>
+        <HandCoins />
+        <span>Request Discount</span>
+
+        <ArrowRight className="ml-auto group-hover:scale-150 transition-all" color="#205BF3" />
+      </button>
     </div>
   );
 }
