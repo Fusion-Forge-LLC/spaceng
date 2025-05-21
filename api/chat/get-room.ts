@@ -4,7 +4,7 @@ import {UseMutationResult, useMutation} from "@tanstack/react-query";
 import {AxiosError} from "axios";
 import {useRouter} from "next/navigation";
 
-import {displayErrorMessage, showSuccess} from "@/lib/utils";
+import {displayErrorMessage} from "@/lib/utils";
 import api, {ErrorData} from "@/lib/http";
 import {API_ENDPOINTS} from "@/lib/api-endpoints";
 import {QueryResponse} from "@/@types/auth";
@@ -38,10 +38,7 @@ export const useGetChatRoom = (): UseMutationResult<
 
   return useMutation({
     mutationFn: getChaRoom,
-    onSuccess: (data) => {
-      showSuccess(data.message);
-      router.push(`/dashboard/communication/${data.data._id}`);
-    },
+    onSuccess: () => {},
     onError: (error) => {
       displayErrorMessage(error);
     },

@@ -35,6 +35,7 @@ function Page({params}: {params: {type: Type; id: string}}) {
     caution_fee,
     video,
     property_terms,
+    user,
   } = data.data;
 
   return (
@@ -48,6 +49,7 @@ function Page({params}: {params: {type: Type; id: string}}) {
       images={gallery}
       label={params.type === "shortlet" ? "Guest" : "Team"}
       location={`${property_address.address}, ${property_address.neighborhood || ""}, ${property_address.location || ""}`}
+      ownerId={user}
       property_terms={property_terms}
       reviews={reviews}
       title={property_title}
