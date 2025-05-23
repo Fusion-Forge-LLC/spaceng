@@ -175,3 +175,19 @@ export interface GeoLocation {
   display_name: string;
   boundingbox: string[];
 }
+
+export interface CouponResponse {
+  createdAt: string;
+  amount: number;
+  expiry_date?: Date;
+  minimum_duration: number;
+  property: {
+    _id: string;
+    property_title: string;
+  };
+  creator: string;
+  is_expired: boolean;
+  is_used: boolean;
+  _id: string;
+  code: string;
+}
