@@ -111,4 +111,9 @@ export const API_ENDPOINTS = {
   },
 
   CONTACT: "/contact/form",
+
+  COUPON: {
+    create: "/coupon",
+    lists: () => `/coupon`,
+  },
 };
