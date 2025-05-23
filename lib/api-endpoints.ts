@@ -115,5 +115,6 @@ export const API_ENDPOINTS = {
   COUPON: {
     create: "/coupon",
     lists: () => `/coupon`,
+    modify: (id: string) => `/coupon/${id}`,
   },
 };
