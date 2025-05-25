@@ -116,5 +116,7 @@ export const API_ENDPOINTS = {
     create: "/coupon",
     lists: () => `/coupon`,
     modify: (id: string) => `/coupon/${id}`,
+    validate: (code: string, propertyId: string, duration: number) =>
+      `/coupon/${code}?propertyId=${propertyId}&duration=${duration}`,
   },
 };

@@ -19,6 +19,7 @@ type TransactionPayload = {
     checkout: string;
     channel: string;
     guestCount: string | number;
+    couponCode?: string;
   };
 };
 
