@@ -204,7 +204,7 @@ export function CouponList({
   if (!data || data.length === 0) {
     return (
       <div className="py-16 grid place-content-center">
-        <span className="italic font-medium text-grey-200">Payout history empty</span>
+        <span className="italic font-medium text-grey-200">Coupon List is Empty</span>
       </div>
     );
   }
