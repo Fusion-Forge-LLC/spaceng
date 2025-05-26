@@ -94,9 +94,9 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       >
         <Calendar
           className="rounded-md border"
+          defaultMonth={checkInMonth}
           disabled={(date) => date < new Date() || date < new Date("1900-01-01")}
           mode="single"
-          month={checkInMonth}
           selected={date.checkin}
           onSelect={(date) => updateDate(date, "checkin")}
         />
@@ -117,9 +117,9 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
       >
         <Calendar
           className="rounded-md border"
+          defaultMonth={checkoutMonth}
           disabled={(current) => current < date?.checkin! || current < new Date("1900-01-01")}
           mode="single"
-          month={checkoutMonth}
           selected={date.checkout}
           onSelect={(date) => updateDate(date, "checkout")}
         />

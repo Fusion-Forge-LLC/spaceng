@@ -2,17 +2,21 @@
 
 import {ArrowLeft} from "lucide-react";
 import {useParams, useRouter, useSearchParams} from "next/navigation";
-import React, {useState} from "react";
+import React, {FormEvent, useState} from "react";
 import Paystack from "@paystack/inline-js";
 import {toast} from "sonner";
 
 import {Bank, CreditCard, Gpay} from "@/components/Icons/icons";
 import Wrapper from "@/components/wrapper/wrapper";
-import {calculateDays, cn} from "@/lib/utils";
+import {calculateDays, cn, toCurrency} from "@/lib/utils";
 import {useInitTransaction} from "@/api/transaction/initpayment";
 import {useUser} from "@/context/user";
 import {BookingResponse, useCreateBooking} from "@/api/booking/create-booking";
 import Loader from "@/components/loader/loader";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {useValidateCoupon} from "@/api/coupon/validate-coupon";
+import {CouponResponse} from "@/@types/types";
 
 import PaymentSuccess from "../modal/payment-success";
 import Booking from "../booking-page/booking";
@@ -45,10 +49,14 @@ function Checkout({
   const {mutateAsync, isPending: initatingTransaction} = useInitTransaction();
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
+  const [couponCode, setCouponCode] = useState("");
+  const [couponDetails, setCouponDetails] = useState<null | CouponResponse>(null);
+  const [couponError, setCouponError] = useState("");
   const checkin = searchParams.get("checkin");
   const checkout = searchParams.get("checkout");
   const guestCount = searchParams.get("guest");
   const {mutateAsync: createBooking, isPending} = useCreateBooking();
+  const {mutateAsync: validateCoupon, isPending: isValidating} = useValidateCoupon();
   const [bookingData, setBookingData] = useState<BookingResponse | null>(null);
   const duration = calculateDays(checkin ?? "", checkout ?? "", propertyType);
   const totalRentalFee = duration * price;
@@ -71,6 +79,7 @@ function Checkout({
         checkout,
         channel: paymentMethod,
         guestCount: guestCount || 1,
+        couponCode: couponDetails?.code,
       },
     });
 
@@ -85,6 +94,20 @@ function Checkout({
       onCancel: () => {},
       onError: (error: any) => {},
     });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const result = await validateCoupon({couponCode, propertyId, duration});
+
+      setCouponDetails(result.data);
+      setCouponError("");
+      console.log(result);
+    } catch (error: any) {
+      setCouponError(error.response.data.message);
+      setCouponDetails(null);
+    }
   };
 
   return (
@@ -117,7 +140,7 @@ function Checkout({
                       {duration}day{duration > 1 && "s"}
                     </span>
                   </p>
-                  <span className="text-[#6D6E78]">₦{totalRentalFee.toLocaleString()}</span>
+                  <span className="text-[#8d94e0]">₦{totalRentalFee.toLocaleString()}</span>
                 </li>
                 {cautionFee && (
                   <li className="flex justify-between">
@@ -139,6 +162,30 @@ function Checkout({
                 </li>
               </ul>
             </div>
+
+            <div className="mb-10">
+              <h4 className="text-xl text-center font-semibold mb-4">Apply Coupon</h4>
+              <form className="flex gap-2" onSubmit={handleSubmit}>
+                <Input
+                  autoComplete={"off"}
+                  className="h-12 rounded"
+                  id="coupon-code"
+                  name="coupon-code"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                />
+                <Button className="h-12 px-8" disabled={isValidating}>
+                  {isValidating ? <Loader /> : "Apply"}
+                </Button>
+              </form>
+              {couponDetails && (
+                <span className="text-sm text-green-500">
+                  Coupon Applied Successfully, you get {toCurrency(couponDetails.amount)} discount
+                </span>
+              )}
+              {couponError && <span className="text-sm text-red">{couponError}</span>}
+            </div>
+
             <h4 className="text-xl text-center font-semibold mb-10">Select Payment Method</h4>
 
             <div className="text-[#6D6E78] text-sm flex flex-col gap-5 mb-8">
@@ -183,7 +230,11 @@ function Checkout({
             </div>
 
             <button className="booking-btn w-full block" onClick={makePayment}>
-              {initatingTransaction ? <Loader /> : <span>Pay ₦{totalCost.toLocaleString()}</span>}
+              {initatingTransaction ? (
+                <Loader />
+              ) : (
+                <span>Pay {toCurrency(totalCost - (couponDetails?.amount || 0))}</span>
+              )}
             </button>
 
             <div className="relative overflow-hidden hidden">

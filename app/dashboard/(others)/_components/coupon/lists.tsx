@@ -133,8 +133,8 @@ export const columns: ColumnDef<CouponResponse>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({row}) => {
-      const isExpired = row.getValue("is_expired");
-      const isUsed = row.getValue("is_used");
+      const isExpired = row.original.is_expired;
+      const isUsed = row.original.is_used;
       const statusText = isExpired ? "Expired" : isUsed ? "Used" : "Not Used";
 
       return (
@@ -158,7 +158,7 @@ export const columns: ColumnDef<CouponResponse>[] = [
   {
     accessorKey: "menu",
     header: () => <div className="text-center">Menu</div>,
-    cell: ({row}) => <Dropdown id={row.getValue("_id")} />,
+    cell: ({row}) => <Dropdown data={row.original} />,
   },
 ];
 

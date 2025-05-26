@@ -304,3 +304,10 @@ function formatSingleDate(date: Date) {
 
   return `${dayWithSuffix} ${month}, ${year}`;
 }
+
+export function toCurrency(amount: number) {
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(amount);
+}

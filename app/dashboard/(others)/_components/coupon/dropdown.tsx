@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import {EllipsisVertical, Trash2} from "lucide-react";
+import {Edit, EllipsisVertical, Trash2} from "lucide-react";
 
 import {
   DropdownMenu,
@@ -12,13 +12,32 @@ import {
 import {DialogClose, DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import ModalWrapper from "@/components/ui/modals/modal-wrapper";
+import {useDeleteCoupon} from "@/api/coupon/delete-coupon";
+import Loader from "@/components/loader/loader";
+import {CouponResponse} from "@/@types/types";
 
-function Dropdown({id}: {id: string}) {
+import {EditCoupon} from "./edit-coupon";
+
+function Dropdown({data}: {data: CouponResponse}) {
+  const editBtn = useRef<HTMLButtonElement>(null);
   const deleteBtn = useRef<HTMLButtonElement>(null);
+  const cancelBtn = useRef<HTMLButtonElement>(null);
+  const {mutateAsync: deleteCoupon, isPending} = useDeleteCoupon();
 
   const showDelete = () => {
     if (deleteBtn.current) {
       deleteBtn.current.click();
+    }
+  };
+
+  const handleDelete = async () => {
+    await deleteCoupon(data._id);
+    if (cancelBtn.current) cancelBtn.current.click();
+  };
+
+  const showEdit = () => {
+    if (editBtn.current) {
+      editBtn.current.click();
     }
   };
 
@@ -33,9 +52,13 @@ function Dropdown({id}: {id: string}) {
         <DropdownMenuContent>
           <DropdownMenuLabel>Action</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem>
-            <button className="flex items-center gap-2" onClick={showDelete}>
+            <button className="flex items-center gap-2" onClick={showEdit}>
+              <Edit size={16} /> Edit
+            </button>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <button className="flex items-center gap-2 text-red" onClick={showDelete}>
               <Trash2 size={16} /> Delete
             </button>
           </DropdownMenuItem>
@@ -50,16 +73,20 @@ function Dropdown({id}: {id: string}) {
         }
       >
         <div className="max-w-80 w-full mx-auto flex flex-col py-5 gap-4">
-          <Button variant={"destructive"}>Delete</Button>
+          <Button variant={"destructive"} onClick={handleDelete}>
+            {isPending ? <Loader /> : "Delete"}
+          </Button>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
-              <Button className="w-full" type="button" variant="secondary">
+              <Button ref={cancelBtn} className="w-full" type="button" variant="secondary">
                 Close
               </Button>
             </DialogClose>
           </DialogFooter>
         </div>
       </ModalWrapper>
+
+      <EditCoupon data={data} editRef={editBtn} />
     </>
   );
 }
