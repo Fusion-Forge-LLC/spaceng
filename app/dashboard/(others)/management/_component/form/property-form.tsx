@@ -1,6 +1,5 @@
 "use client";
 
-import * as yup from "yup";
 import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -18,25 +17,8 @@ import PropertyVideo from "./property-video";
 import Features from "./features";
 import Basic from "./basic";
 import CautionFee from "./caution-fee";
-
-const propertySchema = yup.object({
-  property_title: yup.string().required("Please enter property title"),
-  property_address: yup.string().required("Please enter property address"),
-  property_description: yup.string(),
-  price: yup.number().required("Please enter price"),
-  old_price: yup.number(),
-  caution_fee: yup.number(),
-  price_postfix: yup.string(),
-  type: yup.string().oneOf(["workspace", "shortlet"], "Invalid type").required("Type is required"),
-  location: yup.string(),
-  neighborhood: yup.string(),
-  state: yup.string().required("Please select property state"),
-  coordinates: yup.array(yup.number()).length(2),
-  bedroom: yup.number(),
-  property_terms: yup.string(),
-});
-
-type PropertyType = yup.InferType<typeof propertySchema>;
+import Discount from "./discount";
+import {propertySchema, PropertySchemaType} from "./schema";
 
 function PropertyForm({
   mutate,
@@ -55,11 +37,11 @@ function PropertyForm({
   const [video, setVideo] = useState<string[]>(defaultValues ? defaultValues.video : []);
   const {id} = useParams();
 
-  const form = useForm<PropertyType>({
+  const form = useForm<PropertySchemaType>({
     resolver: yupResolver(propertySchema),
     defaultValues:
       defaultValues === null
-        ? undefined
+        ? {enableDiscount: false}
         : {
             property_title: defaultValues.property_title,
             property_address: defaultValues.property_address.address,
@@ -75,6 +57,7 @@ function PropertyForm({
             coordinates: defaultValues.property_address.coordinates,
             bedroom: defaultValues.bedroom,
             property_terms: defaultValues.property_terms,
+            enableDiscount: defaultValues.enableDiscount || false,
           },
   });
 
@@ -104,6 +87,8 @@ function PropertyForm({
           return "features";
         case "features":
           return "caution";
+        case "caution":
+          return "discount";
         default:
           return "basic";
       }
@@ -120,13 +105,15 @@ function PropertyForm({
         return "video";
       } else if (prevState === "caution") {
         return "features";
+      } else if (prevState === "discount") {
+        return "caution";
       } else {
         return "basic";
       }
     });
   };
 
-  const onSubmit = (values: PropertyType) => {
+  const onSubmit = (values: PropertySchemaType) => {
     const payload: PropertyPayload = {
       ...values,
       property_description: values.property_description || "",
@@ -165,12 +152,17 @@ function PropertyForm({
               setTab={setCurrentTab}
               tab="features"
             />
-
             <TabBtn
               currentTab={currentTab}
               isDisabled={!property_address || !property_title || !type}
               setTab={setCurrentTab}
               tab="caution"
+            />
+            <TabBtn
+              currentTab={currentTab}
+              isDisabled={!property_address || !property_title || !type}
+              setTab={setCurrentTab}
+              tab="discount"
             />
           </div>
 
@@ -187,6 +179,7 @@ function PropertyForm({
               )}
 
               {currentTab === "caution" && <CautionFee form={form} />}
+              {currentTab === "discount" && <Discount form={form} />}
             </form>
           </Form>
         </div>
@@ -201,7 +194,7 @@ function PropertyForm({
           Previous
         </Button>
 
-        {currentTab !== "caution" ? (
+        {currentTab !== "discount" ? (
           <Button
             className="bg-blue"
             disabled={!property_address || !property_title || !type}

@@ -1,11 +1,13 @@
 import React, {ChangeEvent, Dispatch, SetStateAction} from "react";
+import {UseFormReturn} from "react-hook-form";
 
 import {amenities} from "./amenities";
+import {PropertySchemaType} from "./schema";
 
 interface Props {
   features: string[];
   setFeatures: Dispatch<SetStateAction<string[]>>;
-  form: any;
+  form: UseFormReturn<PropertySchemaType, any, undefined>;
 }
 
 function Features({setFeatures, features, form}: Props) {

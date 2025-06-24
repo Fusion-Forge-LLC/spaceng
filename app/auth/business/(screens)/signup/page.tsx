@@ -101,7 +101,7 @@ function Page() {
             render={({field}) => (
               <FormItem>
                 <FormControl>
-                  <FormInput id="phone_number" label="Phone Number" {...field} />
+                  <FormInput id="phone_number" label="Phone Number" {...field} autoComplete="off" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

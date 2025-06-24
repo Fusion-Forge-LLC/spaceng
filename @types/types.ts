@@ -66,6 +66,9 @@ export interface PropertyResponse {
   }[];
   disabledDates: Date[];
   property_terms: string;
+  enableDiscount: boolean;
+  minimum_duration: number;
+  percentage: number;
 }
 
 export interface WishlistResponse {
