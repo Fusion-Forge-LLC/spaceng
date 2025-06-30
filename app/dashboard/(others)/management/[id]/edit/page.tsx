@@ -15,7 +15,7 @@ function Page({params}: {params: {id: string}}) {
 
   if (isPending) {
     return (
-      <div className="flex-1 overflow-hidden grid place-content-center">
+      <div className="flex-1 overflow-hidden grid place-content-center py-20">
         <Loader />
       </div>
     );

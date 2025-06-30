@@ -53,7 +53,11 @@ function Dropdown({data}: {data: CouponResponse}) {
           <DropdownMenuLabel>Action</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <button className="flex items-center gap-2" onClick={showEdit}>
+            <button
+              className="flex items-center gap-2 disabled:cursor-not-allowed"
+              disabled={data.is_used || data.is_expired}
+              onClick={showEdit}
+            >
               <Edit size={16} /> Edit
             </button>
           </DropdownMenuItem>

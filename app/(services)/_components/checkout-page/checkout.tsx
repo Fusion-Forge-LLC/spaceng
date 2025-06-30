@@ -35,11 +35,17 @@ function Checkout({
   price,
   propertyType,
   cautionFee,
+  discountAvailable,
+  discountDuration,
+  discountPercentage,
 }: {
   label: "Guest" | "Team";
   price: number;
   propertyType: "workspace" | "shortlet";
   cautionFee?: number;
+  discountAvailable: boolean;
+  discountDuration: number;
+  discountPercentage: number;
 }) {
   const params = useParams();
   const {User} = useUser();
@@ -103,12 +109,16 @@ function Checkout({
 
       setCouponDetails(result.data);
       setCouponError("");
-      console.log(result);
     } catch (error: any) {
       setCouponError(error.response.data.message);
       setCouponDetails(null);
     }
   };
+
+  const isDiscountValid = discountAvailable && discountDuration <= duration && !couponDetails;
+  const amountToPay = isDiscountValid
+    ? totalCost - (totalCost * discountPercentage) / 100
+    : totalCost - (couponDetails?.amount || 0);
 
   return (
     <main>
@@ -156,10 +166,25 @@ function Checkout({
                   </p>
                   <span className="text-[#6D6E78]">₦{serviceCharge.toLocaleString()}</span>
                 </li>
-                <li className="flex justify-between">
+                <li className="flex justify-between items-center">
                   Total Fee
-                  <span className="text-[#6D6E78]">₦{totalCost.toLocaleString()}</span>
+                  <span
+                    className={cn(
+                      "text-[#6D6E78]",
+                      isDiscountValid ? "ml-auto text-sm mr-2 line-through" : "",
+                    )}
+                  >
+                    ₦{totalCost.toLocaleString()}
+                  </span>
+                  {isDiscountValid && (
+                    <span className="text-[#6D6E78]">₦{amountToPay.toLocaleString()}</span>
+                  )}
                 </li>
+                {isDiscountValid && (
+                  <li className="text-sm text-green-500">
+                    Congratulation you qualify for {discountPercentage}% discount{" "}
+                  </li>
+                )}
               </ul>
             </div>
 
@@ -230,11 +255,7 @@ function Checkout({
             </div>
 
             <button className="booking-btn w-full block" onClick={makePayment}>
-              {initatingTransaction ? (
-                <Loader />
-              ) : (
-                <span>Pay {toCurrency(totalCost - (couponDetails?.amount || 0))}</span>
-              )}
+              {initatingTransaction ? <Loader /> : <span>Pay {toCurrency(amountToPay)}</span>}
             </button>
 
             <div className="relative overflow-hidden hidden">

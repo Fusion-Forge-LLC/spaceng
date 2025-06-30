@@ -1,10 +1,13 @@
 import React from "react";
 import ReactQuill from "react-quill";
+import {UseFormReturn} from "react-hook-form";
 
 import {FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import FormInput from "@/app/dashboard/(others)/_components/form-control/form-input";
 
-function CautionFee({form}: {form: any}) {
+import {PropertySchemaType} from "./schema";
+
+function CautionFee({form}: {form: UseFormReturn<PropertySchemaType, any, undefined>}) {
   return (
     <div className="space-y-5">
       <FormField

@@ -28,6 +28,9 @@ function Page({params}: {params: {type: Type; id: string}}) {
   return (
     <Checkout
       cautionFee={data.data.caution_fee}
+      discountAvailable={data.data.enableDiscount}
+      discountDuration={data.data.minimum_duration}
+      discountPercentage={data.data.percentage}
       label={params.type === "shortlet" ? "Guest" : "Team"}
       price={data.data.price}
       propertyType={params.type}
