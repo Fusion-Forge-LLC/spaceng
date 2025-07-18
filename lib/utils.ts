@@ -311,3 +311,9 @@ export function toCurrency(amount: number) {
     currency: "NGN",
   }).format(amount);
 }
+
+export function markupPrice(amount: number) {
+  const price = amount + amount * 0.05;
+
+  return toCurrency(price);
+}
