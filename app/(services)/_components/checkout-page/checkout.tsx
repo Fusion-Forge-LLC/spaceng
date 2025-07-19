@@ -65,10 +65,10 @@ function Checkout({
   const {mutateAsync: validateCoupon, isPending: isValidating} = useValidateCoupon();
   const [bookingData, setBookingData] = useState<BookingResponse | null>(null);
   const duration = calculateDays(checkin ?? "", checkout ?? "", propertyType);
-  const totalRentalFee = duration * price;
-  const serviceCharge = (totalRentalFee + (cautionFee || 0)) * 0.025;
+  const markupPrice = price + price * 0.05;
+  const totalRentalFee = duration * markupPrice;
 
-  const totalCost = totalRentalFee + serviceCharge + (cautionFee || 0);
+  const totalCost = totalRentalFee + (cautionFee || 0);
 
   const makePayment = async () => {
     if (!checkin || !checkout) return;
@@ -160,13 +160,7 @@ function Checkout({
                     <span className="text-[#6D6E78]">₦{cautionFee.toLocaleString()}</span>
                   </li>
                 )}
-                <li className="flex justify-between border-b border-b-[#6D6E78]/50 pb-1">
-                  <p>
-                    Service Charge <span className="italic text-xs">2.5%</span>
-                  </p>
-                  <span className="text-[#6D6E78]">₦{serviceCharge.toLocaleString()}</span>
-                </li>
-                <li className="flex justify-between items-center">
+                <li className="flex justify-between items-center border-t border-t-[#6D6E78]/50">
                   Total Fee
                   <span
                     className={cn(
@@ -258,7 +252,7 @@ function Checkout({
               {initatingTransaction ? <Loader /> : <span>Pay {toCurrency(amountToPay)}</span>}
             </button>
 
-            <div className="relative overflow-hidden hidden">
+            <div className="relative overflowx-hidden hidden">
               <div
                 className={cn(
                   "flex relative top-0 transition-all",

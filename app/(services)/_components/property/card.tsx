@@ -7,7 +7,7 @@ import {toast} from "sonner";
 import {useToggleWishlist} from "@/api/wishlist/toggle-wishlist";
 import {useUser} from "@/context/user";
 import {HeartSolid} from "@/components/Icons/icons";
-import {getAverageRating} from "@/lib/utils";
+import {getAverageRating, markupPrice} from "@/lib/utils";
 import {ReviewTypes} from "@/@types/types";
 
 import RatingStars from "./rating-star";
@@ -111,9 +111,9 @@ function Card({
 
           <RatingStars rating={averageRating} />
 
-          <span className="text-grey-200 text-xs whitespace-nowrap">({reviewNum} Reviews)</span>
+          {/* <span className="text-grey-200 text-xs whitespace-nowrap">({reviewNum} Reviews)</span> */}
 
-          <p className="ml-auto text-[#443344] font-semibold text-lg">₦{price.toLocaleString()}</p>
+          <p className="ml-auto text-[#443344] font-semibold text-lg">{markupPrice(price)}</p>
           <span className="text-[#333333] text-xs whitespace-normal">{postfix}</span>
         </div>
       </div>

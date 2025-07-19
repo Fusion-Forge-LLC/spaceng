@@ -18,7 +18,7 @@ import {useSwipeable} from "react-swipeable";
 import {toast} from "sonner";
 
 import Wrapper from "@/components/wrapper/wrapper";
-import {cn} from "@/lib/utils";
+import {cn, markupPrice} from "@/lib/utils";
 import {useUpdateViews} from "@/api/property/update-view";
 import {ReviewTypes} from "@/@types/types";
 import ShareButtons from "@/components/share-property/share-property";
@@ -391,8 +391,7 @@ function BookingCard({
 
       <div className="property-book ">
         <p className="text-2xl font-bold text-[#443344] flex items-center gap-2">
-          ₦ {cost.toLocaleString("en-Us")}{" "}
-          <span className="text-[#333] text-xs font-normal">/night</span>
+          {markupPrice(cost)} <span className="text-[#333] text-xs font-normal">/night</span>
         </p>
         {cautionFee && (
           <div>
