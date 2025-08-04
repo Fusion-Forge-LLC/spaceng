@@ -34,6 +34,7 @@ function Page({params}: {params: {type: Type; id: string}}) {
       label={params.type === "shortlet" ? "Guest" : "Team"}
       price={data.data.price}
       propertyType={params.type}
+      vendor={data.data.user}
     />
   );
 }

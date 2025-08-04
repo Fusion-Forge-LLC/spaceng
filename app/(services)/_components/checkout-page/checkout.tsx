@@ -16,10 +16,11 @@ import Loader from "@/components/loader/loader";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {useValidateCoupon} from "@/api/coupon/validate-coupon";
-import {CouponResponse} from "@/@types/types";
+import {CouponResponse, PropertyOwner} from "@/@types/types";
 
 import PaymentSuccess from "../modal/payment-success";
 import Booking from "../booking-page/booking";
+import ContactCard from "../booking-page/contact-card";
 
 import CardsPayment from "./payment-methods/cards";
 import GooglePay from "./payment-methods/google-pay";
@@ -38,6 +39,7 @@ function Checkout({
   discountAvailable,
   discountDuration,
   discountPercentage,
+  vendor,
 }: {
   label: "Guest" | "Team";
   price: number;
@@ -46,6 +48,7 @@ function Checkout({
   discountAvailable: boolean;
   discountDuration: number;
   discountPercentage: number;
+  vendor: PropertyOwner;
 }) {
   const params = useParams();
   const {User} = useUser();
@@ -65,10 +68,10 @@ function Checkout({
   const {mutateAsync: validateCoupon, isPending: isValidating} = useValidateCoupon();
   const [bookingData, setBookingData] = useState<BookingResponse | null>(null);
   const duration = calculateDays(checkin ?? "", checkout ?? "", propertyType);
-  const markupPrice = price + price * 0.05;
-  const totalRentalFee = duration * markupPrice;
-
-  const totalCost = totalRentalFee + (cautionFee || 0);
+  const totalRentalFee = duration * price;
+  const totalFee = totalRentalFee + (cautionFee || 0);
+  const serviceCharge = totalFee * 0.02;
+  const totalCost = totalRentalFee + (cautionFee || 0) + serviceCharge;
 
   const makePayment = async () => {
     if (!checkin || !checkout) return;
@@ -129,20 +132,23 @@ function Checkout({
         </div>
       )}
       {bookingData && <PaymentSuccess {...bookingData} />}
-      <Wrapper className="pt-10">
+      <Wrapper className="pt-5 sm:pt-10">
         <div className="py-5">
-          <button className="flex items-center gap-3" onClick={() => router.back()}>
+          <button
+            className="flex items-center gap-2 sm:gap-3 text-sm"
+            onClick={() => router.back()}
+          >
             <ArrowLeft color="#205BF3" size={18} />
             Go Back
           </button>
         </div>
       </Wrapper>
-      <Wrapper className="pt-8 md:pt-0 pb-20 max-sm:px-0">
+      <Wrapper className="sm:pt-8 md:pt-0 pb-20 max-sm:px-0">
         <div className="md:grid md:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="md:col-span-6 lg:col-span-7 property-book">
             <div className="mb-10">
               <h4 className="text-xl text-center font-semibold mb-4">Payment Summary</h4>
-              <ul className="space-y-2">
+              <ul className="space-y-2 max-sm:text-sm">
                 <li className="flex justify-between">
                   <p>
                     Rental Charge{" "}
@@ -150,16 +156,20 @@ function Checkout({
                       {duration}day{duration > 1 && "s"}
                     </span>
                   </p>
-                  <span className="text-[#8d94e0]">₦{totalRentalFee.toLocaleString()}</span>
+                  <span className="text-[#8d94e0]">{toCurrency(totalRentalFee)}</span>
                 </li>
                 {cautionFee && (
                   <li className="flex justify-between">
                     <p>
                       Caution Fee <span className="italic text-xs">Refundable</span>
                     </p>
-                    <span className="text-[#6D6E78]">₦{cautionFee.toLocaleString()}</span>
+                    <span className="text-[#6D6E78]">{toCurrency(cautionFee)}</span>
                   </li>
                 )}
+                <li className="flex justify-between">
+                  <p>Processing Fee</p>
+                  <span className="text-[#6D6E78]">{toCurrency(serviceCharge)}</span>
+                </li>
                 <li className="flex justify-between items-center border-t border-t-[#6D6E78]/50">
                   Total Fee
                   <span
@@ -168,7 +178,7 @@ function Checkout({
                       isDiscountValid ? "ml-auto text-sm mr-2 line-through" : "",
                     )}
                   >
-                    ₦{totalCost.toLocaleString()}
+                    {toCurrency(totalCost)}
                   </span>
                   {isDiscountValid && (
                     <span className="text-[#6D6E78]">₦{amountToPay.toLocaleString()}</span>
@@ -205,7 +215,9 @@ function Checkout({
               {couponError && <span className="text-sm text-red">{couponError}</span>}
             </div>
 
-            <h4 className="text-xl text-center font-semibold mb-10">Select Payment Method</h4>
+            <h4 className="text-xl text-center font-semibold mb-4 md:mb-8 lg:mb-10">
+              Select Payment Method
+            </h4>
 
             <div className="text-[#6D6E78] text-sm flex flex-col gap-5 mb-8">
               <button
@@ -269,11 +281,18 @@ function Checkout({
               </div>
             </div>
           </div>
-          <div className="hidden md:block col-span-6 lg:col-span-5 property-book">
-            <div className="p-6">
-              <h4 className=" text-grey font-medium text-lg">Booking details</h4>
-              <Booking label={label} />
+
+          <div className="block col-span-6 lg:col-span-5 ">
+            <div className="property-book">
+              <div className="md:p-6">
+                <h4 className=" text-grey font-medium text-lg max-md:text-center">
+                  Booking details
+                </h4>
+                <Booking label={label} />
+              </div>
             </div>
+
+            <ContactCard vendor={vendor} />
           </div>
         </div>
       </Wrapper>

@@ -1,16 +1,7 @@
 "use client";
 
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
-import {
-  ArrowRight,
-  CalendarDaysIcon,
-  CheckCheck,
-  ChevronLeft,
-  ChevronRight,
-  HandCoins,
-  ImageIcon,
-  MapPin,
-} from "lucide-react";
+import {CheckCheck, ChevronLeft, ChevronRight, ImageIcon, MapPin} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
@@ -18,9 +9,9 @@ import {useSwipeable} from "react-swipeable";
 import {toast} from "sonner";
 
 import Wrapper from "@/components/wrapper/wrapper";
-import {cn, markupPrice} from "@/lib/utils";
+import {cn, toCurrency} from "@/lib/utils";
 import {useUpdateViews} from "@/api/property/update-view";
-import {ReviewTypes} from "@/@types/types";
+import {PropertyOwner, ReviewTypes} from "@/@types/types";
 import ShareButtons from "@/components/share-property/share-property";
 import SingleMap from "@/components/map/singlemap";
 import {useUser} from "@/context/user";
@@ -28,6 +19,7 @@ import {useGetChatRoom} from "@/api/chat/get-room";
 
 import ReviewCard from "../review-card/review-card";
 import BookShortlet from "../booking-page/booking";
+import ContactCard from "../booking-page/contact-card";
 
 import PropertyVideos from "./property-videos";
 
@@ -45,7 +37,7 @@ function DetailsPage({
   cautionFee,
   video,
   property_terms,
-  ownerId,
+  propertyOwner,
 }: {
   images: string[];
   title: string;
@@ -60,7 +52,7 @@ function DetailsPage({
   cautionFee?: number;
   video: string[];
   property_terms: string;
-  ownerId: string;
+  propertyOwner: PropertyOwner;
 }) {
   useUpdateViews();
   const postUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -258,10 +250,10 @@ function DetailsPage({
                 className="md:hidden my-16"
                 cost={cost}
                 label={label}
-                ownerId={ownerId}
+                vendor={propertyOwner}
               />
 
-              <div className="pt-12">
+              <div className="sm:pt-12">
                 <h5 className="text-lg mb-2 font-medium text-grey">Share</h5>
                 <ShareButtons postUrl={postUrl} title={title} />
               </div>
@@ -295,7 +287,7 @@ function DetailsPage({
               className="hidden md:block sticky top-0 right-0"
               cost={cost}
               label={label}
-              ownerId={ownerId}
+              vendor={propertyOwner}
             />
           </div>
         </div>
@@ -348,13 +340,13 @@ function BookingCard({
   cost,
   label,
   cautionFee,
-  ownerId,
+  vendor,
 }: {
   className: string;
   cost: number;
   label: "Guest" | "Team";
   cautionFee: number | undefined;
-  ownerId: string;
+  vendor: PropertyOwner;
 }) {
   const pathname = usePathname();
   const {mutateAsync: getRoom, isPending} = useGetChatRoom();
@@ -369,7 +361,7 @@ function BookingCard({
     if (userId) {
       const result = await getRoom({
         clientId: userId,
-        vendorId: ownerId,
+        vendorId: vendor._id,
       });
 
       router.push(`/account/messages/${result.data._id}`);
@@ -381,17 +373,10 @@ function BookingCard({
   };
 
   return (
-    <div className={cn("sm:w-[310px] lg:w-[435px] shrink-0 space-y-5", className)}>
-      <Link className="flex items-center group property-book gap-4" href={`${pathname}/booking`}>
-        <CalendarDaysIcon />
-        <span>Arrange a visit</span>
-
-        <ArrowRight className="ml-auto group-hover:scale-150 transition-all" color="#205BF3" />
-      </Link>
-
+    <div className={cn("md:w-[310px] lg:w-[435px] shrink-0 space-y-5", className)}>
       <div className="property-book ">
         <p className="text-2xl font-bold text-[#443344] flex items-center gap-2">
-          {markupPrice(cost)} <span className="text-[#333] text-xs font-normal">/night</span>
+          {toCurrency(cost)} <span className="text-[#333] text-xs font-normal">/night</span>
         </p>
         {cautionFee && (
           <div>
@@ -406,12 +391,7 @@ function BookingCard({
         </div>
       </div>
 
-      <button className="flex items-center group property-book gap-4 w-full" onClick={chatOwner}>
-        <HandCoins />
-        <span>Request Discount</span>
-
-        <ArrowRight className="ml-auto group-hover:scale-150 transition-all" color="#205BF3" />
-      </button>
+      <ContactCard vendor={vendor} />
     </div>
   );
 }

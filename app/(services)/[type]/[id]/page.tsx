@@ -49,7 +49,7 @@ function Page({params}: {params: {type: Type; id: string}}) {
       images={gallery}
       label={params.type === "shortlet" ? "Guest" : "Team"}
       location={`${property_address.address}, ${property_address.neighborhood || ""}, ${property_address.location || ""}`}
-      ownerId={user}
+      propertyOwner={user}
       property_terms={property_terms}
       reviews={reviews}
       title={property_title}
