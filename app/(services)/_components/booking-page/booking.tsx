@@ -1,7 +1,7 @@
 "use client";
 
-import {useParams, usePathname, useRouter} from "next/navigation";
-import React, {useMemo, useState} from "react";
+import {useParams, usePathname, useRouter, useSearchParams} from "next/navigation";
+import React, {useEffect, useMemo, useState} from "react";
 
 import {CaretDown} from "@/components/Icons/icons";
 import {PopoverElement} from "@/components/style-guide/style-guide";
@@ -16,6 +16,7 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
   const pathName = usePathname();
   const router = useRouter();
   const param = useParams();
+  const searchParams = useSearchParams();
   const propertyId = param.id as string;
   const {date, guestsCount, setGuestsCount, updateDate} = useCheckout();
   const {mutateAsync: checkDateAvailable, isPending} = useCheckDateAvailability();
@@ -31,17 +32,25 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
     params.set("checkin", checkin || "");
     params.set("checkout", checkout || "");
 
-    if (typeof window !== "undefined") {
-      const parsedUrl = new URL(window.location.href);
-
-      parsedUrl.searchParams.set("guest", guestsCount.toString());
-      parsedUrl.searchParams.set("checkin", checkin || "");
-      parsedUrl.searchParams.set("checkout", checkout || "");
-      router.push(parsedUrl.toString());
-    }
-
     return params.toString();
-  }, [date, guestsCount, guestsCount]);
+  }, [date, guestsCount]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentParams = new URLSearchParams(searchParams.toString());
+
+      const checkin = date.checkin?.getTime().toString();
+      const checkout = date.checkout?.getTime().toString();
+
+      currentParams.set("guest", guestsCount.toString());
+      currentParams.set("checkin", checkin || "");
+      currentParams.set("checkout", checkout || "");
+
+      const newUrl = `${pathName}?${currentParams.toString()}`;
+
+      router.replace(newUrl);
+    }
+  }, [date, guestsCount, router]);
 
   const checkoutBooking = async () => {
     const path = `${pathName}/checkout?${params}`;
@@ -77,7 +86,7 @@ function Booking({showBtn, label}: {showBtn?: boolean; label: "Guest" | "Team"})
     : new Date(new Date().getFullYear(), new Date().getMonth());
 
   return (
-    <div className="space-y-4 py-6">
+    <div className="space-y-4 py-3 md:py-6">
       <PopoverElement
         trigger={
           <button

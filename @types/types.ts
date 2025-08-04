@@ -32,6 +32,13 @@ export interface PropertyPayload {
   property_terms: string;
 }
 
+export interface PropertyOwner {
+  _id: string;
+  fullname: string;
+  email: string;
+  phone: string;
+}
+
 export interface PropertyResponse {
   bedroom: number;
   createdAt: string;
@@ -53,7 +60,7 @@ export interface PropertyResponse {
   reviews: ReviewTypes[];
   type: "shortlet" | "workspace";
   updatedAt: string;
-  user: string;
+  user: PropertyOwner;
   video: string[];
   __v: number;
   _id: string;
